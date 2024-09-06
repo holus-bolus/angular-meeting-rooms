@@ -1,0 +1,100 @@
+<section class="survey-results-window">
+  <div class="survey-results-window-wrapper">
+    <button [innerHTML]="closeIcon | safe" class="survey-results-window-close" (click)="onClose()"></button>
+    <h2 class="survey-results-window-title">
+      Thanks for your participating!
+    </h2>
+    <p class="survey-results-window-subtitle">
+      <ng-container *ngIf="isMatches$ | async else noMatches">
+        <span>We’ve selected matches for you:</span>
+        <span>Perfect match — your survey results matched at 95-100%</span>
+        <span>Good match — some answers in your survey don’t match, but you still have a lot in common</span>
+        <span>Have a good communication!</span>
+      </ng-container>
+
+      <ng-template #noMatches>
+        <span>We’ve selected matches for you. Have a good communication!</span>
+      </ng-template>
+    </p>
+    <div class="survey-results-window-content">
+      <div class="survey-results-match">
+        <div *ngIf="perfectMatch$.value.length" class="survey-results-match-group">
+          <h3 class="survey-results-match-title">
+            Perfect match
+          </h3>
+          <div class="survey-results-match-content">
+            <div *ngFor="let match of perfectMatch$ | async" class="survey-results-match-data">
+              <div class="survey-results-match-name-wrapper">
+                <a href="employee/{{ match.employeeId }}/personal-info" class="survey-results-match-name">
+                  {{ match.employeeFullName }}
+                </a>
+              </div>
+              <p class="survey-results-match-status">
+                {{ match.employeeStatus }}
+              </p>
+              <div class="survey-results-match-result">
+                {{ match.value }}/9
+                <div class="survey-results-match-result-bar">
+                  <span class="survey-results-match-result-line" [ngStyle]="{'width': match.value * 11.11 + '%'}"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="survey-results-match-result-underline"></div>
+        </div>
+
+        <div *ngIf="goodMatch$.value.length" class="survey-results-match-group">
+          <h3 class="survey-results-match-title">
+            Good match
+          </h3>
+          <div class="survey-results-match-content">
+            <div *ngFor="let match of goodMatch$ | async" class="survey-results-match-data">
+              <div class="survey-results-match-name-wrapper">
+                <a href="employee/{{ match.employeeId }}/personal-info" class="survey-results-match-name">
+                  {{ match.employeeFullName }}
+                </a>
+              </div>
+              <p class="survey-results-match-status">
+                {{ match.employeeStatus }}
+              </p>
+              <div class="survey-results-match-result">
+                {{ match.value }}/9
+                <div class="survey-results-match-result-bar">
+                  <span class="survey-results-match-result-line" [ngStyle]="{'width': match.value * 11.11 + '%'}"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="!goodMatch$.value.length && !perfectMatch$.value.length" class="survey-results-match-group">
+          <div *ngFor="let match of simpleMatch$ | async" class="survey-results-match-content">
+            <div class="survey-results-match-data">
+              <div class="survey-results-match-name-wrapper">
+                <a href="employee/{{ match.employeeId }}/personal-info" class="survey-results-match-name">
+                  {{ match.employeeFullName }}
+                </a>
+              </div>
+              <p class="survey-results-match-status">
+                {{ match.employeeStatus }}
+              </p>
+              <div class="survey-results-match-result">
+                {{ match.value }}/9
+                <div class="survey-results-match-result-bar">
+                  <span class="survey-results-match-result-line" [ngStyle]="{'width': match.value * 11.11 + '%'}"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <andteam-button [type]="btnSubmit"
+                    class="survey-results-window-button"
+                    (click)="onClose()">
+      Done
+    </andteam-button>
+  </div>
+</section>

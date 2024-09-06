@@ -1,0 +1,110 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.activities-modal {
+  color: $activities-text-color;
+
+  &-close {
+    @include transition;
+
+    position: absolute;
+    right: 17px;
+    top: 17px;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    stroke: $white-color;
+    stroke-width: 1px;
+
+    ::ng-deep {
+      svg {
+        color: $news-gray-light-icon;
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+
+  &-header {
+    @include font-base(36px, 300, 46.8%);
+
+    margin: 60px 40px 40px;
+  }
+
+  &-main {
+    width: 400px;
+    margin: 0 40px;
+  }
+
+  &-field {
+    margin-bottom: 40px;
+
+    ::ng-deep {
+      .mat-form-field-empty {
+        margin-top: 0;
+
+        span {
+          color: $tag-box-border;
+        }
+      }
+
+      .activities-modal-field-name {
+        path {
+          stroke: $tag-box-border;
+        }
+      }
+
+      .activities-modal-field-date {
+        path {
+          fill: $tag-box-border;
+        }
+      }
+
+      .mat-datepicker-input {
+        @include font-base(16px, 400, 25.6px);
+
+        color: $objectives-text-color;
+      }
+
+      .label {
+        display: none;
+      }
+
+      .placeholder-none {
+        display: block !important;
+        font-size: 16px !important;
+        font-weight: 400 !important;
+        line-height: 25.6px !important;
+        color: $objectives-text-color !important;
+      }
+    }
+  }
+
+  &-buttons {
+    margin: 40px;
+    display: flex;
+    align-items: center;
+
+    .modal-buttons-btn {
+      margin-right: 30px;
+
+      .btn {
+        width: 130px;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+::ng-deep {
+  .mat-dialog-container {
+    position: relative;
+    padding: 0;
+  }
+
+  .mat-select-panel {
+    max-height: none !important;
+    overflow: auto !important;
+    min-width: 400px !important;
+  }
+}

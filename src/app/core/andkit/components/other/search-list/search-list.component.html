@@ -1,0 +1,24 @@
+<div class="search-list"
+     andteamOuterClick
+     (outerClick)="onCloseDropdown($event)">
+  <div *ngIf="isSearchActive" class="search">
+    <input
+      type="text"
+      placeholder="Search"
+      class="search-field"
+      [formControl]="search">
+    <div class="search-icon" [innerHTML]="searchIcon"></div>
+  </div>
+
+  <div class="list">
+    <div class="item" *ngIf="isAllOptionEnabled">
+      <mat-checkbox
+        [checked]="isAllOptionsSelected"
+        (change)="onSelectAllOptions()">All</mat-checkbox>
+    </div>
+
+    <div class="item" *ngFor="let option of foundOptions">
+      <mat-checkbox (change)="onSelectOption($event, option)" [checked]="option.checked">{{option.name}}</mat-checkbox>
+    </div>
+  </div>
+</div>

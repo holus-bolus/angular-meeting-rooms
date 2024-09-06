@@ -1,0 +1,23 @@
+<div class="external-feedback-instruction-modal-wrap">
+  <div class="external-feedback-instruction">
+    <ng-container *ngIf="data?.skill; else opinion">
+      <h1 class="external-feedback-instruction-title">{{ data.skill.name }}</h1>
+      <ng-container>
+        <p class="external-feedback-instruction-description">{{ data.skill.description }}</p>
+      </ng-container>
+    </ng-container>
+    
+    <div mat-dialog-actions>
+      <button mat-dialog-close class="external-feedback-instruction-button">Got it</button>
+    </div>
+
+    <button mat-dialog-close [innerHTML]="closeIcon | safe" class="icon"></button>
+  </div>
+</div>
+
+<ng-template #opinion>
+  <h1 class="external-feedback-instruction-title">Opinion explanation</h1>
+  <h1 class="external-feedback-instruction-name">General opinion</h1>
+
+  <p class="external-feedback-instruction-description">Please give your general opinion about the employee in a text form (minimum 100 characters).</p>
+</ng-template>

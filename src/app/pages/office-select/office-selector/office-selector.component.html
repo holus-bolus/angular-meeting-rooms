@@ -1,0 +1,14 @@
+<div class="modal">
+  <div class="modal-wrapper" (click)="onCloseClick()">
+    <div class="main-container" (click)="onModalClick($event)">
+      <p class="main-label">Choose your office</p>
+      <p class="main-info">All relevant information and filters will be shown according to the chosen office.</p>
+      <andteam-office-list class="office-select" [offices$]="offices$" (itemSelected)="onSelected($event)">
+      </andteam-office-list>
+      <button (click)="confirmSelection()" [ngClass]="{'main-container__button-disabled': disableConfirm}"
+              [disabled]="disableConfirm" class="main-container__button">
+        Confirm
+      </button>
+    </div>
+  </div>
+</div>

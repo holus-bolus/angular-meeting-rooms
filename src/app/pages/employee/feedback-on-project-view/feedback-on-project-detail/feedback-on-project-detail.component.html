@@ -1,0 +1,74 @@
+<div class="detailed-feedback" [ngClass]="{'last-feedback': isLastFeedback}">
+  <div>
+    <div class="project">
+      <div class="info" >
+        <div class="name">
+          <span>{{ userFeedback.project.name }}</span>
+        </div>
+        <div class="date">
+          <span>{{ userFeedback.feedbackDate | date: "dd.MM.yyyy" }}</span>
+        </div>
+        <ng-container *ngTemplateOutlet="chipsBlock"></ng-container>
+      </div>
+    </div>
+  </div>
+
+  <div class="comment" [class.marked]="userFeedback?.feedbackAverageMark">
+    <span *ngIf="userFeedback?.projectName" class="project-title">
+      {{ userFeedback?.projectName + " / "}}
+    </span>
+
+    <div class="text text__with-space">
+      <span class="text-title">What's good at the project</span>
+      <span #comment class="formatted-text"
+            [class.collapsed]="isCommentCollapsed">{{ userFeedback?.feedbackComment || userFeedback?.textQuestion1 }}
+      </span>
+
+      <button *ngIf="isCommentLong"
+              (click)="commentToggle()"
+              class="more-less-btn">{{ isCommentCollapsed ? 'More' : 'Less' }}
+      </button>
+    </div>
+
+    <div class="text">
+      <span class="text-title">{{ 'What needs to be improved' }}</span>
+      <span #improve class="formatted-text"
+            [class.collapsed]="isImproveCollapsed">{{ userFeedback?.feedbackWhatToImprove || userFeedback?.textQuestion2 }}
+      </span>
+
+      <button *ngIf="isImproveLong"
+              (click)="improveToggle()"
+              class="more-less-btn">{{ isImproveCollapsed ? 'More' : 'Less' }}
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="userFeedback?.feedbackAverageMark"
+       class="mark"
+       [class.high-rated]="highRating">
+    {{ userFeedback.feedbackAverageMark | number: '1.1-1' }}
+  </div>
+
+  <div class="scale">
+    <p><span>Feedback scale</span></p>
+    <div class="detail">
+      <p class="triangle">▲</p>
+      <andteam-feedback-scales-modal class="feedback-modal-scale" *ngFor="let scale of scaleData"
+                                     [scaleItem]="scale" positionType="Project">
+      </andteam-feedback-scales-modal>
+    </div>
+  </div>
+
+  <ng-template #noScale>
+    <div class="no-scale">
+      <p><span>No feedback scale</span></p>
+    </div>
+  </ng-template>
+</div>
+
+<ng-template #chipsBlock>
+  <div class="chips-container">
+    <div *ngIf="userFeedback.project.isActive === false" class="chips inactive">Closed</div>
+    <div *ngIf="userFeedback.employeePosition" class="chips position">{{ userFeedback.employeePosition }}</div>
+  </div>
+</ng-template>

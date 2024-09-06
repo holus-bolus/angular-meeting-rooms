@@ -1,0 +1,36 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.objectives-wrapper {
+  @include font-base(14px, 500, 16px);
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+
+  .title-block {
+    width: 30%;
+    display: flex;
+    align-items: center;
+
+    .title {
+      @include font-base(16px, normal, 150%);
+
+      margin-right: 30px;
+      color: $username-color;
+    }
+
+    .status-icon {
+      margin-right: 20px;
+    }
+  }
+}
+
+.description {
+  @include font-base(16px, 200, 160%);
+
+  width: 72%;
+  color: $username-color;
+  padding-bottom: 33px;
+  border-bottom: 1px solid $border;
+}

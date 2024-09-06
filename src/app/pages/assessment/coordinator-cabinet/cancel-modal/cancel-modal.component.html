@@ -1,0 +1,58 @@
+<div class="cancel-wrapper" [formGroup]="cancelForm">
+  <h2 class="assessment-h2 cancel-title">Cancel review</h2>
+  <div class="divider grow"></div>
+  <div class="applicant">
+    <span class="applicant-name">{{ employee?.name }}</span>
+    <span class="applicant-role">{{ employee?.position + ' ' + employee?.positionLevel }}</span>
+  </div>
+  <div class="commentary">
+    <div class="commentary-label">Comment*</div>
+    <div class="commentary-form">
+      <textarea class="input"
+                title="comment"
+                formControlName="comment"
+                [class.error]="cancelForm.get('comment').errors?.maxlength"
+                [placeholder]="commentPlaceholder">
+      </textarea>
+      <div *ngIf="cancelForm.get('comment').errors?.maxlength; else charactersCounter"
+           class="error-message floating-message">
+        {{ maxLengthErrorMessage }}
+      </div>
+
+      <ng-template #charactersCounter>
+        <div class="counter-label floating-message">
+          <div class="counter-message">{{ maxCancelLength - cancelForm.get('comment').value?.length }} characters left
+          </div>
+        </div>
+      </ng-template>
+    </div>
+
+  </div>
+  <div class="date">
+    <div class="date-label">Set new review date</div>
+    <div class="date-picker">
+      <andteam-date-picker formControlName="date"
+                           [isAssessment]="isAssessment"
+                           [dateIcon]="dateIcon"
+                           [placeholder]="datePlaceholder">
+      </andteam-date-picker>
+    </div>
+  </div>
+  <div class="controls">
+    <div class="controls-confirm">
+      <andteam-button [disabled]="isDisabled"
+                      [type]="buttonPrimary"
+                      [componentType]="componentType"
+                      (click)="onConfirm()">
+        Confirm
+      </andteam-button>
+    </div>
+    <div class="controls-cancel">
+      <andteam-button [type]="buttonSecondary"
+                      [componentType]="componentType"
+                      (click)="onCancel()">
+        Cancel
+      </andteam-button>
+    </div>
+  </div>
+</div>

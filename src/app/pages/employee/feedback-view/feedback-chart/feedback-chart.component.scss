@@ -1,0 +1,155 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+@import '~src/styles/shared-styles/_vars.scss';
+
+.feedback-chart {
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  background-color: $white-color;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  margin-bottom: 50px;
+  padding: 40px;
+
+  .title {
+    @include font-base(36px, 300, 37px);
+
+    color: $objectives-text-color;
+    margin-bottom: 20px;
+  }
+
+  .hint {
+    display: flex;
+    justify-content: flex-start;
+    color: $text-primary;
+    margin-bottom: 35px;
+
+    .text {
+      @include font-base(14px, 400, 16px);
+
+      margin-right: 20px;
+    }
+
+    .circle {
+      height: 12px;
+      width: 12px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .yellow {
+      background-color: $border-link-hover;
+    }
+
+    .gray {
+      background-color: $anonymous-icon-background;
+    }
+  }
+
+  .info {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+
+    .list {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 165px;
+
+      p {
+        @include font-base(12px, 400, 18px);
+
+        color: $tag-title-color;
+        width: 110px;
+        padding-bottom: 35px;
+
+        &:nth-child(3) {
+          width: 100px;
+          padding-bottom: 30px;
+        }
+      }
+    }
+
+    .chart {
+      width: 935px;
+      padding-top: 15px;
+
+      & .row {
+        height: 66px;
+        border-top: 1px dashed $detailed-feedback-border;
+      }
+    }
+  }
+
+  .marks {
+    @include font-base(12px, inherit, 18px);
+
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 170px;
+  }
+
+  .mark {
+    position: relative;
+    width: 70px;
+    margin-right: 60px;
+
+    .number {
+      @include font-base(12px, 400, 150%);
+
+      color: $objectives-text-color;
+      margin-bottom: 15px;
+      width: 17px;
+      text-align: center;
+    }
+
+    .no-data {
+      height: 30px;
+    }
+
+    p {
+      @include font-base(12px, 400, 150%);
+
+      color: $tag-title-color;
+      width: 70px;
+    }
+
+    .columns {
+      display: flex;
+      justify-content: flex-start;
+      position: absolute;
+      top: -27px;
+      right: 17px;
+    }
+
+    .column {
+      width: 30px;
+      transform: rotate(270deg);
+
+      &::ng-deep {
+        .mat-progress-bar {
+          height: 25px;
+          width: 335px;
+
+          &-background {
+            fill: transparent;
+          }
+        }
+
+        .mat-progress-bar-fill::after {
+          background-color: $border-link-hover;
+        }
+
+        .mat-progress-bar-buffer {
+          background-color: transparent;
+        }
+      }
+    }
+
+    .self-column {
+      &::ng-deep .mat-progress-bar-fill::after {
+        background-color: $anonymous-icon-background;
+      }
+    }
+  }
+}

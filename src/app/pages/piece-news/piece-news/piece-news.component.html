@@ -1,0 +1,54 @@
+<ng-container *ngIf="pieceNews$ | async as pieceNews">
+  <div class="news">
+
+    <div class="news-title-box">
+      <div class="news-title">{{ pieceNews?.title }}<span class="news-title-point">.</span></div>
+      <div class="news-date">{{ pieceNews?.published | timezone : 'MMM DD, YYYY' }}</div>
+    </div>
+
+    <andteam-news-block class="news-block"
+                        [pieceNews]="pieceNews"
+                        [pieceNewsPage]="pieceNewsPage"
+                        (deletion)="onDelete($event)">
+    </andteam-news-block>
+
+    <ng-container *ngIf="relatedNews$ | async as relatedNews">
+      <div class="news-content">
+        <div class="related-news">
+          <h2 class="portal-h2 related-news__title">Related news</h2>
+          <div class="related-news__slider">
+            <andteam-slider [itemsPerSlide]="3"
+                            [slideItemsGap]="'25px'"
+                            [amountOfItems]="relatedNews.length">
+              <ng-container *ngFor="let oneNews of relatedNews; trackBy: trackItem">
+                <div class="news-wrapper" *andteamSlideItem>
+                  <andteam-news-card mainPage="false"
+                                     [pieceNews]="oneNews"
+                                     (delete)="onOpenConfirmationModal($event)">
+                  </andteam-news-card>
+                </div>
+              </ng-container>
+            </andteam-slider>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</ng-container>
+
+<andteam-assessment-toast-notification
+  *ngIf="newsService.isNewsPublished$ | async"
+  (fadeOut)="onFadeOut()">
+  <span>News has been published</span>
+</andteam-assessment-toast-notification>
+
+<div class="footer">
+  <andteam-footer></andteam-footer>
+</div>
+
+<andteam-confirmation-modal *ngIf="isOpenConfirmationModal"
+                            [text]="title"
+                            [subText]="subTitle"
+                            (sendConfirmEvent)="onDelete(confirmationNews.id)"
+                            (sendCloseEvent)="onCloseConfirmationModal()">
+</andteam-confirmation-modal>

@@ -1,0 +1,8 @@
+<andteam-form-comment
+  [formControl]="control"
+  [placeholder]="commentPlaceholder"
+  [error]="control.invalid"
+  [errorMessage]="maxLengthErrorMessage"
+  [charactersLimit]="maxCommentLength"
+  (commentChanges)="onCommentChanges($event)">
+</andteam-form-comment>

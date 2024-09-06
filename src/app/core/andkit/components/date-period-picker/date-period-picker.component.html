@@ -1,0 +1,79 @@
+<form>
+  <mat-form-field 
+    cdk-overlay-origin
+    [ngClass]="{'active' : openedBS | async}"
+    class="date" 
+    [floatLabel]="'never'">
+      <input matInput 
+        [formControl]="startDate"
+        disabled
+        hidden>
+      <input matInput 
+        [formControl]="endDate"
+        disabled
+        hidden>
+      <div (click)="openDateWindow()">
+        <span [ngClass]="{'selected' : !!startDate.touched}" *ngIf="startDate.touched; else emptyDate">{{ startDate.value | date:'MMM.YYYY' }}</span>
+        <span [ngClass]="{'selected' : !!endDate.touched}"> - </span>
+        <span [ngClass]="{'selected' : !!endDate.touched}" *ngIf="endDate.touched; else  emptyDate">{{ endDate.value | date:'MMM.YYYY' }}</span>
+      </div>
+      <div class="control-icons">
+        <mat-icon 
+          *ngIf = "startDate.touched || endDate.touched"
+          (click)="reset()"
+          class="reset">
+          <span [innerHTML]="closeIcon | safe"></span>
+        </mat-icon>
+        <mat-icon 
+          (click)="openDateWindow()"
+          class="calendar">
+          <span [innerHTML]="dateIcon | safe"></span>
+        </mat-icon>
+      </div>
+  </mat-form-field>
+</form>
+
+<ng-template cdk-portal #dateRangeTemplate="cdkPortal">
+  <div class="date-range-wrapper">
+    <ng-container *ngTemplateOutlet="dateTemplate; context: { date: startDate, type: 'start', currentDate: initialStartDate }"></ng-container>
+    <ng-container *ngTemplateOutlet="dateTemplate; context: { date: endDate, type: 'end', currentDate: initialEndDate }"></ng-container>
+  </div>
+</ng-template>
+
+<ng-template #dateTemplate let-date="date" let-type="type" let-currentDate="currentDate">
+  <div class="date-range-wrapper-item">
+    <div class="date-range-wrapper-item-year">
+      <mat-icon (click)="currentDate.setFullYear(currentDate.getFullYear() - 1)">
+        <span [innerHTML]="arrowIcon | safe"></span>
+      </mat-icon>
+     {{ currentDate.getFullYear() }}
+      <mat-icon (click)="currentDate.setFullYear(currentDate.getFullYear() + 1)">
+        <span class="svg-reflected" [innerHTML]="arrowIcon | safe"></span>
+      </mat-icon>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="date-range-wrapper-item-months">
+      <div *ngFor ="let tmonth of months | keyvalue: asIsOrder"
+        [ngClass]="{
+          'active'  : date.touched && 
+                      date.value.getMonth().toString() === tmonth.key &&
+                      date.value.getFullYear() === currentDate.getFullYear(), 
+          'current' : nowDate.getMonth().toString() === tmonth.key && 
+                      currentDate.getFullYear() === nowDate.getFullYear(),
+          'disabled': (type === 'start' &&
+                      endDate.touched &&
+                      ((endDate.value.getMonth() < tmonth.key && currentDate.getFullYear() === endDate.value.getFullYear()) ||
+                      endDate.value.getFullYear() < currentDate.getFullYear())) || 
+                      (type === 'end' &&
+                      startDate.touched &&
+                      ((startDate.value.getMonth() > tmonth.key && currentDate.getFullYear() === startDate.value.getFullYear()) ||
+                      startDate.value.getFullYear() > currentDate.getFullYear()))
+                    }"
+        class="date-range-wrapper-item-months-month">
+        <div (click)="updateDate(date, tmonth.key, currentDate.getFullYear(), type)">{{ tmonth.value }}</div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #emptyDate><span class>Mon/yyyy</span></ng-template>

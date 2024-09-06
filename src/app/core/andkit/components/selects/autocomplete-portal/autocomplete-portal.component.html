@@ -1,0 +1,9 @@
+<div class="form">
+  <span *ngIf="searchIcon" class="search-icon" [innerHTML]="searchIcon | safe"></span>
+  <input class="input"
+         type="text"
+         [value]="value"
+         [placeholder]="placeholder"
+         (input)="onChange($event.target.value)"
+  >
+</div>

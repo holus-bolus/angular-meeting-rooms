@@ -1,0 +1,53 @@
+<div class="project-wrapper">
+  <div class="project-content">
+    <div class="project-content__title-row">
+      <h4 class="title-project">{{ project.name }}</h4>
+      <span *ngIf="isEnabledTeamQty$ | async; else disabledTeamQty"
+            class="link team-qty"
+            (click)="onClick(project.id)">
+        <img src="assets/images/employees.svg"
+             class="grid-link-icon"
+             alt="employees icon">
+        {{ project.teamQty }}
+      </span>
+
+      <ng-template #disabledTeamQty>
+        <span class="link team-qty team-qty_disabled">
+        <img src="assets/images/employees.svg"
+             class="grid-link-icon"
+             alt="employees icon">
+          {{ project.teamQty }}
+      </span>
+      </ng-template>
+    </div>
+
+    <div class="project-content__managers-row">
+      <div class="manager">
+        <span class="icon-manager">{{TITLE_POSITION_OF_MANAGER.ProjectManager}}</span>
+        <a *ngIf="project.projectManagerId"
+           class="grid-link grid-link-rm-employee"
+           [routerLink]="['/employee', project.projectManagerId]">
+          {{ project.projectManagerName }}
+        </a>
+      </div>
+
+      <div class="manager">
+        <span class="icon-manager">{{TITLE_POSITION_OF_MANAGER.DeliveryManager}}</span>
+        <a *ngIf="project.deliveryManager?.id"
+           class="grid-link grid-link-rm-employee"
+           [routerLink]="['/employee', project.deliveryManager.id]">
+          {{ project.deliveryManager.name }}
+        </a>
+      </div>
+
+      <div class="manager">
+        <span class="icon-manager">{{TITLE_POSITION_OF_MANAGER.DeliveryDirector}}</span>
+        <a *ngIf="project.resourceManagerId"
+           class="grid-link grid-link-rm-employee"
+           [routerLink]="['/employee', project.resourceManagerId]">
+          {{ project.resourceManagerName }}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

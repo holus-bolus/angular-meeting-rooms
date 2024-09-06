@@ -1,0 +1,337 @@
+@import 'src/styles/shared-styles/colors';
+@import 'src/styles/shared-styles/mixins';
+@import 'src/styles/shared-styles/_vars.scss';
+
+.count {
+  position: absolute;
+  content: '';
+  background-image: url('../../../../assets/images/request.svg');
+  width: 33px;
+  height: 29px;
+  left: -37px;
+  top: 2px;
+}
+
+.tab-wrapper {
+  @include font-base(16px, 400, 26px, normal);
+
+  padding: 60px 68px !important;
+  position: relative;
+  background-color: $body-background;
+  color: $objectives-text-color;
+
+  .vacation {
+    &-header {
+      @include font-base(42px, 300, 130%);
+
+      padding: 0 0 21.5px 0;
+    }
+
+    &-subheader {
+      @include font-base(36px, 300, 130%);
+
+      padding: 0 0 15px 0;
+    }
+
+    &-block {
+      display: flex;
+      flex-direction: column;
+      width: 750px;
+
+      &-link {
+        font-weight: 500;
+        color: $objectives-text-color;
+
+        &:hover {
+          color: $primary;
+        }
+
+        &:visited {
+          color: $clicked-link-color;
+        }
+      }
+
+      &-month {
+        color: $objectives-text-color;
+      }
+
+      &-no-data {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      &-img {
+        margin: 28px 0 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 140px;
+        height: 140px;
+        background-color: $body-background;
+        border-radius: 50%;
+
+        ::ng-deep {
+          svg {
+            padding-right: 18px;
+          }
+        }
+      }
+
+      &-text {
+        margin-bottom: 10px;
+        color: $week-days;
+      }
+    }
+
+    &-info-btn {
+      margin: 0 0 17px 10px;
+    }
+
+    &-plan {
+      display: flex;
+      justify-content: space-between;
+      background-color: $white-color;
+      padding: 32px;
+      box-shadow: 0 2px 12px 0 $box-shadow-color;
+    }
+
+    &-form {
+      width: 350px;
+      padding-top: 62px;
+
+      &-select {
+        padding-bottom: 40px;
+
+        ::ng-deep {
+          .mat-select-value-text {
+            display: none !important;
+          }
+
+          .mat-form-field-subscript-wrapper {
+            margin-top: 0;
+          }
+
+          .mat-form-field-infix {
+            padding-bottom: 2px;
+          }
+
+          .arrow {
+            path {
+              stroke: $tag-box-border;
+            }
+          }
+
+          mat-label {
+            font-family: Roboto, sans-serif;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 26px;
+            text-align: left;
+            color: $objectives-text-color;
+          }
+
+          .placeholder {
+            color: $tag-box-border;
+          }
+        }
+      }
+
+      &-button {
+        margin: 10px 0 0 170px;
+
+        ::ng-deep {
+          .btn {
+            width: 180px !important;
+            font-size: 14px !important;
+          }
+        }
+      }
+    }
+
+    &-year {
+      @include font-base(18px, normal, 21px);
+
+      display: flex;
+      justify-content: flex-start;
+      padding-bottom: 41.5px;
+
+      &-img {
+        margin: -2px 10px 0 0;
+      }
+
+      &-title {
+        margin: 0 5px 0 0;
+      }
+
+      &-period {
+        color: $tag-title-color;
+      }
+    }
+
+    &-instruction {
+      @include font-base(16px, normal, 160%);
+
+      color: $tag-title-color;
+      width: 795px;
+      padding: 0 0 40px 0;
+    }
+
+    &-link {
+      @include font-base(16px, 500, 19px);
+      @include border-bottom(1px, dashed, $border-bottom-color);
+
+      color: $objectives-text-color;
+      text-decoration: none;
+
+      &:hover {
+        @include border-bottom(1px, solid, $border-link-hover);
+      }
+    }
+
+    &-btn {
+      ::ng-deep {
+        .btn {
+          @include font-base(14px, 500, 16px);
+
+          padding: 13px 24px;
+        }
+      }
+    }
+
+    &-checkbox {
+      &::ng-deep {
+        .mat-checkbox .mat-checkbox-inner-container {
+          width: 22px;
+          height: 22px;
+          border-radius: 2px;
+          margin-right: 11px;
+        }
+
+        .vacation-mat-checkbox .mat-checkbox-layout {
+          color: $tag-box-border;
+        }
+
+        .mat-checkbox .mat-checkbox-frame {
+          border-color: $border-bottom-color;
+          border-width: 1px;
+        }
+      }
+    }
+
+    &-list {
+      position: relative;
+    }
+
+    &-total {
+      @include font-base(16px, 400, 25px);
+
+      color: $black-color;
+      text-align: end;
+
+      &-count {
+        @include font-base(28px, 300, 36px);
+
+        position: relative;
+
+        &::before {
+          @extend .count;
+        }
+      }
+    }
+  }
+}
+
+::ng-deep {
+  .mat-expansion-panel {
+    box-shadow: none !important;
+    background-color: transparent;
+
+    &-header {
+      padding: 0 !important;
+
+      &.mat-expanded {
+        .accordion-title::before {
+          transform: rotate(-180deg);
+        }
+      }
+    }
+
+    &-header-description {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .mat-expansion-panel-content .mat-expansion-panel-body {
+      position: relative;
+      padding: 0 0 20px 0;
+    }
+  }
+
+  .accordion {
+    & + & {
+      margin-top: 15px;
+    }
+
+    &-request {
+      @include font-base(16px, 400, 25px);
+
+      position: absolute;
+      right: 0;
+      top: -46px;
+      color: $black-color;
+
+      &-value {
+        @include font-base(28px, 300, 36px);
+
+        position: relative;
+
+        &::before {
+          @extend .count;
+        }
+      }
+    }
+
+    &-title {
+      @include font-base(24px, 300, 31px);
+
+      position: relative;
+
+      &::before {
+        transition: all 0.3s ease;
+        content: '';
+        position: absolute;
+        background-image: url('../../../../assets/images/portal-arrow.svg');
+        width: 20px;
+        height: 20px;
+        right: -30px;
+        top: 7px;
+      }
+    }
+  }
+}
+
+::ng-deep {
+  .mat-select-panel-wrap {
+    .mat-select-panel {
+      margin-left: 18px !important;
+      width: 100% !important;
+      left: 0 !important;
+      top: 25px !important;
+    }
+  }
+
+  .mat-option-text {
+    font-weight: 400 !important;
+  }
+
+  .mat-form-field-disabled .arrow svg path {
+    stroke: $anonymous-icon-background !important;
+  }
+
+  .select .mat-form-field-appearance-fill .mat-form-field-label {
+    top: unset !important;
+  }
+}

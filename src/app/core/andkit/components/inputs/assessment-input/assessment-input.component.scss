@@ -1,0 +1,43 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.input {
+  height: 36px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  border: 1px solid $text-tertiary;
+  padding: 8px 0 8px 8px;
+
+  &:hover {
+    border: 1px solid $text-secondary;
+  }
+
+  .form-input {
+    @include font-base(14px, 400, 22px);
+
+    width: 95%;
+    border: none;
+    cursor: pointer;
+  }
+
+  .clear-icon {
+    position: absolute;
+    right: 15px;
+    cursor: pointer;
+  }
+}
+
+.assessment-focus {
+  border: 1px solid $text-secondary;
+}
+
+.error {
+  border: 1px solid $error-color;
+
+  &:hover {
+    border: 1px solid $error-color;
+  }
+}

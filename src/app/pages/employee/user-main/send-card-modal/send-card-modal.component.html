@@ -1,0 +1,108 @@
+<div class="modal-send-card">
+  <div *ngIf="isStartWindow$ | async else lastWindow" class="modal-send-card-first">
+    <button [innerHTML]="closeIcon | safe" class="modal-send-card-close" mat-dialog-close></button>
+
+    <h2 class="modal-send-card-title">Send {{ data.shortName }} card</h2>
+
+    <div class="modal-send-card-chapter" [attr.data-number]="'01'">
+      Choose your {{ data.shortName }} card
+    </div>
+
+    <div class="modal-send-card-pictures">
+      <div *ngFor="let pic of data.cards; let index = index"
+           class="modal-send-card-pictures-wrapper"
+           [class.active-card]="cardNumber === index">
+        <img src="data:image/png;base64,{{ pic }}"
+             class="modal-send-card-pictures-picture" alt="card"
+             (click)="chooseCard(index)">
+        <div class="modal-send-card-pictures-congrat"
+             [class.invisible]="cardNumber !== index">
+          <div class="modal-send-card-pictures-text"
+               [innerHTML]="editorText">
+          </div>
+
+          <div [class.invisible]="editorText"
+               class="modal-send-card-pictures-pretext">
+            {{ data.defaultText }}
+          </div>
+
+          <div *ngIf="nameText" class="modal-send-card-pictures-name">- {{ nameText }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-send-card-chapter" [attr.data-number]="'02'">
+      Add text to the card
+    </div>
+
+    <div class="modal-send-card-redactor">
+      <div class="modal-send-card-redactor-wrapper">
+        <div class="modal-send-card-redactor-editor">
+          <ckeditor [editor]="classicEditor"
+                    [config]="editorConfig"
+                    [(ngModel)]="editorText"
+                    (blur)="onEditorBlur($event)">
+          </ckeditor>
+        </div>
+
+        <div [class.invisible]="editorText" class="modal-send-card-redactor-editor-placeholder">{{ ckEditorPlaceholder }}</div>
+
+        <p class="modal-send-card-redactor-hint">
+          The card will be sent from General corporate Company email
+        </p>
+      </div>
+
+      <div class="modal-send-card-redactor-name">
+        <andteam-portal-input class="modal-send-card-redactor-name-input"
+                              [componentType]="componentsType"
+                              [placeholder]="namePlaceholder"
+                              [(ngModel)]="nameText">
+        </andteam-portal-input>
+        <p class="modal-send-card-redactor-hint">You can also stay anonymous</p>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #lastWindow>
+    <h2 class="modal-send-card-title">{{ data.shortName | titlecase }} card preview</h2>
+
+    <div #capture class="modal-send-card-postcard">
+      <img src="data:image/png;base64,{{ data.cards[cardNumber] }}" class="modal-send-card-postcard-pic" alt="card">
+      <div class="modal-send-card-postcard-congrat">
+        <div class="modal-send-card-postcard-text"
+             [innerHTML]="editorText">
+        </div>
+
+        <div [class.invisible]="editorText"
+             class="modal-send-card-postcard-text
+               modal-send-card-postcard-pretext">
+          {{ data.defaultText }}
+        </div>
+
+        <div *ngIf="nameText"
+             class="modal-send-card-postcard-name">
+          - {{ nameText }}
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <div class="modal-send-card-buttons">
+    <andteam-button *ngIf="leftButtonName$ | async as leftButtonName"
+                    [disabled]="isButtonDisable$ | async"
+                    (click)="onLeftButtonClick(leftButtonName)">
+      <span>{{ leftButtonName }}</span>
+    </andteam-button>
+
+    <andteam-button *ngIf="rightButtonName$ | async as rightButtonName"
+                    class="modal-send-card-buttons-right"
+                    [type]="buttonSecondary"
+                    (click)="onRightButtonClick(rightButtonName)">
+      <span class="cancel-button_text">{{ rightButtonName }}</span>
+    </andteam-button>
+  </div>
+
+  <div *ngIf="isShowLoader$ | async" class="modal-send-card-spinner">
+    <andteam-spinner delay="0"></andteam-spinner>
+  </div>
+</div>

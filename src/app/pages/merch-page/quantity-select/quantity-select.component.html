@@ -1,0 +1,17 @@
+<div class="quantity-select">
+  <div [class.disabled]="value < 2"
+       class="quantity-select__minus"
+       (click)="minus()">
+    -
+  </div>
+
+  <div class="quantity-select__value">
+    {{ value }}
+  </div>
+
+  <div [class.disabled]="value === max"
+       class="quantity-select__plus"
+       (click)="plus()">
+    +
+  </div>
+</div>

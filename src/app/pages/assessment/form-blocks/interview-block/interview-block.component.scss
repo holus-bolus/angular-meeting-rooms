@@ -1,0 +1,70 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.interview {
+  &-box {
+    margin: 0 30px 10px 0;
+    display: flex;
+    width: 450px;
+    box-sizing: border-box;
+    align-items: center;
+  }
+
+  &-title {
+    @include font-base(12px, 400, 20px);
+
+    color: $tag-title-color;
+    margin-right: 10px;
+    white-space: nowrap;
+    flex-basis: 130px;
+    text-align: right;
+  }
+
+  &-data {
+    @include font-base(14px, 400, 140%);
+
+    color: $text-primary;
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  &-time {
+    margin-left: 10px;
+  }
+
+  &-textarea {
+    margin-top: -8px;
+  }
+
+  &-scheduled {
+    @include font-base(12px, 400, 130%);
+
+    color: $text-secondary;
+  }
+
+  &-icon {
+    margin-right: 10px;
+  }
+
+  &-button {
+    border: 1px solid $text-tertiary;
+    border-radius: 50px;
+
+    .matrix-link {
+      text-decoration: none;
+      color: $text-primary;
+      display: block;
+    }
+
+    ::ng-deep .btn_secondary {
+      @include font-base(14px, 400, 22px);
+
+      width: 95px;
+      height: 32px;
+      padding: 0;
+    }
+  }
+}
+
+

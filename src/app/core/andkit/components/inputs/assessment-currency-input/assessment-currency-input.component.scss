@@ -1,0 +1,30 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.currency-wrapper {
+  height: 36px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .currency-input {
+    box-sizing: border-box;
+    width: 95%;
+    position: relative;
+
+    .dollar-equivalent {
+      @include font-base(12px, normal, 14px);
+
+      color: $text-secondary;
+      position: absolute;
+      bottom: -2px;
+      transform: translate(0, 100%);
+    }
+  }
+
+  .currency-select {
+    padding-right: 10px;
+    max-width: 60px;
+    width: 100%;
+  }
+}

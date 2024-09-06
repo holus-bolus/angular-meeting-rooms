@@ -1,0 +1,145 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.chips-wrapper {
+  position: relative;
+}
+
+.chips-wrapper-portal {
+  border-bottom: 1px solid $input-unselected-color;
+
+  &.active, &:hover {
+    border-color: $input-hover-color !important;
+  }
+}
+
+.error {
+  border-color: $error-color;
+}
+
+.chips {
+  height: 32px;
+  width: 100%;
+
+  &-label {
+    @include font-base(12px, 400, 14px);
+
+    display: block;
+    margin-bottom: 6px;
+    color: $text-secondary;
+  }
+
+  &-list {
+    position: relative;
+    margin-bottom: 7px;
+    border: 1px solid $text-tertiary;
+    padding: 3px 40px 3px 7px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover, &.active {
+      ::ng-deep {
+        svg path {
+          stroke: $primary;
+        }
+      }
+    }
+
+    &-portal {
+      margin-bottom: 0;
+      padding-left: 0;
+      border: none;
+      border-radius: 0;
+      cursor: pointer;
+
+      .chips-list-arrow-up,
+      .chips-list-arrow-down {
+        position: absolute;
+        top: 5px;
+        right: 0;
+      }
+
+      .chips-all-items {
+        @include font-base(18px, 300);
+
+        width: 160px;
+        display: flex;
+        padding-left: 0;
+        color: #828282;
+
+        .list-value {
+          max-width: 145px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
+
+  &-all-items {
+    @include font-base(14px, 400, 16px);
+
+    cursor: pointer;
+    padding: 6px 5px;
+  }
+}
+
+::ng-deep {
+  .form-input {
+    @include font-base(18px, 300, 24px);
+
+    width: 100%;
+    color: $black-color;
+    padding-left: 0;
+    border-bottom: none;
+
+    &:hover {
+      border-bottom: none;
+    }
+  }
+
+  .picker {
+    &_time {
+      .form-input {
+        border-bottom: 1px solid $portal-border-color;
+        padding: 0 0 8px;
+
+        &_error {
+          border-bottom: 1px solid $error-color;
+        }
+      }
+    }
+  }
+
+  .search-icon {
+    display: none;
+  }
+
+  .chips-wrapper {
+    .chips {
+      &-list {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 0 10px 0;
+
+        .list-value {
+          height: 25px;
+          overflow-y: hidden;
+          color: $black-color;
+        }
+
+        .chips-all-items {
+          padding: 0;
+        }
+      }
+    }
+  }
+
+  .mat-input-element {
+    color: $black-color;
+  }
+}

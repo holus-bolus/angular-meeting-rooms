@@ -1,0 +1,62 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+:host {
+  width: 100%;
+
+  .picker {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #757575;
+    margin-top: 2px;
+    padding-bottom: 7px;
+    height: 23px;
+
+    &-input {
+      @include font-base(16px, 400, 25.6px);
+
+      border: none;
+      height: 100%;
+      width: 100%;
+      color: $text-primary;
+
+      &::placeholder {
+        color: $tag-box-border;
+        font-weight: 300;
+      }
+    }
+
+    &-input:disabled {
+      background: $white-color;
+    }
+
+    &-button {
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      width: 16px;
+      height: 16px;
+
+      &:focus {
+        outline: none;
+      }
+      &:disabled {
+        cursor: default;
+      }
+    }
+  }
+  .error {
+    border-color: $error-color;
+
+    &-text {
+      @include font-base(12px, 300, 130%);
+
+      position: absolute;
+      color: $error-color;
+      bottom: -19px;
+    }
+  }
+}
+
+

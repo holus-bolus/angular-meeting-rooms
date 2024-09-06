@@ -1,0 +1,56 @@
+@import 'src/styles/shared-styles/colors';
+@import 'src/styles/shared-styles/mixins';
+
+.list-container {
+  width: 100%;
+  height: 233px;
+  box-sizing: border-box;
+  border: 1px solid $menu-item-background;
+  overflow-y: auto;
+}
+
+.list-item {
+  height: 47px;
+  background: $white-color;
+}
+
+.list-item p {
+  @include font-base(14px, normal, 16px);
+
+  position: relative;
+  width: 148px;
+  height: 17px;
+  left: 20px;
+  top: 8px;
+  color: $text-primary;
+  margin: 0;
+  display: inline-block;
+}
+
+.list-item__marker {
+  position: relative;
+  left: 15px;
+  top: 13px;
+  display: inline-block;
+}
+
+.list-item:hover {
+  background: $menu-item-background;
+  cursor: pointer;
+}
+
+.list-container::-webkit-scrollbar {
+  background: $white-color;
+  width: 12px;
+  height: 18px;
+}
+
+.list-container::-webkit-scrollbar-thumb {
+  background: $text-secondary;
+  border-radius: 6px;
+}
+
+.list-container::-webkit-scrollbar-thumb {
+  border: 4px solid $white-color;
+  background-clip: padding-box;
+}

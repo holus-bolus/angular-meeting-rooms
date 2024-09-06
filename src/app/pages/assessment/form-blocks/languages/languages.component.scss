@@ -1,0 +1,106 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.language {
+  display: flex;
+  margin: 20px 0;
+  flex-direction: column;
+
+  .language-comment-field {
+    ::ng-deep .form-input {
+      flex-basis: 310px;
+    }
+
+    ::ng-deep .form-field {
+      justify-content: flex-end;
+      margin-right: 10px;
+    }
+  }
+
+  .level {
+    width: 310px;
+    margin: 0 0 0 auto;
+  }
+
+  &-icon {
+    position: absolute;
+    left: -20px;
+  }
+
+  &-eraser-icon {
+    position: absolute;
+    left: -30px;
+    top: -2px;
+  }
+
+  &-box {
+    display: flex;
+    margin-bottom: 10px;
+    min-height: 20px;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  .title {
+    @include font-base(12px, 400, 20px);
+
+    color: $tag-title-color;
+    margin-right: 10px;
+    white-space: nowrap;
+    flex-basis: 130px;
+    text-align: right;
+  }
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.error-message {
+  @include font-base(14px, 400, 140%);
+
+  color: $assessment-error-color;
+  margin: 0 0 10px 140px;
+}
+
+.delete-button {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+
+  ::ng-deep .btn_secondary {
+    position: absolute;
+    right: 0;
+    top: -30px;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 22px;
+    color: $text-secondary;
+    padding: 0;
+    height: 22px;
+  }
+}
+
+.add-button {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  margin-bottom: 30px;
+
+  &-button {
+    &-border {
+      border: 1px solid $text-tertiary;
+      border-radius: 50px;
+      margin-top: 13px;
+
+      ::ng-deep .btn_secondary {
+        width: 310px;
+        height: 32px;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 22px;
+      }
+    }
+  }
+}

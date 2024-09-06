@@ -1,0 +1,17 @@
+<header class="external-header">
+  <div class="external-header-wrapper">
+   <div class="external-header-content">
+     <ng-container *ngIf="!showLongHeaderLogo; else longLogo">
+      <span [innerHTML]="logoIcon" class="logo-icon"></span>
+      <span [innerHTML]="logoTextIcon" class="logo-title"></span>
+     </ng-container>
+     <div *ngIf="showInfoButton" class="external-header-info-icon" 
+          [innerHTML]="infoIcon | safe"
+          (click)="onInfoClick()"
+      ></div>
+   </div>
+  </div>
+</header>
+<ng-template #longLogo>
+  <span class="logo-long" [innerHTML]="longLogoIcon"></span>
+</ng-template>

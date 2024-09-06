@@ -1,0 +1,27 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.filter {
+  @include font-base(14px, 400, 22px);
+
+  max-height: 36px;
+  border: 1px solid $text-tertiary;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 7px;
+  color: $text-primary;
+  margin-right: 15px;
+  cursor: pointer;
+
+  &:hover {
+    background: $assessment-border-color;
+    border: 1px solid $assessment-border-color;
+  }
+}
+
+.active {
+  background: $text-tertiary;
+  border: 1px solid $text-tertiary;
+  box-sizing: border-box;
+  border-radius: 4px;
+}

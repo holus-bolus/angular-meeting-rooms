@@ -1,0 +1,12 @@
+<svg width="30" height="30" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path class="stroke-theme-color" d="M19.803 1v5.09h5.727" stroke="#FEDA00" stroke-linejoin="round"/>
+  <path class="fill-theme-color"
+    d="M3.4 1V.5a.5.5 0 00-.5.5h.5zm16.607 0l.33-.376a.5.5 0 00-.33-.124V1zM25.8 6.09h.5a.5.5 0 00-.17-.375l-.33.376zm0 22.91v.5a.5.5 0 00.5-.5h-.5zM3.4 29h-.5a.5.5 0 00.5.5V29zm.5-5.6V1h-1v22.4h1zM3.4 1.5h16.607v-1H3.4v1zm16.277-.124l5.793 5.09.66-.75L20.337.623l-.66.752zM25.3 6.09V29h1V6.09h-1zm.5 22.409H7.503v1H25.8v-1zm-18.297 0H3.4v1h4.103v-1zM3.9 29v-5.6h-1V29h1z"
+    fill="#FEDA00"/>
+  <path class="stroke-theme-color" d="M13.926 9h8.666M13.926 11.25h6.666" stroke="#FEDA00" stroke-linecap="round"/>
+  <path class="stroke-theme-color" d="M7.05 10l1.5 1.5 2.5-2.5" stroke="#FEDA00" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect class="stroke-theme-color" x="7" y="22" width="4" height="4" rx=".5" stroke="#FEDA00"/>
+  <path class="stroke-theme-color" d="M13.926 22.75h8.666M13.926 25h6.666M13.926 15.5h8.666M13.926 17.75h6.666" stroke="#FEDA00"
+        stroke-linecap="round"/>
+  <path class="stroke-theme-color" d="M7.05 16.5l1.5 1.5 2.5-2.5" stroke="#FEDA00" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

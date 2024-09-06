@@ -1,0 +1,197 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .wrapper-paginator {
+    @include font-base(14px, 400, 22.4px, normal);
+
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: $tag-color;
+
+    .pagination {
+      &-counter {
+        @include align-elements;
+
+        margin-right: 40px;
+        height: 36px;
+      }
+
+      &-select {
+        width: 37px;
+        height: 34px;
+        border: 1px solid $text-tertiary;
+        border-radius: 4px;
+        padding: 0 3px 0 8px;
+      }
+
+      &-text {
+        margin-right: 5px;
+      }
+
+      &-selector {
+        ::ng-deep {
+          .mat-form-field-underline {
+            width: 0;
+          }
+
+          .mat-option {
+            height: 35px !important;
+          }
+
+          .arrow {
+            top: 0 !important;
+            right: 4px;
+          }
+
+          .label {
+            position: relative;
+            top: -1px;
+            font-size: 14px !important;
+            line-height: 22.4px !important;
+          }
+        }
+      }
+
+      &-disabled {
+        pointer-events: none;
+        opacity: 0.3;
+      }
+    }
+
+    .team-pagination {
+      display: flex;
+      align-items: center;
+      height: 115px;
+
+      .pagination-list {
+        margin: 0;
+        display: flex;
+        justify-content: space-between;
+        box-sizing: border-box;
+      }
+
+      .pagination-button {
+        @include arrow-button;
+
+        &:focus {
+          outline: none;
+        }
+
+        &:last-child {
+          transform: rotate(180deg);
+        }
+      }
+
+      .pagination-item {
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        justify-content: center;
+        cursor: pointer;
+        flex: 1;
+        position: relative;
+        width: 24px;
+        height: 24px;
+        margin-right: 10px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        .pagination-pages {
+          position: absolute;
+          left: 2px;
+          bottom: 40px;
+          background: $white-color;
+          z-index: 1;
+          box-shadow: 0 10px 15px rgba(5, 31, 43, 0.2);
+          max-height: 184px;
+          overflow-y: scroll;
+
+          &-item {
+            padding: 15px 45px 15px 15px;
+            color: $username-color;
+          }
+
+          &-item:hover {
+            background: $menu-item-background;
+          }
+        }
+      }
+
+      .current {
+        color: $objectives-text-color;
+        background-color: $primary;
+        border-radius: 4px;
+      }
+    }
+
+    .portal-pagination {
+      .pagination-list {
+        display: flex;
+        justify-content: center;
+        box-sizing: border-box;
+        margin: 0;
+        min-width: 0;
+      }
+
+      .pagination-button {
+        @include portal-arrow-button;
+
+        &:last-child {
+          transform: rotate(0);
+        }
+      }
+
+      .pagination-item {
+        @include font-base(14px, 500, 16px);
+
+        border: 1px solid $primary;
+        color: $white-color;
+        height: 46px;
+        width: 46px;
+        margin: 0 8px;
+        flex: 0;
+        flex-basis: 46px;
+
+        .pagination-link {
+          padding: 15px;
+        }
+
+        .pagination-pages {
+          left: -1px;
+          bottom: 55px;
+        }
+      }
+
+      .current {
+        background: $primary;
+        color: $username-color;
+      }
+    }
+  }
+}
+
+::ng-deep {
+  .paginator-panel-class {
+    position: absolute;
+    min-width: 50px !important;
+    left: 7px !important;
+    top: 30px !important;
+    min-height: 100px !important;
+    font-size: 14px !important;
+    line-height: 16.41 !important;
+
+    .mat-option {
+      height: 35px !important;
+      font-weight: 400 !important;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+@import '~src/styles/shared-styles/_vars.scss';
+
+.wrapper {
+  position: relative;
+
+  &-spinner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: $employee-avatar-loader-z-index + 1;
+  }
+}

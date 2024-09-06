@@ -1,0 +1,42 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+:host ::ng-deep {
+  andteam-portal-input {
+    margin: 0;
+    max-width: 70px;
+  }
+
+  .portal-options {
+    left: -70px;
+    min-width: 70px;
+    max-height: 287px;
+    overflow: auto;
+  }
+
+  .search-icon,
+  .selected-option,
+  .close-icon {
+    display: none;
+  }
+
+  .form-input {
+    color: $black-color;
+    padding: 0 0 7px;
+  }
+}
+
+.time-wrapper,
+.time-part {
+  display: flex;
+}
+
+.time-part:last-child {
+  &::before {
+    @include font-base(18px, 300, 25px);
+
+    content: ':';
+    display: block;
+    margin: auto 8px;
+  }
+}

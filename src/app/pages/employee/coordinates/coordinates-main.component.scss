@@ -1,0 +1,64 @@
+@import 'src/styles/shared-styles/colors';
+@import 'src/styles/shared-styles/mixins';
+@import 'src/styles/shared-styles/_vars.scss';
+
+.tab-wrapper {
+  @include font-base(16px, 400, 26px, normal);
+
+  background-color: $body-background;
+  position: relative;
+
+  .coordinates-table {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    background: $white-color;
+    overflow-x: scroll;
+    overflow-y: visible;
+  }
+
+  .cursor-grab {
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
+  .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 22px;
+
+    &-block {
+      display: flex;
+      align-items: center;
+
+      .text {
+        @include font-base(42px, 300, 55px);
+
+        margin-right: 10px;
+      }
+    }
+
+    &-icon {
+      vertical-align: bottom;
+    }
+
+    .coordinates {
+      @include font-base(16px, 400, 25px);
+
+      display: flex;
+
+      &-icon {
+        vertical-align: text-bottom;
+      }
+
+      &-count {
+        @include font-base(28px, 300, 36px);
+
+        margin-right: 10px;
+        margin-left: 10px;
+      }
+    }
+  }
+}

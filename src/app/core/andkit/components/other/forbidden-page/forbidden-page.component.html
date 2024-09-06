@@ -1,0 +1,15 @@
+<div class="error-wrapper" [ngClass]="{'background-image': showBackgroundImage, 'background-color': !showBackgroundImage}">
+  <andteam-external-header></andteam-external-header>
+  <div class="error">
+    <div class="error-title">Error 403<span [innerHTML]="dot | safe"></span></div>
+    <div class="error-details">
+      <p>
+        Sorry!  Access denied.
+      </p>
+      <p>
+        You can return to a home page
+        <a routerLink=".." class="error-link">team.{{companyService.companyUrl}}</a>
+      </p>
+    </div>
+  </div>
+</div>

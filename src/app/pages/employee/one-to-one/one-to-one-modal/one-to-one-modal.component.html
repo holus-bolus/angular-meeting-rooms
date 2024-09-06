@@ -1,0 +1,191 @@
+<div class="add-modal-wrap">
+  <div class="modal-add-one-to-one">
+    <button [innerHTML]="closeIcon | safe" class="modal-add-one-to-one-close" (click)="onClose()"></button>
+
+    <h2 automation-id="one-to-one-add-title" class="modal-add-one-to-one-title">
+      {{ isEditMode ? 'Edit' : 'Add' }} One to one
+    </h2>
+
+    <ng-container [formGroup]="currentForm">
+      <div class="modal-add-one-to-one-row">
+        <div class="modal-add-one-to-one-column">
+          <andteam-date-picker
+            formControlName="date"
+            [error]="!getControl('date').value && getControl('date').touched"
+            [errorMessage]="errorRequiredField"
+            [disabled]="disable"
+            [minDate]="minStartDate"
+            placeholder="Date & Time of current One to one*"
+          ></andteam-date-picker>
+        </div>
+
+        <div class="modal-add-one-to-one-column">
+          <andteam-select-control
+            automation-id="one-to-one-add-current-type"
+            [automationId]="'one-to-one-add-current-type'"
+            formControlName="oneToOneType"
+            [options]="oneToOneTypes"
+            [disabled]="disable"
+            [error]="!getControl('oneToOneType').value && getControl('oneToOneType').touched"
+            [errorMessage]="errorRequiredField"
+            [panelClass]="'type-panel-class'"
+            [placeholder]="'Type of current One to one*'">
+          </andteam-select-control>
+        </div>
+      </div>
+
+      <div class="modal-add-one-to-one-row">
+        <div class="modal-add-one-to-one-column">
+          <andteam-date-picker
+            automation-id="one-to-one-add-next-interview-date"
+            formControlName="nextInterviewDate"
+            [errorMessage]="errorRequiredField"
+            [disabled]="disable"
+            [minPreviousDate]="minPreviousDate"
+            [maxDate]="nextInterviewDate"
+            placeholder="Date of next One to one*">
+          </andteam-date-picker>
+        </div>
+
+        <div class="modal-add-one-to-one-column">
+          <andteam-select-control
+            automation-id="one-to-one-add-next-type"
+            [automationId]="'one-to-one-add-next-type'"
+            formControlName="nextInterviewType"
+            [options]="oneToOneTypes"
+            [disabled]="disable"
+            [error]="!getControl('nextInterviewType').value && getControl('nextInterviewType').touched"
+            [errorMessage]="errorRequiredField"
+            [panelClass]="'type-panel-class'"
+            [placeholder]="'Type of next One to one*'">
+          </andteam-select-control>
+        </div>
+      </div>
+
+      <div class="modal-add-one-to-one-row">
+        <div class="modal-add-one-to-one-column">
+          <andteam-select-control
+            automation-id="one-to-one-add-risk-of-leaving"
+            [automationId]="'one-to-one-add-risk-of-leaving'"
+            formControlName="riskOfLeaving"
+            [options]="riskOfLeavingList"
+            [additionalInfo]="risksInfo"
+            [disabled]="disable"
+            [error]="!getControl('riskOfLeaving').value && getControl('riskOfLeaving').touched"
+            [errorMessage]="errorRequiredField"
+            [panelClass]="'risk-panel-class'"
+            [placeholder]="'Risk of leaving*'">
+          </andteam-select-control>
+        </div>
+
+        <div class="modal-add-one-to-one-column">
+          <andteam-select-control
+            *ngIf="isShowReason"
+            automation-id="one-to-one-add-reason-for-leaving"
+            [automationId]="'one-to-one-add-reason-for-leaving'"
+            formControlName="riskFiringReasonId"
+            [options]="data.reasonsForLeaving"
+            [disabled]="disable"
+            [error]="!getControl('riskFiringReasonId').value && getControl('riskFiringReasonId').touched"
+            [errorMessage]="errorRequiredField"
+            [panelClass]="'reason-panel-class'"
+            [placeholder]="'Reason of leaving*'">
+          </andteam-select-control>
+        </div>
+      </div>
+
+      <div class="modal-add-one-to-one-row-comment">
+        <p class="modal-add-one-to-one-comment-title">Please use English language only</p>
+        <div class="modal-add-one-to-one-column modal-add-one-to-one-column-full-width">
+          <andteam-portal-textarea
+            ngDefaultControl
+            automation-id="one-to-one-add-comment"
+            [automationId]="'one-to-one-add-comment'"
+            placeholder="Comment*"
+            formControlName="comment"
+            [disabled]="disable"
+            (keyup)="onCommentKeyUp()"
+            [maxRows]="maxCommentRows"
+            [error]="(!getControl('comment').value && getControl('comment').touched) || getControl('comment').value.length > maxMessageLength"
+            [hint]="getControl('comment').valid || getControl('comment').errors?.hasOwnProperty('pattern')"
+            [errorMessage]="errorMessageText"
+            [hintMessage]="hintMessageText('comment', 5000)"
+            [isNoErrorMargin]="true">
+          </andteam-portal-textarea>
+        </div>
+        <p *ngIf="isShowLangError.value" class="modal-add-one-to-one-comment-error">
+          Latin characters only
+        </p>
+      </div>
+      <div *ngIf="!getControl('update') && isEditMode" class="add-update-container" (click)="onAddUpdate()">
+        <div class="update-icon" type="button"></div>
+        <span class="modal-add-one-to-one-comment-title">Add update</span>
+    </div>
+      <ng-container *ngIf="getControl('update')">
+        <div class="modal-add-one-to-one-row-comment" style="margin-bottom: 25px;">
+          <p class="modal-add-one-to-one-comment-title">Please use English language only</p>
+          <div class="modal-add-one-to-one-column modal-add-one-to-one-column-full-width one-to-one-update">
+            <andteam-portal-textarea
+              style="width: 90%"
+              ngDefaultControl
+              automation-id="one-to-one-add-comment"
+              [automationId]="'one-to-one-add-comment'"
+              placeholder="Update*"
+
+              formControlName="update"
+              (keyup)="onUpdateCommnetKeyUp()"
+              [error]="(!getControl('update').value && getControl('update').touched) || getControl('update').value.length > maxUpdateMessageLength"
+              [hint]="getControl('update').valid || getControl('update').errors?.hasOwnProperty('pattern')"
+              [errorMessage]="errorMessageText"
+              [hintMessage]="hintMessageText('update', 5000)"
+              [isNoErrorMargin]="true">
+            </andteam-portal-textarea>
+            <button [innerHTML]="closeIcon | safe" class="modal-add-one-to-one-close" (click)="onDeleteUpdateComment()"></button>
+          </div>
+
+          <p *ngIf="isShowUpdateLangError.value" class="modal-add-one-to-one-comment-error">
+            Latin characters only
+          </p>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="data.oneToOneStaticData && data.oneToOneStaticData.updates">
+        <ng-container *ngFor="let update of data.oneToOneStaticData.updates">
+          <div class="one-to-one-view-container">
+            <div class="modal-view-one-to-one-row one-to-one-update-container">
+              <div class="one-to-one-comment">
+                {{ update.updateDate | date: 'dd/MM/yyyy' }}
+              </div>
+              <div class="modal-view-one-to-one-column modal-view-one-to-one-column-full-width">
+                <div
+                  class="modal-view-one-to-one-textarea"
+                  automation-id="one-to-one-comment"
+                >{{ update.updateComment }}</div>
+              </div>
+            </div>
+          <button [innerHTML]="closeIcon | safe" class="modal-add-one-to-one-close" (click)="onDeleteUpdateComment(update.id)"></button>
+        </div>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+    <div class="modal-add-one-to-one-buttons">
+      <andteam-button
+        automation-id="one-to-one-add-cancel-button"
+        [type]="cancelButtonType"
+        class="modal-add-one-to-one-btn modal-add-one-to-one-btn-cancel"
+        (click)="onClose()">
+        Cancel
+      </andteam-button>
+
+      <andteam-button
+        automation-id="one-to-one-add-confirm-button"
+        [type]="confirmButtonType"
+        class="modal-add-one-to-one-btn modal-add-one-to-one-btn-confirm"
+        [disabled]="!currentForm.valid"
+        (click)="onSubmit()">
+        {{ isEditMode ? 'Save' : 'Add' }}
+      </andteam-button>
+    </div>
+  </div>
+</div>

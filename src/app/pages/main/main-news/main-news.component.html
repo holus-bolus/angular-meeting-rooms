@@ -1,0 +1,56 @@
+<div class="wrapper">
+  <div class="wrapper__content">
+    <h2 class="portal-h2">Hot News</h2>
+    <div class="content-description">Check our latest corporate news! Important. Official. Hot.</div>
+    <div class="content-filter-box">
+      <div class="content-filter-search">
+        <andteam-portal-input
+          [formControl]="search"
+          placeholder="Search"></andteam-portal-input>
+      </div>
+      <div class="content-filter-tags">
+        <andteam-tags [allTags]="allTags"
+                      [titleTags]="titleTags"
+                      [formControl]="tag">
+        </andteam-tags>
+      </div>
+    </div>
+
+    <div class="news-cards-wrapper">
+      <div *ngFor="let pieceNews of allNews; first as isFirst" class="news-card-wrapper">
+        <andteam-news-card [pieceNews]="pieceNews"
+                           [isFirst]="isFirst"
+                           [mainPage]="mainPage"
+                           (delete)="onOpenConfirmationModal($event)">
+        </andteam-news-card>
+      </div>
+    </div>
+
+    <div class="link-box">
+      <div>
+      <span class="link"
+            (click)="lessNews()"
+            *ngIf="sizeNews > 5">Less
+        <span class="link-icon icon-less" [innerHTML]="vectorIcon | safe"></span>
+      </span>
+      </div>
+
+      <div>
+      <span class="link"
+            (click)="moreNews()"
+            *ngIf="totalItemCount > sizeNews">More
+        <span class="link-icon" [innerHTML]="vectorIcon | safe"></span>
+      </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<andteam-confirmation-modal *ngIf="isOpenConfirmationModal"
+                            [text]="title"
+                            [subText]="subTitle"
+                            (sendConfirmEvent)="onDelete(confirmationNews.id)"
+                            (sendCloseEvent)="onCloseConfirmationModal()">
+</andteam-confirmation-modal>
+

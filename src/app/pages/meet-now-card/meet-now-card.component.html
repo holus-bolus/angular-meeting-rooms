@@ -1,0 +1,53 @@
+<!-- <div class="card">
+  <div class="card__wrapper">
+    <div class="card__details">
+      <div class="card__name">
+        <span>&#x25CF;</span>
+        <span>{{ room.title | titlecase }} room</span>
+      </div>
+      <div class="card__availability">
+        <span class="text-gray">Available for </span>
+        <span class="text-bold">{{ room.status }}</span>
+      </div>
+      <div class="card__capacity">
+        <span class="text-gray">Number of seats </span>
+        <span class="text-bold">{{ room.capacity }}</span>
+      </div>
+      <andteam-button >
+        Book now
+      </andteam-button>
+    </div>
+    <div class="card__controls">
+      <andteam-button class="card__favorite-toogle" (click)="toggleFavorite()" [buttonIcon]="favoriteIcon" [type]="buttonType.FAB">
+      </andteam-button>
+      <a>See on the map</a>
+    </div>
+  </div>
+</div> -->
+
+<andteam-room-card>
+  <div class="meet-now-card__wrapper">
+    <div class="meet-now-card__details">
+      <div class="meet-now-card__name">
+        <span>&#x25CF;</span>
+        <span>{{ room.title | titlecase }} room</span>
+      </div>
+      <div class="meet-now-card__availability">
+        <span class="text-gray">Available for </span>
+        <span class="text-bold">{{ room.status }}</span>
+      </div>
+      <div class="meet-now-card__capacity">
+        <span class="text-gray">Number of seats </span>
+        <span class="text-bold">{{ room.capacity }}</span>
+      </div>
+      <andteam-button >
+        Book now
+      </andteam-button>
+    </div>
+    <div class="meet-now-card__controls">
+      <andteam-button class="meet-now-card__favorite-toogle" (click)="toggleFavorite()" [buttonIcon]="favoriteIcon" [type]="buttonType.FAB">
+      </andteam-button>
+      <a>See on the map</a>
+    </div>
+  </div>
+</andteam-room-card>

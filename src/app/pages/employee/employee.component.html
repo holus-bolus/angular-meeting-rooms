@@ -1,0 +1,18 @@
+<div class="wrapper">
+  <div class="card-body">
+    <div class="backward" *ngIf="isShowButton">
+      <andteam-backward-link
+        (goBack)="goBack()"><span>{{buttonName}}</span></andteam-backward-link>
+    </div>
+    <div class="navigation-panel-wrapper" *ngIf="navs">
+      <div class="navigation-panel">
+        <div class="tabs-wrapper">
+          <andteam-tabs [isLazyTabs]="isLazyTabs" [tabs]="navs" (selectTab)="onSelectTab($event)"></andteam-tabs>
+        </div>
+      </div>
+    </div>
+
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<andteam-footer></andteam-footer>

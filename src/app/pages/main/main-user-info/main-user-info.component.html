@@ -1,0 +1,79 @@
+<div class="user-info">
+  <div [ngClass]="{'__disabled': isBlockBackground }" class="user-info__avatar">
+    <img class="user-info__avatar-img"
+         [src]="newAvatar || avatar" alt="avatar">
+    <div class="user-info__avatar-shadow">
+      <div class="button__text">
+        <andteam-portal-input-file
+          (handleFiles)="handleFiles($event)"></andteam-portal-input-file>
+        Update
+      </div>
+    </div>
+  </div>
+  <div [ngStyle]="{'-webkit-user-select': isBlockBackground ? 'none' : 'inherit'}"
+       class="user-info__name">
+    <a *ngIf="!isBlockBackground"
+       class="user-info__name_ru"
+       [routerLink]="['/employee', externalId]">
+      {{usernameEn || username}}
+    </a>
+    <br>
+    <a *ngIf="usernameEn && usernameEn !== username"
+       class="user-info__name_en"
+       [routerLink]="['/employee', externalId]">
+      {{username}}
+    </a>
+  </div>
+</div>
+
+<div class="edit-image" *ngIf="isOpenEditImageModal">
+  <andteam-modal (closeClick)="onOpenEditImageModal()">
+    <p class="main-label">Edit image</p>
+    <div class="image-cropper-block" *ngIf="isCropperActive">
+      <andteam-progress-spinner *ngIf="!isCropperImageLoaded"></andteam-progress-spinner>
+      <image-cropper
+        [imageFile]="fileImageToCrop"
+        [maintainAspectRatio]="true"
+        [aspectRatio]="1 / 1"
+        [resizeToWidth]="290"
+        [cropperMinWidth]="290"
+        [onlyScaleDown]="true"
+        [roundCropper]="true"
+        (imageLoaded)="onImageLoaded()"
+        [transform]="transform"
+        (imageCropped)="onImageCropped($event)"
+        [hideResizeSquares]="true"
+        [backgroundColor]="'rgba(255,255,255,0.3)'"
+        [style.display]="isCropperImageLoaded ? null : 'none'"
+        format="png"
+        [alignImage]="'center'"
+      ></image-cropper>
+      <div class="error-message"
+           *ngIf="testImageMessageError$ | async as messageError">{{messageError}}</div>
+      <div class="error-message"
+           *ngIf="testImagePreviewMessageError$ | async as previewMessageError ">{{previewMessageError}}</div>
+      <div class="buttons">
+        <div class="center">
+          <div class="wrapper">
+            <input type="range"
+                   step="0.1"
+                   min="0"
+                   max="2"
+                   (change)="handleFileInput($event)">
+          </div>
+        </div>
+        <div class="controls">
+          <andteam-button class="save"
+                          type="primary"
+                          (click)="cropImage()">
+            Save
+          </andteam-button>
+          <andteam-button class="cancel"
+                          type="secondary"
+                          (click)="onOpenEditImageModal()">Cancel
+          </andteam-button>
+        </div>
+      </div>
+    </div>
+  </andteam-modal>
+</div>

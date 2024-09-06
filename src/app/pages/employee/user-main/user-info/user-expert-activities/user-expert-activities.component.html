@@ -1,0 +1,30 @@
+<div *ngIf="userActivities?.length || isCanEditActivities" class="activities">
+  <div class="activities-header">
+    <p class="activities-header-title">Expert Activities</p>
+    <span *ngIf="isCanEditActivities"
+          [innerHTML]="plusIcon | safe"
+          class="activities-header-icon"
+          [ngClass]="{'disable-add': isAllActivitiesUsed | async}"
+          (click)="editActivitiesModal(false)">
+    </span>
+    <span *ngIf="isAllActivitiesUsed | async" class="activities-header-tooltip">
+      <div>
+        All possible expert activities
+      </div>
+      <div>
+        are added for the employee
+      </div>
+    </span>
+  </div>
+
+  <div class="activities-main">
+    <div *ngFor="let activity of userActivities" class="activities-main-item-wrapper">
+      <p
+        class="activities-main-item"
+        (click)="editActivitiesModal(true, activity)">
+        {{activity?.activityName}}
+      </p>
+      <span *ngIf="activity.dueDate && isCanEditActivities" class="activities-main-tooltip">{{activity.dueDate | date: 'dd.MM.y'}}</span>
+    </div>
+  </div>
+</div>

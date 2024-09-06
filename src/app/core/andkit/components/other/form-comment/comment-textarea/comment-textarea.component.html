@@ -1,0 +1,25 @@
+<div class="form">
+  <textarea
+    class="form-input"
+    matInput
+    #autosize="cdkTextareaAutosize"
+    cdkTextareaAutosize
+    cdkAutosizeMinRows="1"
+    cdkAutosizeMaxRows="6"
+    [placeholder]="placeholder"
+    [value]="value"
+    [class.error]="error"
+    (input)="onChangeValue($event)"
+    (blur)="onBlur($event)">
+  </textarea>
+
+  <div *ngIf="value" [innerHTML]="clearIcon" class="clear-icon" (click)="clearTextarea()"></div>
+
+  <div *ngIf="error; else charactersCounter" class="error-message floating-message">{{errorMessage}}</div>
+
+  <ng-template #charactersCounter>
+    <div *ngIf="charactersLimit" class="counter-label floating-message">
+      <div class="counter-message">{{charactersLimit - value?.length}} characters left</div>
+    </div>
+  </ng-template>
+</div>

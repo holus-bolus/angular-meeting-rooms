@@ -1,0 +1,6 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+:host ::ng-deep .hover:hover > svg > path {
+    fill: $primary;
+}

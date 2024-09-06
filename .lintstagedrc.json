@@ -1,0 +1,4 @@
+{
+  "src/**/*.{ts,js}": ["tslint --fix", "git add"],
+  "src/**/*.{md,json,template.html}": ["prettier --write", "git add"]
+}

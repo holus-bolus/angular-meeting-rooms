@@ -1,0 +1,90 @@
+@import '~src/styles/shared-styles/vars';
+@import '~src/styles/shared-styles/colors';
+
+$font-family-base: 'Roboto', sans-serif;
+$font-size-base: 14px;
+$line-height-base: 1.4;
+
+@mixin font-base(
+  $size: $font-size-base,
+  $font-weight: 400,
+  $height: $line-height-base,
+  $font-style: normal,
+  $font-family: $font-family-base
+) {
+  font: $font-weight $font-style #{$size}/#{$height $font-family};
+}
+
+@mixin transition($property: all, $time: 0.25s) {
+  transition: $property $time ease-in;
+}
+
+@mixin arrow-button {
+  color: $objectives-text-color;
+  background: $white-color;
+  border: none;
+  height: 40px;
+  width: 40px;
+  padding: 10px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+@mixin portal-arrow-button {
+  color: $white-color;
+  background: transparent;
+  border: 1px solid transparent;
+  height: 46px;
+  width: 40px;
+  position: relative;
+  cursor: pointer;
+  transform: rotate(180deg);
+  padding: 10px 0;
+}
+
+@mixin arrow {
+  content: '';
+  position: absolute;
+  left: 9px;
+  top: 12px;
+  border: 5px solid transparent;
+  border-top: 7px solid $text-primary;
+  transform: rotate(90deg);
+}
+
+@mixin avatar-sizes {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+@mixin tag {
+  @include font-base(16px, 300, 19px);
+
+  margin: 5px;
+  color: $tag-color;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+@mixin button($height-border, $type, $color, $width, $height, $box-sizing) {
+  border: $height-border $type $color;
+  width: $width;
+  height: $height;
+  box-sizing: $box-sizing;
+}
+
+@mixin shadow {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+@mixin border-bottom($height, $type, $color) {
+  border-bottom: $height $type $color;
+}
+
+@mixin align-elements {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

@@ -1,0 +1,9 @@
+<andteam-assessment-textarea
+  [value]="value"
+  [errorMessage]="errorMessage"
+  [error]="error"
+  [placeholder]="commentPlaceholder"
+  [charactersLimit]="charactersLimit"
+  (changeValue)="onCommentChanges($event)"
+  (blurTextarea)="onCommentBlur($event)">
+</andteam-assessment-textarea>

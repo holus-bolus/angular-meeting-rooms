@@ -1,0 +1,148 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+@import '~src/styles/shared-styles/_vars.scss';
+
+.wrapper {
+  display: flex;
+
+  .contacts,
+  .skills {
+    display: flex;
+    flex-direction: column;
+
+    .info {
+      text-align: left;
+      color: $objectives-text-color;
+
+      &-inline {
+        @include font-base(16px, 300, 20px);
+
+        display: flex;
+        flex-direction: column;
+        min-height: 50px;
+        justify-content: center;
+        align-items: flex-start;
+        text-align: left;
+        overflow-wrap: break-word;
+        margin: 0 30px 25px 0;
+      }
+
+      &-link {
+        color: $black-color;
+        text-decoration: none;
+        line-height: 26px;
+        margin: 5px 0 0 0;
+
+        &:hover {
+          color: $primary;
+        }
+
+        &-inactive {
+          color: $text-disabled;
+        }
+      }
+
+      &-link-dotted {
+        @include border-bottom(1px, dashed, $border-bottom-color);
+
+        text-decoration: none;
+        color: $objectives-text-color;
+
+        &:hover {
+          @include border-bottom(1px, solid, $border-link-hover);
+        }
+      }
+
+      &-title {
+        @include font-base(14px, 300, 20px);
+
+        color: $text-secondary;
+        margin-bottom: 5px;
+        white-space: pre-line;
+      }
+
+      &-text {
+        white-space: pre-line;
+      }
+
+      &-inline-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+
+      &-inline-birth-container,
+      &-inline-phone-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-top: 5px;
+
+        .text {
+          margin: 0;
+        }
+      }
+    }
+
+    .title {
+      font-size: 14px;
+      line-height: 18px;
+      color: $text-secondary;
+    }
+
+    .text {
+      margin: 5px 0 0 0;
+      line-height: 26px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      line-height: 26px;
+      gap: 5px;
+      margin: 5px 0 0 0;
+
+      .chips-text,
+      .chips-text-technologies  {
+        width: fit-content;
+        padding: 0 10px;
+        border: 1px solid $activities-border-color;
+        border-radius: 4px;
+        font-size: 14px;
+
+        .link {
+          text-decoration: none;
+          border-bottom: none;
+          font-weight: 300;
+        }
+
+        &-technologies:first-child {
+          border: none;
+          background-color: $border-link-hover;
+          margin-left: 0;
+        }
+      }
+
+      .disabled {
+        pointer-events: none;
+      }
+    }
+  }
+
+  .skills {
+    width: 60%;
+
+    .general-info {
+      display: flex;
+      align-items: flex-start;
+
+      .position {
+        max-width: 200px;
+      }
+    }
+  }
+
+  .contacts {
+    width: 40%;
+  }
+}

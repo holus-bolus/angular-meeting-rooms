@@ -1,0 +1,87 @@
+@import '~src/styles/shared-styles/mixins';
+@import '~src/styles/shared-styles/colors';
+
+.tab-wrapper {
+  background-color: $body-background;
+
+  @media (max-width: $wrapper-portal) {
+    width: $wrapper-portal-title;
+  }
+}
+
+.salary-review-card__content {
+  position: relative;
+  min-height: 340px;
+  min-width: 1100px;
+}
+
+.next-salary-date {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.next-salary-date-label {
+  @include font-base(18px, 300, 25px);
+
+  color: $objectives-text-color;
+  margin-left: 5px;
+}
+
+.reviews-count {
+  @include font-base(22px, 300, 1);
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin: 42px 0 30px;
+  color: $username-color;
+}
+
+.reviews-count-icon {
+  height: 24px;
+  margin-right: 10px;
+}
+
+.reviews-count-label {
+  @include font-base(16px, 200, 140%);
+
+  margin-left: 10px;
+  color: $username-color;
+}
+
+.review-details {
+  margin-top: 30px;
+}
+
+.review-details-card {
+  display: block;
+
+  & + & {
+    margin-top: 20px;
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 40px;
+
+  .show-more {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .show-more-link {
+    @include font-base(16px, 500, 160%);
+
+    padding-bottom: 3px;
+    border-bottom: 1px solid $primary;
+  }
+
+  .arrow-down {
+    transform: scale(0.5);
+  }
+}

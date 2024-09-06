@@ -1,0 +1,196 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+:host {
+  & + & {
+    margin-bottom: auto;
+  }
+}
+
+.feedback-skills {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0px;
+
+  @media (max-width: $tablet-md) {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  andteam-checkbox {
+    margin-left: 45px;
+
+    span {
+      @include font-base(18px, 400, 29px);
+    }
+  }
+
+  &-row  {
+    position: relative;
+    flex: 50%;
+    display: flex;
+    height: 48px;
+    align-items: center;
+    left: 0;
+    max-width: 370px;
+    top: 0;
+    z-index: 10;
+
+    @media (max-width: $tablet-md) {
+      max-width: none;
+      width: 100%;
+    }
+
+    .line {
+      width: 25%;
+      height: 2px;
+      background-color: $one-to-one-position-chips;
+
+      &.yellow {
+        background-color: $primary;
+        height: 4px;
+      }
+    }
+
+    .vert-wrapper {
+      position: relative;
+
+      .vert-line {
+        position: absolute;
+        top: -5px;
+        z-index: 1000;
+
+        &.yellow {
+          .small-thumb {
+            background-color: $primary;
+            border-color: $primary;
+          }
+        }
+
+        .small-thumb {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          border-width: 2px;
+          border-color: $one-to-one-position-chips;
+          border-style: solid;
+          background-color: $white-color;
+        }
+
+        .thumb {
+          background-color: #fff!important;
+          border: 2px solid $primary;
+          width: 14px;
+          height: 14px;
+          text-align: center;
+          transform: scale(1)!important;
+          border-radius: 50%;
+          position: absolute;
+          top: -4px;
+          left: -4px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-color: $primary;
+
+          &-inner {
+            width: 10px;
+            height: 10px;
+            background-color: $primary;
+            border-radius: 50%;
+          }
+        }
+
+        andteam-assessment-tooltip::ng-deep {
+          .tooltip {
+            left: -3px;
+            top: -5px;
+          }
+
+          .tooltip-base > .tootip-hint{
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            left: -12px;
+            top: -10px;
+            z-index: 999;
+          }
+        }
+      }
+    }
+    
+
+    @media (max-width: $tablet-md) {
+      width: 100%;
+      max-width: none;
+    }
+  }
+
+  &-title {
+    display: flex;
+    flex-direction: row;
+    padding: 0px;
+    gap: 5px;
+    flex: 227px;
+    max-width: 227px;
+    align-items: center;
+
+    @media (max-width: $tablet-md) {
+      flex: 70px;
+      width: 100%;
+    }
+    
+    h3 {
+      @include font-base(18px, 400, 29px);
+    }
+  }
+
+  &-tooltip {
+    @include font-base(12px, 400, 19px);
+    min-width: 200px;
+    max-width: 290px;
+    padding: 2px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+
+    @media (max-width: $tablet-md) {
+      font-size: 10px;
+      line-height: 16px;
+    }
+
+    h4 {
+      color: $input-selected-color;
+    }
+    span {
+      color: $tag-title-color;
+    }
+  }
+
+  &-description {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 5px;
+    width: 100%;
+
+    @include font-base(12px, 400, 19px);
+
+    &-title {
+      color: $input-selected-color;
+    }
+
+    &-text {
+      color: $tag-title-color;
+    }
+  }
+}
+
+::ng-deep .range-slider {
+  width: 100%;
+  z-index: 5;
+}

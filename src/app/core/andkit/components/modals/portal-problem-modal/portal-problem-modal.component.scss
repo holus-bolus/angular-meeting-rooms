@@ -1,0 +1,82 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.problem {
+  &-title {
+    @include font-base(36px, 200, 130%);
+
+    color: $username-color;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+
+  &-subtitle {
+    @include font-base(18px, 200, 160%);
+
+    margin-bottom: 30px;
+  }
+
+  &-image {
+    margin-bottom: 40px;
+  }
+
+  .error {
+    border: 1px dashed $error-color;
+  }
+
+  .error-message {
+    margin-top: 5px;
+    font-size: 12px;
+    font-weight: 300;
+    color: $error-color;
+  }
+
+  ::ng-deep .modal {
+    z-index: 1001;
+
+    .modal-body {
+      padding: 60px 40px;
+      border-radius: 0;
+      min-width: 480px;
+
+      .modal-close {
+        right: 20px;
+        top: 20px;
+      }
+
+      .btn {
+        @include font-base(14px, 500, 160%);
+
+        padding: 0;
+        border-radius: 0;
+        width: 180px;
+        height: 40px;
+      }
+    }
+  }
+
+  ::ng-deep .chips-wrapper {
+    border-bottom: 1px solid $portal-border-color;
+    margin-bottom: 25px;
+
+    .chips-all-items {
+      @include font-base(18px, 200, 160%);
+
+      color: $tag-title-color;
+    }
+  }
+
+  ::ng-deep .form {
+    margin: 20px 0 40px;
+  }
+
+  ::ng-deep .image-pick {
+    width: 400px;
+    margin: 0;
+
+    .image-pick__description {
+      width: 320px;
+      white-space: pre-wrap;
+    }
+  }
+}

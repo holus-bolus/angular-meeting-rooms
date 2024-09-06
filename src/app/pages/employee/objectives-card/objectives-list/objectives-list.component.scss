@@ -1,0 +1,143 @@
+@import '~src/styles/shared-styles/mixins';
+@import '~src/styles/shared-styles/colors';
+
+table {
+  width: 100%;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+
+  .status-with-button {
+    color: transparent !important;
+  }
+
+  tr {
+    td {
+      cursor: pointer;
+    }
+
+    th {
+      padding-top: 35px;
+      font-size: 14px;
+    }
+
+    th:first-child,
+    td:first-child {
+      padding-left: 35px;
+    }
+
+    th:last-child,
+    td:last-child {
+      padding-right: 35px;
+    }
+  }
+
+  td.mat-cell,
+  td.mat-footer-cell,
+  th.mat-header-cell {
+    border-bottom: none;
+  }
+
+  .text-wrapper {
+    min-height: 52px;
+    display: flex;
+    max-width: 460px;
+    align-items: center;
+    color: $objectives-text-color;
+    font: 16px/25.6px sans-serif;
+  }
+
+  .mat-column-objective {
+    min-width: 460px;
+    width: 460px;
+  }
+
+  .mat-column-type {
+    min-width: 100px;
+    width: 100px;
+  }
+
+  .mat-column-dueDate {
+    min-width: 100px;
+    width: 100px;
+  }
+
+  .mat-column-comment {
+    min-width: 207px;
+  }
+
+  .text {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+
+    &.one-word {
+      display: block;
+    }
+  }
+
+  .mat-header-cell {
+    padding-left: 50px;
+    color: $table-header;
+  }
+
+  .mat-cell {
+    padding: 10px 0 10px 50px;
+
+    .text-wrapper {
+      line-height: 160%;
+    }
+  }
+
+  .objectives-menu {
+    color: $border-link-hover;
+  }
+
+  .mat-row {
+    height: 90px;
+  }
+
+  .mat-row:nth-child(even) {
+    background-color: #f8f8f8;
+  }
+
+  .status-action {
+    &__menu {
+      text-align: right;
+
+      .mat-button {
+        padding: 0;
+        min-width: auto;
+      }
+    }
+  }
+}
+
+.status-done {
+  color: $green-color;
+}
+
+.status-failed {
+  color: $red-color;
+}
+
+.mat-menu-content {
+  min-width: 150px;
+}
+
+::ng-deep .mat-menu {
+  &-content {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  &-item {
+    line-height: 42px !important;
+    height: 42px !important;
+  }
+
+  &-panel {
+    min-height: 42px !important;
+  }
+}

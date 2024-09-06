@@ -1,0 +1,20 @@
+<div class="wrapper">
+  <andteam-header
+    *ngIf="isShowHeader"
+    [headerType]="headerType"></andteam-header>
+  <router-outlet></router-outlet>
+  <andteam-assessment-modal
+    *ngIf="isShowErrorModal"
+    class="modal-wrapper"
+    (closeClick)="onCloseModal()">
+    <div class="error-modal">
+      <div class="icon" [innerHTML]="errorIcon | safe"></div>
+      <div class="messages">
+        <div class="message" *ngFor='let errorMessage of errorMessages'>{{errorMessage}}</div>
+      </div>
+      <andteam-button
+        class="button"
+        (click)="onCloseModal()">Ok</andteam-button>
+    </div>
+  </andteam-assessment-modal>
+</div>

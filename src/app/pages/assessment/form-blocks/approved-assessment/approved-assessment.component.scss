@@ -1,0 +1,197 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.wrapper {
+  position: relative;
+
+  .comments {
+    padding: 35px 0 10px;
+    display: flex;
+    flex-wrap: wrap;
+
+    &-box {
+      margin: 0 30px 10px 0;
+      display: flex;
+      width: 450px;
+      box-sizing: border-box;
+    }
+
+    &-title {
+      @include font-base(12px, 400, 20px);
+
+      color: $tag-title-color;
+      margin-right: 10px;
+      white-space: nowrap;
+      flex-basis: 130px;
+      text-align: right;
+    }
+
+    &-data {
+      @include font-base(14px, 400, 140%);
+
+      color: $text-primary;
+      flex: 1;
+    }
+
+    .coordinator-comment {
+      @media (max-width: 1380px) {
+        margin-top: 8px;
+      }
+    }
+
+    &-textarea {
+      margin-top: -8px;
+
+      @media (max-width: 1380px) {
+        margin-top: 0;
+      }
+    }
+
+    &-scheduled {
+      @include font-base(12px, 400, 130%);
+
+      color: $text-secondary;
+    }
+  }
+
+  .review-plan {
+    width: 450px;
+
+    &:first-child {
+      margin-right: 30px;
+
+      @media (max-width: 1360px) {
+        margin-right: 0;
+      }
+    }
+
+    .comments-box {
+      align-items: center;
+
+      &:last-child {
+        ::ng-deep .btn_primary {
+          @include font-base(14px, 400, 22px);
+
+          width: 120px;
+          height: 32px;
+          margin-top: 8px;
+        }
+      }
+
+      .date-box {
+        flex: 1;
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+
+        .date-picker {
+          margin-right: 20px;
+        }
+
+        &-spinner {
+          position: absolute;
+          right: -12%;
+          top: 5%;
+        }
+
+        ::ng-deep &.disabled {
+          .mat-input-element, .time-picker-value {
+            color: $text-disabled !important;
+          }
+        }
+      }
+
+      .comments-title {
+        text-align: right;
+      }
+
+      .autocomplete {
+        flex: 1;
+      }
+
+      .date-picker {
+        flex: 1;
+
+        ::ng-deep .mat-form-field {
+          width: 160px;
+        }
+      }
+    }
+
+    .box-button {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .planning-review-date {
+      margin: 26px 0;
+    }
+
+    .planned-box {
+      margin: 23px 30px 0 0;
+      display: flex;
+      max-width: 450px;
+      width: 100%;
+      box-sizing: border-box;
+
+      &:last-child {
+        justify-content: flex-end;
+        margin-top: 25px;
+      }
+
+      .planned {
+        @include transition;
+        @include font-base(14px, 400, 22px);
+
+        border: none;
+        border-radius: 50px;
+        box-shadow: none;
+        width: 120px;
+        height: 32px;
+        color: $text-primary;
+        margin: 0;
+        background: $primary-disabled;
+        padding: 5px 0;
+        box-sizing: border-box;
+        text-align: center;
+      }
+    }
+
+    .planned-data {
+      @include font-base(14px, 400, 22px);
+
+      color: $text-secondary;
+      flex: 1;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+    }
+
+    .planned-date {
+      margin-right: 10px;
+    }
+
+    @media (max-width: 1360px) {
+      width: 100%;
+      margin-right: 0;
+    }
+  }
+
+  .approved-review-plan {
+    border-top: 1px solid rgba(224, 224, 224, 0.5);
+    padding: 25px 0;
+  }
+
+  .error-message {
+    @include font-base(14px, 400, 140%);
+
+    color: $assessment-error-color;
+    margin: 0 0 10px 140px;
+  }
+
+  .loader {
+    position: absolute;
+    top: calc(50% - 32px);
+    left: calc(50% - 32px);
+  }
+}

@@ -1,0 +1,208 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.footer-external {
+  padding: 80px 0 0;
+  margin: 0 auto;
+  color: $white-color;
+  max-width: 1110px;
+  box-sizing: border-box;
+
+  @media (max-width: $tablet) {
+    padding-top: 50px;
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+
+  &-menu {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &-item {
+    flex: 1;
+    margin-right: 45px;
+
+    @media (max-width: $tablet) {
+      max-width: 334px;
+      width: 100%;
+      flex: unset;
+      margin-right: 60px;
+      margin-bottom: 45px;
+
+      &:nth-child(even) {
+        margin-right: 0;
+      }
+
+      &:nth-last-child(-n + 2) {
+        margin-bottom: 0;
+      }
+    }
+
+    @media (max-width: $mobile) {
+      margin-right: 0;
+
+      &:nth-last-child(-n + 2) {
+        margin-bottom: 45px;
+      }
+    }
+
+    &:first-child {
+      min-width: 335px;
+
+      @media (max-width: $tablet) {
+        min-width: auto;
+        max-width: 334px;
+      }
+    }
+
+    &:last-child {
+      margin-right: 0;
+
+      @media (max-width: $mobile) {
+        margin-bottom: 0;
+      }
+    }
+
+    &-title {
+      @include font-base(16px, 400, 25.6px);
+
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid $gray-color;
+
+      @media (max-width: $mobile) {
+        font-size: 14px;
+        line-height: 22.4px;
+      }
+    }
+
+    &-link {
+      margin-left: 15px;
+      text-decoration: none;
+      color: $white-color;
+      border-bottom: thin dashed $border-bottom-color;
+
+      &:hover {
+        border-bottom-color: $primary;
+        border-bottom-style: solid;
+      }
+
+      @media (max-width: $tablet) {
+        font-size: 12px;
+        line-height: 19.2px;
+      }
+
+      ::ng-deep {
+        .icon {
+          margin-right: 15px;
+
+          @media (max-width: $mobile) {
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+
+    &-text {
+      @include font-base(14px, 400, 22.4px);
+
+      @media (max-width: $tablet) {
+        font-size: 12px;
+        line-height: 19.2px;
+      }
+    }
+  }
+
+  &-socials {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+
+    &-item {
+      @include font-base(14px, 400, 22.4px);
+
+      margin-bottom: 6px;
+      padding: 6px 14px 6px 15px;
+      background-color: rgba($white-color, 0.1);
+      color: $white-color;
+
+      &:not(:last-child) {
+        margin-right: 6px;
+      }
+
+      &:hover {
+        background-color: $primary;
+        color: $black-color;
+
+        .footer-external-socials-link {
+          color: $black-color;
+        }
+      }
+    }
+
+    &-link {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: $white-color;
+    }
+
+    ::ng-deep {
+      .icon {
+        margin-right: 10px;
+        min-width: 15px;
+        min-height: 15px;
+        width: 15px;
+
+        svg {
+          width: 15px;
+        }
+      }
+    }
+  }
+
+  &-contacts {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+
+    &-item {
+      display: inline-flex;
+      align-items: center;
+
+      &:not(:first-child) {
+        margin-top: 15px;
+      }
+    }
+  }
+
+  &-copyright {
+    display: flex;
+    align-items: center;
+    padding-top: 70px;
+    padding-bottom: 20px;
+
+    @media (max-width: $mobile) {
+      flex-direction: column;
+      align-items: flex-start;
+      padding-top: 40px;
+    }
+
+    &-text,
+    &-link {
+      @include font-base(12px, 400, 14px);
+
+      color: $tag-title-color;
+
+      @media (max-width: $mobile) {
+        font-size: 12px;
+        line-height: 19px;
+      }
+    }
+
+    &-text {
+      margin-right: 25px;
+    }
+  }
+}

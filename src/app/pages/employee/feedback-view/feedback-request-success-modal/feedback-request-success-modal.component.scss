@@ -1,0 +1,44 @@
+@import 'src/styles/shared-styles/colors';
+@import 'src/styles/shared-styles/mixins';
+
+.mat-dialog-container {
+  padding: 0;
+  border-radius: 0;
+}
+
+.modal-ask-for-feedback-successful {
+  padding: 50px 40px;
+  text-align: center;
+
+  &-icon {
+    margin-bottom: 50px;
+  }
+
+  &-title {
+    @include font-base(24px, 300, 31.2px);
+  }
+
+  &-subtitle {
+    @include font-base(14px, 400, 22.4px);
+
+    margin-top: 10px;
+    color: $tag-box-border;
+  }
+
+  &-list {
+    @include font-base(14px, 400, 22.4px);
+
+    margin-top: 10px;
+  }
+
+  &-button {
+    margin-top: 40px;
+    display: block;
+
+    .btn {
+      min-width: 180px;
+      font-weight: 500 !important;
+      font-size: 14px !important;
+    }
+  }
+}

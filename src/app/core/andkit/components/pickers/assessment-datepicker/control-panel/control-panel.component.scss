@@ -1,0 +1,46 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.controls-panel {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  .arrows-controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .year-arrows {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .arrows-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      opacity: 0.4;
+      border-radius: 50%;
+
+      &:hover {
+        cursor: pointer;
+        background-color: rgba(136, 141, 146, 0.2);
+        opacity: 1;
+      }
+    }
+
+    .arrow {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .next-control {
+    transform: rotate(180deg);
+  }
+
+}

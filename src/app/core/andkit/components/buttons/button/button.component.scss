@@ -1,0 +1,192 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.btn-group > :host {
+  .btn {
+    max-width: 180px;
+    width: 100%;
+  }
+}
+
+.btn {
+  @include font-base(16px, 500, 43px);
+
+  border: none;
+  box-shadow: none;
+  padding: 0 17px;
+  min-width: 130px;
+  height: 42px;
+  color: $objectives-text-color;
+  margin: 0;
+  outline: none;
+  cursor: pointer;
+  text-transform: inherit;
+  white-space: nowrap;
+
+  &:active {
+    box-shadow: none;
+  }
+
+  &_primary,
+  &_primary_portal {
+    background-color: $primary;
+
+    &:hover {
+      background-color: $primary-hover;
+    }
+
+    &:active {
+      background-color: $primary-active;
+    }
+
+    &:focus {
+      background-color: $primary-hover;
+    }
+
+    &.disabled {
+      color: $text-disabled;
+      background-color: $primary-disabled;
+      cursor: default;
+    }
+
+    &.assessment {
+      border-radius: 50px;
+    }
+  }
+
+  &_secondary,
+  &_secondary_portal {
+    background-color: transparent;
+    line-height: 20px;
+
+    &.text-color {
+
+      &-black {
+        color: $text-primary;
+      }
+
+      &-white {
+        color: $white-color;
+      }
+    }
+
+    &:hover {
+      color: $text-primary;
+      border-color: $border-hover;
+      background-color: transparent;
+    }
+
+    &:active {
+      color: $text-primary;
+      border-color: $border-active;
+    }
+
+    &.disabled {
+      color: $text-tertiary;
+      background-color: transparent;
+
+      &:hover {
+        color: $text-tertiary;
+        background-color: transparent;
+        border-color: $text-tertiary;
+        cursor: initial;
+      }
+    }
+
+    &.assessment {
+      border-radius: 50px;
+      border: 1px solid $border-bottom-color;
+
+      &:active {
+        border-color: $border-active;
+      }
+
+      &:hover {
+        border-color: $border-hover;
+      }
+    }
+
+    &.overtime,
+    &.employee_list {
+      border: 2px solid $primary;
+    }
+  }
+
+  &_previous {
+    @include font-base(14px, 500, 16px);
+    @include button(2px, solid, $primary, 130px, 42px, border-box);
+
+    background: $white-color;
+
+    &:hover {
+      border-color: $primary-hover;
+    }
+  }
+
+  &_submit {
+    @include font-base(14px, 500, 16px);
+    @include button(2px, solid, $primary, 130px, 42px, border-box);
+
+    background: $primary;
+
+    &.disabled {
+      color: $text-disabled;
+      background-color: $primary-disabled;
+      border-color: $primary-disabled;
+      cursor: default;
+    }
+  }
+
+  &_text {
+    @include font-base(14px, 400, 22px);
+
+    background-color: transparent;
+    border: transparent;
+    color: $text-secondary;
+    height: 32px;
+    width: 120px;
+
+    &:hover,
+    &:active {
+      color: $text-primary;
+    }
+  }
+
+  &_fab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    min-width: 32px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 1px solid;
+
+    &.color-primary {
+      border-color: $primary;
+      fill: $primary;
+    }
+
+    &.color-accent {
+
+    }
+
+    &.color-warn {
+      border-color: $error-color;
+      fill: $error-color;
+    }
+
+    &.disabled {
+      cursor: default;
+      border-color: $text-disabled;
+      fill: $text-disabled;
+    }
+  }
+
+  &-icon {
+    display: flex;
+    width: 20px;
+    height: 20px;
+  }
+}

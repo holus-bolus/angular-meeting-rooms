@@ -1,0 +1,29 @@
+<div class="wrapper">
+    <ng-container *ngIf="userData$ | async as userData">
+      <andteam-user-info [userInfo]="userData"
+                         [isSalaryReviewTab]="isSalaryReviewTab$ | async"
+                         [riskOfLeaving]="labelRiskOfLeaving[userData.riskOfLeaving]"
+                         [celebrationsButtons]="celebrationsButtons$ | async"
+                         [surveyButton]="buttonSurvey$ | async"
+                         [currentUserId]="currentUserId$ | async"
+                         (questionnaire)="openQuestionnaireDialogWindow()"
+                         (surveyResults)="openSurveyResultsDialogWindow()"
+                         (buttonId)="openEventSendWindow($event)">
+      </andteam-user-info>
+      <andteam-user-project-list *ngIf="userData.allocationsCurrent?.length || userData.allocationsPrevious?.length"
+                                [userId]="userData.externalId"
+                                [allocationsCurrent]="userData.allocationsCurrent"
+                                [allocationsPrevious]="userData.allocationsPrevious">
+      </andteam-user-project-list>
+
+      <andteam-assessment-toast-notification *ngIf="isToastNotification$ | async"
+                                              class="toast"
+                                              (fadeOut)="onFadeOut()">
+        <span>{{ eventCardName | titlecase }} card has been sent to {{ userData.fullNameEn || userData.fullNameRu }}</span>
+      </andteam-assessment-toast-notification>
+    </ng-container>
+
+  <div *ngIf="isShowLoader$ | async" class="wrapper-spinner">
+    <andteam-spinner delay="0"></andteam-spinner>
+  </div>
+</div>

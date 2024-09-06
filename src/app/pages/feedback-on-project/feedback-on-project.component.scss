@@ -1,0 +1,187 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.feedback-container {
+  background: $body-background;
+  margin: 210px auto 60px;
+  width: 1340px;
+  padding: 60px 68px 40px;
+  box-sizing: border-box;
+}
+
+.feedback {
+  width: 100%;
+  position: relative;
+
+  .feedback-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 10px;
+    margin-bottom: 40px;
+    
+    &-title  {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 0px;
+      gap: 10px;
+      h1 {
+        @include font-base(42px, 300, 54.6px);
+        color: $input-selected-color;
+        padding: 0;
+        margin-right: 10px;
+      }
+    }
+
+    h2 {
+      @include font-base(18px, 400, 28.8px);
+      color: $tag-title-color;
+    }
+  }
+
+  &-spinner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+  }
+
+  &-block {
+    max-width: 100%;
+    margin: 0 0 20px 0;
+    background-color: $white-color;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+
+    @media (max-width: $tablet) {
+      margin-bottom: 10px;
+    }
+
+    &-wrapper {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 40px;
+    }
+
+    &-header {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0px;
+      gap: 10px;
+
+      &-title {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        align-content: center;
+        padding: 0px;
+        gap: 8px;
+
+        h3 {
+          @include font-base(24px, 300, 32px);
+          color: $input-selected-color;
+          width: 100%;
+        }
+
+        span.valid > ::ng-deep svg > path {
+          fill: $clicked-link-color;
+        }
+      }
+
+      &-subtitle {
+        p {
+          @include font-base(16px, 400, 26px);
+          color: $tag-title-color;
+        }
+      }
+    }
+
+    &-dropdown-area{
+      display: flex;
+      gap: 40px;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      width: 100%;
+      
+      andteam-select-new {
+        flex: 1;
+        max-width: 33%;
+
+        ::ng-deep  {
+          mat-label, mat-form-field-label-wrapper {
+            @include font-base(16px, 400, 26px);
+          }
+        }
+      }
+    }
+
+    .feedback-skills {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      padding: 0px;
+      gap: 40px 64px;
+      flex-wrap: wrap;
+
+      &-item {
+        flex: calc(50% - 35px);
+        max-width: calc(50% - 35px);
+
+        &-switcher {
+          max-width: unset;
+          flex: 100%;
+        }
+      }
+
+      &-description {
+        @include font-base(16px, 400, 26px);
+        color: $tag-title-color;
+        margin-bottom: 24px;
+      }
+    }
+  }
+}
+
+.icon-hint {
+  cursor: pointer;
+}
+
+.feedback-buttons {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 20px;
+}
+
+.profile-button {
+  width: 100%;
+  margin: 0 auto;
+  display: block;
+  position: absolute;
+  top: 150px;
+  z-index: 20;
+
+  andteam-portal-backward-link {
+    width: 1340px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  ::ng-deep.portal-backward-text {
+    color: white !important;
+  }
+}
+
+::ng-deep.mat-select-value-text {
+  display: none;
+}

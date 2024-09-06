@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="salary-invoice-header">
+        <h1 class="salary-invoice-header-title">
+            Salary invoice
+        </h1>
+        <span class="salary-invoice-header-hint">
+            Please create only one Invoice for a certain period. If you create another Invoice for the same period - your previous one will be replaced with the new Invoice.
+        </span>
+    </div>
+    <div class="salary-invoice-wrapper">
+        <span class="salary-invoice-wrapper-title">
+            Fill in tasks for the invoice
+        </span>
+
+        <andteam-select-new
+            ngDefaultControl
+            [options]="periodList"
+            [option]="periodList[0]"
+            [disableOptionCentering]="true"
+            [formControl]="salaryInvoiceForm.controls.period">
+        </andteam-select-new>
+
+        <div class="salary-invoice-wrapper-tasklist" *ngFor="let taskControl of salaryInvoiceForm.get('tasks')['controls']; let i = index ">
+            <andteam-portal-textarea
+                    [placeholder]="'Task ' + (i + 1) "
+                    (changeValue)="onInputTask($event, taskControl)"
+                    [formControlName]="taskControl">
+            </andteam-portal-textarea>
+            <span *ngIf="i > 0" [innerHTML]="closeSvg" (click)="removeTask(i)"></span>
+        </div>
+
+        <div class="salary-invoice-wrapper-add" (click)="addNewTask()">
+            <span [innerHTML]="plusSvg"></span>
+            <span>Add task</span>
+        </div>
+    </div>
+    <div class="salary-invoice-buttons">
+        <andteam-button
+            (click)="onCancel($event)"
+            [type]="cancelButtonType">
+            Cancel
+        </andteam-button>
+        <andteam-button
+            [disabled]="!salaryInvoiceForm.valid"
+            (click)="onSubmit($event)"
+            [type]="confirmButtonType">
+            Send to 1C
+        </andteam-button>
+    </div>
+    <div *ngIf="isShowLoader" class="container-spinner">
+        <andteam-spinner delay="0"></andteam-spinner>
+    </div>
+</div>
+
+<andteam-assessment-toast-notification *ngIf="isToastNotification" (fadeOut)="onFadeOut()">
+    <span>{{ notificationText }}</span>
+</andteam-assessment-toast-notification>
+
+<andteam-footer></andteam-footer>
+

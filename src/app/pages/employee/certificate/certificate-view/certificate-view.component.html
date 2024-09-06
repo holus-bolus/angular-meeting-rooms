@@ -1,0 +1,89 @@
+<div
+  *ngIf="certificate"
+  #download
+  class="certificate"
+  [ngClass]="{'view-certificate': isViewVersion, 'action-menu': certificate.isHover, 'menu-opened': isShowActionMenu}"
+  (mouseover)="showActionMenu()"
+  (mouseleave)="hideActionMenu(true)"
+>
+  <div class="certificate-header">
+    <div class="certificate-header-logo">
+      <div [innerHTML]="logoIcon" class="certificate-header-logo-icon"></div>
+      <p class="certificate-header-logo-title">{{ companyService.companyName }}</p>
+    </div>
+    <div class="certificate-header-date">
+      <p>{{ certificate.currentReviewDate | date:"MMMM, yyyy" }}</p>
+      <p class="certificate-header-date-number">№ {{ certificate.serialNumber }}</p>
+    </div>
+  </div>
+
+  <h2 class="certificate-title">Certificate</h2>
+
+  <h4 class="certificate-describe">of professional development</h4>
+
+  <h3 class="certificate-name">{{ certificate.employeeName }} &mdash; {{ certificate.mainTechnology }}</h3>
+
+  <div
+    *ngIf="certificate.projects.length as length"
+    class="certificate-project" [class.more-goals]="certificate.objectives.length > 6">
+    <span class="certificate-project-text">Current project: </span>
+    <span *ngFor="let project of certificate.projects; let i = index" class="certificate-project-name">
+      {{ project.name }}{{ i === length - 1 ? '' : ',' }}
+    </span>
+  </div>
+
+  <div class="certificate-levels">
+    <div class="certificate-levels-level" *ngFor="let level of techLevelList; let index = index">
+      <div *ngIf="isShowDivider(level.fullName, index)" class="certificate-levels-level-slash" [innerHTML]="divider"></div>
+      <div class="certificate-levels-level-text" [class.active]="isActivePosition(level.fullName)">{{ level.fullName }}
+        <div class="certificate-levels-level-text__underline" *ngIf="isActivePosition(level.fullName)"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <p class="certificate-objectives-title">Objectives for the next review:</p>
+
+  <div
+    class="certificate-objectives"
+    [ngClass]="{'more-goals': certificate.objectives.length > 6, 'no-projects': !certificate.projects.length}">
+    <div *ngFor="let objective of certificate.objectives; let i = index" class="certificate-objectives-goal">
+      <div class="certificate-objectives-goal-count">{{ i + 1 }}. </div>
+      <div class="certificate-objectives-goal-text">{{ objective.name }}</div>
+    </div>
+  </div>
+
+  <div class="certificate-footer">
+    <div class="certificate-footer-language">
+      <span class="certificate-footer-language-flag" [innerHTML]="iconUKFlag"></span>
+      <span class="certificate-footer-language-level"><span>&mdash;</span><span>{{ certificate.englishLevel }}</span></span>
+    </div>
+
+    <div class="certificate-footer-assessment">
+      <span class="certificate-footer-assessment-text">The next assessment is no earlier than </span>
+      <span class="certificate-footer-assessment-date">{{ certificate.nextReviewDate | date:"MMMM yyyy" }}</span>
+    </div>
+
+    <div class="certificate-footer-signature">
+      <span class="certificate-footer-signature-text">CEO</span>
+      <span class="certificate-footer-signature-name">{{ ceoName }}</span>
+      <span
+        [ngClass]="{'sign-andersen': companyName === 'Andersen'}"
+        class="certificate-footer-signature-img"
+        [innerHTML]="sign"></span>
+    </div>
+  </div>
+
+  <div *ngIf="isActionMenu" class="certificate-action">
+    <andteam-action-selector [iconType]="iconType"
+                             [menuItems]="getMenuItems"
+                             [menuIcons]="getMenuIcons"
+                             (click)="$event.stopPropagation()"
+                             (menuClosed)="hideActionMenu()"
+                             (menuOpened)="openActionMenu()"
+                             (menuOptionSelected)="onSelectMenuOption($event)">
+    </andteam-action-selector>
+  </div>
+  <div class="certificate-stamp"></div>
+  <div *ngIf="!isViewVersion" class="certificate-line"></div>
+</div>

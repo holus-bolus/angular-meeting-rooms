@@ -1,0 +1,131 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.upload-button {
+  display: flex;
+  align-items: center;
+  margin: 0 0 15px auto;
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    .button__description-text {
+      display: block;
+    }
+  }
+
+  .file {
+    width: 0;
+    height: 0;
+  }
+}
+
+.button {
+  height: 40px;
+
+  &__wrapper {
+    display: flex;
+    width: 500px;
+    position: relative;
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+
+    &__icon ::ng-deep {
+      .icon {
+        svg {
+          path {
+            fill: white;
+          }
+        }
+      }
+    }
+  }
+
+  &__description-text {
+    @include font-base(14px, 400, 16px);
+
+    display: none;
+    margin-right: 5px;
+    color: $white-color;
+  }
+
+  &__label {
+    display: flex;
+    align-items: center;
+    margin: 0 0 15px auto;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  &__cropper {
+    ::ng-deep .btn {
+      @include font-base(14px, 500, 16px);
+
+      width: 130px;
+      height: 42px;
+      border-radius: 0;
+
+      &_primary {
+        margin-right: 20px;
+      }
+
+      &_secondary {
+        border: 2px solid $primary;
+      }
+    }
+  }
+
+  &__button {
+    .button {
+      min-width: auto;
+      height: auto;
+
+      &__text {
+        @include font-base(14px, 500, 16.41px);
+        display: inline;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+::ng-deep .button__wrapper .button{
+  display: block;
+  min-width: 390px;
+  background-color: transparent !important;
+  font-size: 0 !important;
+}
+
+.background-image-cropper-block {
+  position: absolute;
+  left: 0;
+  top: 80px;
+  width: 100%;
+  height: 400px;
+  z-index: 2;
+  background-color: rgba($white-color, 0.5);
+
+  ::ng-deep .overlay {
+    outline: none !important;
+  }
+}
+
+.buttons {
+  position: absolute;
+  display: flex;
+  bottom: 15px;
+  left: calc(50% + 530px);
+  transform: translateX(-50%);
+}
+

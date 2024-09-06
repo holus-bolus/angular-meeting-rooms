@@ -1,0 +1,44 @@
+<div class="mile">
+  <andteam-modal [isConfirmationModal]="isConfirmationModal"
+                 [isConfirmationType]="isConfirmationType"
+                 [isCloseIconView]="!isExtraMileOn"
+                 (closeClick)="onCancelConfirm()">
+    <div *ngIf="isExtraMileOn" class="mile-off">
+      <div class="mile-off-box">
+        <div class="mile-off-icon" [innerHTML]="cautionSvg"></div>
+
+        <div class="mile-off-title">
+          <div>Delete this extra mile?</div>
+          <div>The comment will also be deleted</div>
+        </div>
+      </div>
+
+      <div class="mile-off-btn">
+        <andteam-button [type]="cancelButtonType" (click)="onCancelConfirm()">No</andteam-button>
+        <andteam-button [type]="confirmButtonType" (click)="onCancelExtraMile()">Yes</andteam-button>
+      </div>
+    </div>
+
+    <div *ngIf="!isExtraMileOn" class="mile-on">
+      <div class="mile-on-box">
+        <div class="mile-on-title">Extra mile</div>
+        <div class="mile-on-subtitle">Please describe what extra activity the employee is ready to perform.</div>
+
+        <div class="mile-on-input">
+          <andteam-portal-textarea placeholder="Comment*"
+                                   (keyup)="checkValidation()"
+                                   [formControl]="extraMileCommentControl"
+                                   [error]="!isFormValid"
+                                   [hintMessage]="errorMessageText"
+                                   [isNoErrorMargin]="true">
+          </andteam-portal-textarea>
+        </div>
+      </div>
+
+      <andteam-button [type]="confirmButtonType"
+                      (click)="onConfirmExtraMile()">
+        Done
+      </andteam-button>
+    </div>
+  </andteam-modal>
+</div>

@@ -1,0 +1,63 @@
+<div class="wrapper">
+  <div class="wrapper-content">
+    <h2 class="portal-h2 title">Events</h2>
+    <p class="short-description">
+      Every week our Company holds a big number of interesting
+      activities - educational meetups, interviews with famous
+      people, useful lectures, funny celebrations and exciting games...
+      Choose your event and have fun!
+    </p>
+    <andteam-main-events-filter (optionsChanges)="onOptionsChanges($event)"
+                                (datesChanges)="onDatesChanges($event)"
+                                (searchChanges)="onSearchChanges($event)"
+                                (clearAll)="onClearAll()">
+    </andteam-main-events-filter>
+
+    <div class="events-cards-wrapper" *ngIf="events?.length; else nothingFoundBlock">
+      <div *ngFor="let event of events; trackBy: trackEvent; first as isFirst"
+           #eventContainer
+           class="event-card"
+           [class.first]="isFirst"
+           (click)="onEventCardCLick(eventContainer)">
+        <andteam-event-card [isFirstImage]="isFirst" [event]="event"></andteam-event-card>
+        <div class="menu">
+          <andteam-edit-menu *ngIf="isAdminHr$ | async"
+                             [param]="event.urlName"
+                             route="edit-event"
+                             (delete)="onOpenConfirmationModal(event)">
+          </andteam-edit-menu>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #nothingFoundBlock>
+      <div class="nothing-found">
+        <div class="nothing-found-icon" [innerHTML]="nothingFoundIcon | safe"></div>
+        <div class="nothing-found-text">Ooops! Nothing found!</div>
+      </div>
+    </ng-template>
+
+    <div class="btn-box">
+      <div class="btn-box-left">
+        <div *ngIf="hasDefaultPage" class="link wrapper-content-link" (click)="onClick('events')">
+          Less
+          <span class="up" [innerHTML]="vectorIcon | safe"></span>
+        </div>
+      </div>
+
+      <div class="btn-box-right">
+        <div *ngIf="hasNextPage" class="link wrapper-content-link" (click)="onMoreClick()">
+          More
+          <span class="down" [innerHTML]="vectorIcon | safe"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<andteam-confirmation-modal *ngIf="isOpenConfirmationModal"
+                            [text]="title"
+                            [subText]="subTitle"
+                            (sendConfirmEvent)="onDeleteEvent(event.id)"
+                            (sendCloseEvent)="onOpenConfirmationModal(event)">
+</andteam-confirmation-modal>

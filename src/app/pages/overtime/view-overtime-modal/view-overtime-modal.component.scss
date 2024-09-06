@@ -1,0 +1,118 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+@import '~src/styles/shared-styles/vars';
+
+.wrapper {
+  position: absolute;
+
+  ::ng-deep .modal-body {
+    padding: 0;
+    min-width: 0;
+    width: inherit;
+  }
+
+  .avatar-loader {
+    position: absolute;
+    top: 34%;
+    left: 34%;
+  }
+}
+
+.overtime {
+  &-title {
+    padding: $overtime-modal-padding - 10px $overtime-modal-padding 0 $overtime-modal-padding;
+  }
+
+  &-wrapper {
+    display: flex;
+    box-sizing: border-box;
+    padding: $overtime-modal-padding;
+    flex-wrap: wrap;
+    width: $overtime-modal-width;
+  }
+
+  &-block {
+    flex-basis: $overtime-modal-width;
+    margin-top: $overtime-fields-gap;
+
+    a:hover {
+      @include transition();
+
+      color: $border-link-hover;
+
+      ::ng-deep svg path {
+        @include transition();
+
+        fill: $border-link-hover;
+      }
+    }
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  &-comment {
+    font: inherit;
+    width: 100%;
+    border: none;
+    outline: none;
+    -moz-appearance: none;
+    appearance: none;
+    white-space: pre-line;
+    max-height: 126px;
+    overflow-wrap: break-word;
+    overflow-y: auto;
+
+    ::ng-deep a {
+      @include border-bottom(1px, dashed, $border-bottom-color);
+
+      word-break: inherit;
+      text-decoration: none;
+      color: $text-primary;
+
+      &:hover {
+        @include border-bottom(1px, solid, $border-link-hover);
+      }
+
+      &:focus {
+        @include border-bottom(1px, solid, $border-link-hover);
+      }
+    }
+  }
+
+  .static-field {
+    @include font-base(18px, 300, 21px);
+
+    display: flex;
+    width: 100%;
+    max-width: $overtime-modal-width - $overtime-modal-padding * 2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-bottom: 8px;
+    border-bottom: 1px solid $text-secondary;
+  }
+
+  .two-fields {
+    display: flex;
+    gap: 35px;
+
+    .field {
+      flex: 1;
+
+      &:first-child {
+        margin-right: 35px;
+      }
+    }
+  }
+
+  &-link {
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  &-filename {
+    padding-left: 8px;
+  }
+}

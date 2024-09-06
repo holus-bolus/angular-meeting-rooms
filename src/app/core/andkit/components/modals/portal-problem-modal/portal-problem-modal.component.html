@@ -1,0 +1,36 @@
+<div class="problem">
+  <andteam-modal
+    [isConfirmationModal]="isConfirmationModal"
+    (closeClick)="onOpenConfirmationModal()">
+
+    <div class="problem-title">Have a problem?</div>
+    <div class="problem-subtitle">If you have a problem, please let your HR know <br> about it. Your message will be sent anonymously.</div>
+
+    <andteam-portal-textarea
+      placeholder="Describe the problem"
+      [error]="hasMessageError"
+      [errorMessage]="messageError"
+      (changeValue)="onChangeValue($event)"></andteam-portal-textarea>
+
+    <div class="problem-image">
+      <andteam-portal-draggable-image
+        [isShowImage]="isShowImage"
+        [fileImage]="fileImage"
+        [colors]="colors"
+        [hasImageErrors]="hasImagesError"
+        [showTitleBox]="showTitleBox"
+        [description]="description"
+        (files)="handleFiles($event)"
+        (hover)="handleHover($event)"></andteam-portal-draggable-image>
+
+      <div class="error-message"
+           *ngIf="imagesError">{{imagesError}}</div>
+    </div>
+
+    <div class="problem-button">
+      <andteam-button
+        (click)="onSend()">Send</andteam-button>
+    </div>
+
+  </andteam-modal>
+</div>

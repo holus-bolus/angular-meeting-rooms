@@ -1,0 +1,140 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+:host {
+  position: relative;
+
+  .tags {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    &-title {
+      @include font-base(18px, 300, 25px);
+
+      display: flex;
+      align-items: center;
+      height: 40px;
+      color: $tag-title-color;
+      margin-right: 10px;
+    }
+
+    &-list {
+      display: flex;
+      align-items: center;
+      max-width: 574px;
+      flex-wrap: wrap;
+    }
+
+    &-item-box {
+      @include tag;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      &:hover {
+        background: linear-gradient(0deg, $primary, $primary), rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    &-item {
+      padding: 7px 15px;
+    }
+
+    &-icon {
+      margin: 3px 10px 0 0;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+
+    .active {
+      background: $primary;
+    }
+
+    &-button {
+      ::ng-deep .dropdown-button {
+        @include tag;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-right: 0;
+        height: 33px;
+        box-sizing: border-box;
+        transform: rotate(0);
+        padding: 7px 14px;
+        width: 48px;
+        opacity: 1;
+
+        &:hover {
+          background: linear-gradient(0deg, $primary, $primary), rgba(0, 0, 0, 0.1);
+          opacity: 1;
+        }
+
+        &:hover .dropdown-ellipse {
+          background: rgba(0, 0, 0, 0.6);
+        }
+      }
+
+      ::ng-deep .dropdown-ellipse {
+        background: $primary;
+      }
+    }
+  }
+
+  .dropdown-box {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 530px;
+    background: linear-gradient(180deg, $white-color 0, rgba(255, 255, 255, 0) 100%), $white-color;
+    box-shadow: 0 3px 20px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+  }
+
+  .dropdown {
+    position: relative;
+    padding: 20px;
+    max-height: 495px;
+    overflow-y: scroll;
+
+    &-close {
+      cursor: pointer;
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      color: $text-tertiary;
+    }
+
+    &-title {
+      @include font-base(30px, 300, 130%);
+
+      color: $username-color;
+      padding-bottom: 20px;
+      margin: 20px;
+      border-bottom: 1px solid $tag-box-border;
+    }
+
+    &-list {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 25px 15px 15px;
+    }
+
+    .tags-item-box {
+      background: rgba(0, 0, 0, 0.1);
+
+      &:hover {
+        background: linear-gradient(0deg, $primary, $primary), rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    .active {
+      background: $primary;
+    }
+  }
+}

@@ -1,0 +1,65 @@
+<andteam-block-creation
+  [title]="creationEventForm.get('title')"
+  [text]="creationEventForm.get('text').value"
+  [titleError]="titleError"
+  [hasTitleError]="hasTitleError"
+  [hasTextError]="hasTextError"
+  [textError]="textError"
+  [disabled]="disabled"
+  (changeData)="onChangeData($event)"
+  (saveData)="onSaveData()"
+  (cancelCreation)="onCancelCreation()">
+  <div class="form">
+    <andteam-create-event-filters
+      [topic]="topic"
+      [topics]="topics"
+      [office]="office"
+      [offices]="offices"
+      [signupUrl]="creationEventForm.get('signupUrl')"
+      [place]="creationEventForm.get('place')"
+      [date]="creationEventForm.get('date')"
+      [hour]="creationEventForm.get('hour')"
+      [minute]="creationEventForm.get('minute')"
+      [officeError]="officeError"
+      [topicError]="topicError"
+      [dateError]="dateError"
+      [hoursError]="hoursError"
+      [minutesError]="minutesError"
+      (selectOption)="onSelectOption($event)"
+      (selectOptions)="onSelectOptions($event)"></andteam-create-event-filters>
+  </div>
+  <andteam-portal-draggable-image
+    [isShowImage]="!isCropperActive"
+    [fileImage]="fileImage"
+    [colors]="colors"
+    [hasImageErrors]="hasImageErrors"
+    [showTitleBox]="showTitleBox"
+    [description]="description"
+    (files)="handleFiles($event)">
+  </andteam-portal-draggable-image>
+  <div class="image-cropper-block" *ngIf="isCropperActive">
+    <andteam-progress-spinner *ngIf="!isCropperImageLoaded"></andteam-progress-spinner>
+    <image-cropper
+      [imageFile]="fileImageToCrop"
+      [maintainAspectRatio]="true"
+      [aspectRatio]="4 / 3"
+      [cropperMinWidth]="350"
+      [containWithinAspectRatio]="false"
+      [roundCropper]="false"
+      [resizeToWidth]="1100"
+      [onlyScaleDown]="true"
+      [class.error]="hasImageErrors"
+      (imageLoaded)="onImageLoaded()"
+      (imageCropped)="onImageCropped($event)"
+      [style.display]="isCropperImageLoaded ? null : 'none'"
+      format="png"
+      outputType="file"
+      alignImage="center"
+    ></image-cropper>
+    <andteam-portal-button *ngIf="isCropperImageLoaded" (click)="cropImage()">Crop</andteam-portal-button>
+  </div>
+  <div class="error-message"
+       *ngIf="imageError">{{imageError}}</div>
+  <div class="error-message"
+       *ngIf="previewImageError">{{previewImageError}}</div>
+</andteam-block-creation>

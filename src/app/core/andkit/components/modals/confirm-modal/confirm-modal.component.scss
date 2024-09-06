@@ -1,0 +1,112 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.mat-dialog-container {
+  padding: 0;
+  border-radius: 0;
+  overflow-y: hidden;
+}
+
+.confirm {
+  padding: 50px;
+
+  &-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  &-icon {
+    display: flex;
+    justify-content: center;
+  }
+
+  &-titles {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-title {
+    @include font-base(24px, 300, 130%);
+
+    color: $objectives-text-color;
+    margin-bottom: 10px;
+
+    a {
+      font-weight: 400;
+      text-decoration: none;
+      color: $objectives-text-color;
+      border-bottom: 1px dashed $certificates-icons-color;
+
+      &:hover {
+        color: $border-link-hover;
+      }
+    }
+  }
+
+  &-subtitle {
+    @include font-base(14px, normal, 160%);
+
+    color: $tag-box-border;
+  }
+
+  &-btn {
+    @include align-elements;
+    @include font-base(14px, 500, 16px);
+
+    color: $text-primary;
+
+    .btn {
+      width: 180px !important;
+      font-weight: 500 !important;
+    }
+
+    &-single {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  &.other {
+    .confirm-title {
+      @include font-base(22px, 300, 30.8px);
+
+      padding: 0 30px;
+    }
+
+    .confirm-box {
+      margin-bottom: 37px;
+    }
+
+    .confirm-titles {
+      margin-top: 37px;
+    }
+  }
+}
+
+.confirm-modal-panel-class {
+  &_btn-reverse > .mat-dialog-container > andteam-confirm-modal > .confirm > .confirm-btn {
+    flex-direction: row-reverse;
+  }
+}
+
+.upload-image-error {
+  .confirm {
+    padding-top: 60px;
+
+    &-box {
+      margin-bottom: 52px;
+    }
+  }
+}
+
+.confirm-for-route {
+  .confirm {
+    &-title {
+      font-size: 22px;
+    }
+  }
+}

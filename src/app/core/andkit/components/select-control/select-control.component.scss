@@ -1,0 +1,214 @@
+@import "~src/styles/shared-styles/colors";
+@import "~src/styles/shared-styles/mixins";
+
+.mat-form-field {
+  display: block;
+
+  &-wrapper {
+    top: 1px;
+    padding: 0;
+  }
+
+  &-infix {
+    top: 2px;
+    border-top: 0;
+  }
+
+  &-label {
+    top: 15px;
+    margin: 0;
+  }
+
+  &-underline {
+    bottom: 1px;
+  }
+
+  &-subscript-wrapper {
+    top: 29px;
+  }
+}
+
+.mat-select-panel {
+  border-radius: 0 !important;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.mat-select-arrow {
+  border: none !important;
+}
+
+mat-label {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 21px;
+  color: $text-primary;
+}
+
+.mat-error {
+  font: 300 normal 12px/130% "Roboto", sans-serif;
+  color: $error-color;
+  margin-top: 10px;
+}
+
+.mat-placeholder-required {
+  display: none !important;
+}
+
+.mat-form-field.mat-focused {
+  .mat-form-field-label {
+    color: $text-secondary;
+  }
+
+  .mat-form-field-ripple {
+    background-color: $text-secondary;
+  }
+
+  .mat-form-field-required-marker {
+    color: $text-secondary;
+  }
+
+  .mat-input-element {
+    color: $text-secondary;
+  }
+}
+
+.select {
+  position: relative;
+
+  .mat-form-field {
+    width: 100%;
+    height: 32px;
+    border-bottom: 1px solid $portal-border-color;
+  }
+
+  .error-bottom {
+    border-bottom: 1px solid $error-color;
+  }
+
+  .arrow {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .error {
+    border-color: $error-color;
+
+    &-text {
+      position: absolute;
+      font: 300 normal 12px/130% 'Roboto', sans-serif;
+      color: $error-color;
+      margin-top: 10px;
+    }
+  }
+
+  .placeholder {
+    color: $tag-box-border;
+
+    &-none {
+      display: none;
+    }
+  }
+
+  &-info {
+    position: absolute;
+    left: 115px;
+    top: -3px;
+    cursor: pointer;
+    font-weight: 100;
+
+    &:hover {
+      + .select-info-popup {
+        display: block;
+      }
+    }
+
+    &-popup {
+      @include font-base(12px, 400, 16px, normal);
+
+      box-sizing: border-box;
+      position: absolute;
+      display: none;
+      width: 360px;
+      background-color: $white-color;
+      padding: 15px;
+      top: 30px;
+      left: -30px;
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+      cursor: auto;
+      z-index: 2;
+
+      &-text {
+        margin: 5px 0;
+      }
+
+      &-triangle {
+        position: absolute;
+        top: -5px;
+        left: 140px;
+        font-size: 30px;
+        font-stretch: expanded;
+        text-shadow: 0 -5px 5px rgba(0, 0, 0, 0.2);
+        transform: scale(0.7);
+        border: none;
+        color: $white-color;
+      }
+    }
+
+    .btn {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  .mat-form-field-appearance-fill {
+    @include font-base(16px, 400, 25px);
+
+    width: 100%;
+
+    .mat-form-field-infix {
+      width: 100% !important;
+    }
+
+    .mat-form-field-flex {
+      background-color: transparent;
+      padding: 0;
+    }
+
+    .mat-form-field-ripple {
+      height: 1px;
+    }
+
+    .mat-form-field-underline {
+      display: none;
+    }
+
+    .mat-form-field-subscript-wrapper {
+      padding: 0;
+      top: 39px;
+    }
+
+    .mat-form-field-label {
+      top: 20px;
+    }
+  }
+
+  .mat-select {
+    @include font-base(16px, 400, 25px);
+  }
+
+  .mat-form-field-appearance-fill.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    -webkit-transform: translateY(0) scale(1);
+    transform: translateY(0) scale(1);
+  }
+}
+
+.error-bottom {
+  border-bottom: 1px solid $error-color;
+}
+
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+  color: $text-primary !important;
+}

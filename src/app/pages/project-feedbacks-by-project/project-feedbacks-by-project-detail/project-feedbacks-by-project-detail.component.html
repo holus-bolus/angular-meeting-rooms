@@ -1,0 +1,140 @@
+<div class="detailed-feedback" [ngClass]="{'last-feedback': isLastFeedback}">
+  <div class="inerviewer">
+    <div class="avatar-image">
+      <img *ngIf="userFeedback.employee.photoUrl; else defaultPic"
+            [src]="userFeedback.employee.photoUrl"
+            alt="employees icon">
+    </div>
+    <div class="info" >
+      <div class="name">
+        <a [routerLink]="['/employee', userFeedback.employee.id]" class="employee-link">
+          {{ userFeedback.employee.name }}
+        </a>
+      </div>
+      <div *ngIf="userFeedback.employeeTechnology" class="technology">
+        <span>{{ userFeedback.employeeTechnology</span>
+      </div>
+
+      <ng-container *ngTemplateOutlet="chipsBlock"></ng-container>
+
+      <div *ngIf="userFeedback.valuable === undefined || userFeedback.valuable === null; else valuableExisted" class="feedback-value">
+        <ng-container *ngIf="hasAccessToExtendedFilter; else askForValuableFeedback" >
+          <p class="feedback-value-title">Feedback value</p>
+          <mat-radio-group class="feedback-value-radiogroup" (change)="onRadioButtonChange($event)">
+            <mat-radio-button
+              class="feedback-value-radiobutton"
+              [value]="true"
+              [checked]="userFeedback.valuable === true">
+              Valuable
+            </mat-radio-button>
+
+            <mat-radio-button
+              class="feedback-value-radiobutton"
+              [value]="false"
+              [checked]="userFeedback.valuable === false">
+              Not valuable
+            </mat-radio-button>
+          </mat-radio-group>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <div class="comment" [class.marked]="userFeedback?.feedbackAverageMark">
+    <div class="project">
+      <span class="project-title">{{ project.name }} / </span>
+      <span class="project-feedback-date">{{ userFeedback.createDate | date: "dd.MM.yyyy" }}</span>
+    </div>
+    <div class="text text__with-space">
+      <span class="text-title">What's good at the project</span>
+      <span #comment class="formatted-text"
+            [class.collapsed]="isCommentCollapsed">{{ userFeedback?.feedbackComment || userFeedback?.textQuestion1 }}
+      </span>
+
+      <button *ngIf="isCommentLong"
+              (click)="commentToggle()"
+              class="more-less-btn">{{ isCommentCollapsed ? 'More' : 'Less' }}
+      </button>
+    </div>
+
+    <div class="text">
+      <span class="text-title">{{ 'What needs to be improved' }}</span>
+      <span #improve class="formatted-text"
+            [class.collapsed]="isImproveCollapsed">{{ userFeedback?.feedbackWhatToImprove || userFeedback?.textQuestion2 }}
+      </span>
+
+      <button *ngIf="isImproveLong"
+              (click)="improveToggle()"
+              class="more-less-btn">{{ isImproveCollapsed ? 'More' : 'Less' }}
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="userFeedback?.feedbackAverageMark"
+       class="mark"
+       [class.high-rated]="highRating">
+    {{ userFeedback.feedbackAverageMark | number: '1.1-1' }}
+  </div>
+
+  <div class="scale">
+    <p><span>Feedback scale</span></p>
+    <div class="detail">
+      <p class="triangle">▲</p>
+      <andteam-feedback-scales-modal class="feedback-modal-scale" *ngFor="let scale of scaleData"
+                                     [scaleItem]="scale" positionType="Project">
+      </andteam-feedback-scales-modal>
+    </div>
+  </div>
+
+  <ng-template #noScale>
+    <div class="no-scale">
+      <p><span>No feedback scale</span></p>
+    </div>
+  </ng-template>
+</div>
+
+<ng-template #chipsBlock>
+  <div class="chips-container">
+    <div *ngIf="userFeedback.employee.isWork === false" class="chips inactive">Inactive</div>
+    <div *ngIf="userFeedback.employeePosition" class="chips position">{{ userFeedback.employeePosition }}</div>
+  </div>
+</ng-template>
+
+<ng-template #defaultPic>
+  <div class="avatar-image">
+    <span [innerHTML]="defaultAvatar | safe" class="avatar-image"></span>
+  </div>
+</ng-template>
+
+<ng-template #valuableExisted>
+  <div class="feedback-value">
+    <div class="feedback-value-wrapper">
+      <div *ngIf="userFeedback.valuable"
+        class="feedback-value-vertical">
+      </div>
+      <div>
+        <p class="feedback-value-title">Feedback value</p>
+        <p class="feedback-value-name">{{ userFeedback.valuable ? 'Valuable' : 'Not Valuable'}}</p>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #askForValuableFeedback>
+  <p class="feedback-value-title">Feedback value</p>
+  <p class="feedback-value-name not-marked">Not marked 
+    <andteam-assessment-tooltip *ngIf="!isMobile; else iconWithPopup" alignTooltip="center" side="top" [isArrow]="true">
+      <span 
+        tooltip-base
+        class="feedback-value-name-info"
+        [innerHTML]="infoIcon | safe">
+      </span>
+
+      <div tooltip-content>
+        <div class="feedback-value-tooltip">
+          Please contact Scoring department to mark feedback as Valuable / Not valuable.
+        </div>
+      </div>
+    </andteam-assessment-tooltip>
+  </p>
+</ng-template>

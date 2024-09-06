@@ -1,0 +1,14 @@
+<div class="picker" [class.error]="error" #timePicker>
+  <input
+    #timeInput
+    class="picker-input"
+    [disabled]="isDisabled"
+    [placeholder]="placeholder"
+    [value]="value">
+  <button class="picker-button"
+          [innerHTML]="timeIcon"
+          (click)="openPicker()"></button>
+</div>
+
+<div *ngIf="error" class="error-text">{{ errorMessage }}</div>
+

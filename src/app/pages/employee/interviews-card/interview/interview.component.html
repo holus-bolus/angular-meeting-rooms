@@ -1,0 +1,78 @@
+<div class="interview" [class.current]="interview?.isCurrent">
+  <div class="interview-info">
+    <span class="block-title">Employee</span>
+    <div *ngIf="interview?.employee.isWork; else notWorking" class="interviewer">
+      <andteam-assessment-tooltip>
+        <a tooltip-base class="interviewer-icon"
+           [href]="interview?.employee?.skype | link: linkType.SKYPE | safe : 'url'"
+           [innerHTML]="skypeIcon | safe"></a>
+        <ng-container tooltip-content>{{interview?.employee?.skype}}</ng-container>
+      </andteam-assessment-tooltip>
+      <a *ngIf="interview?.employee?.id as id" class="interviewer-link link" [routerLink]="['/employee', id]">{{interview.employee.name}}</a>
+    </div>
+    <ng-template #notWorking>
+      <div class="interviewer">
+        <span class="interviewer-icon-inactive"
+              [innerHTML]="skypeIcon | safe">
+        </span>
+        <span class="interviewer-link-inactive">
+          {{interview.employee.name}}
+        </span>
+      </div>
+    </ng-template>
+    <div class="card-body" *ngIf="interview?.assessments?.length">
+      <div class="card-body__column">
+        <span class="card-body__column-title">Technology & level</span>
+        <div *ngFor="let assessment of interview.assessments" class="card-body__column-content">
+          {{assessment.technology + ' ' + assessment.currentLevel}}
+        </div>
+      </div>
+      <div class="card-body__column">
+        <span class="card-body__column-title">Matrix</span>
+        <div *ngFor="let assessment of interview.assessments" class="card-body__column-content">
+          <span *ngIf="assessment?.matrix; else noMatrix">
+            <a class="link employee-card-link" [href]="assessment.matrix?.link">
+              {{assessment.matrix?.isDone ? 'View' : 'Edit'}}
+            </a>
+          </span>
+          <andteam-assessment-tooltip *ngIf="isErrorsShow && !assessment.matrix?.isDone">
+            <andteam-icon tooltip-base class="error-icon" [icon]="error | safe"></andteam-icon>
+            <ng-container tooltip-content>
+              <span class="error-tooltip-text">{{assessment.matrix ? 'Confirm matrix filling' : 'Ask the coordinator for the matrix'}}</span>
+            </ng-container>
+          </andteam-assessment-tooltip>
+
+          <ng-template #noMatrix>Not ready</ng-template>
+        </div>
+      </div>
+      <div class="card-body__column">
+        <span class="card-body__column-title">Interview Date & Time</span>
+        <div *ngFor="let interviewDate of interview.interviewsDates" class="card-body__column-content">
+          <ng-container>
+            {{interviewDate | timezone: 'DD.MM.YYYY. HH:mm'}}
+          </ng-container>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="feedback">
+    <andteam-interview-feedback
+      [formControl]="interviewerFeedback"
+      [maxRows]="interview.assessments.length | maxRows : interview.isCurrent"
+      [charactersLimit]="feedbackCharactersLimit"
+      [errorMaxLength]="interviewerFeedback.errors?.maxlength"
+      [errorMessage]="maxLengthErrorMessage"
+      [errorRequire]="interviewerFeedback.errors?.required && interviewerFeedback.touched"
+      [isEditable]="interview.isCurrent && isInterviewer"
+      (saveFeedback)="onSaveFeedback($event)"
+    >
+    </andteam-interview-feedback>
+    <div *ngIf="interview.isCurrent && isInterviewer" class="feedback-finish">
+      <andteam-portal-button [disabled]="interviewerFeedback.dirty || interviewerFeedback.errors?.required"
+                             (click)="finishInterview()">
+        Finish interview
+      </andteam-portal-button>
+    </div>
+  </div>
+</div>

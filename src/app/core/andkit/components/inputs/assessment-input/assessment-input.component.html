@@ -1,0 +1,20 @@
+<div class="input assessment-input"
+     [ngClass]="{
+      'error': error,
+      'assessment-focus': isFocused
+     }"
+>
+  <input
+    type="text"
+    class="form-input"
+    [placeholder]="placeholder"
+    [value]="value"
+    (focusin)="onFocus()"
+    (focusout)="onFocus()"
+    (blur)="blurSalary.emit()"
+    (input)="onChangeValue($event)">
+
+  <div *ngIf="value" [innerHTML]="clearIcon | safe" class="clear-icon" (click)="clearTextArea()"></div>
+  <div class="error-message"
+       *ngIf="errorMessage">{{errorMessage}}</div>
+</div>

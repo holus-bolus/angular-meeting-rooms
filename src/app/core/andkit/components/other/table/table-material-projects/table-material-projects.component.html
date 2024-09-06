@@ -1,0 +1,51 @@
+<mat-table class="mat-theme wrapper-grid fake-header">
+  <ng-container matColumnDef="team">
+    <mat-header-cell *matHeaderCellDef class="mat-cell-header"> Team</mat-header-cell>
+  </ng-container>
+  <ng-container matColumnDef="project">
+    <mat-header-cell *matHeaderCellDef class="mat-cell-header"> Projects</mat-header-cell>
+  </ng-container>
+  <ng-container matColumnDef="pm/rm">
+    <mat-header-cell *matHeaderCellDef class="mat-cell-header"> PM/RM</mat-header-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="columnDefs; sticky: true" class="mat-header-row"></mat-header-row>
+</mat-table>
+<div class="fake-tbody">
+  <mat-table [dataSource]="rowData" class="mat-theme wrapper-grid">
+    <ng-container matColumnDef="team">
+      <mat-header-cell *matHeaderCellDef class="mat-cell-header"> Team</mat-header-cell>
+      <mat-cell *matCellDef='let element' class="mat-cell mat-cell-projects">
+        <span class="grid-link grid-link-employees grid-default"
+              (click)="onClick(element.id)">
+          <img src="assets/images/employees.svg" class="grid-link-icon" alt="employees icon">
+          {{element.teamQty}}
+        </span>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="project">
+      <mat-header-cell *matHeaderCellDef class="mat-cell-header"> Projects</mat-header-cell>
+      <mat-cell *matCellDef='let element' class="mat-cell mat-cell-projects"> {{element.name}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="pm/rm">
+      <mat-header-cell *matHeaderCellDef class="mat-cell-header"> PM/RM</mat-header-cell>
+      <mat-cell *matCellDef='let element' class="mat-cell mat-cell-projects">
+        <div class="grid-inner-col">
+          <span class="icon-manager">PM</span>
+          <a [routerLink]="['/employee', element.projectManagerId]"
+             class="grid-link grid-link-rm-employee">
+            {{element.projectManagerName }}</a>
+        </div>
+        <div class="grid-inner-col">
+          <span class="icon-manager">RM</span>
+          <a [routerLink]="['/employee', element.resourceManagerId]"
+             class="grid-link grid-link-rm-employee">
+            {{element.resourceManagerName}}</a>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="columnDefs; sticky: true" class="mat-header-row"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columnDefs;"></mat-row>
+  </mat-table>
+</div>

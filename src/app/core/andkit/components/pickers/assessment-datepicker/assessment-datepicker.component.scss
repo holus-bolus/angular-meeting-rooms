@@ -1,0 +1,62 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.picker-wrapper {
+  box-sizing: border-box;
+  max-width: 230px;
+  width: 100%;
+  min-height: 270px;
+  padding: 16px 12px 25px;
+  background-color: white;
+  box-shadow: 0 5px 15px rgba(5, 31, 43, 0.17);
+  border-radius: 4px;
+
+  .control-panel {
+    margin-bottom: 16px;
+  }
+
+  .calendar-days {
+    .calendar-day {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      max-width: 26px;
+      width: 100%;
+      height: 26px;
+      border-radius: 50%;
+
+      &_not-selected {
+        &:hover {
+          cursor: pointer;
+          background-color: rgba(254, 218, 0, 0.2);
+        }
+      }
+
+      &_selected {
+        background-color: $primary;
+        cursor: pointer;
+      }
+
+      &_disabled {
+        opacity: 0.2;
+        cursor: auto;
+      }
+    }
+
+    .week-day {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      color: $text-secondary;
+    }
+  }
+
+  .grid-days {
+    @include font-base(12px, normal, 14px);
+
+    display: grid;
+    grid-template: 1.4fr repeat(5, 1fr) / repeat(7, 1fr);
+    gap: 3px 0;
+    justify-items: center;
+  }
+}

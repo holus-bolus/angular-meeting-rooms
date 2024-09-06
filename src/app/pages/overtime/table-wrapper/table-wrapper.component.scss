@@ -1,0 +1,209 @@
+@import 'src/styles/shared-styles/colors';
+@import 'src/styles/shared-styles/mixins';
+
+.overtime-table {
+  &-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 20px 75px;
+    background: $body-background;
+
+    @media (max-width: $wrapper-overtimes-width) {
+      width: $wrapper-overtimes-width;
+    }
+
+    &-header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .overtime-controls-wrapper {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-basis: 470px;
+
+      .overtime-button {
+        display: flex;
+        flex-basis: 146px;
+
+        .btn {
+          width: 146px;
+        }
+      }
+
+      .overtime-select {
+        position: relative;
+        flex: 1;
+        margin-right: 34px;
+        width: 305px;
+
+        .arrow-down {
+          position: absolute;
+          right: 0;
+          top: 10px;
+        }
+      }
+
+      .overtime-period {
+        position: absolute;
+        top: 45px;
+        font: 300 normal 12px/25px Roboto, sans-serif;
+        color: $text-secondary;
+      }
+
+      .mat-form-field-appearance-fill {
+        width: 305px;
+        font: 300 normal 16px/25px Roboto, sans-serif;
+        color: $tag-title-color;
+
+        .mat-form-field-flex {
+          background-color: transparent;
+          padding: 0 !important;
+        }
+
+        .mat-form-field-infix {
+          padding: 8px 8px 8px 0;
+          border-top: 0;
+        }
+      }
+
+      .mat-select-placeholder {
+        font: 300 normal 18px Roboto, sans-serif;
+        color: $tag-title-color;
+      }
+
+      .mat-select-panel {
+        border-radius: 0;
+        font-weight: 300;
+      }
+
+      .mat-form-field-ripple {
+        height: 1px;
+        background-color: $text-primary;
+      }
+
+      .mat-form-field-underline {
+        bottom: 0;
+        transform: none;
+
+        &::before {
+          background-color: $text-secondary;
+        }
+      }
+
+      .mat-select-arrow {
+        border: none;
+      }
+
+      .mat-form-field-wrapper {
+        padding: 0;
+      }
+
+      .mat-select-value-text {
+        color: $text-primary;
+        font-size: 18px;
+      }
+
+      .mat-select-disabled ~ .arrow-down {
+        filter: grayscale(1);
+      }
+    }
+  }
+
+  &-h1 {
+    padding: 30px;
+    color: $objectives-text-color;
+    font: 200 normal 42px/59px 'Roboto', sans-serif;
+  }
+}
+
+.wrapper-quantity {
+  background: $white-color;
+  color: $text-secondary;
+  width: 100%;
+  border-radius: 0 0 8px 8px;
+  padding: 26px 30px;
+  box-sizing: border-box;
+}
+
+.select-mat {
+  font-weight: 300;
+  color: $text-primary !important;
+}
+
+.mat-select-panel {
+  border-radius: 0 !important;
+}
+
+.overtype-tooltip {
+  @include font-base(16px, 300, 19px);
+
+  position: relative;
+  overflow: visible !important;
+  max-width: 313px !important;
+  color: $text-primary !important;
+  background-color: $white-color;
+  box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 1px;
+  padding: 20px !important;
+
+  &::before {
+    content: '';
+    top: 50%;
+    transform: translateY(-50%);
+    right: -10px;
+    position: absolute;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid $white-color;
+  }
+}
+
+.overs-type-panel {
+  position: absolute;
+  top: 47px;
+  left: 16px;
+  min-width: 305px !important;
+
+  .mat-option {
+    font-weight: 300;
+    white-space: normal;
+    line-height: 18.75px !important;
+    padding: 15px;
+    height: auto !important;
+  }
+
+  .mat-option.mat-active {
+    background-color: transparent;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.04);
+    }
+  }
+
+  .select.mat-selected {
+    color: #000000de !important;
+  }
+
+  .mat-option.mat-selected:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+}
+
+.overtimes-disabled {
+  @include font-base(18px, 400, 28px);
+  color: $text-secondary;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 590px;
+}

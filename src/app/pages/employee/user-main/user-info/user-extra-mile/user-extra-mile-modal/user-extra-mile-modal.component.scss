@@ -1,0 +1,75 @@
+@import 'src/styles/shared-styles/colors';
+@import 'src/styles/shared-styles/mixins';
+
+.mile {
+  &-on {
+    &-box {
+      padding: 0 0 40px 0;
+    }
+
+    &-title {
+      @include font-base(36px, 300, 130%);
+
+      padding: 0 0 20px 0;
+    }
+
+    &-subtitle {
+      @include font-base(18px, 300, 150%);
+
+      padding: 0 0 35px 0;
+    }
+
+    &-input {
+      width: 100%;
+
+      ::ng-deep.mat-form-field-label {
+        top: 23px !important;
+      }
+    }
+  }
+
+  &-off {
+    &-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    &-icon {
+      display: flex;
+      justify-content: center;
+    }
+
+    &-title {
+      @include font-base(22px, 300, 140%);
+
+      max-width: 350px;
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      color: $username-color;
+    }
+
+    &-btn {
+      @include align-elements;
+    }
+  }
+
+  ::ng-deep .modal-body {
+    min-width: 480px;
+    padding: 60px 40px;
+    border-radius: 0;
+
+    .btn {
+      @include font-base(14px, 500, 16px);
+
+      padding: 0 60px;
+      border-radius: 0;
+      width: 180px;
+      height: 42px;
+      color: $text-primary;
+    }
+  }
+}

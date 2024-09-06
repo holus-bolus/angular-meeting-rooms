@@ -1,0 +1,78 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+@import '~src/styles/shared-styles/vars';
+
+::ng-deep {
+  & .cart-modal-container {
+
+    & .mat-dialog-container {
+      padding: 0;
+      border-radius: 0;
+    }
+  }
+}
+
+.orders-table {
+  width: 100%;
+}
+
+.wrapper {
+  background: $main-page-background;
+  min-height: 100%;
+  padding-top: 64px;
+
+  @media (max-width: $wrapper-portal) {
+    width: $wrapper-portal;
+  }
+}
+
+.card-body {
+  max-width: 1340px;
+  width: 100%;
+  margin: 83px auto 0;
+  box-sizing: border-box;
+
+  .backward {
+    margin: 45px 0 45px 10px;
+
+    span {
+      border-bottom: 1px solid $border-link-hover;
+    }
+  }
+}
+
+.title {
+  font-size: 42px;
+  font-weight: 300;
+  line-height: 42px;
+}
+
+.card-divider {
+  padding: 10px 0;
+}
+
+.actions {
+  display: flex;
+
+  &__button {
+
+    &:first-child {
+      margin-right: 16px;
+    }
+  }
+}
+
+.mat-column {
+
+  &-actions {
+    width: 50px;
+  }
+
+  &-item {
+    font-weight: 500;
+  }
+}
+
+.mat-cell {
+  padding: 16px 24px 16px 0;
+}

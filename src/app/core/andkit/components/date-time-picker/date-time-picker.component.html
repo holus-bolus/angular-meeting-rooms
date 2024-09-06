@@ -1,0 +1,23 @@
+<mat-form-field class="date" [class.error-bottom]="error" [floatLabel]="'never'">
+  <input matInput 
+    [ngxMatDatetimePicker]="picker" 
+    [placeholder]="placeholder" 
+    [formControl]="dateTime"
+    [max]="maxDate"
+    [min]="minDate"
+    disabled>
+  
+  <ngx-mat-datetime-picker #picker [disabled]="disabled">
+    <ng-template>
+      <mat-icon>done</mat-icon>
+    </ng-template>
+  </ngx-mat-datetime-picker>
+
+  <mat-datepicker-toggle class="button" matSuffix [for]="picker" disableRipple>
+    <mat-icon matDatepickerToggleIcon>
+      <span [innerHTML]="dateIcon | safe"></span>
+    </mat-icon>
+  </mat-datepicker-toggle>
+</mat-form-field>
+
+<div *ngIf="error" class="error-text">{{ errorMessage }}</div>

@@ -1,0 +1,6 @@
+<mat-slide-toggle class="mat-slide-toggle"
+                  [ngClass]="{'unchecked': !checked}"
+                  [checked]="checked"
+                  (change)="onChange($event)">
+                  {{label}}
+</mat-slide-toggle>

@@ -1,0 +1,367 @@
+@import '~src/styles/shared-styles/mixins';
+@import '~src/styles/shared-styles/colors';
+
+.overtime {
+  position: relative;
+  padding: 28px 32px 32px;
+  max-height: 100%;
+
+  ::ng-deep {
+    .spinner-wrapper {
+      height: 533px !important;
+    }
+
+    .confirm-title {
+      font-size: 22px !important;
+      font-weight: 300 !important;
+      line-height: 30.8px !important;
+    }
+
+    .mat-form-field-wrapper {
+      top: 0 !important;
+    }
+  }
+
+  &__title {
+    @include font-base(24px, 300, 31.2px);
+
+    color: $objectives-text-color;
+    margin-bottom: 37px;
+  }
+
+  &__description {
+    @include font-base(16px, 400, 25.6px);
+
+    color: $tag-color;
+    margin-bottom: 32px;
+  }
+
+  &__form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+  }
+
+  &__field {
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+    height: 36px;
+    width: 389px;
+
+    ::ng-deep {
+      .placeholder {
+        font-size: 16px !important;
+        font-weight: 400 !important;
+        line-height: 25.6px !important;
+        color: $news-gray-light-icon !important;
+      }
+    }
+
+    &-description {
+      @include font-base(14px, 400, 160%);
+
+      color: $tag-title-color;
+      margin-top: 20px;
+    }
+
+    &-projectInfo {
+      position: absolute;
+      top: 6px;
+      left: 65px;
+    }
+
+    &-projectTooltip {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+
+    &-project {
+      position: relative;
+
+      ::ng-deep {
+        .search-field {
+          max-width: 389px;
+        }
+
+        .mat-input-element {
+          box-sizing: content-box !important;
+          padding-bottom: 7px !important;
+          font-size: 16px !important;
+          font-weight: 400 !important;
+          line-height: 25.6px !important;
+          color: $objectives-text-color !important;
+          border-color: $news-gray-light-icon !important;
+        }
+      }
+    }
+
+    &-approver {
+      ::ng-deep {
+        path {
+          stroke: $tag-box-border !important;
+        }
+
+        .label {
+          display: none !important;
+        }
+
+        .placeholder-none {
+          display: block !important;
+          font-size: 16px !important;
+          font-weight: 400 !important;
+          line-height: 25.6px !important;
+          color: $news-gray-light-icon !important;
+        }
+      }
+    }
+
+    &-sum {
+      display: inline-block;
+      width: 184.5px;
+      margin-right: 20px;
+
+      ::ng-deep {
+        .overtime {
+          width: 184.5px;
+        }
+
+        .form-input {
+          font-size: 16px !important;
+          font-weight: 400 !important;
+          line-height: 25.6px !important;
+          color: $objectives-text-color !important;
+        }
+
+        path {
+          stroke: $tag-box-border !important;
+        }
+      }
+    }
+
+    &-sumInfo {
+      position: absolute;
+      top: 9px;
+      left: 70px;
+    }
+
+    &-hoursInfo {
+      top: 5px;
+      left: 55px;
+
+      ::ng-deep {
+        svg {
+          stroke-width: 0;
+        }
+      }
+    }
+
+    &-sumTooltip {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    &-halfInfo {
+      position: absolute;
+      left: 260px;
+      top: 6px;
+    }
+
+    &-currency {
+      display: inline-block;
+      width: 184.5px;
+
+      ::ng-deep {
+        .select {
+          width: 184.5px;
+        }
+
+        .label {
+          display: none !important;
+        }
+
+        .mat-select-value-text {
+          color: $objectives-text-color !important;
+        }
+
+        path {
+          stroke: $tag-box-border !important;
+        }
+      }
+
+      &-small {
+        width: 90px;
+
+        ::ng-deep {
+          .mat-form-field-wrapper {
+            top: 1px !important;
+            width: 98px !important;
+          }
+
+          .mat-form-field-underline {
+            bottom: 2px !important;
+          }
+        }
+      }
+    }
+
+    &-jira {
+      margin-bottom: 25px;
+    }
+
+    &-jira,
+    &-hours {
+      ::ng-deep {
+        .form-input {
+          font-size: 16px !important;
+          font-weight: 400 !important;
+          line-height: 25.6px !important;
+          color: $objectives-text-color !important;
+
+          &::placeholder {
+            font-size: 16px !important;
+            font-weight: 400 !important;
+            line-height: 25.6px !important;
+            color: $news-gray-light-icon !important;
+          }
+        }
+
+        path {
+          stroke: $tag-box-border !important;
+        }
+      }
+    }
+
+    &-newcommer {
+      ::ng-deep {
+        .search-icon {
+          display: none;
+        }
+
+        .search-field {
+          max-width: 389px;
+        }
+
+        .mat-input-element {
+          padding-right: 0 !important;
+          box-sizing: content-box !important;
+          padding-bottom: 7px !important;
+          font-size: 16px !important;
+          font-weight: 400 !important;
+          line-height: 25.6px !important;
+          color: $objectives-text-color !important;
+          border-color: $news-gray-light-icon !important;
+        }
+      }
+    }
+
+    &-radiobuttons {
+      display: flex;
+      align-items: center;
+    }
+
+    &-comment {
+      height: 100%;
+
+      ::ng-deep {
+        .mat-input-element {
+          box-sizing: content-box !important;
+          min-height: 36px !important;
+          font-size: 16px !important;
+          font-weight: 400 !important;
+          line-height: 25.6px !important;
+          color: $objectives-text-color !important;
+        }
+
+        .mat-form-field-label {
+          padding-top: 5px !important;
+        }
+
+        .form {
+          margin-top: -12px !important;
+        }
+      }
+    }
+
+    &-half {
+      width: 198px;
+    }
+
+    &-small {
+      display: inline-block;
+      margin-right: 10px;
+      ::ng-deep {
+        .overtime {
+          width: 90px !important;
+        }
+
+        .form-input {
+          font-size: 16px !important;
+          font-weight: 400 !important;
+          line-height: 25.6px !important;
+          color: $objectives-text-color !important;
+
+          &::placeholder {
+            font-size: 16px !important;
+            font-weight: 400 !important;
+            line-height: 25.6px !important;
+            color: $news-gray-light-icon !important;
+          }
+        }
+
+        path {
+          stroke: $tag-box-border !important;
+        }
+      }
+    }
+  }
+
+  &__field.overtime__field-hasHint {
+    height: 68px;
+  }
+
+  &__buttons {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+  }
+}
+
+.hasAttachment {
+  position: relative;
+  min-height: 300px;
+  flex-direction: column;
+  column-count: 2;
+
+  .overtime__attachment {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-left: auto;
+  }
+}
+
+.radio-group {
+  width: 191px;
+}
+
+.radio-group-content {
+  margin-right: 19px;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.hidden {
+  display: none;
+}
+
+

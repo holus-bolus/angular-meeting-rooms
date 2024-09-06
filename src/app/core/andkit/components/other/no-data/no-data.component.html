@@ -1,0 +1,19 @@
+<div class="forbid-info">
+  <div class="forbid-icon">
+    <span [innerHTML]="noDataIcon | safe"></span>
+  </div>
+
+  <div class="system-text">{{ noDataMessage }}</div>
+  <div class="system-text">{{ noDataMessageSecond }}</div>
+
+  <ng-content></ng-content>
+
+  <div *ngIf="isLink">
+    <div class="system-text">{{ wikiMessage }}
+      <a class="title-link-h2" href="{{linkOnWiki}}" target="_blank">
+        <span class="title-link">{{ titleOfWiki }}</span>
+      </a>
+    </div>
+  </div>
+</div>
+

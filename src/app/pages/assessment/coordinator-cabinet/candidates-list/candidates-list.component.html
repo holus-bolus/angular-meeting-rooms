@@ -1,0 +1,60 @@
+<div class="wrapper">
+
+  <div class="employee">
+    <div class="employee-info">
+      <div class="employee-box">
+        <div class="employee-name">Employee</div>
+        <div class="employee-quantity">{{sidebarCandidates?.length}}</div>
+      </div>
+      <div class="employee-filter"
+           [class.active]="isFilterActive || chips.length"
+           [innerHTML]="filtersSwitcherIcon"
+           (click)="onOpenFilter()"></div>
+    </div>
+
+    <andteam-filters-list
+      *ngIf="isFilterActive"
+      [technologies]="technologies"
+      [resourceManagers]="resourceManagers"
+      [interviewers]="interviewers"
+      [activeTab]="activeTab"
+      andteamOuterClick
+      (outerClick)="onCloseFilter($event)"
+      (filter)="onFilter($event)"
+      (clearField)="onClearField()"
+      (selectOption)="onSelectFilterOption($event)"></andteam-filters-list>
+
+    <andteam-assessment-autocomplete
+      class="autocomplete"
+      [placeholder]="employeePlaceholder"
+      [formControl]="employeeForm"
+      [options]="employees"
+      (keyup)="onKeyup()"
+      (blurField)="onBlurField($event)"
+      (clearField)="onClearSearchField()"
+      (selectOption)="onSelectOption($event)"></andteam-assessment-autocomplete>
+
+    <div class="chips" *ngIf="isShowChips">
+      <andteam-chip
+        *ngFor="let chip of chips; let i = index"
+        [isAssessment]="isAssessment"
+        (remove)="onRemove(chip)">{{chip}}</andteam-chip>
+    </div>
+  </div>
+
+  <cdk-virtual-scroll-viewport class="candidates" itemSize="86">
+    <andteam-candidate
+      class="candidates-item"
+      *cdkVirtualFor="let candidate of sidebarCandidates; let i = index"
+      [activeTab]="activeTab"
+      [employee]="candidate.employee"
+      [candidateId]="candidate.id"
+      [reviewDateFrom1C]="candidate.reviewDateFrom1C"
+      [reviewDate]="candidate.reviewDate"
+      [isActiveCandidate]="activeCandidateIndex === i"
+      [isCandidateListComponent]="isCandidateListComponent"
+      (showCandidateDetails)="onShowCandidateDetails($event, i)"></andteam-candidate>
+  </cdk-virtual-scroll-viewport>
+
+</div>
+

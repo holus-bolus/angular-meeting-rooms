@@ -1,0 +1,62 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.editor-content {
+  @include font-base(18px, 300, 160%);
+
+  margin: 45px 0 0;
+  word-break: break-word;
+  color: $black-color;
+
+  .title {
+    margin: 30px 0 15px 0;
+    color: $black-color;
+  }
+
+  figure {
+    width: 100%;
+
+    img {
+      width: 100%;
+    }
+
+    table {
+      width: 100%;
+      border: 1px solid $username-color;
+      border-collapse: collapse;
+
+      th, td {
+        border: 1px solid $username-color;
+        border-collapse: collapse;
+        font: 300 normal 18px/160% Roboto,sans-serif;
+        color: $username-color;
+      }
+    }
+  }
+
+  p {
+    word-break: break-word;
+  }
+
+  a {
+    font-weight: 300;
+    color: $black-color;
+    cursor: pointer;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+
+  .image-style-align-left {
+    float: left;
+    max-width: 50%;
+    margin-right: 20px;
+  }
+
+  .image-style-align-right {
+    float: right;
+    max-width: 50%;
+    margin-left: 20px;
+  }
+}

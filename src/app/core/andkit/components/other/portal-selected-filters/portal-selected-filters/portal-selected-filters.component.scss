@@ -1,0 +1,97 @@
+@import '~src/styles/shared-styles/mixins';
+
+.wrapper {
+  margin-bottom: 50px;
+
+  .col {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    &:nth-child(2n) {
+      justify-content: flex-start;
+      margin-top: 40px;
+    }
+
+    .info-inline {
+      position: relative;
+      width: 15%;
+      height: 46px;
+      border-bottom: 1px solid $portal-border-color;
+
+      .placeholder {
+        @include font-base(18px, 300);
+
+        position: absolute;
+        top: 10px;
+        color: $tag-title-color;
+      }
+
+      &:last-child {
+        width: 30%;
+        margin: 0;
+      }
+    }
+
+    .toggler {
+      margin-left: 15px;
+      border-bottom: none;
+    }
+
+    &_selected-filters {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+
+      &__legend {
+        @include font-base(18px, 300, 160%);
+
+        height: 24px;
+        margin-right: 20px;
+        color: $tag-title-color;
+      }
+
+      &__link {
+        display: flex;
+        align-items: center;
+        height: 24px;
+        margin-left: 30px;
+        cursor: pointer;
+        position: relative;
+        right: 0;
+      }
+
+      ::ng-deep {
+        .chip {
+          box-sizing: border-box;
+          height: 34px;
+          padding: 12px 14px 12px 24px;
+        }
+      }
+
+      .chips {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        max-width: 860px;
+
+        .chips-group {
+          display: flex;
+        }
+
+        ::ng-deep .chip {
+          @include font-base(16px, 300, 19px);
+
+          padding: 7px 12px 8px 16px;
+          color: rgba(0, 0, 0, 0.6);
+
+          .close-icon {
+            width: 10px;
+            height: 10px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+<div class="instruction-modal-wrap">
+  <div class="wrapper-one-to-one-instruction">
+    <h1 class="title">Instruction</h1>
+    <p class="text">One to one is a periodic conversation with an employee conducted in a free form to discuss all current questions, brilliant ideas or disappointments</p>
+    <p class="text">Before the meeting:</p>
+    <p> – define and convey an agenda (a list of topics for discussion at One to one)</p>
+    <p> – gather information (get feedback in advance, check goals, etc.)</p>
+    <p class="text">At the meeting:</p>
+    <p>– define the context and structure of a meeting</p>
+    <p>– start with a small talk (casual conversation)</p>
+    <p>– it is important to conduct a conversation informally</p>
+    <p>– give and receive feedback with an interlocutor</p>
+    <p>– define a list of actions based on the conversation</p>
+    <p class="text">After the meeting:</p>
+    <p>– make a follow up (the result of the conversation)</p>
+    <p>– check out after the conversation</p>
+    <p>– give  feedback on the result of the conversation (both positive and negative)</p>
+    <p>– add information about the conducted One to one (Editing and deleting One to one is possible within 7 days after entering the data)</p>
+
+    <button 
+      mat-button 
+      mat-dialog-close
+      automation-id="one-to-one-instruction-close-button"
+      [innerHTML]="closeIcon | safe" 
+      class="close">
+    </button>
+
+    <div mat-dialog-actions>
+      <button 
+        mat-dialog-close 
+        automation-id="one-to-one-instruction-got-it-button" 
+        class="button"
+      >I got it</button>
+    </div>
+  </div>
+</div>
+

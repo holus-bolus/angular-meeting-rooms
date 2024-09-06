@@ -1,0 +1,19 @@
+.color-select {
+  display: flex;
+
+  &__option {
+    padding: 4px;
+    border: 1px solid #E0E0E0;
+    margin-right: 8px;
+    cursor: pointer;
+
+    &_box {
+      width: 15px;
+      height: 15px;
+    }
+
+    &.is-active {
+      border: 1px solid #020303;
+    }
+  }
+}

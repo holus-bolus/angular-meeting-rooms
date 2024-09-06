@@ -1,0 +1,65 @@
+<div class="select" [class.no-error]="!error">
+  <mat-form-field appearance="fill" floatLabel="never">
+    <mat-label *ngIf="setOption?.name && !disableLabel; else name"
+               [attr.automation-id]="automationId + '-label'"
+               class="label"
+               [class.placeholder-none]="!formControl.value">
+      {{ setOption.name }}
+    </mat-label>
+
+    <ng-template #name>
+      <mat-label *ngIf="!formControl.value"
+                 [attr.automation-id]="automationId + '-placeholder'"
+                 class="placeholder"
+                 [class.placeholder-none]="!!formControl.value">
+        {{ placeholder }}
+      </mat-label>
+    </ng-template>
+
+    <mat-select ngDefaultControl
+                [attr.automation-id]="automationId + '-select'"
+                andteamScroll
+                [panelClass]="panelClass"
+                [disableOptionCentering]="disableOptionCentering"
+                [formControl]="formControl"
+                [disabled]="isFieldDisabled"
+                (keyup.enter)="onKeyEnterUp($event)"
+                (openedChange)="openedChange()">
+      <mat-option *ngFor="let option of options"
+                  [attr.automation-id]="automationId + '-option'"
+                  [value]="option"
+                  [disabled]="option.disabled"
+                  (click)="onClick(option)">
+        <p class="option-title">{{option.name}}</p>
+        <ng-container *ngIf="showDescription && option.description">
+          <p class="option-description">{{ option.description }}</p>
+        </ng-container>
+      </mat-option>
+    </mat-select>
+
+    <mat-error automation-id="andteam-select-error" *ngIf="error">Required Field</mat-error>
+
+    <div *ngIf="additionalInfo && !setOption">
+      <andteam-material-info-btn
+        [attr.automation-id]="automationId + '-info-button'"
+        class="select-info"
+        [btnText]="'i'"
+        [btnColor]="yellow"
+        disabled>
+      </andteam-material-info-btn>
+
+      <div class="select-info-popup">
+        <div class="select-info-popup-triangle">▲</div>
+        <p>Low – no risks for the employee to leave, the employee is satisfied with the work.</p>
+        <p>Mid – the employee is not satisfied with: project, salary, career, etc.</p>
+        <p>High – a direct or indirect talk about leaving the company.</p>
+        <p>Critical – the employee has an offer from another company and discusses leaving</p>
+      </div>
+    </div>
+
+    <div [attr.automation-id]="automationId + '-arrow-icon'"
+         [innerHTML]="portalArrow | safe"
+         class="arrow">
+    </div>
+  </mat-form-field>
+</div>

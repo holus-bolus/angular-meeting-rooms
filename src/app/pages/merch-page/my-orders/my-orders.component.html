@@ -1,0 +1,97 @@
+<div class="wrapper">
+  <div class="card-body">
+    <div class="backward">
+      <andteam-backward-link (goBack)="goBack()">
+        <div>Back to Merch page</div>
+      </andteam-backward-link>
+    </div>
+
+    <andteam-card>
+      <div class="title">My orders</div>
+    </andteam-card>
+
+    <div class="card-divider"></div>
+
+    <andteam-card>
+      <table
+        mat-table [dataSource]="dataSource"
+        class="mat-elevation-z2 orders-table"
+      >
+
+        <ng-container matColumnDef="{{tableHeaders[0].definition}}">
+          <th mat-header-cell *matHeaderCellDef>{{ tableHeaders[0].name }}</th>
+          <td mat-cell *matCellDef="let order">
+            {{ order.status }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="{{tableHeaders[1].definition}}">
+          <th mat-header-cell *matHeaderCellDef> {{ tableHeaders[1].name }}</th>
+          <td mat-cell *matCellDef="let order">
+            {{ order.createDate | date: 'dd.MM.yyyy'}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="{{tableHeaders[2].definition}}">
+          <th mat-header-cell *matHeaderCellDef> {{ tableHeaders[2].name }}</th>
+          <td mat-cell *matCellDef="let order">
+            {{ order.updateDate | date: 'dd.MM.yyyy'}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="{{tableHeaders[3].definition}}">
+          <th mat-header-cell *matHeaderCellDef> {{ tableHeaders[3].name }}</th>
+          <td mat-cell *matCellDef="let order">
+            <div [innerHTML]="getParameters(order.parameters) | safe"></div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="{{tableHeaders[4].definition}}">
+          <th mat-header-cell *matHeaderCellDef> {{ tableHeaders[4].name }}</th>
+          <td mat-cell *matCellDef="let order">
+            {{ order.name }} ({{ order.countItems }})
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="{{tableHeaders[5].definition}}">
+          <th mat-header-cell *matHeaderCellDef> {{ tableHeaders[5].name }}</th>
+          <td mat-cell *matCellDef="let order">
+            {{ order.price }} points
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="{{tableHeaders[6].definition}}">
+          <th mat-header-cell *matHeaderCellDef>{{ tableHeaders[6].name }}</th>
+          <td mat-cell *matCellDef="let order">
+            <div class="actions">
+              <andteam-button
+                class="actions__button"
+                [disabled]="!isActionsAvailable(order.status)"
+                [type]="buttonType.FAB"
+                [buttonIcon]="trashIcon"
+                color="warn"
+                (click)="onDelete(order.id, order.status)"
+              ></andteam-button>
+
+              <andteam-button
+                class="actions__button"
+                [disabled]="!isActionsAvailable(order.status)"
+                [type]="buttonType.FAB"
+                [buttonIcon]="editIcon"
+                color="primary"
+                (click)="onEdit(order.id, order.status)"
+              ></andteam-button>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+
+      </table>
+
+    </andteam-card>
+  </div>
+</div>
+
+<andteam-footer></andteam-footer>

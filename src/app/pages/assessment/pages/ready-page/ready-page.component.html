@@ -1,0 +1,23 @@
+<div class="ready" *ngIf="review$ | async as review">
+
+  <div *ngFor="let assessment of review?.assessments" class="ready-review">
+    <andteam-interview-block
+      class="ready-block"
+      [assessment]="assessment"
+      [dateIcon]="dateIcon">
+    </andteam-interview-block>
+  </div>
+
+  <div class="ready-box ready-box-date"
+       [ngClass]="{order4: review?.assessments?.length === 1, order3: review?.assessments?.length > 1}">
+    <div class="ready-title">Review date:</div>
+    <span class="ready-autocomplete">{{review.reviewDate | date : 'dd.MM.yyyy'}}</span>
+  </div>
+
+  <andteam-form-field class="ready-box"
+                      [ngClass]="{order3: review?.assessments?.length === 1, order4: review?.assessments?.length > 1}">
+    <ng-container form-label>Coordinator's comment:</ng-container>
+    <andteam-comment form-input commentType="coordinator" [reviewId]="review?.id" [formControl]="coordinatorCommentControl">
+    </andteam-comment>
+  </andteam-form-field>
+</div>

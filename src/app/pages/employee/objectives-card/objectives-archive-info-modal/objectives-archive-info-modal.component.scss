@@ -1,0 +1,71 @@
+@import 'src/styles/shared-styles/colors';
+@import 'src/styles/shared-styles/mixins';
+@import 'src/styles/shared-styles/_vars.scss';
+
+.mat-dialog-container {
+  padding: 0;
+  border-radius: 0;
+}
+
+.objectives-instruction {
+  padding: 50px 40px;
+  position: relative;
+  background-color: $white-color;
+  color: $objectives-text-color;
+
+  &-title {
+    @include font-base(36px, 300, 130%);
+
+    padding: 0 0 25px 0;
+  }
+
+  &-text {
+    @include font-base(18px, normal, 160%);
+
+    padding: 0 0 25px 0;
+
+    &:last-of-type {
+      padding: 0 0 50px 0;
+    }
+  }
+
+  &-btn {
+    @include font-base(14px, 500, 16px);
+
+    background: $primary;
+    cursor: pointer;
+    border: 1px solid $primary;
+    padding: 12px 54px;
+    outline: none;
+
+    &:hover,
+    :focus {
+      background: $primary-hover;
+    }
+  }
+
+  &-close {
+    cursor: pointer;
+    opacity: 0.5;
+    position: absolute;
+    right: 22px;
+    top: 22px;
+    width: 20px;
+    border: none;
+    outline: none;
+    background: $white-color;
+
+    & svg {
+      stroke: $white-color;
+      stroke-width: 1px;
+      fill-opacity: 0.5;
+      width: 20px;
+      height: 20px;
+    }
+
+    &:hover,
+    &:focus {
+      opacity: 1;
+    }
+  }
+}

@@ -1,0 +1,102 @@
+@import 'src/styles/shared-styles/colors';
+@import 'src/styles/shared-styles/mixins';
+@import 'src/styles/shared-styles/_vars.scss';
+
+.list {
+  background: $white-color;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+
+  &-header {
+    @include align-elements;
+
+    padding: 37px 35px 19px;
+    color: $tag-box-border;
+
+    &-item {
+      color: $table-header;
+      font-size: 14px;
+      font-weight: 500;
+
+      .icon {
+        fill: $table-header;
+        margin-left: 10px;
+      }
+
+      &:first-child {
+        width: 10%;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+
+      &:nth-child(2) {
+        width: 16%;
+      }
+
+      &:nth-child(3) {
+        width: 8%;
+      }
+
+      &:nth-child(4) {
+        width: 14%;
+      }
+
+      &:nth-child(5) {
+        width: 10%;
+      }
+
+      &:nth-child(6) {
+        width: 10%;
+      }
+
+      &:last-child {
+        width: 26%;
+      }
+    }
+  }
+
+  &-item {
+    background-color: $white-color;
+
+    &:nth-child(odd) {
+      background-color: $body-background;
+    }
+  }
+
+  .btn-up {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: absolute;
+    right: 8px;
+    bottom: 130px;
+    background-color: $border-link-hover;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $primary-hover;
+    }
+
+    &:focus {
+      background-color: $primary-hover;
+    }
+
+    &__arrow {
+      border: solid black;
+      border-width: 0 3px 3px 0;
+      display: inline-block;
+      padding: 3px;
+      -webkit-transform: rotate(-135deg);
+      transform: rotate(-135deg);
+    }
+  }
+}
+
+::ng-deep {
+  .list-item {
+    &:nth-child(odd) .one-to-one-comment .one-to-one-comment-text::after {
+      background-color: $body-background;
+    }
+  }
+}

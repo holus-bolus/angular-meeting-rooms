@@ -1,0 +1,83 @@
+<div class="interview border-bottom">
+  <div class="interview-column manager-comment">
+    <div class="interview-title margin">Manager's comment:</div>
+
+    <div class="comments-data text">
+      <span>{{managerComment}}</span>
+    </div>
+  </div>
+
+  <andteam-form-field class="interview-column">
+    <ng-container form-label>Coordinator's comment:</ng-container>
+
+    <andteam-comment form-input
+                     commentType="coordinator"
+                     [reviewId]="reviewId"
+                     [formControl]="coordinatorCommentControl">
+    </andteam-comment>
+  </andteam-form-field>
+</div>
+
+<div class="interview">
+  <andteam-assessment class="interview-block"
+                      *ngFor="let assessment of assessments; let i = index"
+                      [reviewDate]="reviewDateControl.value"
+                      [reviewId]="reviewId"
+                      [assessmentIndex]="i"
+                      [type]="type"
+                      [candidateId]="reviewId"
+                      [assessment]="assessment"
+                      [minReviewDate]="minReviewDate"
+                      (updateCandidates)="onUpdateCandidates($event)"
+                      (changeInterviewDate)="onChangeInterviewDate($event, i)"
+                      (formCreated)="onFormCreated($event)">
+  </andteam-assessment>
+</div>
+
+<div class="interview">
+  <div class="interview-column review">
+    <ng-container *ngIf="isShowReviewDate">
+      <div class="interview-box">
+        <div class="interview-title">Review date:</div>
+
+        <andteam-date-picker class="date-picker"
+                             isAssessment="true"
+                             [minDate]="!!minReviewDate"
+                             [formControl]="reviewDateControl"
+                             [error]="reviewDateError$ | async"
+                             [dateIcon]="dateIcon"
+                             (blurDate)="onChangeReviewDate($event)">
+        </andteam-date-picker>
+      </div>
+      <div class="error-message" *ngIf="reviewDateErrorMessage$ | async as message">{{message}}</div>
+    </ng-container>
+
+    <andteam-languages
+      [candidateLanguagesList]="getAllLanguagesList$ | async"
+      [languagesLevelsList]="languagesLevelsList$ | async"
+      [candidateId]="candidateId$ | async">
+    </andteam-languages>
+
+    <ng-container *ngIf="isPreparation">
+      <div class="interview-salary-section" [formGroup]="salaryForm">
+        <div class="interview-box">
+          <div class="interview-title">Requested salary:</div>
+          <andteam-assessment-currency-input class="interview-autocomplete"
+                                             [formControl]="salaryControl"
+                                             [currencies]="currencies"
+                                             [selectedCurrency]="selectedCurrency"
+                                             (blurSalary)="onChangeSalary($event)">
+          </andteam-assessment-currency-input>
+        </div>
+
+        <andteam-form-field class="interview-box salary-comment-field">>
+          <andteam-comment form-input
+                           formControlName="comment"
+                           commentType="salary"
+                           [reviewId]="reviewId">
+          </andteam-comment>
+        </andteam-form-field>
+      </div>
+    </ng-container>
+  </div>
+</div>

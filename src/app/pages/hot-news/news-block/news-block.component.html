@@ -1,0 +1,62 @@
+<div class="news">
+  <div class="news-item">
+
+    <div *ngIf="!pieceNewsPage">
+      <div class="news-title-box">
+        <div class="news-title">{{ pieceNews?.title }}</div>
+        <andteam-edit-menu *ngIf="isShowEditMenu$ | async"
+                           [param]="pieceNews?.urlName"
+                           route="/edit-news"
+                           (delete)="onOpenConfirmationModal()"></andteam-edit-menu>
+      </div>
+      <div class="news-date">{{ pieceNews?.published | timezone : 'MMM DD, YYYY' }}</div>
+    </div>
+
+    <div class="news-edit-box">
+      <andteam-portal-backward-link *ngIf="pieceNewsPage"
+                                    isStatic="true"
+                                    path="/hot-news">
+        Hot news
+      </andteam-portal-backward-link>
+      <andteam-edit-menu *ngIf="pieceNewsPage && isShowEditMenu$ | async"
+                         [param]="pieceNews?.urlName"
+                         route="/edit-news"
+                         (delete)="onOpenConfirmationModal()"></andteam-edit-menu>
+    </div>
+
+    <div class="news-description"
+         *ngIf="pieceNews">
+      <andteam-editor-content [rawHTML]="pieceNewsPage ? pieceNews?.text : pieceNews?.previewText">
+        <span *ngIf="!pieceNewsPage"
+              class="news-link"
+              [routerLink]="['/hot-news', pieceNews?.urlName]">
+          Read more
+        </span>
+      </andteam-editor-content>
+    </div>
+
+    <div class="news-box">
+      <div class="news-list">
+        <div class="news-tag"
+             *ngFor="let tag of pieceNews?.tags"
+             [routerLink]="['/hot-news']"
+             [queryParams]="{tags: tag.name}"
+             (click)="searchByTag(tag)">{{tag.name}}
+        </div>
+      </div>
+
+      <div class="news-views">
+        <div class="news-views-icon" [innerHTML]="eyeOpenIcon | safe"></div>
+        <div class="news-views-quantity">{{pieceNews?.viewsCount}}</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<andteam-confirmation-modal *ngIf="isOpenConfirmationModal"
+                            [text]="title"
+                            [subText]="subTitle"
+                            (sendConfirmEvent)="onDelete(pieceNews)"
+                            (sendCloseEvent)="onOpenConfirmationModal()">
+</andteam-confirmation-modal>

@@ -1,0 +1,197 @@
+@import 'src/styles/shared-styles/colors';
+@import 'src/styles/shared-styles/mixins';
+@import 'src/styles/shared-styles/_vars.scss';
+
+.one-to-one {
+  @include font-base(16px, normal, 160%);
+  @include align-elements;
+
+  position: relative;
+  padding: 32px 35px;
+  color: $objectives-text-color;
+
+  & .date-row-info-popup {
+    @include font-base(14px, 400, 22px, normal);
+
+    box-sizing: border-box;
+    position: absolute;
+    display: none;
+    width: 284px;
+    background-color: $white-color;
+    padding: 20px 30px;
+    top: 50%;
+    left: 145px;
+    transform: translate(0, -50%);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    cursor: auto;
+    z-index: 2;
+
+    & p {
+      @include font-base(14px, 400, 22.4px);
+
+      color: $objectives-text-color;
+    }
+
+    &-triangle {
+      position: absolute;
+      top: 50%;
+      left: -22px;
+      font-size: 30px;
+      font-stretch: expanded;
+      text-shadow: 0 -5px 5px rgba(0, 0, 0, 0.2);
+      transform: scale(0.7) rotateZ(-90deg) translate(50%, 0);
+      border: none;
+      color: $white-color;
+    }
+  }
+
+  &-date {
+    width: 10%;
+    cursor: pointer;
+
+    &:hover {
+      + .date-row-info-popup {
+        display: block;
+      }
+    }
+
+    &.red-date {
+      color: $red-color;
+    }
+  }
+
+  &-interviewer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 16%;
+
+    &-icon {
+      @include font-base(14px, 300, 16px);
+
+      color: $tag-box-border;
+      padding: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $primary-disabled;
+      border-radius: 2px;
+      margin: 0 11px 0 0;
+    }
+
+    &-name {
+      @include font-base(16px, normal, 19px);
+
+      color: $text-primary;
+      text-decoration: none;
+
+      span {
+        @include border-bottom(1px, dashed, $text-tertiary);
+
+        &:hover {
+          @include border-bottom(1px, solid, $border-link-hover);
+
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  &-type {
+    width: 8%;
+  }
+
+  &-risk {
+    width: 14%;
+    pointer-events: none;
+
+    ::ng-deep {
+      .label {
+        width: 74px;
+      }
+    }
+  }
+
+  &-reason {
+    width: 10%;
+    text-align: left;
+
+    &-info {
+      @include font-base(14px, 400, 22px, normal);
+
+      box-sizing: border-box;
+      position: absolute;
+      display: none;
+      background-color: $white-color;
+      padding: 20px 30px;
+      top: 50%;
+      left: 70%;
+      transform: translate(0, -50%);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      cursor: auto;
+      z-index: 2;
+    }
+
+    & p {
+      @include font-base(14px, 400, 22.4px);
+
+      color: $objectives-text-color;
+    }
+
+    &-triangle {
+      position: absolute;
+      top: 50%;
+      left: -22px;
+      font-size: 30px;
+      font-stretch: expanded;
+      text-shadow: 0 -5px 5px rgba(0, 0, 0, 0.2);
+      transform: scale(0.7) rotateZ(-90deg) translate(50%, 0);
+      border: none;
+      color: $white-color;
+    }
+
+    &:hover {
+      + .one-to-one-reason-info {
+        display: block;
+      }
+    }
+  }
+
+  &-comment {
+    width: 22%;
+    overflow: hidden;
+    line-height: 1.37em;
+
+    p {
+      margin: 0;
+      word-break: break-all;
+    }
+
+    &-text {
+      position: relative;
+      max-height: calc(1.335em * 2);
+      overflow: hidden;
+      padding-right: 0.8em;
+
+      &::before {
+        position: absolute;
+        content: '...';
+        bottom: 0;
+        right: 0;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        width: 1.2em;
+        height: 1.2em;
+        background: white;
+      }
+    }
+  }
+
+  &-action {
+    width: 3%;
+  }
+}

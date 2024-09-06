@@ -1,0 +1,38 @@
+<div class="objective-to-archive-modal-wrapper">
+  <div class="objective-modal">
+    <button [innerHTML]="closeIcon | safe" class="objective-modal-close" (click)="onClose()"></button>
+
+    <h2 class="objective-modal-title">
+      {{statusDoneName === status ? 'Objective done' : 'Objective failed'}}
+    </h2>
+
+    <div class="objectives-instruction-text">
+      {{statusDoneName === status ?
+      'Once you submitting the objective, please describe in short why it is done.'
+      : 'Once you submitting the objective, please describe in short why it is failed.'}}
+    </div>
+
+    <div class="objective-modal-field">
+      <andteam-portal-textarea
+        ngDefaultControl
+        [placeholder]="placeHolder"
+        (click)="onClickComment()"
+        (keyup)="onKeyUpComment()"
+        [maxLength]="maxMessageLength"
+        [formControl]="commentControl"
+        [error]="!isFormValid"
+        [hint]="true"
+        [hintMessage]="hintMessageText"
+        [isNoErrorMargin]="true">
+      </andteam-portal-textarea>
+    </div>
+
+    <div class="objective-modal-buttons">
+      <andteam-button
+        [type]="confirmButtonType"
+        class="objective-modal-buttons-btn objective-modal-buttons-btn-confirm"
+        (click)="onSubmit()">Complete
+      </andteam-button>
+    </div>
+  </div>
+</div>

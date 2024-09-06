@@ -1,0 +1,38 @@
+<div class="tab-wrapper">
+  <ng-container *ngIf="coordinatesList$ | async as coordinatesList">
+    <div class="title">
+      <div class="title-block">
+        <h2 class="text">Coordinates list</h2>
+
+        <div *ngIf="columnsList" class="select-checkbox">
+          <andteam-settings-multiselect [selectIcon]="selectIcon"
+                                        [selectName]="'Add column'"
+                                        [selectList]="columnsList"
+                                        (makeSelect)="onChangeColumnsList($event)">
+          </andteam-settings-multiselect>
+        </div>
+      </div>
+
+      <div class="coordinates-number">
+        <span [innerHTML]="coordinatesIcon | safe" class="coordinates-icon"></span>
+        <span class="coordinates-count">{{ coordinatesList.length }}</span>
+        <span>Coordinates</span>
+      </div>
+    </div>
+
+    <div class="coordinates-table"
+        andteamDragScroll
+        [addClass]="'cursor-grab'">
+      <andteam-coordinates-list *ngIf="columnsList"
+                                [dataSource]="coordinatesList"
+                                [employeeId]="employeeId"
+                                [columnsList]="columnsList"
+                                (selectedId)="getCoordinates($event)">
+      </andteam-coordinates-list>
+    </div>
+  </ng-container>
+
+  <div *ngIf="isShowLoader">
+    <andteam-spinner delay="0"></andteam-spinner>
+  </div>
+</div>

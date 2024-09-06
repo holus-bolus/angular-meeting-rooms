@@ -1,0 +1,14 @@
+<div class="chip" (click)="onStopClick($event)">
+  <ng-content></ng-content>
+  <div class="assessment-chip-icon"
+       *ngIf="isAssessment; else assessmentBlock"
+       [innerHtml]="assessmentRemoveIcon"
+       (click)="onRemove()">
+  </div>
+  <ng-template #assessmentBlock>
+    <div class="chip-icon"
+         [innerHtml]="removeIcon"
+         (click)="onRemove()">
+    </div>
+  </ng-template>
+</div>

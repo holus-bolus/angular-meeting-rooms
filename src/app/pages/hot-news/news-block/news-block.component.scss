@@ -1,0 +1,104 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.news {
+  &-item {
+    margin: 20px 0;
+    padding: 80px 95px 75px;
+    background: $white-color;
+    color: $username-color;
+  }
+
+  &-edit-menu {
+    position: absolute;
+    top: 90px;
+    right: 65px;
+  }
+
+  &-title-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &-edit-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &-title {
+    @include font-base(36px, 300, 130%);
+
+    word-break: break-word;
+  }
+
+  &-date {
+    @include font-base(18px, 300, 21px);
+
+    margin: 15px 0 20px;
+  }
+
+  &-description {
+    @include font-base(18px, 200, 160%);
+  }
+
+  &-link {
+    @include font-base(16px, 500, 19px);
+
+    text-align: center;
+    color: $username-color;
+    text-decoration: none;
+    cursor: pointer;
+    outline: none;
+    border-bottom: 1px dashed $text-tertiary;
+    margin-left: 5px;
+
+    &:hover {
+      border-bottom: 1px solid $border-link-hover;
+    }
+  }
+
+  &-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 35px;
+    clear: both;
+  }
+
+  &-list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  &-tag {
+    @include tag;
+
+    background: rgba(0, 0, 0, 0.1);
+    padding: 7px 15px;
+
+    &:hover {
+      background: linear-gradient(0deg, $primary, $primary), rgba(0, 0, 0, 0.1);
+    }
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+
+  &-views {
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+
+    &-icon {
+      margin-right: 10px;
+    }
+
+    &-quantity {
+      @include font-base(16px, 300, 19px);
+    }
+  }
+}

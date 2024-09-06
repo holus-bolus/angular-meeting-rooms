@@ -1,0 +1,32 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.table-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0 80px 70px;
+  background: $body-background;
+
+  .table-h1 {
+    padding: 30px;
+    color: $objectives-text-color;
+    font: 200 normal 42px/59px 'Roboto', sans-serif;
+  }
+
+  .table-over-h1 {
+    padding: 0;
+    color: $objectives-text-color;
+    font: 200 normal 42px/59px 'Roboto', sans-serif;
+  }
+}
+
+.wrapper-quantity {
+  background: $white-color;
+  color: $text-secondary;
+  width: 100%;
+  border-radius: 0 0 8px 8px;
+  padding: 26px 30px;
+  box-sizing: border-box;
+}

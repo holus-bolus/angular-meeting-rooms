@@ -1,0 +1,32 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 5px 0px;
+
+  position: relative;
+  width: 138px;
+  height: 104px;
+  overflow-y: scroll;
+
+  /* Primary colors / White */
+
+  background: #FFFFFF;
+  /* Dropdown */
+
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.12);
+
+  &-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 11.5px 8px 11.5px 20px;
+    gap: 10px;
+    height: 47px;
+
+    @include font-base(16px, 400, 18.75px, normal);
+  }
+}

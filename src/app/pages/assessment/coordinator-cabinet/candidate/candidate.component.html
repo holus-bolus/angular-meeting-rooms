@@ -1,0 +1,56 @@
+<div class="candidate"
+     [class.active-candidate]="isActiveCandidate"
+     (click)="onShowCandidateDetails()">
+  <div class="candidate-box">
+    <div class="candidate-box" *ngIf="employee?.isWork; else notWorking">
+      <andteam-assessment-tooltip *ngIf="employee?.skype">
+        <a tooltip-base
+           [href]="employee.skype | link: linkType.SKYPE | safe : 'url'"
+           class="candidate-icon"
+           [innerHTML]="skypeIcon | safe">
+        </a>
+        <ng-container tooltip-content>{{employee.skype}}</ng-container>
+      </andteam-assessment-tooltip>
+
+      <div class="candidate-name">
+        <a class="candidate-name-link"
+           [routerLink]="['/employee', employee?.id]"
+           [class.ellipsis]="isCandidateListComponent"
+           (click)="preventEvent($event)">
+          {{employee?.name}}
+        </a>
+        <div class="candidate-position-box">
+          <div class="candidate-position" [class.ellipsis]="isCandidateListComponent">
+            {{employee?.position}} {{employee?.positionLevel}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #notWorking>
+      <div class="candidate-icon candidate-icon-inactive"
+           [innerHTML]="skypeIcon | safe">
+      </div>
+      <div class="candidate-name candidate-name-inactive">
+        <span [class.ellipsis]="isCandidateListComponent">
+          {{employee?.name}}
+        </span>
+        <div class="candidate-position-box">
+          <div class="candidate-position"
+               [class.ellipsis]="isCandidateListComponent">
+            {{employee?.position}} {{employee?.positionLevel}}
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+  </div>
+
+  <div class="candidate-position-box" *ngIf="isCandidateListComponent">
+    <div *ngIf="activeTab === assessmentTabs.approved" class="candidate-storage">1C</div>
+    <div class="candidate-date">
+      <span *ngIf="activeTab === assessmentTabs.approved; else reviewDateBlock">{{reviewDateFrom1C | date: 'dd.MM'}}</span>
+      <ng-template #reviewDateBlock>{{reviewDate | date: 'dd.MM'}}</ng-template>
+    </div>
+  </div>
+</div>

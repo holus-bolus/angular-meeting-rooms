@@ -1,0 +1,20 @@
+<div class="confirmation">
+  <andteam-modal [isConfirmationModal]="isConfirmationModal"
+                 [isConfirmationType]="isConfirmationType">
+
+    <div class="confirmation-box">
+      <div class="confirmation-icon" [innerHTML]="cautionSvg"></div>
+
+      <div class="confirmation-titles">
+        <div class="confirmation-title">Leave this page?</div>
+        <div class="confirmation-subtitle">Your feedback will not be sent</div>
+      </div>
+    </div>
+
+    <div class="confirmation-button">
+      <andteam-button [type]="firstButtonType" (click)="cancelConfirm()">Stay</andteam-button>
+      <andteam-button (click)="confirm()">Leave</andteam-button>
+    </div>
+
+  </andteam-modal>
+</div>

@@ -1,0 +1,20 @@
+<div class="modal">
+  <span [innerHTML]="(!isError ? emailSvgIcon : cautionSvgIcon) | safe" class="modal-mail-icon"></span>
+  <div>
+    <p *ngIf="!isError; else error" class="modal-title">{{ data.isEngVersion ? modalText.english.answersSend : modalText.russian.answersSend }}</p>
+    <ng-template #error>
+      <div>
+        <p class="modal-title-caution">{{ data.isEngVersion ? modalText.english.error : modalText.russian.error }}</p>
+        <p class="modal-title error">{{ data.isEngVersion ? modalText.english.reload : modalText.russian.reload }}</p>
+      </div>
+    </ng-template>
+    <p *ngIf="!isError" class="modal-add-info">{{ data.isEngVersion ? modalText.english.thanks : modalText.russian.thanks }}</p>
+  </div>
+  <div class="modal-button">
+    <andteam-button [type]="confirmButtonType" (click)="onClose()">
+      {{ data.isEngVersion
+        ? !isError ? modalText.english.buttonText.close : modalText.english.buttonText.reload
+        : !isError ? modalText.russian.buttonText.close : modalText.russian.buttonText.reload }}
+    </andteam-button>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="tab-wrapper">
+  <div class="title">
+    <div class="title-block">
+      <h2 class="text">One to one</h2>
+
+      <andteam-material-info-btn
+        automation-id="one-to-one-info-button"
+        [btnText]="btnText"
+        [btnColor]="yellow"
+        (btnClick)="onInfoBtnClick()">
+      </andteam-material-info-btn>
+    </div>
+
+    <button automation-id="one-to-one-add-button"
+            class="add-button"
+            (click)="onAddOneToOne()">
+      Add One to one
+    </button>
+  </div>
+
+  <div class="content" *ngIf="oneToOneList$ | async as oneToOneList">
+    <andteam-one-to-one-list *ngIf="oneToOneList.length; else noData"
+                             automation-id="one-to-one-list"
+                             [oneToOneList]="oneToOneList"
+                             (oneToOneAction)="onActionWithOneToOne($event)">
+    </andteam-one-to-one-list>
+
+    <ng-template #noData>
+      <andteam-one-to-one-not-found></andteam-one-to-one-not-found>
+    </ng-template>
+  </div>
+</div>
+
+<andteam-assessment-toast-notification 
+  *ngIf="isToastNotification"
+  automation-id="one-to-one-notification" 
+  (fadeOut)="onFadeOut()">
+  <span>{{ notificationText }}</span>
+</andteam-assessment-toast-notification>

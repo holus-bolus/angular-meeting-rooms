@@ -1,0 +1,65 @@
+<div class="list">
+  <div class="list-header">
+    <div (click)="sortChange()" class="list-header-item">
+      DATE
+      <span [innerHTML]="icon | safe" class="icon"></span>
+    </div>
+
+    <div class="list-header-item">
+      <andteam-andkit-input-select
+        automation-id="one-to-one-interviewer-input"
+        [placeholder]="'INTERVIEWER'"
+        [options] = "options$ | async"
+        (selectOption) = "selectReviewerOption($event)"
+        (inputCleared)="resetInterviewerOption()">
+      </andteam-andkit-input-select>
+    </div>
+
+    <div class="list-header-item">
+      <andteam-material-select
+        automation-id="one-to-one-type-select"
+        [panelPosition]="'bottom'"
+        [placeholder]="'TYPE'"
+        [options]="typeOfOneToOne"
+        (selectOption)="selectTypeOption($event)"
+        (resetOptions)="resetTypeOption()">
+      </andteam-material-select>
+    </div>
+
+    <div class="list-header-item">
+      <andteam-material-select
+        automation-id="one-to-one-risk-of-leaving-select"
+        [panelPosition]="'bottom'"
+        [placeholder]="'RISK OF LEAVING'"
+        [options]="riskOfLeavingList"
+        [isCenter]="isCenter"
+        (selectOption)="selectRiskOption($event)"
+        (resetOptions)="resetRiskOption()">
+      </andteam-material-select>
+    </div>
+    
+    <div class="list-header-item">
+      UPDATE
+    </div>
+
+    <div class="list-header-item">REASON</div>
+
+    <div class="list-header-item">COMMENT</div>
+  </div>
+
+  <div *ngFor="let oneToOne of filteredOneToOneList" class="list-item">
+    <andteam-one-to-one-row automation-id="one-to-one-row"
+                            [oneToOne]="oneToOne"
+                            [currentDate]="currentDate"
+                            (oneToOneAction)="onOneToOneAction($event, oneToOne)">
+    </andteam-one-to-one-row>
+  </div>
+
+  <button 
+    *ngIf="filteredOneToOneList.length > oneToOneListLength"
+    automation-id="one-to-one-scroll-top-button"
+    class="btn-up" 
+    (click)="scrollTop()">
+    <i class="btn-up__arrow"></i>
+  </button>
+</div>

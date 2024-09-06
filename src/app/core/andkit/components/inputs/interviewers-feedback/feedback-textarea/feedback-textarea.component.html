@@ -1,0 +1,34 @@
+<div class="textarea-wrapper" [class.error]="errorMaxLength">
+  <textarea
+    class="textarea"
+    cdkTextareaAutosize
+    cdkAutosizeMinRows="1"
+    #autosize="cdkTextareaAutosize"
+    #textarea
+    [class.textarea-editing]="isEditing"
+    [disabled]="disabled"
+    [cdkAutosizeMaxRows]="maxRows"
+    [placeholder]="placeholder"
+    [value]="value"
+    (input)="onInput($event)"
+  >
+  </textarea>
+  <div *ngIf="isEditing" class="floating-icon control-icon">
+    <span class="control" [innerHTML]="saveIcon | safe" (click)="onSave()"></span>
+    <span class="control" [innerHTML]="clearIcon | safe" (click)="onClear()"></span>
+  </div>
+  <div *ngIf="errorRequire" class="floating-icon warning-icon" >
+    <andteam-assessment-tooltip>
+      <span tooltip-base [innerHTML]="warning | safe"></span>
+      <ng-container tooltip-content>Leave your feedback</ng-container>
+    </andteam-assessment-tooltip>
+  </div>
+
+  <div *ngIf="errorMaxLength; else charactersCounter" class="error-message floating-message">{{errorMessage}}</div>
+
+  <ng-template #charactersCounter>
+    <div *ngIf="charactersLimit" class="counter-label floating-message">
+      <div class="counter-message">{{charactersLimit - value?.length}} characters left</div>
+    </div>
+  </ng-template>
+</div>

@@ -1,0 +1,68 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "baseUrl": "./",
+    "paths": {
+      "@andkit/*": [
+        "src/app/core/andkit/*"
+      ],
+      "@animations/*": [
+        "src/app/core/animations/*"
+      ],
+      "@constants/*": [
+        "src/app/core/constants/*"
+      ],
+      "@interceptors/*": [
+        "src/app/core/interceptors/*"
+      ],
+      "@resolvers/*": [
+        "src/app/core/resolvers/*"
+      ],
+      "@services/*": [
+        "src/app/core/services/*"
+      ],
+      "@validators/*": [
+        "src/app/core/validators/*"
+      ],
+      "@directives/*": [
+        "src/app/directives/*"
+      ],
+      "@guards/*": [
+        "src/app/guards/*"
+      ],
+      "@interfaces/*": [
+        "src/app/interfaces/*"
+      ],
+      "@pages/*": [
+        "src/app/pages/*"
+      ],
+      "@pipes/*": [
+        "src/app/pipes/*"
+      ],
+      "@assets/*": [
+        "src/assets/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ]
+    },
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "module": "es2020",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ]
+  }
+}

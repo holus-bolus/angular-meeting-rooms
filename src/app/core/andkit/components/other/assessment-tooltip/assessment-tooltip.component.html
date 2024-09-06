@@ -1,0 +1,21 @@
+<div class="tooltip">
+  <div #icon class="tooltip-base"
+       (mouseleave)="onMouseLeft()"
+       (mouseover)="onMouseEnter()">
+    <ng-content  select="[tooltip-base]"></ng-content>
+  </div>
+  <div #tooltip id="tooltip" class="tooltip-content">
+    <span class="text"
+          [ngClass]="{
+          'overtime-form-tooltip': panelClass === 'overtime-form-tooltip',
+          'center': alignTooltip === 'center',
+          'align-left': alignTooltip === 'left',
+          'align-right': alignTooltip === 'right',
+          'bottom': side === 'bottom',
+          'top': side === 'top'
+          }">
+      <ng-content select="[tooltip-content]"></ng-content>
+    </span>
+    <div *ngIf="isArrow" class="arrow"></div>
+  </div>
+</div>

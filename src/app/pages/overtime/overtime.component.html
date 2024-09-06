@@ -1,0 +1,59 @@
+<div class="container">
+  <andteam-table-wrapper [data]="overtimesForTable"
+                         [isPaginationConfig]="false"
+                         (selectOvertimeType)="onSelectOvertimeType($event)"
+                         (overtimeConfigurationEmit)="onOvertimeConfiguration($event)"
+                         (isOnlyAndersenEmit)="onOnlyAndersen($event)"
+                         (isAdditionalApproverRequiredEmit)="onAdditionalApproverRequired($event)"
+                         (hintLinkEmit)="onHintLink($event)"
+                         (buttonAction)="manageModals('add', true)"
+                         [isNullData]="isNullOversData"
+                         buttonName="Add Overtime"
+                         tableTitle="Overtimes List">
+    <andteam-overtimes-table [tableHead]="tableHead"
+                             [dataSource]="overtimesForTable"
+                             (triggerAction)="handleMenuAction($event)">
+    </andteam-overtimes-table>
+  </andteam-table-wrapper>
+</div>
+
+<andteam-footer></andteam-footer>
+
+<andteam-assessment-toast-notification *ngIf="popups.notification" (fadeOut)="onFadeOut()">
+  <span>{{ notificationText }}</span>
+</andteam-assessment-toast-notification>
+
+<ng-container *ngIf="popups?.modals as modals">
+  <andteam-add-overtime-modal *ngIf="modals?.add"
+                              buttonName="Add"
+                              [configuration]="overtimeConfiguration"
+                              [isOnlyAndersen]="!isOnlyAndersen"
+                              [isAdditionalApproverRequired]="isAdditionalApproverRequired"
+                              [hintLink]="hintLink"
+                              (submitOvertime)="onSubmitOvertime($event)"
+                              (closeModal)="manageModals('add', false)">
+  </andteam-add-overtime-modal>
+
+  <andteam-add-overtime-modal *ngIf="modals?.edit"
+                              buttonName="Edit"
+                              [configuration]="editedOvertime?.configuration"
+                              [isOnlyAndersen]="!isOnlyAndersen"
+                              [hintLink]="hintLink"
+                              (submitOvertime)="onEditOvertime(editedOvertime.id, $event)"
+                              (closeModal)="manageModals('edit', false)">
+  </andteam-add-overtime-modal>
+
+  <andteam-view-overtime-modal *ngIf="modals?.view"
+                               [overtime]="myOvertime"
+                               (closeModal)="manageModals('view', false)">
+  </andteam-view-overtime-modal>
+
+  <andteam-overtime-modal *ngIf="modals?.confirmation"
+                          [text]="confirmationDeleteText"
+                          [subText]="confirmationDeleteSubText"
+                          [cancelConfirmTextButton]="'Cancel'"
+                          [confirmTextButton]="'Delete'"
+                          (sendCloseEvent)="manageModals('confirmation', false)"
+                          (sendConfirmEvent)="onDeleteOvertime(idForDeleting)">
+  </andteam-overtime-modal>
+</ng-container>

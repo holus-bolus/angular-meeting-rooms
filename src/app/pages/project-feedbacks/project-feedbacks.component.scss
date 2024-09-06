@@ -1,0 +1,305 @@
+@import "~src/styles/shared-styles/colors";
+@import "~src/styles/shared-styles/mixins";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 140px auto 20px;
+  padding: 90px 75px 70px;
+  background-color: $body-background;
+  width: 1340px;
+  color: $objectives-text-color;
+  box-sizing: border-box;
+
+  h1 {
+    @include font-base(42px, 300, 54.6px, normal);
+    margin-bottom: 40px;
+  }
+
+  .subtitle {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+    gap: 16px;
+
+    .feedbacks-amount {
+      @include font-base(24px, 300, 31.2px, normal);
+
+      span {
+        @include font-base(16px, 400, 25.6px, normal);
+      }
+    }
+
+    .feedbacks-controls {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 0px;
+      gap: 12px;
+
+      div {
+        @include font-base(16px, 400, 25.6px, normal);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 2px 8px;
+        gap: 4px;
+
+        &.disabled {
+          color: $primary-disabled;
+        }
+      }
+    }
+  }
+
+  &-feedbacks-table {
+    @include font-base(16px, 400, 25.6px, normal);
+
+    width: 1190px;
+    color: $objectives-text-color;
+    background-color: $white-color;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+
+    .feedbacks {
+      width: 100%;
+
+      &-item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0px;
+        gap: 8px;
+        width: fit-content;
+      }
+
+      tr.mat-header-row {
+        height: 70px;
+
+        th {
+          padding: 0;
+          margin: 0;
+        }
+
+        th:nth-child(1) {
+          width: 80px;
+          text-align: center;
+          vertical-align: middle;
+        }
+
+        th:nth-child(2) {
+          width: 282px;
+        }
+
+        th:nth-child(3) {
+          width: 288px;
+        }
+
+        th:nth-child(4) {
+          width: 144px;
+        }
+
+        th:nth-child(5) {
+          width: 140px;
+        }
+
+        th:nth-child(6) {
+          width: 130px;
+        }
+
+        th:nth-child(7) {
+          width: 140px;
+        }
+      }
+
+      tr.mat-row td.mat-cell:first-child {
+        padding: 0;
+        margin: 0;
+        text-align: center;
+        vertical-align: middle;
+      }
+
+      tr.mat-row,
+      tr.mat-footer-row {
+        height: 80px;
+      }
+
+      &-header {
+        &-column {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          padding: 0px;
+          gap: 5px;
+
+          &-filter {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 5px;
+          }
+
+          @include font-base(12px, 500, 18px);
+          color: $table-header;
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+
+  .no-feedbacks {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 635px;
+
+    &-text {
+      @include font-base(18px, 400, 28.8px);
+
+      margin-top: 15px;
+      color: $tag-title-color;
+    }
+
+    &-icon {
+      ::ng-deep svg {
+        width: 128px !important;
+        height: 120px !important;
+      }
+    }
+  }
+
+  &-loader ::ng-deep {
+    .wrapper{
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      position: absolute;
+      align-items: center;
+      
+      .loader {
+        position: relative;
+        left: -39px;
+      }
+    }
+  }
+}
+
+.feedbacks-action {
+  &:not(.disabled) {
+    cursor: pointer;
+  }
+  
+  &.disabled {
+    cursor: default;
+    
+    ::ng-deep svg path {
+      fill: $primary-disabled;
+    }
+  }
+
+  &:hover:not(.disabled) {
+    span {
+      color: $text-secondary;
+    }
+
+    ::ng-deep svg path {
+      fill: $primary;
+    }
+  }
+
+  &-icon {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    
+    ::ng-deep svg  {
+      transform: rotate(180deg);
+
+      path {
+        fill: $table-header;
+      }
+    }
+
+    &.active {
+      &.default ::ng-deep svg {
+        transform: rotate(0deg) !important;
+      }
+
+      ::ng-deep svg path {
+        fill: $primary;
+      }
+    }
+    
+    &-close {
+      width: 11px;
+      height: 11px;
+      cursor: pointer;
+
+      &:hover ::ng-deep svg path {
+        stroke: $primary;
+      }
+
+      ::ng-deep svg {
+        width: 11px;
+        height: 11px;
+      }
+    }
+  }
+}
+
+.project-link {
+  @include font-base(16px, 400, 16px);
+  @include border-bottom(1px, dashed, $border-bottom-color);
+
+  color: $objectives-text-color;
+  text-decoration: none;
+
+  &:hover,
+  :focus {
+    @include border-bottom(1px, solid, $border-link-hover);
+  }
+}
+
+::ng-deep mat-checkbox.mat-checkbox {
+  .mat-checkbox-inner-container {
+    width: 22px;
+    height: 22px;
+
+    .mat-checkbox-frame {
+      border-color: $primary-disabled;
+    }
+  }
+
+  .mat-checkbox-checked .mat-checkbox-background {
+    background-color: $primary;
+  }
+}
+
+.chips {
+  @include font-base(14px, 400, 22px);
+  color: $input-selected-color;
+  border-radius: 4px;
+  text-align: center;
+  width: fit-content;
+  padding: 2px 11px;
+
+  &.manager {
+    @include font-base(14px, 400, 16px);
+    padding: 3px;
+    color: $tag-box-border;
+    background-color: $one-to-one-position-chips;
+  }
+
+  &.active {
+    background-color: $tag-active;
+  }
+
+  &.inactive {
+    background-color: $tag-inactive;
+  }
+}

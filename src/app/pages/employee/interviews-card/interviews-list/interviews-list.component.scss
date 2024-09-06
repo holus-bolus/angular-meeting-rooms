@@ -1,0 +1,132 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+@import '~src/styles/shared-styles/vars';
+
+.interview-card {
+  background-color: $body-background;
+  padding: 100px $tabs-side-padding $tabs-bottom-padding;
+
+  .interview-card__content {
+    position: relative;
+    min-height: 564px;
+    min-width: 1100px;
+
+    .interview-panel {
+      margin-top: 42px;
+      display: flex;
+      justify-content: space-between;
+
+      &__total {
+        display: flex;
+        align-items: flex-end;
+
+        .total-icon {
+          margin-right: 10px;
+        }
+
+        .total-text {
+          display: flex;
+          align-items: flex-end;
+          justify-content: flex-end;
+
+          &__count {
+            @include font-base(22px, 300, 26px);
+
+            margin-right: 10px;
+          }
+
+          &__word {
+            @include font-base(16px, 300, 23px);
+
+            display: flex;
+            align-items: flex-end;
+          }
+        }
+      }
+
+      &__toggle {
+        display: flex;
+        align-items: center;
+      }
+
+      .toggle-state {
+        @include font-base(14px, normal, 125%);
+
+        margin-right: 10px;
+        color: $text-secondary;
+
+        &_right {
+          margin-left: 10px;
+        }
+      }
+
+      .toggle-button {
+        transform: rotate(180deg);
+
+        ::ng-deep .mat-slide-toggle-bar {
+          width: 36px;
+          height: 20px;
+          border-radius: 100px;
+        }
+
+        ::ng-deep .mat-checked .mat-slide-toggle-bar {
+          background-color: $primary;
+        }
+
+        ::ng-deep .mat-checked .mat-slide-toggle-thumb-container {
+          left: 1px;
+        }
+
+        ::ng-deep {
+          .mat-slide-toggle-thumb-container {
+            width: 16px;
+            height: 16px;
+            top: 2px;
+            left: 2px;
+          }
+
+          .mat-slide-toggle-thumb {
+            width: 16px;
+            height: 16px;
+            background-color: $white-color;
+            box-shadow: none;
+          }
+        }
+      }
+    }
+
+    .interview-wrapper {
+      margin-top: 20px;
+
+      &_first {
+        margin-top: 30px;
+      }
+    }
+
+    .interview-placeholder {
+      height: 564px;
+    }
+
+    .interview-show-more {
+      @include font-base(16px, 500, 160%);
+
+      margin-top: 40px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      float: right;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .placeholder {
+      position: absolute;
+      top: 0;
+      left: -$tabs-side-padding;
+      width: calc(100% + #{$tabs-side-padding * 2});
+      height: calc(100% + #{$tabs-bottom-padding});
+    }
+  }
+}

@@ -1,0 +1,80 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.chips-wrapper {
+  position: relative;
+}
+
+.chips-wrapper-portal {
+  border-bottom: 1px solid $portal-border-color;
+}
+
+.error {
+  border-color: $error-color;
+}
+
+.chips {
+  width: 100%;
+
+  &-label {
+    font: 400 normal 12px/14px 'Roboto', sans-serif;
+    display: block;
+    margin-bottom: 6px;
+    color: $text-secondary;
+  }
+
+  &-list {
+    position: relative;
+    border-bottom: 1px solid $tag-box-border;
+    padding-bottom: 3px;
+    padding-right: 10px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    cursor: pointer;
+    min-height: 37px;
+
+    &-portal {
+      margin-bottom: 0;
+      padding-left: 0;
+      border: none;
+      border-radius: 0;
+      cursor: pointer;
+
+      .chips-list-arrow-up {
+        transform: rotate(0deg);
+      }
+
+      .chips-list-arrow-down {
+        transform: rotate(180deg);
+      }
+
+      .chips-all-items {
+        @include font-base(18px, 300);
+
+        padding-left: 0;
+        color: $tag-title-color;
+      }
+    }
+
+    &-arrow-down {
+      position: absolute;
+      right: 10px;
+      transform: scale(0.7) rotate(180deg);
+    }
+
+    &-arrow-up {
+      position: absolute;
+      right: 10px;
+      transform: scale(0.7);
+    }
+  }
+
+  &-all-items {
+    @include font-base(18px, 300, 25px);
+
+    cursor: pointer;
+    padding: 6px 5px;
+    color: $tag-box-border;
+  }
+}

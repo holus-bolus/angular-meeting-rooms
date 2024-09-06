@@ -1,0 +1,92 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+:host {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: block;
+  z-index: 100;
+
+  .error-container {
+    z-index: 1001;
+  }
+
+  .error-wrapper {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-size: cover;
+
+    &.background-image {
+      background-image: url('../../../../../../assets/images/404page.svg');
+    }
+
+    &.background-color {
+      background-color: $main-page-background;
+    }
+
+    .error {
+      max-width: 1340px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 150px 165px 0;
+      color: $white-color;
+      z-index: 1;
+
+      @media (max-width: $tablet-md) {
+        padding: 205px 20px 0;
+      }
+
+      @media (max-width: $mobile) {
+        padding-top: 155px;
+        width: auto;
+      }
+
+      &-title {
+        @include font-base(56px, 200, 66px);
+
+        @media (max-width: $tablet) {
+          font-size: 46px;
+          line-height: 59.8px;
+        }
+
+        @media (max-width: $mobile) {
+          font-size: 34px;
+          line-height: 44.3px;
+        }
+      }
+
+      &-details {
+        @include font-base(20px, 300, 28px);
+
+        margin: 20px 0 25px;
+
+        @media (max-width: $tablet) {
+          margin-top: 20px;
+          font-size: 16px;
+          line-height: 25.6px;
+        }
+      }
+
+      &-link {
+        @include font-base(20px, 500, 28px);
+
+        border-bottom: 1px dashed $white-color;
+        text-decoration: none;
+        color: $white-color;
+        cursor: pointer;
+
+        @media (max-width: $tablet) {
+          font-size: 16px;
+          line-height: 25.6px;
+        }
+      }
+    }
+  }
+}

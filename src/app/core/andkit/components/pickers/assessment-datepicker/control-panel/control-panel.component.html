@@ -1,0 +1,19 @@
+<div class="controls-panel">
+  <div class="previous-control arrows-controls">
+    <div class="year-arrows arrows-group">
+      <span class="arrow" [innerHtml]="controlArrows | safe"></span>
+    </div>
+    <div class="month-arrows arrows-group">
+      <span class="arrow" [innerHtml]="controlArrow | safe"></span>
+    </div>
+  </div>
+  <div class="current-date">{{currentDate | date : 'MMM yyyy'}}</div>
+  <div class="next-control arrows-controls">
+    <div class="year-arrows arrows-group">
+      <span class="arrow" [innerHtml]="controlArrows | safe"></span>
+    </div>
+    <div class="month-arrows arrows-group">
+      <span class="arrow" [innerHtml]="controlArrow | safe"></span>
+    </div>
+  </div>
+</div>

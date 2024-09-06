@@ -1,0 +1,43 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+:host {
+
+  .title-h1 {
+    margin: 130px 0 50px;
+    color: $white-color;
+  }
+}
+
+.employee {
+
+  &-count {
+    padding-top: 20px;
+  }
+}
+
+.wrapper-table {
+  margin: 15px 0 0 15px;
+}
+
+.container {
+  padding-bottom: 60px;
+  min-width: $min-container-width;
+
+  .employee-header {
+    padding: 70px 0 70px 80px;
+  }
+}
+
+.wrapper-rows-count {
+  margin-bottom: 15px;
+
+  .rows-count {
+    margin-left: 5px;
+    color: $text-primary;
+  }
+}
+
+.footer {
+  width: 100%;
+}

@@ -1,0 +1,14 @@
+@import '~src/styles/shared-styles/colors';
+
+.yellow-label {
+  width: 55px;
+  height: 85px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $primary;
+
+  .icon {
+    height: 35px;
+  }
+}

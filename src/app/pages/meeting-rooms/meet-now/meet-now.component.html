@@ -1,0 +1,8 @@
+<div class="meet-now__nav">
+  <a [class.active]="view === 'now'" (click)="goToAvailableNow()">Available now</a>
+  <a [class.active]="view === 'soon'" (click)="goToAvailableSoon()">Available soon</a>
+</div>
+
+<div class="meet-now__list">
+  <andteam-meet-now-card *ngFor="let room of rooms" [room]="room"></andteam-meet-now-card>
+</div>

@@ -1,0 +1,74 @@
+<div class="table">
+<mat-table [dataSource]="dataSource" class="mat-elevation-z2">
+
+  <ng-container matColumnDef="{{tableHead[0]}}">
+    <mat-header-cell *matHeaderCellDef>{{ tableHead[0] | uppercase }}</mat-header-cell>
+    <mat-cell *matCellDef="let over"> {{over.type}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="{{tableHead[1]}}">
+    <mat-header-cell *matHeaderCellDef> {{ tableHead[1] | uppercase }}</mat-header-cell>
+    <mat-cell *matCellDef="let over"> {{ over.project }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="{{tableHead[2]}}">
+    <mat-header-cell *matHeaderCellDef> {{ tableHead[2] | uppercase }}</mat-header-cell>
+    <mat-cell *matCellDef="let over"> {{ over.date }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="{{tableHead[3]}}">
+    <mat-header-cell *matHeaderCellDef> {{ tableHead[3] | uppercase }}</mat-header-cell>
+    <mat-cell *matCellDef="let over">
+      {{ getSumAndHours(over) }}
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="{{tableHead[4]}}">
+    <mat-header-cell *matHeaderCellDef> {{ tableHead[4] | uppercase }}</mat-header-cell>
+    <mat-cell *matCellDef="let over">
+      <div *ngIf="over.wardEmployee; else noName" class="comment">
+        <a [routerLink]="['/employee/', over.wardEmployee.id]" class="name">{{ over.wardEmployee.name }}</a>
+        <div class="text" [innerHTML]="over.comment | urlify"></div>
+      </div>
+
+      <ng-template #noName>
+        <div class="comment-container">
+          <p class="two-strings-comment" [innerHTML]="over.comment | urlify"></p>
+        </div>
+      </ng-template>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="{{tableHead[5]}}">
+    <mat-header-cell *matHeaderCellDef> {{ tableHead[5] | uppercase }}</mat-header-cell>
+    <mat-cell *matCellDef="let over"> {{ over.status }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="{{tableHead[6]}}">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+
+    <mat-cell *matCellDef="let over">
+      <ng-container *ngIf="over.menu?.actions">
+        <button mat-icon-button class="menu-button" [matMenuTriggerFor]="menu" aria-label="menu">
+          <span class="material-icons">more_horiz</span>
+        </button>
+        <mat-menu #menu="matMenu">
+          <ng-container *ngFor="let item of over.menu.actions">
+            <button mat-menu-item
+                    class="menu-item"
+                    [ngClass]="{'delete-red': item === isDeleteMenu}"
+                    (click)="onTriggerAction(over, item)">
+              <span [ngClass]="{'delete-red': item === isDeleteMenu}">{{ item }}</span>
+            </button>
+          </ng-container>
+
+        </mat-menu>
+      </ng-container>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="tableHead"></mat-header-row>
+  <mat-row *matRowDef="let over; columns: tableHead;"></mat-row>
+
+</mat-table>
+</div>

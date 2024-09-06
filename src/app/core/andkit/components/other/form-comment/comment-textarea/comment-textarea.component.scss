@@ -1,0 +1,116 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.form {
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+
+  &-input {
+    @include font-base(14px, 400, 22px);
+
+    width: 86%;
+    padding: 6px 35px 6px 8px;
+    border-radius: 4px;
+    word-break: keep-all;
+    border: 1px solid $text-tertiary;
+    color: $username-color;
+    cursor: pointer;
+    margin: 0;
+
+    &:hover {
+      cursor: pointer;
+      border: 1px solid $text-secondary;
+    }
+
+    &:focus {
+      border: 1px solid $border-active;
+    }
+
+    &::placeholder {
+      @include font-base(14px, 400, 22px);
+
+      color: $text-secondary;
+    }
+  }
+
+  .floating-message {
+    @include font-base(12px, 300, 130%);
+
+    margin-top: 10px;
+  }
+
+  .error-message {
+    color: $error-color;
+  }
+
+  .counter-label {
+    .counter-message {
+      color: $text-secondary;
+    }
+  }
+
+  ::ng-deep {
+    .mat-form-field {
+      width: 100%;
+    }
+
+    .mat-form-field-flex {
+      border: none;
+
+      .mat-form-field-infix {
+        border: none;
+        padding: 8px 0;
+      }
+    }
+
+    .mat-form-field-label {
+      @include font-base(18px, 300, 90%);
+
+      color: $tag-title-color;
+      top: 18px;
+    }
+
+    .mat-form-field.mat-focused .mat-form-field-ripple {
+      background-color: $tag-title-color;
+      height: 1px;
+    }
+
+    .mat-form-field-underline {
+      display: none;
+    }
+
+    .mat-form-field-wrapper {
+      padding-bottom: 0;
+    }
+  }
+
+  .error {
+    ::ng-deep .mat-form-field-flex {
+      border-color: $error-color;
+    }
+  }
+
+  .clear-icon {
+    position: absolute;
+    top: 7px;
+    right: 15px;
+    cursor: pointer;
+  }
+}
+
+.assessment-focus {
+  border: 1px solid $border-active;
+}
+
+.error {
+  border: 1px solid $error-color;
+
+  &:hover {
+    border: 1px solid $error-color;
+  }
+
+  &:focus {
+    border: 1px solid $error-color;
+  }
+}

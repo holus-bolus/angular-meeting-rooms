@@ -1,0 +1,51 @@
+@import 'src/styles/shared-styles/colors';
+@import 'src/styles/shared-styles/mixins';
+
+.wrapper {
+  background-color: $white-color;
+  margin-top: 20px;
+}
+
+.projects {
+  padding: 70px 115px;
+
+  &-title {
+    @include font-base(42px, 300, 130%);
+
+    color: $objectives-text-color;
+    padding: 0 0 25px 0;
+  }
+
+  &-list {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+
+  &-btn {
+    @include font-base(16px, 500, 19px);
+    @include align-elements;
+
+    border: none;
+    background: none;
+    outline: none;
+    margin: 55px 0 0 0;
+    cursor: pointer;
+
+    .btn-name {
+      @include border-bottom(1px, solid, $primary);
+
+      padding-bottom: 3px;
+    }
+
+    .material-icons {
+      color: $primary;
+    }
+  }
+}
+
+.projects-list + .projects-list {
+  margin-top: 30px;
+}

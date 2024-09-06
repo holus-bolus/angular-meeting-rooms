@@ -1,0 +1,93 @@
+<div class="wrapper overtime">
+  <andteam-assessment-modal
+    isShowCloseIcon="true"
+    (closeClick)="closeModal.emit()"
+  >
+    <ng-container *ngIf="overtime?.overType?.required as configuration">
+      <h2 class="overtime-title assessment-h2">
+        {{ overtime.overType.values?.overType?.name | textLength: titleLength }}
+      </h2>
+
+      <div class="overtime-wrapper">
+        <div
+          *ngIf="overtime.overType.required.locationSelectRequired"
+          class="overtime-block"
+        >
+          <span class="static-field">{{ overtime.location.name }}</span>
+        </div>
+
+        <div class="overtime-block">
+          <span class="static-field">{{ overtime.project?.name }}</span>
+        </div>
+
+        <div *ngIf="overtime.additionalApprover" class="overtime-block">
+          <span class="static-field">{{
+            overtime.additionalApprover.name
+          }}</span>
+        </div>
+
+        <div *ngIf="configuration.hours" class="overtime-block">
+          <span class="static-field">{{ overtime.hours }} hours</span>
+        </div>
+
+        <div *ngIf="configuration.sum" class="overtime-block two-fields">
+          <span class="field static-field">{{ overtime.sum }}</span>
+          <span class="field static-field">{{ overtime.currency }}</span>
+        </div>
+
+        <div *ngIf="configuration.wardEmployeeId" class="overtime-block">
+          <span class="static-field">{{ overtime.wardEmployee?.name }}</span>
+        </div>
+
+        <div *ngIf="configuration.position" class="overtime-block two-fields">
+          <span class="field static-field">{{ overtime.position?.name }}</span>
+          <span class="field static-field">{{ overtime.level }}</span>
+        </div>
+
+        <ng-container *ngIf="overtime.attachments?.length">
+          <div
+            *ngFor="let attachment of overtime.attachments"
+            class="overtime-block"
+          >
+            <a
+              class="static-field"
+              [class.overtime-link]="attachment.name"
+              (click)="openFileUrl(attachment.id)"
+            >
+              <span [innerHTML]="fileInactiveIcon | safe"></span>
+              <span class="overtime-filename">{{ attachment.name }}</span>
+            </a>
+          </div>
+        </ng-container>
+
+        <div
+          *ngIf="configuration.jiraLink && overtime.jiraLink"
+          class="overtime-block"
+        >
+          <span class="static-field">
+            <div
+              class="overtime-comment"
+              [innerHTML]="overtime.jiraLink | urlify"
+            ></div>
+          </span>
+        </div>
+
+        <div
+          *ngIf="configuration.comment && overtime.comment"
+          class="overtime-block"
+        >
+          <span class="static-field">
+            <div
+              class="overtime-comment"
+              [innerHTML]="overtime.comment | urlify"
+            ></div>
+          </span>
+        </div>
+      </div>
+    </ng-container>
+
+    <div *ngIf="isLoader | async" class="avatar-loader">
+      <andteam-loader></andteam-loader>
+    </div>
+  </andteam-assessment-modal>
+</div>

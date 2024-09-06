@@ -1,0 +1,85 @@
+<div *ngIf="userData$ | async as userData" class="wrapper">
+  <ng-container *ngIf="companyService.showHeaderBackgroundImabe; else noBackGround">
+    <div *ngIf="backGround$ | async; else customBackGround" class="background-block">
+      <picture class="images">
+        <source type="image/png" [srcset]="imgBackground">
+        <source type="image/jpeg" [srcset]="imgBackground">
+        <img class="image" [src]="imgBackground">
+        <div class="gradient"></div>
+      </picture>
+    </div>
+  </ng-container>
+
+  <ng-template #noBackGround>
+    <div class="background-block"></div>
+  </ng-template>
+
+  <ng-template #customBackGround>
+    <div class="background-block">
+      <picture class="images">
+        <source type="image/png" [srcset]="'assets/images/BG.png'">
+        <source type="image/jpeg" [srcset]="'assets/images/BG.jpeg'">
+        <img class="image" [src]="'assets/images/BG.jpeg'">
+        <div class="gradient"></div>
+      </picture>
+    </div>
+  </ng-template>
+
+  <ng-template #noBackGround>
+    <div class="background-block">
+      <picture class="images">
+        <source type="image/png" [srcset]="'assets/images/BG.png'">
+        <source type="image/jpeg" [srcset]="'assets/images/BG.jpeg'">
+        <img class="image" [src]="'assets/images/BG.jpeg'">
+        <div class="gradient"></div>
+      </picture>
+    </div>
+  </ng-template>
+
+  <div class="wrapper-content">
+    <div class="wrapper-content__block">
+      <andteam-main-user-info
+        [isBlockBackground]="isBlockBackGround"
+        [avatar]="avatar"
+        [username]="userData.fullNameRu"
+        [usernameEn]="userData.fullNameEn"
+        [externalId]="externalId"
+        (openSuccessPopup)="onCloseSuccessImageModal()">
+      </andteam-main-user-info>
+    </div>
+
+    <div class="wrapper-content__block">
+      <andteam-img-background-uploader
+        (blockBackgroundImageOutput)="changeBlockBackground($event)"
+        (changeBackground)="onChangeBg($event)">
+      </andteam-img-background-uploader>
+    </div>
+
+    <div #eventsBlock class="wrapper-content__block">
+      <andteam-main-events
+        [events]="events"
+        [pageSize]="pageSize"
+        [hasNextPage]="hasNextPage">
+      </andteam-main-events>
+    </div>
+
+    <div #newsBlock class="wrapper-content__block">
+      <andteam-main-news></andteam-main-news>
+    </div>
+  </div>
+
+  <div class="footer">
+    <andteam-footer></andteam-footer>
+  </div>
+</div>
+
+<div class="success-image-modal" *ngIf="isOpenSuccessImageModal">
+  <andteam-modal (closeClick)="onOpenSuccessImageModal()">
+    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd" class="fill-theme-color"
+            d="M2 30C2 14.536 14.536 2 30 2C38.6843 2 46.4452 5.95355 51.581 12.159L29.6664 34.5774L15.7075 20.6047C15.3171 20.214 14.684 20.2137 14.2932 20.604C13.9025 20.9944 13.9022 21.6275 14.2925 22.0182L28.9667 36.7068C29.1556 36.8958 29.4123 37.0014 29.6796 37C29.9469 36.9985 30.2024 36.8902 30.3893 36.699L52.8123 13.7605C56.0786 18.3405 58 23.9459 58 30C58 45.464 45.464 58 30 58C14.536 58 2 45.464 2 30ZM54.2312 12.309C57.8586 17.269 60 23.3844 60 30C60 46.5685 46.5685 60 30 60C13.4315 60 0 46.5685 0 30C0 13.4315 13.4315 0 30 0C39.2282 0 47.4832 4.16666 52.9864 10.7213L58.2849 5.30097C58.671 4.90604 59.3041 4.89884 59.699 5.2849C60.094 5.67097 60.1012 6.30409 59.7151 6.69903L54.2312 12.309Z"
+            fill="#FEDA00"/>
+    </svg>
+    <p class="main-label">Profile photo has been saved</p>
+  </andteam-modal>
+</div>

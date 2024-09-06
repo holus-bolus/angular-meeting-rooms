@@ -1,0 +1,30 @@
+<div class="drag-and-drop__wrapper">
+  <div class="drag-and-drop__header">{{ title }}</div>
+
+  <div class="drag-and-drop" andteamDragAndDrop (fileDropped)="onFileDropped($event)">
+    <div [innerHTML]="noDataIcon | safe" class="drag-and-drop__img"></div>
+    <input type="file" class="drag-and-drop__input" multiple (change)="fileBrowseHandler($event)"/>
+    <p class="drag-and-drop__hint">Drag and drop a file, or
+      <label for="fileDropRef" class="drag-and-drop__browse">Browse</label>
+    </p>
+    <p class="drag-and-drop__subhint">Max size: {{ maxFileSize.name }} each, max number: 3</p>
+  </div>
+
+  <div class="drag-and-drop__attachments">
+    <div class="drag-and-drop__file" *ngFor="let file of files; let i = index">
+      <span class="drag-and-drop__file-icon" [innerHTML]="attachmentIcon | safe"></span>
+      <span class="drag-and-drop__file-name">
+          {{ file?.name }}
+      </span>
+
+      <span class="drag-and-drop__delete" (click)="deleteFile(i)">
+        <span [innerHTML]="closeIcon | safe"></span>
+      </span>
+    </div>
+  </div>
+
+  <div *ngIf="error" class="drag-and-drop__error">
+    {{ error }}
+  </div>
+</div>
+

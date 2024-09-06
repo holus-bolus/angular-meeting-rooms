@@ -1,0 +1,132 @@
+<div class="editor" [formGroup]="currentForm">
+  <span
+    [innerHTML]="closeIcon | safe"
+    class="editor-close"
+    (click)="onClose()">
+  </span>
+
+  <div class="editor-header">
+    <span>Editing of Certificate</span>
+    <span
+      [innerHTML]="infoIcon | safe"
+      class="editor-header-icon"
+      (mouseenter)="toggleHintVisabiblity()"
+      (mouseleave)="toggleHintVisabiblity()">
+    </span>
+
+    <div
+      *ngIf="isShowHint"
+      class="editor-header-hint">
+      Pay attention. You can edit employee goals only after negotiation with their RM
+    </div>
+  </div>
+
+  <div class="editor-data">
+    <andteam-portal-input
+      placeholder="Name"
+      class="editor-data-field"
+      formControlName="employeeNameControl"
+      [errorMessage]="errorMessage"
+      [error]="!currentForm.controls.employeeNameControl.valid"
+      [componentType]="componentType"
+      hideCloseButton="true">
+    </andteam-portal-input>
+
+    <andteam-date-picker
+      class="editor-data-field editor-data-datepicker"
+      formControlName="dateControl"
+      minDate="false">
+    </andteam-date-picker>
+
+    <andteam-autocomplete
+      placeholder="Technology"
+      (keyup)="onKeyUpTechnology()"
+      [options]="filtredTechList"
+      class="editor-data-field editor-data-autocomplete"
+      [error]="!currentForm.controls.technologyControl.valid"
+      [errorMessage]="errorMessage"
+      [componentType]="componentType"
+      [isShowSearchIcon]="isShowSearchIcon"
+      [control]="currentForm.controls.technologyControl">
+    </andteam-autocomplete>
+
+    <andteam-select
+      ngDefaultControl
+      class="editor-data-field editor-data-select"
+      [formControl]="currentForm.controls.levelControl"
+      [panelClass]="editorPanelClass"
+      [options]="techLevels"
+      [option]="currentTechLevel">
+    </andteam-select>
+
+    <div class="editor-data-select-container">
+      <span class="editor-data-flag" [innerHTML]="unitedKingdomIcon | safe"></span>
+      <andteam-select
+        ngDefaultControl
+        class="editor-data-field editor-data-select"
+        [formControl]="currentForm.controls.engLevelControl"
+        [panelClass]="editorPanelClass"
+        [options]="engLevels"
+        [option]="currentEngLvl">
+      </andteam-select>
+    </div>
+  </div>
+
+  <div class="editor-subheader">
+    Goals
+    <p class="editor-subheader-hint">
+      Formulate your goals clearly and shortly for the best view of certificate
+    </p>
+  </div>
+  <div class="editor-goals">
+    <div *ngFor="let objective of formData.objectives; index as i">
+      <div class="editor-goals-item" [ngClass]="{'no-margin': i === 0}">
+        <span class="editor-goals-number">{{i + 1}}.</span>
+
+        <andteam-portal-textarea
+          class="editor-goals-area"
+          [ngClass]="{'editor-goals-area-error': isGoalInvalid(objective.id)}"
+          (changeValue)="currentForm.controls[objective.id].markAsTouched()"
+          formControlName="{{objective.id}}">
+        </andteam-portal-textarea>
+
+        <span
+          class="editor-goals-trash"
+          [innerHTML]="trashIcon | safe"
+          (click)="onGoalDelete(objective.id)">
+        </span>
+      </div>
+
+      <div *ngIf="isGoalInvalid(objective.id)"
+           class="editor-goals-error">
+           {{ getGoalErrorMessage(objective.id) }}
+      </div>
+    </div>
+
+    <div
+      [ngClass]="{'editor-goals-add-hide': !isCanAddGoal}"
+      class="editor-goals-add"
+      (click)="onAddGoal()">
+      <span class="editor-goals-add-icon" [innerHTML]="addIcon | safe"></span>
+      <span>Add goal</span>
+    </div>
+  </div>
+
+  <div class="editor-buttons">
+    <andteam-button
+      class="editor-buttons-btn editor-buttons-btn-cancel"
+      [type]="cancelButtonType"
+      (click)="onClose()">
+      Cancel
+    </andteam-button>
+
+    <andteam-button
+      class="editor-buttons-btn editor-buttons-btn-save"
+      [type]="saveButtonType"
+      (click)="onSave()">
+      Save certificate
+    </andteam-button>
+  </div>
+</div>
+
+

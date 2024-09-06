@@ -1,0 +1,112 @@
+<div class="project">
+  <div class="project-header">
+    <div class="project-wrapper-title">
+      <h4 class="title">{{ allocation.project.name }}</h4>
+      <div *ngIf="allocation.project.name.length > 15" class="title-detail">
+        <p>{{ allocation.project.name }}</p>
+        <p class="title-detail-triangle">▲</p>
+      </div>
+    </div>
+    <ng-container *ngIf="isCurrentUser">
+      <div 
+        [innerHTML]="menuIcon | safe" 
+        class="project-menu"
+        (click)="onMenuIconClick()"
+        [ngClass]="{'project-menu-active': isMenuActive$ | async}">
+      </div>
+      <div class="menu-box"
+        *ngIf="isMenuActive$ | async">
+        <div class="menu-box-list" 
+          andteamOuterClick 
+          (outerClick)="onOuterClick($event)">
+          <div (click)="leaveFeedack()" class="menu-box-list-item">Leave feedback on project</div>
+          <!-- <div (click)="askFeedback()" class="menu-box-list-item">Ask for feedback on team</div> -->
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="project-general-info">
+    <div class="project-date">
+      <span class="project-date-start">Start: {{ allocation.startDate | date: "dd.MM.yyyy" }}</span>
+      <span>Stop: {{ allocation?.stopDate ? (allocation.stopDate | date: "dd.MM.yyyy") : '&mdash;' }}</span>
+    </div>
+
+    <div class="project-allocation">Allocation type: {{ allocation.type }}</div>
+    <div class="project-allocation">Role on Project: {{ allocation.role }}</div>
+  </div>
+
+  <div class="project-managers">
+    <h5 class="project-managers-header">Managers</h5>
+
+    <div class="project-manager">
+      <span class="project-manager-icon">{{ TITLE_POSITION_OF_MANAGER.ProjectManager }}</span>
+      <a *ngIf="allocation.project?.projectManager?.id && allocation.project?.projectManager?.isWork; else notWorkingPm"
+         class="project-manager-name"
+         [routerLink]="['/employee', allocation.project.projectManager.id]">
+        <span>{{ allocation.project.projectManager.name }}</span>
+      </a>
+      <ng-template #notWorkingPm>
+        <span class="project-manager-inactive">{{ allocation.project.projectManager.name }}</span>
+      </ng-template>
+    </div>
+
+    <div *ngIf="allocation.project.deliveryManager" class="project-manager">
+      <span class="project-manager-icon">{{ TITLE_POSITION_OF_MANAGER.DeliveryManager }}</span>
+      <a *ngIf="allocation.project?.deliveryManager?.id && allocation.project?.deliveryManager?.isWork; else notWorkingDm"
+         class="project-manager-name"
+         [routerLink]="['/employee', allocation.project.deliveryManager.id]">
+        <span>{{ allocation.project.deliveryManager.name }}</span>
+      </a>
+      <ng-template #notWorkingDm>
+        <span class="project-manager-inactive">{{ allocation.project.deliveryManager.name }}</span>
+      </ng-template>
+    </div>
+  </div>
+
+  <div class="project-team" *ngIf="allocation.project.employees">
+    <h5 class="project-team-header">Team</h5>
+    
+    <div class="project-team-employees">
+      <div class="project-team-employees-icons"
+        [ngClass]="{
+          'project-team-employees-icons-1': allocation.project.employees.length == 1,
+          'project-team-employees-icons-2': allocation.project.employees.length == 2,
+          'project-team-employees-icons-3': allocation.project.employees.length >= 3}">
+          
+          <ng-container *ngFor="let employee of allocation.project.employees.slice(0, 3)">
+            <div class="project-team-employees-icons-img">
+              <img *ngIf="employee.photo; else defaultPic"
+                [src]="employee.photo"
+                alt="employees icon">
+            </div>
+          </ng-container>
+      </div>
+      <button class="project-team-employees-count"
+      (click)="toSeeEmployeeList(allocation.project.employees)">
+      {{ allocation.project.teamQty }} Members
+    </button>
+    </div>
+    
+  </div>
+
+  <div class="project-working">
+    <div class="project-working-info">
+      <div class="project-working-value">{{ allocation.hours }}</div>
+      <div class="project-working-desc">Working<br>hours</div>
+    </div>
+
+    <div class="project-working-icon">/</div>
+
+    <div class="project-working-info" [ngClass]="{'unpaid': !allocation.rate}">
+      <div class="project-working-value">$</div>
+      <div class="project-working-desc">{{ allocation.rate ? "Paid" : "Unpaid" }}<br>project</div>
+    </div>
+  </div>
+</div>
+
+<ng-template #defaultPic>
+  <div class="avatar-image">
+    <span [innerHTML]="defaultAvatar | safe" class="avatar-image"></span>
+  </div>
+</ng-template>

@@ -1,0 +1,14 @@
+<div class="wrapper">
+  <ng-content></ng-content>
+  <div class="col col_selected-filters" *ngIf="selectedFilters && selectedFilters.length">
+    <span class="col_selected-filters__legend" *ngIf="label">{{label}}</span>
+    <div class="chips">
+      <div *ngFor="let selectedFilter of selectedFilters">
+        <andteam-chip (remove)="onRemoveTag(selectedFilter)">
+          {{selectedFilter.name}}
+        </andteam-chip>
+      </div>
+      <div class="link col_selected-filters__link" (click)="onClearAll()">Clear All</div>
+    </div>
+  </div>
+</div>

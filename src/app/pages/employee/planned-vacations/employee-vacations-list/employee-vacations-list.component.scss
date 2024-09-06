@@ -1,0 +1,81 @@
+@import 'src/styles/shared-styles/colors';
+@import 'src/styles/shared-styles/mixins';
+@import 'src/styles/shared-styles/_vars.scss';
+
+:host {
+  position: absolute;
+  visibility: hidden;
+  left: -35px;
+  top: calc(100% + 17px);
+  z-index: 1;
+}
+
+.vacation-employee-info {
+  display: block;
+  max-height: 700px;
+  overflow-y: auto;
+  width: 1190px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+
+  &-header {
+    @include font-base(14px, 500, 150%);
+
+    color: $table-header;
+    padding: 35px 9px 21px;
+    white-space: nowrap;
+    z-index: 1;
+    box-sizing: border-box;
+  }
+
+  &-item {
+    @include font-base(16px, normal, 160%);
+
+    color: $objectives-text-color;
+    padding: 19px 12px;
+    z-index: 1;
+  }
+
+  &-link {
+    @include font-base(16px, normal, 19px);
+
+    color: $text-primary;
+    text-decoration: none;
+    border-bottom: thin dashed $text-tertiary;
+
+    &:hover,
+    &:focus {
+      border-bottom-style: solid;
+      border-color: $border-link-hover;
+    }
+  }
+
+  th.mat-header-cell {
+    border-bottom-width: 0;
+    border-bottom-style: none;
+
+    &:first-of-type {
+      padding-left: 35px;
+    }
+  }
+
+  td.mat-cell:first-of-type {
+    padding-left: 35px;
+  }
+
+  th.mat-header-cell:last-of-type {
+    padding-right: 35px;
+    width: 200px;
+  }
+
+  td.mat-cell:last-of-type {
+    padding-right: 35px;
+  }
+
+  .mat-row {
+    background-color: $white-color;
+
+    &:nth-child(even) {
+      background-color: $body-background;
+    }
+  }
+}

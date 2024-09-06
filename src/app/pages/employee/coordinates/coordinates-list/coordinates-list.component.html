@@ -1,0 +1,200 @@
+<table mat-table [dataSource]="coordinatesList" class="coordinates">
+  <ng-container matColumnDef="name">
+    <th mat-header-cell class="coordinates-header coordinates-header-fixed" *matHeaderCellDef>
+      <andteam-andkit-input-select
+        [placeholder]="titleList.NAME"
+        [options]="employeeList"
+        [clearOption]="isOptionCleared"
+        (selectOption)="selectNameOption($event)"
+        (inputCleared)="resetNameOption()">
+      </andteam-andkit-input-select>
+    </th>
+    <td mat-cell class="coordinates-item coordinates-item-fixed" *matCellDef="let coordinate">
+      <a [routerLink]="['/employee', coordinate.id]" class="coordinates-link">
+        {{ coordinate.name }}
+      </a>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="level">
+    <th mat-header-cell class="coordinates-header" *matHeaderCellDef>
+      <div class="coordinates-header-title" (click)="onSort(activeIconName.LEVEL_ICON, sortedColumn.LEVEL)">
+        <span>{{ titleList.LEVEL }}</span>
+        <span class="icon"
+              [ngClass]="{active: activeIcon.levelIcon}"
+              [innerHTML]="levelIcon | safe">
+        </span>
+      </div>
+    </th>
+    <td mat-cell class="coordinates-item coordinates-item-level" *matCellDef="let coordinate">
+      <span *ngIf="coordinate.level; else none">{{ coordinate.level }}</span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="technology">
+    <th mat-header-cell class="coordinates-header" *matHeaderCellDef>
+      <andteam-andkit-input-select
+        [placeholder]="titleList.TECHNOLOGY"
+        [options]="technologyList"
+        [clearOption]="isOptionCleared"
+        (selectOption)="selectTechnology($event)"
+        (inputCleared)="resetTechnologyOption()">
+      </andteam-andkit-input-select>
+    </th>
+    <td mat-cell class="coordinates-item coordinates-item-technology" *matCellDef="let coordinate">
+      <span *ngIf="coordinate.technology; else none">{{ coordinate.technology }}</span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="language">
+    <th mat-header-cell class="coordinates-header" *matHeaderCellDef>
+      <div class="coordinates-header-title" (click)="onSort(activeIconName.LANGUAGE_ICON, sortedColumn.LANGUAGE)">
+        <span>{{ titleList.LANGUAGE }}</span>
+        <span class="icon"
+              [ngClass]="{active: activeIcon.languageIcon}"
+              [innerHTML]="languageIcon | safe">
+        </span>
+      </div>
+    </th>
+    <td mat-cell class="coordinates-item coordinates-item-lang" *matCellDef="let coordinate">
+      <span *ngIf="coordinate.language; else none">
+        {{ getCoordinateLang(coordinate.language.shortName, coordinate.language.level) }}
+      </span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="project">
+    <th mat-header-cell class="coordinates-header" *matHeaderCellDef>
+      <andteam-andkit-input-select
+        [placeholder]="titleList.PROJECT_EMPLOYMENT"
+        [options]="projectList"
+        [clearOption]="isOptionCleared"
+        (selectOption)="selectProjectOption($event)"
+        (inputCleared)="resetProjectOption()">
+      </andteam-andkit-input-select>
+    </th>
+    <td mat-cell class="coordinates-item coordinates-item-project" *matCellDef="let coordinate">
+      <ng-container *ngIf="coordinate.allocations.length; else none">
+        <div *ngFor="let project of coordinate.allocations">
+          <a class="coordinates-link"
+             (click)="onShowProjectTeam(project.projectId)">
+            {{ getCoordinateProject(project) }}
+          </a>
+        </div>
+      </ng-container>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="assessment">
+    <th mat-header-cell class="coordinates-header" *matHeaderCellDef>
+      <div class="coordinates-header-title" (click)="onSort(activeIconName.ASSESSMENT_ICON, sortedColumn.ASSESSMENT)">
+        <span>{{ titleList.ASSESSMENT }}</span>
+        <span class="icon"
+              [ngClass]="{active: activeIcon.assessmentIcon}"
+              [innerHTML]="assessmentIcon | safe">
+        </span>
+      </div>
+    </th>
+    <td mat-cell class="coordinates-item coordinates-item-assm" *matCellDef="let coordinate">
+      <span *ngIf="coordinate.nextAssessmentDate; else none">
+        {{ coordinate.nextAssessmentDate | date: 'dd.MM.yy' }}
+      </span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="oneToOne">
+    <th mat-header-cell class="coordinates-header" *matHeaderCellDef>
+      <div class="coordinates-header-title" (click)="onSort(activeIconName.ONE_TO_ONE_ICON, sortedColumn.ONE_TO_ONE)">
+        <span>{{ titleList.ONE_TO_ONE }}</span>
+        <span class="icon"
+              [ngClass]="{active: activeIcon.oneToOneIcon}"
+              [innerHTML]="oneToOneIcon | safe">
+        </span>
+      </div>
+    </th>
+    <td mat-cell class="coordinates-item coordinates-item-onetoone" *matCellDef="let coordinate">
+      <div *ngIf="coordinate.nextOneToOneInterviewDate; else none"
+           [ngClass]="{
+           past: today > getMSec(coordinate.nextOneToOneInterviewDate)
+           }"
+           class="coordinates-item-onetoone-date">
+        {{ coordinate.nextOneToOneInterviewDate | date: 'dd.MM.yy' }}
+      </div>
+
+      <div class="coordinates-item-onetoone-hover">
+        <p class="triangle">▲</p>
+        <div *ngIf="today > getMSec(coordinate.nextOneToOneInterviewDate)">
+          Next interview date expired. It’s necessary to hold it again.
+        </div>
+        <div>Current interview date: {{ coordinate.lastOneToOne.interviewDate | date: 'dd.MM.yy'}}</div>
+      </div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="riskOfLeaving">
+    <th mat-header-cell class="coordinates-header" *matHeaderCellDef>
+      <andteam-material-select
+        panelClass="coordinates-select-panel"
+        [placeholder]="titleList.RISK_OF_LEAVING"
+        [options]="riskOfLeavingList"
+        [clearOption]="isOptionCleared"
+        (selectOption)="selectRiskOfLeaving($event)"
+        (resetOptions)="resetRiskOfLeavingOption()">
+      </andteam-material-select>
+    </th>
+    <td mat-cell class="coordinates-item coordinates-item-risk" *matCellDef="let coordinate">
+      <andteam-label-button *ngIf="coordinate.lastOneToOne.riskOfLeaving"
+                            [label]="getLabel(coordinate.lastOneToOne.riskOfLeaving)"
+                            (labelClicked)="goToOneToOnePage(coordinate.id)">
+      </andteam-label-button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="rm">
+    <th mat-header-cell class="coordinates-header" *matHeaderCellDef>
+      <div class="coordinates-select-wrapper" *ngIf="options$ | async as options">
+        <andteam-andkit-input-select
+          [panelPosition]="'left'"
+          [options]="options"
+          [placeholder]="titleList.RESOURCE_MANAGER"
+          (selectOption)="setRmOptions($event)"
+          (inputCleared)="resetRmOptions()">
+        </andteam-andkit-input-select>
+      </div>
+    </th>
+    <td mat-cell class="coordinates-item coordinates-item-rm" *matCellDef="let coordinate">
+      <span *ngIf="coordinate.resourceManager; else none">
+        {{ coordinate.resourceManager.name }}
+      </span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="location">
+    <th mat-header-cell class="coordinates-header" *matHeaderCellDef>
+      <andteam-andkit-input-select
+        [panelPosition]="'left'"
+        [placeholder]="titleList.LOCATION"
+        [options]="locationList"
+        [clearOption]="isOptionCleared"
+        (selectOption)="selectLocation($event)"
+        (inputCleared)="locationOption()">
+      </andteam-andkit-input-select>
+    </th>
+    <td mat-cell class="coordinates-item coordinates-item-location" *matCellDef="let coordinate">
+      <span *ngIf="coordinate.location; else none">{{ coordinate.location }}</span>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumnsList"></tr>
+  <tr mat-row class="coordinates-item" *matRowDef="let row; columns: displayedColumnsList;"></tr>
+</table>
+
+<button *ngIf="coordinatesList?.length > coordinatesListLength" class="btn-up" (click)="scrollTop()">
+  <i class="btn-up__arrow"></i>
+</button>
+
+<div class="coordinates-table-header"></div>
+
+<ng-template #none>
+  <span>None</span>
+</ng-template>

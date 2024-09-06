@@ -1,0 +1,96 @@
+<andteam-portal-selected-filters
+  buttonTitle="Clear All"
+  label="Selected filters: "
+  [selectedFilters]="selectedFilters"
+  (clearAll)="onClearAll()"
+  (removeTag)="onRemoveTag($event)">
+  <form class="wrapper">
+    <div class="col">
+      <div class="info-inline">
+        <mat-form-field appearance="fill"
+                        (keyup.enter)="onKeyEnterUp(topics, topicsList, eventsTypes.topics)">
+          <mat-select [formControl]="topicsList"
+                      andteamScroll
+                      placeholder="Select type"
+                      disableOptionCentering
+                      ngDefaultControl
+                      multiple>
+            <mat-option *ngFor="let topic of topics"
+                        class="events-filter-option"
+                        [value]="topic.value"
+                        (click)="onCheckOption(topic, eventsTypes.topics)">
+              {{topic.value}}
+            </mat-option>
+          </mat-select>
+
+          <div [innerHTML]="portalArrow | safe"
+               class="arrow">
+          </div>
+        </mat-form-field>
+      </div>
+
+      <div class="info-inline">
+        <mat-form-field appearance="fill"
+                        (keyup.enter)="onKeyEnterUp(dates, datesList, eventsTypes.dates)">
+          <mat-select [formControl]="datesList"
+                      placeholder="Select date"
+                      andteamScroll
+                      disableOptionCentering
+                      ngDefaultControl
+                      multiple>
+            <mat-option *ngFor="let date of dates"
+                        class="events-filter-option"
+                        [value]="date.value"
+                        (click)="onCheckDate(date)">
+              {{date.value}}
+            </mat-option>
+          </mat-select>
+
+          <div [innerHTML]="portalArrow | safe"
+               class="arrow">
+          </div>
+        </mat-form-field>
+      </div>
+
+      <div class="info-inline">
+        <mat-form-field appearance="fill"
+                        (keyup.enter)="onKeyEnterUp(offices, officesList, eventsTypes.offices)">
+          <mat-select [formControl]="officesList"
+                      placeholder="Select offices"
+                      andteamScroll
+                      disableOptionCentering
+                      ngDefaultControl
+                      multiple>
+            <mat-option *ngFor="let office of offices"
+                        class="events-filter-option"
+                        [value]="office.value"
+                        (click)="onCheckOption(office, eventsTypes.offices)">
+              {{office.value}}
+            </mat-option>
+          </mat-select>
+
+          <div [innerHTML]="portalArrow | safe"
+               class="arrow">
+          </div>
+        </mat-form-field>
+      </div>
+
+      <div class="info-inline toggler">
+        <andteam-slide-toggler
+          label="Upcoming"
+          [checked]="isChecked"
+          (toggle)="onToggle($event)">
+        </andteam-slide-toggler>
+      </div>
+
+      <div class="info-inline search">
+        <andteam-autocomplete-portal
+          placeholder="Search"
+          [searchIcon]="searchIcon"
+          [value]="search"
+          (checkOption)="onSearch($event)">
+        </andteam-autocomplete-portal>
+      </div>
+    </div>
+  </form>
+</andteam-portal-selected-filters>

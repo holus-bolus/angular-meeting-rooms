@@ -1,0 +1,79 @@
+@import 'src/styles/shared-styles/colors';
+@import 'src/styles/shared-styles/mixins';
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999999999;
+  background: rgba(2, 13, 28, 0.7);
+
+  &-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+}
+
+.main-container {
+  width: 480px;
+  background: $white-color;
+  padding: 60px 40px;
+  text-align: initial;
+}
+
+.main-label {
+  @include font-base(36px, 200, 130%);
+
+  width: 390px;
+  height: 47px;
+  margin: 0;
+  color: $text-primary;
+}
+
+.main-info {
+  @include font-base(18px, 200, 160%);
+
+  width: 400px;
+  height: 58px;
+  margin: 0;
+  margin-top: 20px;
+  margin-bottom: 41px;
+  color: $text-primary;
+}
+
+.office-select {
+  margin-top: 41px;
+}
+
+.main-container__button {
+  @include font-base(14px, 500, 16px);
+
+  width: 180px;
+  height: 42px;
+  margin-top: 40px;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
+  background: $primary;
+  align-items: center;
+  text-align: center;
+  color: $text-primary;
+
+  &:hover {
+    background-color: $primary-hover;
+    cursor: pointer;
+  }
+}
+
+.main-container__button-disabled {
+  background: $primary-disabled;
+
+  &:hover {
+    background-color: $primary-disabled;
+    cursor: auto;
+  }
+}

@@ -1,0 +1,172 @@
+<div class="submitted-overtimes">
+  <andteam-submitted-overtimes-search
+    [overTypes]="overTypes"
+    (formApplied)="onSubmitForm($event)"
+  ></andteam-submitted-overtimes-search>
+
+  <div class="submitted-overtimes__info">
+    <div class="submitted-overtimes__type" *ngIf="periodTypes?.length">
+      <andteam-select [options]="periodTypes"
+                      [option]="periodTypes[0]"
+                      [formControl]="typeControl"
+                      [disableOptionCentering]="true"
+                      (selectOption)="onTypeSelect()"
+                      ngDefaultControl>
+      </andteam-select>
+    </div>
+
+<!--    <div class="submitted-overtimes__periods">-->
+<!--    </div>-->
+
+<!--    <div class="submitted-overtimes__info_earnings">-->
+<!--      <div class="submitted-overtimes__info_summary" >-->
+<!--        <div class="submitted-overtimes__info_text">-->
+<!--          Total for July:-->
+<!--        </div>-->
+
+<!--        <div class="submitted-overtimes__info_sum">-->
+<!--          {{ overtimeList?.monthlySum }} USD-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="submitted-overtimes__info_summary">-->
+<!--        <div class="submitted-overtimes__info_text">-->
+<!--          For second quarter:-->
+<!--        </div>-->
+
+<!--        <div class="submitted-overtimes__info_sum">-->
+<!--          {{ overtimeList?.quarterlySum }} USD-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+  </div>
+
+  <table
+    mat-table [dataSource]="filtredOvers.value"
+    class="mat-elevation-z2 submitted-overtimes__table"
+  >
+    <ng-container matColumnDef="{{tableHeaders[0].definition}}">
+      <th mat-header-cell *matHeaderCellDef (click)="onSortByName()">
+        <span>{{ tableHeaders[0].name }}</span>
+        <span class="icon"
+              [innerHTML]="isSortedByName ? (arrowDown | safe) : (arrowUp | safe)">
+        </span>
+      </th>
+      <td mat-cell *matCellDef="let over">
+        {{ over.name }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="{{tableHeaders[1].definition}}">
+      <th mat-header-cell *matHeaderCellDef>{{ tableHeaders[1].name }}</th>
+      <td mat-cell *matCellDef="let over">
+        {{ over?.sum || over.hours }}
+        {{ over?.currency || 'hours' }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="{{tableHeaders[2].definition}}">
+      <th mat-header-cell *matHeaderCellDef>{{ tableHeaders[2].name }}</th>
+      <td mat-cell *matCellDef="let over">
+        {{ over?.projectName }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="{{tableHeaders[3].definition}}">
+      <th mat-header-cell *matHeaderCellDef (click)="onSortByCreation()">
+        <span>{{ tableHeaders[3].name }}</span>
+        <span class="icon"
+              [innerHTML]="isSortedByCreation ? (arrowDown | safe) : (arrowUp | safe)">
+        </span>
+      </th>
+      <td mat-cell *matCellDef="let over">
+        {{ over.createDate | date: 'MMM yyyy' }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="{{tableHeaders[4].definition}}">
+      <th mat-header-cell *matHeaderCellDef (click)="onSortByPayment()">
+        <span>{{ tableHeaders[4].name }}</span>
+        <span class="icon"
+              [innerHTML]="isSortedByPayment ? (arrowDown | safe) : (arrowUp | safe)">
+        </span>
+      </th>
+      <td mat-cell *matCellDef="let over">
+        {{ over.payDay | date: 'MMM yyyy' }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="{{tableHeaders[5].definition}}">
+      <th mat-header-cell *matHeaderCellDef>{{ tableHeaders[5].name }}</th>
+      <td mat-cell *matCellDef="let over">
+        <a *ngIf="over.jiraLink?.length" class="submitted-overtimes__jira" href="{{ over.jiraLink }}">Jira</a>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="{{tableHeaders[6].definition}}">
+      <th mat-header-cell *matHeaderCellDef>{{ tableHeaders[6].name }}</th>
+      <td mat-cell *matCellDef="let over">
+        <div class="submitted-overtimes_chips"
+             [ngClass]="{
+             'collected-label': over.status === 'COLLECTED',
+             'active-labbel': over.status === 'ACTIVE',
+             'not-collected-label': over.status === 'NOT COLLECTED'}">
+          <p class="submitted-overtimes_chips-text">{{ over.status | titlecase }}</p>
+        </div>
+
+      </td>
+    </ng-container>
+
+<!--    <ng-container matColumnDef="{{tableHeaders[7].definition}}">-->
+<!--      <th mat-header-cell *matHeaderCellDef>{{ tableHeaders[7].name }}</th>-->
+<!--      <td mat-cell *matCellDef="let over">-->
+<!--        <div class="status-action__menu"-->
+<!--             (click)="$event.stopPropagation()">-->
+
+<!--          <button mat-button [matMenuTriggerFor]="menu">-->
+<!--            <mat-icon class="objectives-menu">more_horiz</mat-icon>-->
+<!--          </button>-->
+
+<!--          <mat-menu #menu="matMenu"-->
+<!--                    xPosition="before"-->
+<!--                    yPosition="below"-->
+<!--                    class="mat-menu">-->
+
+<!--            <div class="mat-menu-content">-->
+<!--              <button-->
+<!--                mat-menu-item-->
+<!--                class="status-open">-->
+<!--                Open-->
+<!--              </button>-->
+
+<!--              <button-->
+<!--                mat-menu-item-->
+<!--                class="status-edit">-->
+<!--                Edit-->
+<!--              </button>-->
+
+<!--              <button-->
+<!--                mat-menu-item-->
+<!--                class="status-delete">-->
+<!--                Done-->
+<!--              </button>-->
+<!--            </div>-->
+
+<!--          </mat-menu>-->
+<!--        </div>-->
+<!--      </td>-->
+<!--    </ng-container>-->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell submitted-overtimes__empty" [attr.colspan]="columns.length">
+        <div class="submitted-overtimes__nodata">
+          <div [innerHTML]="noDataIcon | safe" class="submitted-overtimes__nodata-icon"></div>
+          <div class="submitted-overtimes__nodata-text">
+            <p>There are no submitted overs</p>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+  </table>
+</div>

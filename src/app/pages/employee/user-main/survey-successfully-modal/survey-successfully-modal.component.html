@@ -1,0 +1,16 @@
+<section class="survey-successful-window">
+  <div class="survey-successful-window-wrapper">
+    <div class="icon" [innerHTML]="envelopeIcon | safe"></div>
+    <div class="survey-successful-window-content">
+      <h2 class="survey-successful-window-title">
+        {{data.titleText}}
+      </h2>
+      <p class="survey-successful-window-subtitle">
+        {{data.subtitleText}}
+      </p>
+    </div>
+    <andteam-button class="survey-successful-window-button" [type]="confirmButtonType" (click)="onClose()">
+      {{data.submitBtnText}}
+    </andteam-button>
+  </div>
+</section>

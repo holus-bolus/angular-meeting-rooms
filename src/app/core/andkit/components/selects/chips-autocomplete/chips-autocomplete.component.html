@@ -1,0 +1,35 @@
+<div class="chips-wrapper"
+     [class.error]="error"
+     [class.chips-wrapper-portal]="type === 'events'">
+  <div class="chips">
+    <div *ngIf="labelText" class="chips-label">{{labelText}}</div>
+
+    <div class="chips-list"
+         [class.chips-list-portal]="type === 'events'"
+         (click)="onOpen()">
+      <div *ngIf="!isChecked || type === 'events'; else chips" class="chips-all-items">{{placeholder}}</div>
+
+      <ng-template #chips>
+        <div *ngFor="let option of options">
+          <andteam-chip *ngIf="option.checked"
+                        (remove)="onCheckOption(option)">
+            {{option.name}}
+          </andteam-chip>
+        </div>
+      </ng-template>
+
+      <span [ngClass]="isSearchListOpen ? 'arrow chips-list-arrow-down' : 'arrow chips-list-arrow-up'" [innerHTML]="vectorIcon | safe"></span>
+    </div>
+  </div>
+
+  <andteam-search-list
+    *ngIf="isSearchListOpen"
+    [options]="options"
+    [isSearchActive]="isSearchActive"
+    [isAllOptionEnabled]="isAllOptionEnabled"
+    [title]="labelText"
+    (closeDropdown)="onCloseDropdown()"
+    (checkOption)="onCheckOption($event)"
+    (checkOptions)="onCheckOptions($event)">
+  </andteam-search-list>
+</div>

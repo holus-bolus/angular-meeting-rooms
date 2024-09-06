@@ -1,0 +1,154 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+@import '~src/styles/shared-styles/vars';
+
+.certificate-view-container {
+  .mat-dialog-container {
+    overflow: inherit !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+  }
+}
+
+.backdropBackground {
+  background-color: $main-page-background;
+  opacity: 0.7 !important;
+}
+
+.certificate-modal {
+  position: relative;
+
+  &-item {
+    position: relative;
+
+    &-date {
+      position: absolute;
+      margin-top: 15px;
+      color: $white-color;
+    }
+  }
+
+  &-arrow {
+    &-left {
+      top: 48%;
+      left: -103.33px;
+      transform: rotate(180deg);
+    }
+
+    &-right {
+      top: 48.6%;
+      right: -103.33px;
+    }
+
+    &-left,
+    &-right {
+      position: absolute;
+      cursor: pointer;
+
+      &.disabled {
+        svg {
+          path {
+            stroke: #8c8c8c;
+          }
+        }
+      }
+    }
+  }
+
+  &-bottom-count {
+    display: flex;
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translate(-50%, 50%);
+
+    &-item {
+      width: 30px;
+      border: 1px solid $border-bottom-color;
+      margin-right: 14px;
+      background-color: $border-bottom-color;
+
+      :last-child {
+        margin-right: 0;
+      }
+
+      &.active {
+        border: 1px solid $primary;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.modal {
+  &-header {
+    @include font-base(16px, 400, 25.6px);
+
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: $main-page-background;
+    opacity: 0.7;
+    box-sizing: border-box;
+    padding: 17px 111px 17px 50px;
+    color: $white-color;
+
+    &-icons {
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 31px;
+      margin-top: 1px;
+
+      &-item {
+        margin-right: 22px;
+
+        svg path {
+          fill: $certificates-icons-color;
+        }
+
+        &:hover {
+          svg path {
+            fill: $white-color;
+          }
+        }
+
+        &-send {
+          margin: 0 22px 6px 0;
+        }
+
+        &-send:hover {
+          svg path {
+            fill: $white-color;
+          }
+        }
+      }
+    }
+
+    &.no-version {
+      justify-content: flex-end;
+    }
+  }
+
+  &-close {
+    position: absolute;
+    top: 23.5px;
+    right: 53px;
+    background-color: transparent;
+    border: none;
+    color: $certificates-icons-color;
+    cursor: pointer;
+
+    &:hover {
+      color: $white-color;
+    }
+  }
+}

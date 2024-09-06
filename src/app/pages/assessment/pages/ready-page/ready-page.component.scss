@@ -1,0 +1,66 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.ready {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px 0;
+
+  &-block {
+    width: 450px;
+
+    &:first-child {
+      margin-right: 30px;
+
+      @media (max-width: 1360px) {
+        margin-right: 0;
+      }
+    }
+  }
+
+  &-box {
+    display: flex;
+    width: 450px;
+    box-sizing: border-box;
+    align-items: flex-start;
+  }
+
+  .order3 {
+    order: 3;
+  }
+
+  .order4 {
+    order: 4;
+    margin-top: 2px;
+  }
+
+  &-title {
+    @include font-base(12px, 400, 20px);
+
+    color: $tag-title-color;
+    margin-right: 10px;
+    white-space: nowrap;
+    flex-basis: 130px;
+    text-align: right;
+
+    &-comment {
+      margin-top: 8px;
+    }
+  }
+
+  &-autocomplete {
+    flex: 1;
+    line-height: 20px;
+  }
+}
+.coordinator-comment {
+  display: block;
+}
+.error-message {
+  @include font-base(14px, 400, 140%);
+
+  color: $assessment-error-color;
+  margin: 0 0 10px 140px;
+}
+
+

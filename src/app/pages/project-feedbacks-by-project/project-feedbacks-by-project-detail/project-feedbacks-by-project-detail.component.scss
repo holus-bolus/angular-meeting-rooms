@@ -1,0 +1,364 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+@import '~src/styles/shared-styles/_vars.scss';
+
+.thumb-number {
+  @include font-base(12px, 400);
+
+  position: absolute;
+  top: 0;
+  left: 28%;
+  color: $objectives-text-color;
+}
+
+.detailed-feedback {
+  @include border-bottom(1px, solid, $detailed-feedback-border);
+  @include font-base(16px, 300, 24px);
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 20px 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  color: $input-selected-color;;
+  background-color: $white-color;
+
+  .inerviewer {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 15px;
+    width: 240px;
+
+    .avatar-image {
+      width: 32px;
+      height: 32px;
+
+      img {
+        border: 1px solid black;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        position: relative;
+        object-fit: cover;
+      }
+    }
+
+    .info {
+      width: 180px;
+      display: flex;
+      flex-direction: column;
+
+      .technology {
+        @include font-base(14px, 400, 160%);
+        color: $tag-title-color;
+      }
+
+      .chips-container {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 10px;
+        gap: 4px;
+
+        .chips {
+          @include font-base(14px, 400, 22px);
+
+          border-radius: 4px;
+          text-align: center;
+          width: auto;
+          padding: 2px 11px;
+
+          &.active {
+            background-color: $tag-active;
+          }
+
+          &.inactive {
+            background-color: $tag-inactive;
+          }
+
+          &.position {
+            background-color: $position-chips-bg-color;
+          }
+        }
+      }
+
+      a {
+        text-decoration: none;
+        color: $input-selected-color;
+      }
+    }
+  }
+
+  .comment {
+    .project {
+      .project-title {
+        @include font-base(16px, 400, 160%);
+      }
+  
+      .project-feedback-date {
+        @include font-base(12px, 400, 160%);
+      }
+    }
+
+    .text {
+      overflow-wrap: break-word;
+      font-weight: 400;
+
+      &__with-space {
+        margin-bottom: 10px;
+      }
+
+      .text-title {
+        @include font-base(16px, 400, 14px);
+
+        display: inline-block;
+        margin: 15px 0;
+        color: $tag-title-color;
+      }
+
+      .formatted-text {
+        @include font-base(16px, 400, 25.6px);
+        display: block;
+        overflow-y: hidden;
+        white-space: pre-wrap;
+      }
+
+      .collapsed {
+        max-height: 78px;
+      }
+    }
+
+    button {
+      @include border-bottom(1px, solid, $primary);
+      @include font-base(14px, 600, 16px);
+
+      border: none;
+      outline: none;
+      cursor: pointer;
+      height: 20px;
+      background-color: $white-color;
+    }
+  }
+
+  .marked {
+    width: 585px;
+  }
+
+  .mark {
+    @include font-base(56px, 300, 72.8px);
+
+    margin: 60px 40px 0 0;
+    color: $objectives-text-color;
+
+    &.high-rated {
+      color: $primary;
+    }
+  }
+
+  .scale {
+    @include font-base(18px, 400, 21.6px);
+
+    position: relative;
+    width: 125px;
+    margin-top: 70px;
+    cursor: pointer;
+
+    .detail {
+      position: absolute;
+      box-sizing: border-box;
+      right: 0;
+      top: 45px;
+      display: none;
+      width: 440px;
+      height: 235px;
+      padding: 20px;
+      background-color: $white-color;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      border-radius: 4px;
+      cursor: auto;
+      z-index: 2;
+
+      .triangle {
+        position: absolute;
+        top: -21px;
+        right: 45px;
+        font-size: 30px;
+        font-stretch: expanded;
+        text-shadow: 0 -5px 5px rgba(0, 0, 0, 0.2);
+        transform: scaleX(1.5);
+        border: none;
+        color: $white-color;
+      }
+    }
+
+    span {
+      @include border-bottom(1px, dashed, $border-bottom-color);
+
+      &:hover {
+        @include border-bottom(1px, solid, $primary);
+      }
+    }
+
+    &:hover {
+      .detail {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+    }
+  }
+
+  .no-mark {
+    opacity: 0.15;
+  }
+
+  .no-scale {
+    @include font-base(18px, 400, 21.6px);
+
+    width: 125px;
+    margin-top: 15px;
+    opacity: 0.15;
+  }
+}
+
+.feedback-value {
+  margin-top: 24px;
+
+  &-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 8px;
+  }
+  
+  &-vertical {
+    width: 4px;
+    height: 37px;
+    border-radius: 4px;
+    background: $primary;
+  }
+
+  &-title {
+    @include font-base(12px, 400, 19.2px);
+    color: $text-secondary;
+  }
+
+  &-name {
+    @include font-base(14px, 400, 22.4px);
+    color: $input-selected-color;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 8px;
+
+    &.not-marked {
+      color: $text-secondary !important;
+    }
+
+    &-info, andteam-assessment-tooltip {
+      width: 16px;
+      height: 16px;
+
+      ::ng-deep {
+        svg {
+          width: 16px;
+          height: 16px;
+        }
+  
+        svg:hover path {
+          fill: $primary;
+        }
+      }
+    }
+  }
+
+  &-radiogroup {
+    display: flex;
+    flex-direction: column;
+    margin-top: 8px;
+
+    @include font-base(14px, 400, 22.4px);
+    color: $input-selected-color;
+  }
+
+  ::ng-deep {
+    .mat-radio-outer-circle, .mat-radio-inner-circle, .mat-radio-container {
+      height: 16px;
+      width: 16px;
+    }
+  }
+}
+
+.last-feedback {
+  border-bottom: none;
+}
+
+.employee-link {
+  @include font-base(16px, 400, 16px);
+  @include border-bottom(1px, dashed, $border-bottom-color);
+
+  color: $objectives-text-color;
+  text-decoration: none;
+
+  &:hover,
+  :focus {
+    @include border-bottom(1px, solid, $border-link-hover);
+  }
+}
+
+:host ::ng-deep {
+  .mat-slider-horizontal {
+    pointer-events: none;
+    top: 3px;
+
+    .mat-slider-thumb {
+      background-color: $primary !important;
+      width: 16px;
+      height: 16px;
+      transform: none;
+      border: none;
+      bottom: -8px;
+
+      &::before {
+        content: '';
+        position: absolute;
+        bottom: 4px;
+        left: 5px;
+        width: 4px;
+        height: 7px;
+        transform: rotate(45deg);
+        border: solid $white-color;
+        border-width: 0 2px 2px 0;
+      }
+    }
+
+    &.cdk-focused {
+      .mat-slider-thumb-label {
+        border-radius: 0 !important;
+        background-color: $white-color !important;
+      }
+
+      .mat-slider-thumb {
+        transform: scale(0.7) !important;
+      }
+    }
+
+    .mat-slider-ticks-container {
+      overflow: visible;
+      cursor: pointer;
+      color: $primary !important;
+    }
+  }
+}
+
+::ng-deep .tooltip-content {
+  span {
+    box-sizing: border-box;
+    padding: 12px !important;
+    width: 258px;
+    line-height:  19.2px !important;
+    color: $input-selected-color !important;
+  }
+}

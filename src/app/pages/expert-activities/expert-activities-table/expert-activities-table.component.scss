@@ -1,0 +1,305 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.wrapper-activities-table {
+  @include font-base(16px, 400, 25.6px, normal);
+
+  width: 1190px;
+  color: $objectives-text-color;
+  background-color: $white-color;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+
+  ::ng-deep {
+    .pagination-counter {
+      align-items: center !important;
+    }
+
+    .wrapper-paginator {
+      align-items: center !important;
+    }
+  }
+}
+
+.activities {
+  &-header {
+    @include font-base(14px, 500, 150%);
+
+    color: $table-header;
+    padding: 25px 0 35px 20px;
+
+    ::ng-deep {
+      svg {
+        margin-left: 5px;
+        fill: $table-header;
+      }
+    }
+
+    ::ng-deep .icon {
+      svg {
+        transform: rotate(180deg);
+      }
+
+      &.active {
+        svg {
+          fill: $primary;
+        }
+      }
+
+      &.default {
+        svg {
+          transform: rotate(0);
+        }
+      }
+    }
+  }
+
+  &-header-title {
+    &:hover {
+      cursor: pointer;
+    }
+
+    &--surname {
+      width: 75%;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &-item {
+    @include font-base(16px, 400, 160%);
+
+    vertical-align: top;
+    padding: 32px 0 32px 25px;
+    color: $objectives-text-color;
+    box-sizing: border-box;
+
+    &-activities {
+      display: flex;
+      padding-bottom: 19px;
+      padding-right: 0;
+    }
+
+    &-name {
+      width: 230px;
+    }
+
+    &-level {
+      width: 89px;
+    }
+
+    &-technology {
+      width: 263px;
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+
+        .chips-text {
+          @include font-base(14px, 300, 160%);
+
+          padding: 1.5px 11px;
+          margin: 0 10px 13px 0;
+          border: 1px solid $activities-border-color;
+          border-radius: 4px;
+
+          &:first-child {
+            border: none;
+            background-color: $border-link-hover;
+            margin-left: 0;
+          }
+        }
+      }
+    }
+
+    &-language {
+      width: 125px;
+    }
+
+    &-location {
+      width: 160px;
+    }
+
+    &-container {
+      display: flex;
+      flex-wrap: wrap;
+      width: 285px;
+    }
+
+    &-wrapper {
+      position: relative;
+      margin-right: 10px;
+      margin-bottom: 13px;
+    }
+
+    &-activity {
+      @include font-base(14px, 400, 160%);
+
+      border: 1px solid $activities-border-color;
+      background-color: $white-color;
+      border-radius: 4px;
+      padding: 3.5px 11px;
+      cursor: pointer;
+    }
+
+    &-activity:hover + span {
+      display: block;
+    }
+
+    &-tooltip {
+      @include font-base(12px, 400, 19.2px);
+
+      display: none;
+      position: absolute;
+      top: -45px;
+      right: calc(50% - 33px);
+      background-color: $white-color;
+      color: $objectives-text-color;
+      border-radius: 4px;
+      box-shadow: 0 0 8px $gray-color;
+      padding: 8px;
+
+      &::before {
+        content: '';
+        position: absolute;
+        display: block;
+        width: 0px;
+        left: 50%;
+        bottom: 5px;
+        border: 5px solid transparent;
+        border-bottom: 0;
+        border-top: 5px solid $white-color;
+        transform: translate(-50%, calc(100% + 5px));
+      }
+    }
+
+    &-edit {
+      position: relative;
+      width: 84px;
+    }
+
+    &-editor {
+      padding-left: 25px;
+
+      &-tooltip {
+        @include font-base(12px, 400, 19.2px);
+
+        display: none;
+        position: absolute;
+        top: -65px;
+        left: -55px;
+        right: -40px;
+        background-color: $white-color;
+        color: $objectives-text-color;
+        border-radius: 4px;
+        box-shadow: 0 0 8px $gray-color;
+        padding: 8px;
+
+        &::before {
+          content: '';
+          position: absolute;
+          display: block;
+          width: 0px;
+          left: 50%;
+          bottom: 5px;
+          border: 5px solid transparent;
+          border-bottom: 0;
+          border-top: 5px solid $white-color;
+          transform: translate(-50%, calc(100% + 5px));
+        }
+      }
+
+      ::ng-deep {
+        svg {
+          &:hover,
+          :focus {
+            cursor: pointer;
+            path {
+              stroke: $primary-hover;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &-link {
+    @include font-base(16px, 400, 160%);
+    @include border-bottom(1px, dashed, $border-bottom-color);
+
+    color: $objectives-text-color;
+    text-decoration: none;
+
+    &:hover,
+    :focus {
+      @include border-bottom(1px, solid, $border-link-hover);
+    }
+  }
+}
+
+.no-activities {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 635px;
+
+  &-text {
+    @include font-base(18px, 400, 28.8px);
+
+    margin-top: 15px;
+    color: $tag-title-color;
+  }
+
+  &-icon {
+    ::ng-deep svg {
+      width: 128px !important;
+      height: 120px !important;
+    }
+  }
+}
+
+.mat-row {
+  &:nth-child(even) {
+    background-color: $activities-table-background;
+  }
+}
+
+.mat-cell,
+th.mat-header-cell {
+  border-bottom: none;
+
+  &:first-of-type {
+    padding-left: 35px;
+  }
+
+  &:last-of-type {
+    padding-right: 0;
+  }
+}
+
+.disable-add {
+  ::ng-deep {
+    svg {
+      &:hover,
+      :focus {
+        path {
+          stroke: $text-secondary;
+        }
+      }
+    }
+  }
+}
+
+.disable-add:hover + span {
+  display: block;
+}
+
+::ng-deep {
+  .mat-select-panel {
+    margin: 0;
+    min-height: initial !important;
+  }
+}

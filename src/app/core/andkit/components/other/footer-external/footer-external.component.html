@@ -1,0 +1,110 @@
+<footer class="footer-external">
+  <div class="footer-external-menu">
+    <div class="footer-external-item">
+      <h3 class="footer-external-item-title">
+        Socials
+      </h3>
+      <ul class="footer-external-socials">
+        <li class="footer-external-socials-item">
+          <a [href]="whatsappLink"
+             target="_blank"
+             class="footer-external-socials-link">
+            <andteam-icon [icon]="whatsappIcon | safe"></andteam-icon>
+            whatsApp
+          </a>
+        </li>
+        <li class="footer-external-socials-item">
+          <a [href]="telegramLink"
+             target="_blank"
+             class="footer-external-socials-link">
+            <andteam-icon [icon]="telegramIcon | safe"></andteam-icon>
+            telegram
+          </a>
+        </li>
+        <li class="footer-external-socials-item">
+          <a [href]="skypeLink"
+             target="_blank"
+             class="footer-external-socials-link">
+            <andteam-icon [icon]="skypeIcon | safe"></andteam-icon>
+            skype
+          </a>
+        </li>
+        <li class="footer-external-socials-item">
+          <a [href]="facebookLink"
+             target="_blank"
+             class="footer-external-socials-link">
+            <andteam-icon [icon]="facebookIcon | safe"></andteam-icon>
+            facebook
+          </a>
+        </li>
+        <li class="footer-external-socials-item">
+          <a [href]="linkedinLink"
+             target="_blank"
+             class="footer-external-socials-link">
+            <andteam-icon [icon]="linkedinIcon | safe"></andteam-icon>
+            linkedin
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="footer-external-item">
+      <h3 class="footer-external-item-title">
+        Contacts
+      </h3>
+      <ul class="footer-external-contacts">
+        <li class="footer-external-contacts-item">
+          <andteam-icon [icon]="phoneIcon | safe"></andteam-icon>
+          <a href="tel:+380443792837"
+             target="_blank"
+             class="footer-external-item-link">
+            +380 44 379 28 37
+          </a>
+        </li>
+        <li class="footer-external-contacts-item">
+          <andteam-icon [icon]="emailIcon | safe"></andteam-icon>
+          <a href="mailto:vn@{{ companyService.companyUrl }}"
+             target="_blank"
+             class="footer-external-item-link">
+            vn@{{ companyService.companyUrl }}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="footer-external-item">
+      <h3 class="footer-external-item-title">
+        Headquarters
+      </h3>
+      <p class="footer-external-item-text">
+        75 Zhylianska Street, Floor 3, Eurasia Business Center, Kyiv, Ukraine
+      </p>
+    </div>
+
+    <div class="footer-external-item">
+      <h3 class="footer-external-item-title">
+        {{ companyService.companyName }} site
+      </h3>
+      <ul class="footer-external-contacts">
+        <li class="footer-external-contacts-item">
+          <andteam-icon [icon]="logoIcon | safe"></andteam-icon>
+          <a href="{{ companyURL }}"
+             target="_blank"
+             class="footer-external-item-link">
+            {{ companyService.companyUrl }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-external-copyright">
+    <p class="footer-external-copyright-text">
+      ©  Copyright 2007-2022 {{ companyService.companyName }} Software, Inc. All Rights Reserved.
+    </p>
+    <a href="https://{{ companyService.companyUrl }}.com/privacy-policy"
+       target="_blank"
+       class="footer-external-copyright-link">
+      Privacy Policy
+    </a>
+  </div>
+</footer>

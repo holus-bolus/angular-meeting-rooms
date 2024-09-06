@@ -1,0 +1,40 @@
+<div class="modal-project-feedback-generate">
+  <button 
+    [innerHTML]="closeIcon | safe" 
+    class="modal-project-feedback-generate-close" 
+    (click)="onClose()">
+  </button>
+  <div class="modal-project-feedback-generate-title">
+    Leave feedback
+  </div>
+  <div class="modal-project-feedback-generate-wrapper">
+    <div class="modal-project-feedback-generate-wrapper-project">
+      <span>Choose a project to leave feedback</span>
+      <andteam-select-new ngDefaultControl 
+        [placeholder]="'Select project'" 
+        [options]="availableProjects$ | async"
+        [option]="projectControl.value" 
+        [disableOptionCentering]="true"
+        [formControl]="projectControl" 
+        [error]="projectControl.invalid"
+        [errorMessage]="'Please select project'">
+      </andteam-select-new>
+    </div>
+    <div class="modal-project-feedback-generate-wrapper-buttons">
+        <andteam-button 
+          [type]="btnCancel"
+          class="modal-project-feedback-generate-wrapper-buttons-item"
+          (click)="onClose()">
+        Cancel
+      </andteam-button>
+      <andteam-button 
+          [type]="btnNext"
+          [disabled]="projectControl.invalid"
+          class="modal-project-feedback-generate-wrapper-buttons-item"
+          (click)="onCreateFeedback()">
+        Ok
+      </andteam-button> 
+    </div>
+  </div>
+  
+</div>

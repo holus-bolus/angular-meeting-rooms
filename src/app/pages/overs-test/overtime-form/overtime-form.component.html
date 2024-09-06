@@ -1,0 +1,274 @@
+<div class="overtime" *ngIf="configuration">
+  <andteam-progress-spinner *ngIf="isSpinnerShown" class="overtime__spinner"></andteam-progress-spinner>
+
+  <div *ngIf="!isSpinnerShown">
+    <div class="overtime__title">
+      {{ configuration.name }}
+    </div>
+
+    <div *ngIf="configuration.prompt" class="overtime__description">
+      {{ configuration.prompt }}
+    </div>
+
+    <div class="overtime__form" [ngClass]="{'hasAttachment': configuration.isAttachment}">
+      <div class="overtime__field overtime__field-project" *ngIf="configuration.isProject">
+        <andteam-autocomplete [placeholder]="configuration.isRequiredProject ? 'Project*' : 'Project'"
+                              class="project-field"
+                              [componentType]="componentsType"
+                              [options]="options.project$ | async"
+                              [control]="projectControl"
+                              [noResultsText]="'Please start typing'"
+                              (valueReseted)="onProjectReset($event)"
+                              (selectOption)="onSelectProject($event)"
+                              ngDefaultControl
+        >
+        </andteam-autocomplete>
+
+        <div class="overtime__field-projectInfo" [ngClass]="{'hidden': projectControl.value}">
+          <andteam-assessment-tooltip panelClass="overtime-form-tooltip" alignTooltip="center" side="top" [isArrow]="true">
+            <andteam-assessment-matrix-icon
+              tooltip-base
+              [emptyIcon]="infoIcon"
+              [fullicon]="infoActiveIcon"
+            ></andteam-assessment-matrix-icon>
+
+            <div tooltip-content class="overtime__field-projectTooltip">
+              <p>
+                If your overtime is related to a specific
+              </p>
+              <p>
+                project - write its name here.
+              </p>
+            </div>
+          </andteam-assessment-tooltip>
+        </div>
+      </div>
+
+      <div class="overtime__field overtime__field-approver"
+           *ngIf="configuration.overApprovers.length > 0 || configuration.isNeedGetDm">
+        <andteam-select [options]="approversOptions"
+                        [option]="approversOptions[0]"
+                        [placeholder]="'Approver*'"
+                        [formControl]="approverControl"
+                        [disableOptionCentering]="true"
+                        (selectOption)="onSelectApprover($event)"
+                        ngDefaultControl>
+        </andteam-select>
+      </div>
+
+      <div class="overtime__field overtime__field-approver"
+           *ngIf="configuration.overAdditionalInformations?.length > 0">
+        <andteam-select [options]="additionalInfoOptions"
+                        [option]="additionalInfoOptions[0]"
+                        [placeholder]="configuration.overAdditionalInformations[0].fieldName"
+                        [formControl]="additionalInfoControl"
+                        [disableOptionCentering]="true"
+                        ngDefaultControl>
+        </andteam-select>
+      </div>
+
+      <div class="overtime__field overtime__field-radiobuttons"  *ngIf="(configuration.isHours && configuration.isSum) else singleOption">
+        <mat-radio-group class="radio-group">
+          <mat-radio-button class="radio-group-button"
+                            (change)="onSumHoursSelect(option.value)"
+                            [checked]="selectedType === option.value"
+                            *ngFor="let option of overtimeRadioButtons; let idx = index"
+                            [value]="option.value">
+            <div class="radio-group-content">
+              <h3 class="radio-group-content-title">{{ option.title }}</h3>
+            </div>
+          </mat-radio-button>
+        </mat-radio-group>
+
+        <div class="overtime__field-half">
+          <andteam-portal-input *ngIf="selectedType === 1"
+                                class="overtime__field-small"
+                                placeholder="Amount*"
+                                [componentType]="componentsType"
+                                [inputType]="textInput"
+                                [formControl]="sumControl"
+                                [maxLength]="maxSumLength"
+                                [error]="isSumError"
+                                [errorMessage]="sumErrorMessage"
+                                (keypress)="onlyDecimalNumberKey($event)"
+                                (inputValue)="onInputSum($event)">
+          </andteam-portal-input>
+
+          <andteam-portal-input *ngIf="selectedType === 2"
+                                class="overtime__field-small"
+                                placeholder="Hours*"
+                                [componentType]="componentsType"
+                                [inputType]="textInput"
+                                [formControl]="hoursControl"
+                                (keypress)="onlyDecimalNumberKey($event)">
+          </andteam-portal-input>
+
+          <andteam-select ngDefaultControl
+                          [ngClass]="{'disabled': selectedType === 2}"
+                          class="overtime__field-currency overtime__field-currency-small"
+                          [disableOptionCentering]="true"
+                          [options]="currencyOptions"
+                          [option]="isCurrencySingleOption? currencyOptions[0] : null"
+                          [isFieldDisabled]="isCurrencySingleOption"
+                          [placeholder]="'Currency*'"
+                          [formControl]="currencyControl"
+                          (selectOption)="onSelectCurrency($event)">
+          </andteam-select>
+
+          <div class="overtime__field-halfInfo"
+               [ngClass]="{'hidden': hoursControl.value || sumControl.value}">
+            <andteam-assessment-tooltip panelClass="overtime-form-tooltip" alignTooltip="center" side="top" [isArrow]="true">
+              <andteam-assessment-matrix-icon
+                tooltip-base
+                [emptyIcon]="infoIcon"
+                [fullicon]="infoActiveIcon">
+              </andteam-assessment-matrix-icon>
+
+              <div tooltip-content class="overtime__field-sumTooltip">
+                <ng-container *ngIf="selectedType === 1">
+                  <p>Possible sum formats: </p>
+                  <p>1234567, 1234.56</p>
+                </ng-container>
+
+                <ng-container *ngIf="selectedType === 2">
+                  <p>Time format: 12h 45m </p>
+                </ng-container>
+              </div>
+            </andteam-assessment-tooltip>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #singleOption>
+        <div>
+          <div class="overtime__field overtime__field-hasHint" *ngIf="configuration.isSum">
+            <andteam-portal-input class="overtime__field-sum"
+                                  placeholder="Amount*"
+                                  [componentType]="componentsType"
+                                  [inputType]="textInput"
+                                  [maxLength]="maxSumLength"
+                                  [formControl]="sumControl"
+                                  [error]="isSumError"
+                                  [errorMessage]="sumErrorMessage"
+                                  (keypress)="onlyDecimalNumberKey($event)"
+                                  (inputValue)="onInputSum($event)">
+            </andteam-portal-input>
+
+            <andteam-select ngDefaultControl
+                            class="overtime__field-currency"
+                            [disableOptionCentering]="true"
+                            [options]="currencyOptions"
+                            [option]="isCurrencySingleOption? currencyOptions[0] : null"
+                            [isFieldDisabled]="isCurrencySingleOption"
+                            [placeholder]="'Currency*'"
+                            [formControl]="currencyControl"
+                            (selectOption)="onSelectCurrency($event)">
+            </andteam-select>
+
+            <div class="overtime__field-sumInfo" [ngClass]="{'hidden': sumControl.value}">
+              <andteam-assessment-tooltip panelClass="overtime-form-tooltip" alignTooltip="center" side="top" [isArrow]="true">
+                <andteam-assessment-matrix-icon
+                  tooltip-base
+                  [emptyIcon]="infoIcon"
+                  [fullicon]="infoActiveIcon"
+                ></andteam-assessment-matrix-icon>
+
+                <div tooltip-content class="overtime__field-sumTooltip">
+                  <p>Possible sum formats: </p>
+                  <p>1234567, 1234.56</p>
+                </div>
+              </andteam-assessment-tooltip>
+            </div>
+
+            <p *ngIf="!configuration.isGross" class="overtime__field-description">
+              Indicate the amount of compensation excluding taxes
+            </p>
+          </div>
+
+          <div class="overtime__field overtime__field-hours" *ngIf="configuration.isHours">
+            <andteam-portal-input class="sum-field"
+                                  placeholder="Hours*"
+                                  [componentType]="componentsType"
+                                  [inputType]="textInput"
+                                  [formControl]="hoursControl"
+                                  (keypress)="onlyDecimalNumberKey($event)">
+            </andteam-portal-input>
+
+            <div class="overtime__field-sumInfo overtime__field-hoursInfo" [ngClass]="{'hidden': hoursControl.value}">
+              <andteam-assessment-tooltip panelClass="overtime-form-tooltip" alignTooltip="center" side="top" [isArrow]="true">
+                <andteam-assessment-matrix-icon
+                  tooltip-base
+                  [emptyIcon]="infoIcon"
+                  [fullicon]="infoActiveIcon"
+                ></andteam-assessment-matrix-icon>
+
+                <div tooltip-content class="overtime__field-sumTooltip">
+                  <p>Time format: 12h 45m </p>
+                </div>
+              </andteam-assessment-tooltip>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+
+      <div class="overtime__field overtime__field-newcommer" *ngIf="configuration.isReferralProgram">
+        <andteam-autocomplete
+          placeholder="Last name of a newcomer*"
+          [focus]="true"
+          [control]="newcommerControl"
+          [options]="options.fullNames$ | async"
+          (selectOption)="onSelectNewcommer($event)">
+        </andteam-autocomplete>
+      </div>
+
+      <div class="overtime__field overtime__field-jira" *ngIf="configuration.isJiraLink">
+        <andteam-portal-input
+          class="jira-link"
+          placeholder="Jira link*"
+          [formControl]="jiraLinkControl"
+          [componentType]="componentsType"
+          [inputType]="textInput"
+          [error]="isJiraLinkError$ | async"
+          [errorMessage]="jiraLinkErrorMessage"
+          (input)="jiraLinkValidate(jiraLinkControl)">
+        </andteam-portal-input>
+      </div>
+
+      <div class="overtime__field overtime__field-comment" *ngIf="configuration.isComment">
+        <andteam-portal-textarea
+          placeholder="Comment*"
+          (keyup)="onCommentKeyUp()"
+          [maxLength]="maxCommentLength"
+          [formControl]="commentControl"
+          [hint]="true"
+          [hintMessage]="commentHintText">
+        </andteam-portal-textarea>
+      </div>
+
+      <div class="overtime__attachment" *ngIf="configuration.isAttachment">
+        <andteam-drag-and-drop-file-loader
+          [title]="configuration.isRequiredAttachment ? 'Attachment*' : 'Attachment'"
+          [maxFileSize]="maxFileSize"
+          [availableFileTypes]="attachmentTypes"
+          (handleFiles)="onHandleFileInput($event)">
+        </andteam-drag-and-drop-file-loader>
+      </div>
+    </div>
+
+    <div class="overtime__buttons">
+      <andteam-button
+        [componentType]="componentsType"
+        [type]="buttonType.SECONDARY"
+        (click)="onCancel()">
+        Cancel
+      </andteam-button>
+      <andteam-button
+        [componentType]="componentsType"
+        [disabled]="!currentForm.valid"
+        [type]="buttonType.PRIMARY"
+        (click)="onSubmit()">
+        Submit
+      </andteam-button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="tab-wrapper">
+  <ng-container *ngIf="userFeedbacksData">
+
+    <h1 class="title">Feedback
+      <span *ngIf="userFeedbacksData?.employeeName" class="name">on {{ userFeedbacksData?.employeeName }}</span>
+    </h1>
+
+    <ng-container *ngIf="hasData">
+      <ng-container *ngTemplateOutlet="btnBlock;
+                     context:{data: {userFeedbacksData: userFeedbacksData, class: 'btn-block'}}">
+      </ng-container>
+    </ng-container>
+
+    <div class="feedback-list">
+      <div *ngIf="!userFeedbacksData?.feedbacks.length"
+          class="no-feedback">
+        <span class="no-feedback-image" [innerHTML]="noDataSvg | safe"></span>
+        No feedback yet
+        <br>
+        {{ isCurrentUser
+            ? 'You can ask others for feedback'
+            : 'Ask others for feedback or leave your own' }}
+        <ng-container *ngTemplateOutlet="btnBlock;
+                      context:{data: {userFeedbacksData: userFeedbacksData, class: 'btn-feedback-wrapper'}}">
+        </ng-container>
+      </div>
+
+      <andteam-feedback-detail *ngFor="let feedback of userFeedbacksData?.feedbacks; let i = index"
+                               [isLastFeedback]="i === (userFeedbacksData?.feedbacks.length - 1)"
+                               [userFeedback]="feedback">
+      </andteam-feedback-detail>
+    </div>
+
+    <button *ngIf="userFeedbacksData?.feedbacks.length > 3" class="btn-up" (click)="scrollTop()">
+      <i class="btn-up__arrow"></i>
+    </button>
+  </ng-container>
+
+  <div *ngIf="isShowLoader">
+    <andteam-spinner delay="0"></andteam-spinner>
+  </div>
+</div>
+
+<ng-template #btnBlock let-data="data">
+  <div [ngClass]="data.class">
+    <button *ngIf="!isCurrentUser"
+            class="btn-feedback"
+            (click)="goToFeedback()">
+      Leave feedback
+    </button>
+
+    <button *ngIf="data.userFeedbacksData?.canAskFeedback"
+            class="btn-feedback"
+            (click)="askFeedback()">
+      Ask for feedback
+    </button>
+  </div>
+</ng-template>
+

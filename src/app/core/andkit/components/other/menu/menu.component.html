@@ -1,0 +1,117 @@
+<div class="menu">
+  <div class="menu-avatar">
+    <div class="menu-vector"
+      [ngClass]="{
+      'menu-vector-active': isBurgerMenuActive$ | async,
+      'avatar-vector': !isScrollableHeader,
+      'scrollable-avatar-vector': isScrollableHeader}"
+      [innerHTML]="burgerIcon"
+      (click)="onBurgerIconClick(isOpen)"
+      (mouseleave)="onBurgerIconMouseleave()"
+      (mouseenter)="onBurgerIconMouseenter()">
+    </div>
+  </div>
+  <div class="menu-box"
+       *ngIf="isOpenList">
+    <ng-container *ngTemplateOutlet="currentMenuTemplate$ | async"></ng-container>
+  </div>
+</div>
+
+<ng-template #burgerIconMenu>
+  <div class="menu-list"
+       andteamOuterClick
+       (outerClick)="processIconClick($event)"
+       (click)="processIconClick(isOpen)">
+    <a *ngIf="isAddEvent$ | async"
+       class="menu-item"
+       [class.disabled]="isDisabled(addEventRouteName)"
+       (click)="goToPage(addEventRouteName)">Add Event</a>
+
+    <a *ngIf="isAddNews$ | async"
+       class="menu-item"
+       [class.disabled]="isDisabled(addNewsRouteName)"
+       (click)="goToPage(addNewsRouteName)">Add News</a>
+
+    <div *ngIf="isPartition$ | async"
+         class="partition">
+    </div>
+
+    <a  class="menu-item"
+        (click)="goToPage('/employee/' + externalId)">
+      My account
+    </a>
+
+    <a *ngIf="isShowMerch" class="menu-item"
+        (click)="goToPage('/merch')">
+      Andersen Merch
+    </a>
+
+    <a *ngIf="isShowEmployeeList$ | async"
+       class="menu-item"
+       (click)="goToPage('/employee-list')">
+      Employee list
+    </a>
+
+    <a *ngIf="isExpertActivities$ | async"
+       class="menu-item"
+       (click)="goToPage('/expert-activities')">
+      Expert activities
+    </a>
+
+    <a class="menu-item"
+       (click)="goToPage('/overtime')">
+      Overtime
+    </a>
+
+    <a *ngIf="isAssessmentCoordinator"
+       class="menu-item"
+       (click)="goToPage('/assessment')">
+      Assessment
+    </a>
+    <a *ngIf="hasFop$ | async"
+       class="menu-item"
+       (click)="goToPage('/project-feedbacks')">
+      Feedback on projects
+    </a>
+
+    <a [href]="companyService.companyResourcesUrls.Jira" target="_blank"  class="menu-item">Jira</a>
+
+    <a [href]="companyService.companyResourcesUrls.Wiki" target="_blank" class="menu-item">Wiki</a>
+
+    <a target="_blank"
+       *ngIf="isShowExternalResources$ | async"
+       [href]="companyService.companyResourcesUrls.CRM" class="menu-item">
+      CRM
+    </a>
+
+    <a target="_blank"
+       *ngIf="isShowExternalResources$ | async"
+       [href]="companyService.companyResourcesUrls.Audit" class="menu-item">
+      Project scoring
+    </a>
+
+    <a target="_blank" [href]="companyService.companyResourcesUrls.Support" class="menu-item">Support</a>
+
+    <div class="meeting-room" *ngIf="!isShowMettingRoom && !isAssessmentPath">
+      <div class="partition"></div>
+
+      <a [routerLink]="['/meeting-rooms']"
+        class="menu-item"
+        rel="noreferrer noopener">
+        Meeting Room
+      </a>
+
+      <a class="menu-item" (click)="onOpenPortalModal(true)">Have a problem?</a>
+    </div>
+
+    <a *ngIf="hasSalaryInvoice$ | async"
+        class="menu-item"
+        (click)="goToPage('/salary-invoice')">
+        Salary invoice
+    </a>
+
+    <div class="partition"></div>
+
+    <a class="menu-item" (click)="singOut()">Sign Out</a>
+  </div>
+</ng-template>

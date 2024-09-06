@@ -1,0 +1,232 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+@import '~src/styles/shared-styles/_vars.scss';
+
+.tab-wrapper {
+  background-color: $white-color;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 26px;
+  color: $text-primary;
+
+  .user-info {
+    @include border-bottom(1px, solid, $detailed-feedback-border);
+
+    display: flex;
+    max-width: 1110px;
+    padding-bottom: 35px;
+
+    .avatar {
+      width: 95px;
+      height: 95px;
+      position: relative;
+      z-index: $employee-avatar-z-index;
+      padding-top: 6px;
+      padding-right: 6px;
+
+      &-image {
+        @include avatar-sizes;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        object-fit: cover;
+      }
+    }
+
+    .avatar-loader {
+      @include avatar-sizes;
+
+      position: absolute;
+      top: 0;
+      left: 5px;
+      z-index: $employee-avatar-loader-z-index;
+      object-fit: cover;
+    }
+
+    .info {
+      padding-left: 30px;
+
+      .name {
+        margin: 10px 0;
+        display: flex;
+        align-items: baseline;
+
+        &-en {
+          font-size: 56px;
+          line-height: 66px;
+          font-weight: 200;
+          color: $objectives-text-color;
+        }
+
+        &-ru {
+          margin-left: 15px;
+          font-size: 20px;
+          color: $tag-title-color;
+        }
+      }
+
+      .breadcrumbs {
+        display: flex;
+        align-items: center;
+
+        &-title {
+          @include font-base(14px, 300, 16px);
+
+          color: $text-secondary;
+        }
+      }
+
+      .link-error {
+        @include font-base(12px, 400, 19.2px);
+
+        color: $red-color;
+      }
+    }
+
+    &-leaving {
+      margin-top: 4px;
+      padding-bottom: 17px;
+
+      &-title {
+        @include font-base(14px, 300, 130%);
+
+        color: $text-secondary;
+        padding: 0 0 5px 0;
+      }
+    }
+  }
+
+  .feedback {
+    &-text {
+      @include border-bottom(1px, dashed, $text-tertiary);
+
+      margin-left: 30px;
+    }
+
+    &-icon {
+      position: absolute;
+      top: -2px;
+    }
+
+    &-button {
+      @include transition;
+
+      position: relative;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-family: Roboto, 'Helvetica Neue', sans-serif;
+      font-style: normal;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 19px;
+      color: $text-primary;
+      margin-right: 25px;
+
+      & .datePic {
+        top: 0;
+      }
+
+      &-icon {
+        position: absolute;
+        top: -2px;
+        width: 24px;
+        height: 24px;
+      }
+
+      &:hover {
+        .feedback-text {
+          @include border-bottom(1px, solid, $border-link-hover);
+        }
+      }
+
+      &:disabled {
+        color: $text-secondary;
+        margin-right: 15px;
+        cursor: default;
+
+        &:hover {
+          .feedback-text {
+            border-bottom-color: $text-tertiary;
+            border-bottom-style: dashed;
+          }
+        }
+      }
+    }
+  }
+
+  .cards {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 35px;
+
+    andteam-user-skills-and-contacts {
+      width: 70%;
+      padding-right: 20px;
+    }
+
+    &-extra-mile-column {
+      width: 30%;
+    }
+
+    .card {
+      width: 30%;
+    }
+  }
+}
+
+.links {
+  display: flex;
+  gap: 20px;
+  height: 25px;
+
+  &-assessment,
+  &-feedback,
+  &-vacation {
+    display: flex;
+
+    &-icon {
+      margin-right: 5px;
+    }
+
+    &-button {
+      @include transition;
+
+      background: transparent;
+      border: none;
+      cursor: pointer;
+
+      &:hover {
+        .links-text {
+          @include border-bottom(1px, solid, $border-link-hover);
+        }
+      }
+    }
+  }
+
+  &-text {
+    @include border-bottom(1px, dashed, $text-tertiary);
+
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 19px;
+    color: $text-primary;
+
+    &__vacation,
+    &__date {
+      border: none;
+    }
+  }
+
+  .disabled {
+    pointer-events: none;
+
+    .links-text {
+      border-bottom: none;
+    }
+  }
+}

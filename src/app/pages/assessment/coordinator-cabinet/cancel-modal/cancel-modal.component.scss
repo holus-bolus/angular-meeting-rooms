@@ -1,0 +1,116 @@
+@import '../../../../../styles/shared-styles/colors';
+@import '../../../../../styles/shared-styles/mixins';
+@import '../../../../../styles/shared-styles/vars';
+
+.cancel-wrapper {
+  min-width: 376px;
+  width: 100%;
+  height: 451px;
+  border-radius: 8px;
+  box-sizing: border-box;
+
+  .grow {
+    margin-top: 16px;
+    position: absolute;
+    left: 0;
+    width: 100%;
+  }
+
+  .applicant {
+    margin-top: 33px;
+    display: flex;
+    flex-direction: column;
+
+    &-name {
+      @include font-base(16px, normal, 24px);
+    }
+
+    &-role {
+      color: $text-secondary;
+      line-height: 24px;
+    }
+  }
+
+  .commentary {
+    margin-top: 24px;
+
+    &-label {
+      @include font-base(12px, normal, 20px);
+      color: $text-secondary;
+    }
+
+    &-form {
+      position: relative;
+
+      .input {
+        @include font-base(14px, normal, 22px);
+
+        margin-top: 4px;
+        height: 118px;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px 8px;
+        border: 1px solid $text-tertiary;
+        border-radius: 4px;
+        resize: none;
+
+        &::placeholder {
+          color: $text-tertiary;
+        }
+      }
+
+      .floating-message {
+        @include font-base(12px, 300, 130%);
+
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        transform: translate(0, 100%);
+      }
+
+      .counter-message {
+        color: $text-secondary;
+      }
+
+      .error-message {
+        color: $error-color;
+      }
+
+      .error {
+        border: 1px solid $error-color;
+      }
+    }
+  }
+
+  .controls {
+    margin-top: 32px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    &-confirm {
+      width: 47%;
+    }
+
+    &-cancel {
+      width: 47%;
+    }
+
+    ::ng-deep {
+      .btn {
+        width: 100%;
+      }
+    }
+  }
+
+  .date {
+    width: 100%;
+    margin-top: 24px;
+
+    &-label {
+      @include font-base(12px, normal, 20px);
+      color: $text-secondary;
+    }
+  }
+}

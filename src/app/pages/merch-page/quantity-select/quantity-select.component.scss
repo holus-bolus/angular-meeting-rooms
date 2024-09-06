@@ -1,0 +1,42 @@
+.quantity-select {
+  display: flex;
+  justify-content: flex-start;
+
+  &__minus, &__plus {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    font-weight: 300;
+    border-radius: 50%;
+    border: 1px solid #B5B8BB;
+    color: #B5B8BB;
+    cursor: pointer;
+    user-select: none;
+
+    &.disabled {
+      border-color: #D5D7D9;
+      color: #D5D7D9;
+      cursor: not-allowed;
+    }
+  }
+
+  &__plus {
+    font-size: 20px;
+  }
+
+  &__minus {
+    font-size: 34px;
+  }
+
+  &__value {
+    margin: 0 10px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+
+    width: 16px;
+    text-align: center;
+  }
+}

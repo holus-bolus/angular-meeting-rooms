@@ -1,0 +1,74 @@
+@import 'src/styles/shared-styles/colors';
+@import 'src/styles/shared-styles/mixins';
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  list-style: none;
+
+  &-item {
+    &-visible {
+      display: block;
+    }
+
+    &-hidden {
+      display: none;
+    }
+  }
+
+  &-controls {
+    display: flex;
+    align-items: center;
+  }
+
+  &-arrow {
+    color: $objectives-text-color;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  &-dots {
+    @include font-base(14px, 300, 16px);
+    color: $objectives-text-color;
+  }
+
+  &-list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb {
+    padding: 0 4px;
+
+    &:first-child > .breadcrumb-slash {
+      display: none;
+    }
+
+    &:last-child {
+      display: block;
+    }
+
+    &-slash {
+      padding-right: 4px;
+    }
+
+    &-link {
+      @include font-base(14px, 300, 16px);
+      @include border-bottom(1px, dashed, $border-bottom-color);
+      color: $objectives-text-color;
+      text-decoration: none;
+
+      &:hover {
+        @include border-bottom(1px, solid, $border-link-hover);
+      }
+
+      &-inactive {
+        border-bottom: none;
+        opacity: 50%;
+        pointer-events: none;
+      }
+    }
+  }
+}

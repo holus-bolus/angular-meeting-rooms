@@ -1,0 +1,46 @@
+<div class="activities-modal">
+  <button [innerHTML]="closeIcon | safe" class="activities-modal-close" (click)="onClose()"></button>
+  <p class="activities-modal-header">Expert Activities</p>
+
+  <div class="activities-modal-main">
+    <div class="activities-modal-field">
+      <andteam-select
+        class="activities-modal-field-name"
+        [options]="expertActivities"
+        [option]="isEdit ? selectedActivity : null"
+        [placeholder]="'Choose expert activity*'"
+        [formControl]="nameControl"
+        [isFieldDisabled]="isEdit"
+        [disableOptionCentering]="true"
+        ngDefaultControl>
+      </andteam-select>
+    </div>
+
+    <div class="activities-modal-field">
+      <andteam-date-picker
+        class="activities-modal-field-date"
+        [value]="isEdit ? data.activity.dueDate : null"
+        [formControl]="dateControl"
+        placeholder="dd.mm.yyyy"
+      >
+      </andteam-date-picker>
+    </div>
+  </div>
+
+  <div class="activities-modal-buttons">
+    <andteam-button
+      [type]="cancelButtonType"
+      class="modal-buttons-btn modal-buttons-btn-cancel"
+      (click)="onClose()">
+      Cancel
+    </andteam-button>
+
+    <andteam-button
+      [type]="confirmButtonType"
+      [disabled]="!currentForm.valid"
+      class="modal-buttons-btn modal-buttons-btn-confirm"
+      (click)="onSubmit()">
+      Save
+    </andteam-button>
+  </div>
+</div>

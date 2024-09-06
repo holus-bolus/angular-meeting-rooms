@@ -1,0 +1,16 @@
+<div class="wrapper">
+    <div class="wrapper-item">
+        <mat-checkbox 
+            [checked]="options.active"
+            (click)="onCheck('active', $event)">
+        </mat-checkbox>
+        Active
+    </div>
+    <div class="wrapper-item">
+        <mat-checkbox 
+            [checked]="options.closed"
+            (click)="onCheck('closed', $event)">
+        </mat-checkbox>
+        Closed
+    </div>
+<div>

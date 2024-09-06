@@ -1,0 +1,70 @@
+<div class="objectives-card">
+  <div class="objectives-card__content">
+    <ng-container *ngIf="objectives">
+      <div class="objectives-card__header">
+        <div>
+          <div class="objectives-header">
+            <h1 class="employee-h1 objectives-header__title">Objectives</h1>
+            <andteam-material-info-btn
+              class="objectives-header__info-btn"
+              [btnText]="btnText"
+              [btnColor]="yellowColor"
+              (btnClick)="showActiveObjectivesInfo()">
+            </andteam-material-info-btn>
+          </div>
+          <div *ngIf="objectives?.nextAssessmentDate" class="next-salary-date">
+            <andteam-icon [icon]="date | safe"></andteam-icon>
+            <span class="next-salary-date-label">
+              The next assessment is no earlier than {{objectives?.nextAssessmentDate | date:"MMMM yyyy"}}
+              </span>
+          </div>
+        </div>
+
+        <div *ngIf="objectives?.canEdit" class="objectives-add-button">
+          <andteam-portal-button (click)="addObjective()">Add Objective</andteam-portal-button>
+        </div>
+      </div>
+
+      <ng-container *ngIf="openedObjectives.length > 0; else noData">
+        <andteam-objectives-list
+          [objectives]="openedObjectives"
+          [showStatusActions]="true"
+          [interviewerId]="interviewerId"
+          [employeeId]="employeeId"
+          [canEdit]="objectives?.canEdit"
+          (updateData)="updateObjectives($event)">
+        </andteam-objectives-list>
+      </ng-container>
+
+      <div class="archive-objects-list" *ngIf="closedObjectives.length > 0">
+        <div class="objectives-header">
+          <h1 class="employee-h1 objectives-header__title">Archive</h1>
+          <andteam-material-info-btn
+            class="objectives-header__info-btn"
+            [btnText]="btnText"
+            [btnColor]="yellowColor"
+            (btnClick)="showArchiveObjectivesInfo()">
+          </andteam-material-info-btn>
+        </div>
+
+        <andteam-objectives-list [objectives]="closedObjectives"></andteam-objectives-list>
+      </div>
+    </ng-container>
+
+    <div *ngIf="isShowLoader">
+      <andteam-spinner delay="0"></andteam-spinner>
+    </div>
+
+    <button *ngIf="showScrollButton" class="btn-up" (click)="scrollTop()">
+      <i class="btn-up__arrow"></i>
+    </button>
+  </div>
+</div>
+
+<andteam-assessment-toast-notification *ngIf="isToastNotification" (fadeOut)="onFadeOut()">
+  <span>{{ notificationText }}</span>
+</andteam-assessment-toast-notification>
+
+<ng-template #noData>
+  <andteam-objectives-no-data [isRM]="isRM"></andteam-objectives-no-data>
+</ng-template>

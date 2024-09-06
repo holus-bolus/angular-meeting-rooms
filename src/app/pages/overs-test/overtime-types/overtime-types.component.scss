@@ -1,0 +1,114 @@
+@import '~src/styles/shared-styles/mixins';
+@import '~src/styles/shared-styles/colors';
+
+.overtime-types {
+  padding: 32px 0;
+  height: 593px;
+  box-sizing: border-box;
+
+  &__search {
+    padding: 0 32px;
+
+    ::ng-deep {
+      .placeholder {
+        @include font-base(18px, 300, 25px);
+
+        color: $tag-title-color;
+      }
+
+      path {
+        fill: $tag-box-border !important;
+      }
+    }
+  }
+
+  &__filled {
+    ::ng-deep {
+      path {
+        fill: $primary !important;
+      }
+    }
+  }
+
+  &__lists {
+    height: 510px;
+    margin-top: 10px;
+    overflow: scroll;
+  }
+
+  &__list {
+
+    &:last-child {
+      margin-bottom: 15px;
+    }
+
+    &:not(:first-child) {
+
+    }
+
+    &_title {
+      margin: 16px 0 3px 32px;
+      @include font-base(18px, 400, 28.8px);
+    }
+  }
+
+  &__over {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 15px 42px 15px 32px;
+    cursor: pointer;
+
+    &_arrow {
+      position: absolute;
+      right: 27.5px;
+      top: calc(50% - (16px / 2));
+
+      &.reverse {
+        transform: rotate(180deg);
+      }
+    }
+
+    &:hover {
+      background-color: #F5F5F5;
+    }
+
+    &_level-two > & {
+      padding-left: 56px;
+    }
+
+    &_name {
+      @include font-base(14px, 400, 22.4px);
+      user-select: none;
+    }
+
+    &_info {
+      margin-left: 7px;
+    }
+  }
+
+  &__divider {
+    width: 100%;
+    height: 1px;
+    background-color: #DBDDDE;
+  }
+}
+
+.selectedOver {
+  background-color: #DCDCDC;
+}
+
+::ng-deep {
+  .tooltip-content {
+    span {
+      padding: 12px !important;
+      width: 240px;
+    }
+  }
+
+  andteam-assessment-matrix-icon:hover {
+    path {
+      fill: $primary;
+    }
+  }
+}

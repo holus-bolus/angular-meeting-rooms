@@ -1,0 +1,8 @@
+<button (click)="goToBack()" class="backward-link">
+  <span [innerHTML]="backIcon | safe" class="backward-icon"></span>
+
+  <div class="backward-content">
+    <ng-content></ng-content>
+  </div>
+
+</button>

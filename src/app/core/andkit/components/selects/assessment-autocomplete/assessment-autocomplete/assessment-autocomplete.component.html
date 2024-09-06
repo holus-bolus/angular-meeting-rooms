@@ -1,0 +1,38 @@
+<div class="assessment-autocomplete">
+  <input
+    type="text"
+    class="form-input"
+    #input
+    [class.error]="error"
+    [placeholder]="placeholder"
+    [value]="value"
+    [disabled]="disabled"
+    (blur)="onBlur($event)"
+    (input)="onValueChange($event)">
+
+  <button *ngIf="value; else search"
+          class="icon-clear icon"
+          [disabled]="disabled"
+          [innerHTML]="clearIcon | safe"
+          (click)="clearTextArea()"></button>
+  <ng-template #search>
+    <div [innerHTML]="searchIcon | safe" class="icon-search icon"></div>
+  </ng-template>
+
+  <div *ngIf="isOpen" class="dropdown-list"
+       andteamOuterClick
+       (outerClick)="onCloseDropdown()">
+    <ng-container *ngIf="options; else notFound">
+      <div *ngFor="let option of options"
+           class="dropdown-option"
+           (mousedown)="onSelect(option)">
+        {{option.name}}
+      </div>
+    </ng-container>
+    <ng-template #notFound>
+      <div class="dropdown-option dropdown-option_not-found">
+        Not Found
+      </div>
+    </ng-template>
+  </div>
+</div>

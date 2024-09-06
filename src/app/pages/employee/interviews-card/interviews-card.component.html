@@ -1,0 +1,28 @@
+<andteam-interviews-list
+  [isCurrent]="isCurrent"
+  [isShowSpinner]="isShowSpinner"
+  [totalItems]="totalItems"
+  [hasNextPage]="hasNextPage"
+  [interviews]="interviews$ | async"
+  [isInterviewer]="isInterviewer$ | async"
+  (toggleActive)="onToggleActive($event)"
+  (showMore)="onShowMore()"
+  (finish)="onUpdate()"
+></andteam-interviews-list>
+<andteam-matrix-modal
+  *ngIf="isOpenMatrixModal"
+  [successMessage]="successCompleteMatrixMessage"
+  [additionalSuccessMessage]="interviewerSuccessTips"
+  [errorMessage]="errorCompleteMatrixMessage"
+  [interviewerTips]="interviewerErrorTips"
+  (closeModal)="onCloseMatrixModal()">
+</andteam-matrix-modal>
+
+<andteam-employee-matrix-modal
+  *ngIf="isOpenFinishedInterviewModal"
+  buttonName="Ok"
+  mainMessage="You have successfully completed the interview"
+  [isOpenCancelModal]="isOpenFinishedInterviewModal"
+  [isSuccessModal]="true"
+  (cancel)="onCloseFinishedInterviewModal()">
+</andteam-employee-matrix-modal>

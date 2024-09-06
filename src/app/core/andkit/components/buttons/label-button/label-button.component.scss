@@ -1,0 +1,108 @@
+@import 'src/styles/shared-styles/colors';
+@import 'src/styles/shared-styles/mixins';
+
+.label {
+  @include font-base(14px, 400, 160%);
+
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 3px 15px 2px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+.label-default {
+  background: $primary-disabled;
+
+  &:hover,
+  &:focus {
+    background: #e4e4e4;
+    color: $objectives-text-color;
+  }
+}
+
+.label-green {
+  background: #dcf8e4;
+
+  &:hover,
+  &:focus {
+    background: #d7f2df;
+  }
+}
+
+.label-yellow {
+  background: #fef5dd;
+
+  &:hover,
+  &:focus {
+    background: #fff1ca;
+  }
+}
+
+.label-red {
+  background: #fde4e3;
+
+  &:hover,
+  &:focus {
+    background: #ffd9d8;
+  }
+}
+
+.label-blue {
+  background: #e7f3f7;
+}
+
+.label-risk-none {
+  background: $risk-of-leaving-none;
+  color: $objectives-text-color;
+
+  &:hover,
+  &:focus {
+    opacity: 0.85;
+  }
+}
+
+.label-risk-low {
+  background: $risk-of-leaving-low;
+  color: $objectives-text-color;
+
+  &:hover,
+  &:focus {
+    opacity: 0.85;
+  }
+}
+
+.label-risk-mid {
+  background: $risk-of-leaving-mid;
+  color: $objectives-text-color;
+
+  &:hover,
+  &:focus {
+    opacity: 0.85;
+  }
+}
+
+.label-risk-high {
+  background: $risk-of-leaving-high;
+  color: $objectives-text-color;
+
+  &:hover,
+  &:focus {
+    opacity: 0.85;
+  }
+}
+
+.label-risk-critical {
+  background: $risk-of-leaving-critical;
+  color: $objectives-text-color;
+
+  &:hover,
+  &:focus {
+    opacity: 0.85;
+  }
+}

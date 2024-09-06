@@ -1,0 +1,39 @@
+<div class="control-panel">
+  <div class="feedback-title">
+    Interviewer’s feedback
+    <span class="feedback-tooltip" *ngIf="isEditable">
+      <andteam-assessment-tooltip alignTooltip="center" side="top" [isArrow]="true">
+        <andteam-assessment-matrix-icon tooltip-base
+                                        andteamHoverEvent
+                                        [isFull]="isHover"
+                                        [emptyIcon]="infoIcon"
+                                        [fullicon]="infoActiveIcon"
+        ></andteam-assessment-matrix-icon>
+        <div tooltip-content class="feedback-tooltip_content">
+          <p>{{feedbackTooltip}}</p>
+          <ul class="tips-list">
+            <li *ngFor="let tip of tipsForInterviewer" class="tip">
+              {{tip}}
+            </li>
+          </ul>
+        </div>
+      </andteam-assessment-tooltip>
+    </span>
+  </div>
+</div>
+<div class="feedback-textarea">
+  <andteam-feedback-textarea
+    [errorMaxLength]="errorMaxLength"
+    [errorRequire]="errorRequire"
+    [errorMessage]="errorMessage"
+    [maxRows]="maxRows"
+    [charactersLimit]="charactersLimit"
+    [value]="value"
+    [disabled]="!isEditable"
+    [isEditing]="isEditing"
+    (save)="onSave()"
+    (clear)="onClear()"
+    (valueChanges)="onFeedbackChanges($event)"
+  ></andteam-feedback-textarea>
+</div>
+

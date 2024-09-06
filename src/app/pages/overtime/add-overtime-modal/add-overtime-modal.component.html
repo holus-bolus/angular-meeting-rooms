@@ -1,0 +1,269 @@
+<div class="overs-modal-wrapper overtime">
+  <andteam-assessment-modal isShowCloseIcon="true"
+                            (closeClick)="close()">
+    <h2 class="overtime-title assessment-h2">{{ configuration?.values.overType.name | textLength: titleLength }}</h2>
+
+    <div class="overtime-description" *ngIf="!!configuration.required.currencyRestrictions
+      && !!configuration.required.currencyRestrictions[0]?.description">
+      <p>{{ configuration?.required?.currencyRestrictions[0]?.description }}</p>
+    </div>
+
+    <div class="overtime-wrapper">
+      <ng-container *ngIf="configuration?.required as required">
+        <div *ngIf="isItOversForPM() || isItPresaleOvers()"
+             class="overtime-block overtime-block-type">
+          <andteam-select
+            panelClass="overtimes-type"
+            ngDefaultControl
+            [options]="pmTypes"
+            [placeholder]="'Type*'"
+            [formControl]="typeControl"
+            [error]="errors.type$ | async"
+            [errorMessage]="errorsMessages.type$ | async"
+            (selectOption)="onSelectType($event)">
+          </andteam-select>
+
+          <andteam-material-info-btn
+            *ngIf="isItOversForPM() && isShowInfoButtonForPMOvers"
+            class="overtime-block-btn"
+            btnColor="yellow"
+            btnSize="18px"
+            (mouseenter)="onInfoButtonHover()"
+            (mouseleave)="onInfoButtonHover()"
+            [btnText]="'i'">
+          </andteam-material-info-btn>
+
+          <div *ngIf="isShowPmInfoHint.value" class="overtime-pop-up">
+            <div class="overtime-triangle">▲</div>
+            {{currentlySelectedPmType?.description}}
+          </div>
+        </div>
+
+        <div *ngIf="!isOnlyAndersen"
+             class="overtime-block"
+             [ngClass]="{'overtime-hidden-field': isItOversForPM() && !isShowProjectForPmOvers,
+                         'overtime-button-move': isItPresaleOvers()}">
+          <andteam-autocomplete placeholder="Project*"
+                                class="project-field"
+                                [componentType]="componentsType"
+                                [options]="options.project$ | async"
+                                [control]="autocompleteProjectControl"
+                                [error]="errors.project$ | async"
+                                [errorMessage]="errorsMessages.project$ | async"
+                                (valueReseted)="valueReseted()"
+                                (selectOption)="onSelectProject($event)"
+                                ngDefaultControl>
+          </andteam-autocomplete>
+
+          <andteam-material-info-btn
+            *ngIf="isItPresaleOvers()"
+            class="overtime-presale-btn"
+            btnColor="yellow"
+            btnSize="18px"
+            (mouseenter)="onProjectInfoButtonHover()"
+            (mouseleave)="onProjectInfoButtonHover()"
+            [btnText]="'i'">
+          </andteam-material-info-btn>
+
+          <div *ngIf="isShowProjectInfoHint.value" class="overtime-presale-pop-up">
+            <div class="overtime-presale-triangle">▲</div>
+            You can select : <br>
+            1. Andersen (No project) - if you work on presale <br>
+            2. Name of definite Project
+          </div>
+        </div>
+
+        <div *ngIf="!isOnlyAndersen || isAdditionalApproverRequired || required.additionalApproverRequired"
+             class="overtime-block"
+             [ngClass]="{ 'disabled': isDisabled(), 'overtime-hidden-field': isItOversForPM() && !isShowApproverForPmOvers }">
+          <andteam-select ngDefaultControl
+                          [options]="options.approvers$ | async"
+                          [option]="selected.approvers"
+                          [placeholder]="'Approver*'"
+                          [formControl]="approversControl" required
+                          [error]="errors.approvers$ | async"
+                          [errorMessage]="errorsMessages.approvers$ | async"
+                          (selectOption)="onSelectApprovers($event)">
+          </andteam-select>
+        </div>
+
+        <div *ngIf="configuration.required?.locationSelectRequired" class="overtime-block overtime-location">
+          <andteam-select ngDefaultControl
+                          [placeholder]="'Former location*'"
+                          [formControl]="locationControl"
+                          [options]="locationsList$ | async"
+                          [option]="selected.location"
+                          [error]="true"
+                          (selectOption)="onSelectOffice($event, configuration.values.overType.id)">
+          </andteam-select>
+        </div>
+
+        <div class="overtime-block" *ngIf="required.hours || (isShowHoursForPresale$ | async)">
+          <andteam-portal-input class="sum-field"
+                                placeholder="Hours*"
+                                [componentType]="componentsType"
+                                [disabledInput]="sumControl.value"
+                                [inputType]="textInput"
+                                [formControl]="hoursControl"
+                                [error]="isHoursControlInvalid$() | async"
+                                [errorMessage]="hoursControl && (errorsMessages.hours$ | async)"
+                                (keypress)="onlyDecimalNumberKey($event)"
+                                (input)="inputValidate(hoursControl, maxHoursIntegerLength, maxHoursAfterDotLength)">
+          </andteam-portal-input>
+        </div>
+
+        <div *ngIf="required.sum"
+             [ngClass]="{'disabled':
+               (configuration.required?.locationSelectRequired && !locationControl.value)
+               || (isCurrencyBlockDisabled && locationControl.value)
+             }"
+             class="overtime-block two-fields">
+          <andteam-portal-input class="field-first"
+                                placeholder="Sum*"
+                                [componentType]="componentsType"
+                                [disabledInput]="hoursControl.value"
+                                [inputType]="textInput"
+                                [formControl]="sumControl"
+                                [hintMessage]="sumHintMessage$ | async"
+                                [error]="(isSumControlInvalid$() | async)"
+                                [errorMessage]="(sumHintMessage$ | async) || (sumControl && (errorsMessages.sum$ | async))"
+                                (keypress)="onlyDecimalNumberKey($event)"
+                                (inputValue)="onInputSum($event)"
+                                (input)="inputValidate(sumControl, maxSumIntegerLength, maxSumAfterDotLength)">
+
+            <div *ngIf="hintLink.length > 0">
+              <a href="{{hintLink}}" target="_blank">
+                <div class="icon-hint"></div>
+                <span class="hint">Click to choose the correct sum</span>
+              </a>
+            </div>
+          </andteam-portal-input>
+
+          <div *ngIf="isMultiCurrency; else currency"
+               [ngClass]="{'disabled': hoursControl.value}"
+               class="field-second">
+            <andteam-select ngDefaultControl
+                            [options]="allCurrencies$ | async"
+                            [option]="selected?.currency"
+                            [placeholder]="'Currency*'"
+                            [formControl]="currencyControl"
+                            [error]="!hoursControl.value && (errors.currencyControl$ | async)"
+                            [errorMessage]="errorsMessages.currencyControl$ | async"
+                            (selectOption)="onSelectCurrency($event)">
+            </andteam-select>
+          </div>
+
+          <ng-template #currency>
+            <div class="field static-field field-second"
+                 [ngClass]="{'disabled': hoursControl.value}">
+              {{ currencyDefault$ | async }}
+            </div>
+          </ng-template>
+        </div>
+
+        <div *ngIf="required.wardEmployeeId" class="overtime-block">
+          <andteam-autocomplete [placeholder]="placeHolder"
+                                [componentType]="componentsType"
+                                [options]="options.employee$ | async"
+                                [control]="autocompleteEmployeeControl"
+                                [error]="errors.wardEmployee$ | async"
+                                [errorMessage]="errorsMessages.wardEmployee$ | async"
+                                (selectOption)="onEmployeeSelect($event)">
+          </andteam-autocomplete>
+        </div>
+
+        <div class="overtime-block two-fields" *ngIf="required.position && required.level">
+          <andteam-portal-select class="field"
+                                 placeholder="Technology*"
+                                 dropdownHeight="{{ dropdownHeight }}px"
+                                 [componentType]="componentsType"
+                                 [options]="options.technology$ | async"
+                                 [option]="selected?.position"
+                                 [error]="errors.position$ | async"
+                                 [errorMessage]="errorsMessages.position$ | async"
+                                 (selectOption)="onPostSelect($event)">
+          </andteam-portal-select>
+
+          <andteam-portal-select class="field"
+                                 placeholder="Level*"
+                                 dropdownHeight="{{ dropdownHeight }}px"
+                                 [componentType]="componentsType"
+                                 [options]="options.level$ | async"
+                                 [option]="selected?.level"
+                                 [error]="errors.level$ | async"
+                                 [errorMessage]="errorsMessages.level$ | async"
+                                 (selectOption)="onLevelSelect($event)">
+          </andteam-portal-select>
+        </div>
+
+        <div class="overtime-block" *ngIf="isShowAttachment$ | async">
+          <andteam-portal-input-file placeholder="Attachment (max size: 5 mb)"
+                                     [componentType]="componentsType"
+                                     [isSelectorDisabled]="!isAddAttachAvail"
+                                     [error]="isValueInvalid || (errors.attachment$ | async)"
+                                     [errorMessage]="errorsMessages.attachment$ | async"
+                                     (handleFiles)="onFileSelect($event)">
+          </andteam-portal-input-file>
+
+          <div *ngIf="attachments.length" class="overtime-attachments">
+            <div *ngFor="let attachment of attachments; let i = index">
+              <div *ngIf="!attachment.isRemoved" class="overtime-attachment">
+                <div class="overtime-file">
+                  <span class="overtime-attachment-icon" [innerHTML]="fileInactiveIcon | safe"></span>
+                  <div class="overtime-attachment-name">{{ attachment.name }}</div>
+                </div>
+
+                <span class="overtime-attachment-close" [innerHTML]="closeIcon | safe" (click)="onDeleteFile(i)"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="required.jiraLink" class="overtime-block">
+          <andteam-portal-input
+            class="jira-link"
+            placeholder="Jira link*"
+            [formControl]="jiraLinkControl"
+            [error]="errors.jiraLink$ | async"
+            [componentType]="componentsType"
+            [inputType]="textInput"
+            [errorMessage]="errorsMessages.jiraLink$ | async"
+            (input)="jiraLinkValidate(jiraLinkControl)">
+          </andteam-portal-input>
+        </div>
+
+        <div *ngIf="required.comment || isItPresaleOvers() || isShowComment()"
+             class="overtime-block">
+          <andteam-portal-textarea [placeholder]="setupCommentPlaceholder()"
+                                   [maxRows]="maxCommentsAmount"
+                                   [formControl]="commentControl"
+                                   [error]="errors.comment$ | async"
+                                   [hintMessage]="errorMaxChars"
+                                   [errorMessage]="errorsMessages.comment$ | async"
+                                   (input)="commentValidate(commentControl)">
+          </andteam-portal-textarea>
+        </div>
+
+        <div class="overtime-buttons">
+          <andteam-button
+            class="cancel-button"
+            [type]="buttonSecondary"
+            (click)="close()">
+            <span class="cancel-button_text">Cancel</span>
+          </andteam-button>
+
+          <andteam-button (click)="onSubmit()">{{ buttonName }}</andteam-button>
+        </div>
+      </ng-container>
+    </div>
+  </andteam-assessment-modal>
+
+  <andteam-overtime-modal *ngIf="popups.modals?.confirmation"
+                          [text]="confirmText()"
+                          [subText]="confirmSubText()"
+                          [cancelConfirmTextButton]="CancelButtonText()"
+                          [confirmTextButton]="buttonText()"
+                          (sendCloseEvent)="manageModals('confirmation', false);"
+                          (sendConfirmEvent)="closeModal.emit();">
+  </andteam-overtime-modal>
+</div>

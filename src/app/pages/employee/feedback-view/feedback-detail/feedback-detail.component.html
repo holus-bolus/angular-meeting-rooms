@@ -1,0 +1,164 @@
+<div class="detailed-feedback" [ngClass]="{'last-feedback': isLastFeedback}">
+  <div *ngIf="!userFeedback.employee && !userFeedback.customer" class="user">
+    <div class="photo">
+      <div [innerHTML]="incognitoSvg | safe" class="anonymous" title="anonymous"></div>
+    </div>
+
+    <div class="info">
+      <p class="name">Anonymous</p>
+      <p class="role">Unknown position</p>
+    </div>
+  </div>
+
+  <div *ngIf="userFeedback?.employee">
+    <div class="user">
+      <div *ngIf="employeePhoto" class="photo">
+        <img [src]="employeePhoto"
+             alt="{{ userFeedback.employee.name }}" class="img">
+      </div>
+
+      <div *ngIf="!employeePhoto" class="no-photo">
+        <div class="no-photo__text">No photo</div>
+      </div>
+
+      <div class="info" >
+        <a href="employee/{{ userFeedback.employee.id }}/personal-info"
+           class="name"
+           [ngClass]="{ 'disabled' : !userFeedback.employee.isWork }">
+          <span>{{ userFeedback.employee.name }}</span>
+        </a>
+
+        <p class="role">{{ userFeedback.employee.position }}</p>
+
+        <ng-container *ngTemplateOutlet="chipsBlock"></ng-container>
+
+        <div *ngIf="userFeedback.feedbackValue" class="feedback-value">
+          <p class="feedback-value-title">Feedback value</p>
+          <mat-radio-group class="feedback-value-radiogroup" (change)="onRadioButtonChange($event, userFeedback.feedbackId, false)">
+            <mat-radio-button
+              class="feedback-value-radiobutton"
+              [value]="1"
+              [checked]="userFeedback.feedbackValue === 'Valuable'">
+              Valuable
+            </mat-radio-button>
+
+            <mat-radio-button
+              class="feedback-value-radiobutton"
+              [value]="2"
+              [checked]="userFeedback.feedbackValue === 'NotValuable'">
+              Not valuable
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="userFeedback?.customer">
+    <div class="user">
+      <div class="photo">
+        <div [innerHTML]="clientSvg | safe" class="anonymous" title="anonymous"></div>
+      </div>
+
+      <div class="info">
+        <div class="name">
+          {{ userFeedback.customer.customerName }}
+        </div>
+
+        <div class="role">
+          <div class="role-customer">
+            {{ userFeedback.customer.customerPosition | textLength: 35 }}
+
+            <div class="role-customer-hint">
+              <div class="role-customer-hint-triangle">▲</div>
+              <p>{{ userFeedback.customer.customerPosition }}</p>
+            </div>
+          </div>
+        </div>
+
+        <ng-container *ngTemplateOutlet="chipsBlock"></ng-container>
+
+        <div *ngIf="userFeedback.feedbackValue" class="feedback-value">
+          <p class="feedback-value-title">Feedback value</p>
+          <mat-radio-group class="feedback-value-radiogroup" (change)="onRadioButtonChange($event, userFeedback.feedbackId, true)">
+            <mat-radio-button
+              class="feedback-value-radiobutton"
+              [value]="1"
+              [checked]="userFeedback.feedbackValue === 'Valuable'">
+              Valuable
+            </mat-radio-button>
+
+            <mat-radio-button
+              class="feedback-value-radiobutton"
+              [value]="2"
+              [checked]="userFeedback.feedbackValue === 'NotValuable'">
+              Not valuable
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="comment" [class.marked]="userFeedback?.feedbackAverageMark">
+    <span *ngIf="userFeedback?.projectName" class="project-title">
+      {{ userFeedback?.projectName + " / "}}
+    </span>
+    <span class="date">{{ userFeedback.feedbackDate | date: "dd.MM.yyyy" }}</span>
+
+    <div class="text text__with-space">
+      <span class="text-title">{{ 'Person\'s strengths' }}</span>
+      <span #comment class="formatted-text"
+            [class.collapsed]="isCommentCollapsed">{{ userFeedback?.feedbackComment || userFeedback?.textQuestion1 }}
+      </span>
+
+      <button *ngIf="isCommentLong"
+              (click)="commentToggle()"
+              class="more-less-btn">{{ isCommentCollapsed ? 'More' : 'Less' }}
+      </button>
+    </div>
+
+    <div class="text">
+      <span class="text-title">{{ 'What needs to be improved' }}</span>
+      <span #improve class="formatted-text"
+            [class.collapsed]="isImproveCollapsed">{{ userFeedback?.feedbackWhatToImprove || userFeedback?.textQuestion2 }}
+      </span>
+
+      <button *ngIf="isImproveLong"
+              (click)="improveToggle()"
+              class="more-less-btn">{{ isImproveCollapsed ? 'More' : 'Less' }}
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="userFeedback?.feedbackAverageMark"
+       class="mark"
+       [class.high-rated]="highRating">
+    {{ userFeedback.feedbackAverageMark | number: '1.1-1' }}
+  </div>
+
+  <div class="scale">
+    <p><span>Feedback scale</span></p>
+    <div class="detail">
+      <p class="triangle">▲</p>
+      <andteam-feedback-scales-modal class="feedback-modal-scale" *ngFor="let scale of scaleData"
+                                     [scaleItem]="scale" [positionType]="userFeedback.positionType">
+      </andteam-feedback-scales-modal>
+    </div>
+  </div>
+
+  <ng-template #noScale>
+    <div class="no-scale">
+      <p><span>No feedback scale</span></p>
+    </div>
+  </ng-template>
+</div>
+
+<ng-template #chipsBlock>
+  <div class="chips-container">
+    <div *ngIf="userFeedback.accessRule === feedbackType.anonymous" class="chips anonymous">Anonymous</div>
+    <div *ngIf="userFeedback.accessRule === feedbackType.secret" class="chips secret">Secret</div>
+    <div *ngIf="userFeedback.isCustomer" class="chips client">Client</div>
+    <div class="chips position">{{ feedbackTypeChip }}</div>
+  </div>
+</ng-template>

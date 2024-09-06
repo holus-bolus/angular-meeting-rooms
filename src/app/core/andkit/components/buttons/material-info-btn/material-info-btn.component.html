@@ -1,0 +1,9 @@
+<button
+  class="btn"
+  [ngClass]="{
+    yellow: btnColor === btnStyle.YELLOW
+  }"
+  [ngStyle]="{'height': btnSize, 'width': btnSize}"
+  (click)="onBtnClick()">
+  {{ btnText }}
+</button>

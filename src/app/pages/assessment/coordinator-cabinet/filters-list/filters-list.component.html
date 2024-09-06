@@ -1,0 +1,48 @@
+<div class="filters">
+
+  <div class="filters-box">
+    <div class="filters-title">Resource manager</div>
+    <andteam-assessment-autocomplete
+      [placeholder]="resourceManagerPlaceholder"
+      [formControl]="filtersForm.get('resourceManager')"
+      [options]="filteredResourceManagers"
+      (selectOption)="onSelectOption($event, 'resourceManager')"
+      (blurField)="onBlurField($event, 'resourceManager')"
+      (clearField)="onClearField('resourceManager')"></andteam-assessment-autocomplete>
+  </div>
+
+  <div class="filters-box">
+    <div class="filters-title">Technology</div>
+    <andteam-assessment-autocomplete
+      [placeholder]="technologyPlaceholder"
+      [formControl]="filtersForm.get('technology')"
+      [options]="filteredTechnologies"
+      (selectOption)="onSelectOption($event, 'technology')"
+      (blurField)="onBlurField($event, 'technology')"
+      (clearField)="onClearField('technology')"></andteam-assessment-autocomplete>
+  </div>
+
+  <div class="filters-box" *ngIf="activeTab === assessmentTabs.interview">
+    <div class="filters-title">Interviewer</div>
+    <andteam-assessment-autocomplete
+      [placeholder]="interviewerPlaceholder"
+      [formControl]="filtersForm.get('interviewer')"
+      [options]="filteredInterviewers"
+      (selectOption)="onSelectOption($event, 'interviewer')"
+      (blurField)="onBlurField($event, 'interviewer')"
+      (clearField)="onClearField('interviewer')"></andteam-assessment-autocomplete>
+  </div>
+</div>
+
+<div class="buttons">
+  <andteam-button
+    class="text-button"
+    [type]="'text'"
+    (click)="onClearFilters()">Clear All</andteam-button>
+  <andteam-button
+    class="cancel"
+    [type]="'primary'"
+    (click)="onFilter()">Filter</andteam-button>
+</div>
+
+

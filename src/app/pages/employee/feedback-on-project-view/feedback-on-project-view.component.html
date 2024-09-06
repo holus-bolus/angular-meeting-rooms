@@ -1,0 +1,55 @@
+<div class="tab-wrapper">
+  <ng-container *ngIf="universalFeedbacksFiltered">
+    <div class="header">
+      <h1 class="title">Feedback on Projects</h1>
+      <div 
+        [ngClass]="btn-block">
+        <ng-container *ngIf="(availableProjects$ | async) as availableProjects">
+          <button 
+            [disabled]="availableProjects.length === 0"
+            [ngClass]="{'disabled': availableProjects.length === 0}"
+            class="btn-feedback"
+            (click)="onOpenCreateForm()">
+            Leave feedback
+          </button>
+        </ng-container>
+      </div>
+    </div>
+    <andteam-select-new ngDefaultControl 
+      *ngIf="universalFeedbacksFiltered.length > 0"
+      class="project-select"
+      [placeholder]="'Select project'" 
+      [options]="filteringProjects$ | async"
+      [option]="projectControl.value" 
+      [disableOptionCentering]="true"
+      [formControl]="projectControl"
+      [addAllOption]="true"
+      allOptionTitle="All Projects">
+    </andteam-select-new>
+
+    <div class="feedback-list">
+      <div *ngIf="!universalFeedbacksFiltered.length"
+          class="no-feedback">
+        <span class="no-feedback-image" [innerHTML]="noDataSvg | safe"></span>
+        <p>No feedback yet</p>
+        <p>You can leave feedback on the project you are working / used to work</p> 
+      </div>
+      <div *ngIf="universalFeedbacksFiltered.length > 0">
+        <span class="feedback-list-amount">Feedback ({{ universalFeedbacksFiltered.length }})</span>
+        <andteam-feedback-on-project-detail 
+          *ngFor="let feedback of universalFeedbacksFiltered; let i = index"
+          [isLastFeedback]="i === (universalFeedbacksFiltered.length - 1)"
+          [userFeedback]="feedback">
+        </andteam-feedback-on-project-detail>
+      </div>
+    </div>
+
+    <button *ngIf="universalFeedbacksFiltered.length > 3" class="btn-up" (click)="scrollTop()">
+      <i class="btn-up__arrow"></i>
+    </button>
+  </ng-container>
+
+  <div *ngIf="isShowLoader">
+    <andteam-spinner delay="0"></andteam-spinner>
+  </div>
+</div>

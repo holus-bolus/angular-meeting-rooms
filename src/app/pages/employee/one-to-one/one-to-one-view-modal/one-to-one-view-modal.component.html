@@ -1,0 +1,95 @@
+<div class="view-modal-wrap">
+  <div class="modal-view-one-to-one">
+    <button mat-button mat-dialog-close 
+      [innerHTML]="closeIcon | safe" 
+      class="modal-view-one-to-one-close"
+      automation-id="one-to-one-view-close-button">
+    </button>
+
+    <h2 class="modal-view-one-to-one-title">One to one</h2>
+
+    <div class="modal-view-one-to-one-row">
+      <p class="modal-view-one-to-one-column" automation-id="one-to-one-interview-date">
+        {{ data.oneToOne.interviewDate | date: dateType }}
+      </p>
+      <p class="modal-view-one-to-one-column" automation-id="one-to-one-current-type">
+        {{ data.oneToOne.type }}
+      </p>
+    </div>
+
+    <div class="modal-view-one-to-one-row">
+      <div class="modal-view-one-to-one-column" automation-id="one-to-one-next-interview-date">
+        {{ data.oneToOne.nextInterviewDate | date: dateType }}
+      </div>
+      <div class="modal-view-one-to-one-column" automation-id="one-to-one-type">
+        {{ data.oneToOne?.typeOfNext || '' }}
+      </div>
+    </div>
+
+    <div class="modal-view-one-to-one-row">
+      <div class="modal-view-one-to-one-column">
+        <span class="modal-view-one-to-one-risk" automation-id="one-to-one-risk-of-leaving">
+          {{ data.oneToOne.riskOfLeaving }}
+        </span>
+
+        <andteam-material-info-btn
+          automation-id="one-to-one-info-button"
+          class="info"
+          [btnText]="btnText"
+          [btnColor]="yellow"
+          disabled>
+        </andteam-material-info-btn>
+
+        <div class="pop-up" automation-id="one-to-one-pop-up">
+          <div class="triangle">▲</div>
+          <p>Low – no risks for the employee to leave, the employee is satisfied with the work.</p>
+          <p>Mid – the employee is not satisfied with: project, salary, career, etc.</p>
+          <p>High – a direct or indirect talk about leaving the company.</p>
+          <p>Critical – the employee has an offer from another company and discusses leaving</p>
+        </div>
+      </div>
+
+      <div *ngIf="data.oneToOne.riskFiringReason"
+           class="modal-view-one-to-one-column"
+           automation-id="one-to-one-risk-firing-reason">
+        {{ data.oneToOne.riskFiringReason.name }}
+      </div>
+    </div>
+
+    <div class="modal-view-one-to-one-row">
+      <div class="modal-view-one-to-one-column modal-view-one-to-one-column-full-width">
+        <span *ngIf="data.oneToOne.interviewer.position"
+              class="modal-view-one-to-one-position"
+              automation-id="one-to-one-interviewer-position">
+          {{ data.oneToOne.interviewer.position }}
+        </span>
+        <span class="modal-view-one-to-one-name" automation-id="one-to-one-interviewer-name">
+          {{ data.oneToOne.interviewer.name }}
+        </span>
+      </div>
+    </div>
+
+    <div class="modal-view-one-to-one-row">
+      <div class="modal-view-one-to-one-column modal-view-one-to-one-column-full-width">
+        <div 
+          class="modal-view-one-to-one-textarea" 
+          automation-id="one-to-one-comment"
+        >{{ data.oneToOne.comment }}</div>
+      </div>
+    </div>
+
+    <ng-container *ngFor="let update of data.oneToOne.updates"> 
+      <div class="modal-view-one-to-one-row one-to-one-update-container">
+        <div class="one-to-one-comment">
+          {{ update.updateDate | date: 'dd/MM/yyyy' }}
+        </div>
+        <div class="modal-view-one-to-one-column modal-view-one-to-one-column-full-width">
+          <div 
+            class="modal-view-one-to-one-textarea" 
+            automation-id="one-to-one-comment"
+          >{{ update.updateComment }}</div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

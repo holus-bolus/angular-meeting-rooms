@@ -1,0 +1,130 @@
+<div *ngIf="userInfo" class="wrapper">
+
+  <div class="skills">
+    <div class="general-info">
+      <div automation-id="position-inline-info" class="info-inline">
+        <div class="position">
+          <p class="title">Position</p>
+          <p class="text">{{ userInfo.position }}</p>
+        </div>
+      </div>
+
+      <div automation-id="department-inline-info" class="info-inline">
+        <div class="department">
+          <p class="title">Department</p>
+          <p class="text">{{ userInfo.department }}</p>
+        </div>
+      </div>
+
+      <div automation-id="hiring-date-inline-info" class="info-inline">
+        <div class="hiring-date">
+          <p class="title">Hiring date</p>
+          <p class="text">{{ userInfo.startDate | date: "dd.MM.yyyy" }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="userInfo.technologies.length" automation-id="technologies-inline-info" class="info-inline">
+      <p class="title">Technologies</p>
+      <div class="chips">
+        <ng-container *ngFor="let technology of userInfo.technologies">
+          <div class="chips-text-technologies">
+            <a class="link"
+                target="_blank"
+                href="{{ technology.linkMatrix }}"
+                [ngClass]="{ disabled: !technology.linkMatrix }">
+              <span>{{ technology.name }}</span>
+              <span *ngIf="technology.level"> / </span>
+              <span>{{ technology?.level }}</span>
+            </a>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+    <div automation-id="roles-inline-info" class="info-inline">
+      <p class="title">Roles</p>
+      <div class="chips" *ngIf="userInfo.roles.length; else none">
+        <div *ngFor="let role of userInfo.roles" class="chips-text">
+          {{ role.name }}
+        </div>
+      </div>
+      <ng-template #none>
+        <p class="text">None</p>
+      </ng-template>
+    </div>
+
+    <div automation-id="languages-info-inline" class="info-inline">
+      <p class="title">Languages</p>
+      <div class="chips">
+        <ng-container *ngFor="let language of userInfo.languages">
+          <div class="chips-text">{{ language.name }} / {{ language.level }}</div>
+        </ng-container>
+      </div>
+    </div>
+
+    <div *ngIf="userInfo.birthDate" automation-id="bday-info-inline" class="info-inline">
+      <p class="title">Date of birth</p>
+      <div class="info-inline-birth-container">
+        <p class="text">{{ userInfo.birthDate | date: "dd.MM.yyyy" }}</p>
+        <div *ngIf="currentUserId === userInfo.externalId">
+          <andteam-checkbox [formControl]="hiddenBirthdayControl">
+            <span class="text">Hide</span>
+          </andteam-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contacts">
+    <div automation-id="hr-info-inline" class="info-inline">
+      <p class="title">HR</p>
+      <a *ngIf="userInfo.hrManager.isWork; else notWorking" [routerLink]="['/employee/', userInfo.hrManager.id]"
+         class="info-link">
+        <span class="info-link-dotted">{{ userInfo.hrManager.name }}</span>
+      </a>
+      <ng-template #notWorking>
+        <span class="info-link-inactive">{{ userInfo.hrManager.name }}</span>
+      </ng-template>
+    </div>
+
+    <div automation-id="office-info-inline" class="info-inline">
+      <p class="title">Office</p>
+      <p class="text">{{ userInfo.location.name }}</p>
+    </div>
+
+<!--    <div automation-id="location-info-inline" class="info-inline">-->
+<!--      <p class="title">Location</p>-->
+<!--      <p class="text" *ngIf="userInfo.cityCountryLocation; else noLocation">{{ userInfo.cityCountryLocation?.countryTitle }}, {{ userInfo.cityCountryLocation.cityTitle }}</p>-->
+<!--      <ng-template #noLocation>-->
+<!--        - -->
+<!--      </ng-template>-->
+<!--    </div>-->
+
+    <div automation-id="email-info-inline" class="info-inline">
+      <p class="title">E-mail</p>
+      <a [href]="userInfo.emailCorp | link: linkType.MAIL | safe : 'url'" class="info-link">
+        <span class="info-link-dotted">{{ userInfo.emailCorp }}</span>
+      </a>
+    </div>
+
+    <div automation-id="skype-info-inline" class="info-inline">
+      <p class="title">Skype</p>
+      <a [href]="userInfo.skype | link: linkType.SKYPE | safe : 'url'" class="info-link">
+        <span class="info-link-dotted">{{ userInfo.skype }}</span>
+      </a>
+    </div>
+
+    <div *ngIf="userInfo.mobilePhone" automation-id="phone-info-inline" class="info-inline">
+      <p class="title">Phone number</p>
+      <div class="info-inline-phone-container">
+        <p class="text">{{ userInfo.mobilePhone | phoneNumber }}</p>
+        <andteam-checkbox *ngIf="userInfo.externalId === currentUserId" [formControl]="hiddenPhoneControl">
+          <span class="text">Hide</span>
+        </andteam-checkbox>
+      </div>
+    </div>
+  </div>
+</div>
+
+

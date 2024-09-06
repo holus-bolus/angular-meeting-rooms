@@ -1,0 +1,36 @@
+@import 'src/styles/shared-styles/colors';
+@import 'src/styles/shared-styles/mixins';
+
+.survey-successful-window {
+  &-wrapper {
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &-content {
+    margin-top: 50px;
+    max-width: 396px;
+    text-align: center;
+  }
+
+  &-title {
+    @include font-base(24px, 300, 31.2px);
+  }
+
+  &-subtitle {
+    @include font-base(14px, 400, 22.4px);
+
+    margin-top: 10px;
+    color: $tag-box-border;
+  }
+
+  &-button {
+    margin-top: 50px;
+
+    ::ng-deep .btn_submit {
+      width: 180px;
+    }
+  }
+}

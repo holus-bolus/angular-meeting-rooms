@@ -1,0 +1,8 @@
+<header class="error-header">
+  <div class="error-header-context">
+    <a [routerLink]="['/']">
+      <span [innerHTML]="logoIcon"></span>
+    </a>
+    <span class="location">{{location$ | async}}</span>
+  </div>
+</header>

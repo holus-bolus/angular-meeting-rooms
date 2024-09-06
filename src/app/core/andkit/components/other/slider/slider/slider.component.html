@@ -1,0 +1,26 @@
+<div class="slider">
+  <div class="arrow prev"
+       *ngIf="isShowControls"
+       [innerHTML]="arrow | safe"
+       (click)="onArrow('previous')"></div>
+  <div class="arrow next"
+       *ngIf="isShowControls"
+       [innerHTML]="arrow | safe"
+       (click)="onArrow('next')"></div>
+  <div class="slider__content">
+    <div #carousel class="slides-wrapper">
+      <ng-container *ngFor="let slideItem of slidesItems">
+        <div #slide
+             [ngStyle]="{'margin-right': slideItemsGap}">
+          <ng-container [ngTemplateOutlet]="slideItem.template"></ng-container>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="radio-buttons" *ngIf="isShowControls">
+    <div *ngFor="let buttonState of radioButtonsState; let i = index"
+         (click)="onButtonClick(i)"
+         [class.active]="buttonState"
+         class="radio-buttons__button"></div>
+  </div>
+</div>

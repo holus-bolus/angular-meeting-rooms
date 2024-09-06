@@ -1,0 +1,29 @@
+<div class="wrapper">
+  <div class="wrapper-item wrapper-filter">
+    <andteam-autocomplete
+      [ngClass]="{ 'wrapper-filter__filled': searchControl.value }"
+      placeholder="Search project"
+      [focus]="true"
+      [control]="searchControl"
+      [options]="[]"
+    >
+    </andteam-autocomplete>
+  </div>
+  <ng-container *ngIf="projectsFiltered.length > 0; else noProjects">
+    <div class="project-list">
+      <div
+        *ngFor="let project of projectsFiltered"
+        class="wrapper-item wrapper-project"
+        (click)="onCheck(project)">
+        {{ project.name }}
+      </div>
+    </div>
+  </ng-container>
+  <div>
+    <ng-template #noProjects>
+      <div class="wrapper-item wrapper-project wrapper-item-empty">
+        No projects...
+      </div>
+    </ng-template>
+  </div>
+</div>

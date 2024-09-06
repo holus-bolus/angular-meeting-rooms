@@ -1,0 +1,18 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.error-header {
+  background: $white-color;
+  padding: 25px 50px;
+
+  &-context {
+    width: 105px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .location {
+    @include font-base(14px, 500, 16px);
+  }
+}

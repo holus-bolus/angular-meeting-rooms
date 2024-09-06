@@ -1,0 +1,45 @@
+@import 'src/styles/shared-styles/colors';
+@import 'src/styles/shared-styles/mixins';
+
+.extra-mile {
+  max-width: 300px;
+  color: $objectives-text-color;
+
+  &-selector {
+    display: flex;
+    align-items: center;
+    padding: 0 0 25px 0;
+
+    &-toggle {
+      margin-right: 15px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    &-label {
+      @include font-base(18px, 300, 140%);
+      color: $text-secondary;
+    }
+  }
+
+  &-comment {
+    &-title {
+      @include font-base(14px, 300, 130%);
+      color: $text-secondary;
+      padding: 0 0 5px 0;
+    }
+
+    &-text {
+      @include font-base(16px, 300, 160%);
+      overflow-wrap: break-word;
+    }
+  }
+}
+
+:host ::ng-deep {
+  .mat-slide-toggle {
+    pointer-events: none;
+  }
+}

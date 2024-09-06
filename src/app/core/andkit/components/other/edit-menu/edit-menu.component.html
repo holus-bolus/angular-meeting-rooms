@@ -1,0 +1,15 @@
+<div class="menu">
+  <andteam-dropdown-button
+    (mouseenter)="onMouseEnter()"
+    (openDropdown)="isCloseDropdown()">
+  </andteam-dropdown-button>
+
+  <div class="menu-list"
+       *ngIf="isOpenDropdown"
+       andteamOuterClick
+       (outerClick)="onCloseDropdown($event)">
+        <a [routerLink]="['/' + route, param]" class="menu-item">Edit</a>
+
+        <a (click)="onDelete()" class="menu-item">Delete</a>
+  </div>
+</div>

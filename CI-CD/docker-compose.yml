@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  frontend-angular:
+    container_name: $PROJECT-$APP-$CI_COMMIT_BRANCH
+    image: $AND_DOCKER_REGISTRY_NAME/$PROJECT-$APP:$CI_COMMIT_BRANCH
+    ports:
+      - 30080:80
+    restart: always
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '50m'

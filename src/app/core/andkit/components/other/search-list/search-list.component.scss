@@ -1,0 +1,119 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.search-list {
+  width: 100%;
+  border-radius: 2px;
+  box-shadow: 0 5px 15px rgba(5, 31, 43, 0.17);
+  position: absolute;
+  background: $white-color;
+  z-index: 10;
+  margin-top: 5px;
+
+  .search {
+    position: relative;
+
+    &-field {
+      width: 100%;
+      border: 0;
+      border-bottom: 1px solid $border-bottom-color;
+      position: relative;
+      color: $objectives-text-color;
+      box-sizing: border-box;
+      padding: 10px 45px 10px 15px;
+
+      &::placeholder {
+        color: $text-tertiary;
+      }
+    }
+
+    &-icon {
+      position: absolute;
+      top: 9px;
+      right: 20px;
+      z-index: 10;
+    }
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    padding: 5px 0;
+    max-height: 255px;
+    overflow-y: scroll;
+  }
+
+  .item {
+    @include font-base(14px, 400, 16px);
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    line-height: 47px !important;
+    color: $objectives-text-color;
+
+    &:hover {
+      background-color: $body-background;
+    }
+  }
+
+  ::ng-deep {
+    .mat-checkbox {
+      width: 100%;
+
+      .mat-checkbox-frame {
+        border: 1px solid $text-tertiary;
+        border-radius: 2px;
+        width: 22px;
+        height: 22px;
+      }
+
+      .mat-checkbox-checkmark {
+        width: 22px;
+        height: 22px;
+      }
+
+      .mat-checkbox-checkmark-path {
+        stroke: $primary;
+        width: 22px;
+        stroke-width: 3.13333px;
+      }
+
+      .mat-checkbox-inner-container {
+        height: 22px;
+        width: 22px;
+        margin-right: 8px;
+      }
+
+      &:hover .mat-checkbox-frame {
+        border-color: $primary;
+      }
+    }
+
+    .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+      background-color: $primary;
+      border-radius: 2px;
+      width: 22px !important;
+
+      svg path {
+        stroke: $white-color;
+      }
+    }
+
+    .mat-checkbox-layout {
+      width: 100% !important;
+
+      .mat-checkbox-label {
+        line-height: 47px;
+        display: flex;
+        width: calc(100% - 50px);
+      }
+    }
+
+    .item:hover {
+      .mat-checkbox-frame {
+        border-color: $activities-checkbox-color;
+      }
+    }
+  }
+}

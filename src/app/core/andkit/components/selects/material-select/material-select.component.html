@@ -1,0 +1,35 @@
+<div class="select-wrapper" [ngClass]="{center: isCenter}">
+  <mat-form-field appearance="fill">
+    <mat-label *ngIf="!option; else name"
+               class="placeholder">
+        {{ placeholder }}
+        <span class="icon" [innerHTML]="mdi_filter_listSvg | safe"></span>
+    </mat-label>
+
+    <ng-template #name>
+      <mat-label class="placeholder title">
+        {{ option.name }}
+      </mat-label>
+    </ng-template>
+
+    <mat-select ngDefaultControl
+                [panelClass]="panelClasses"
+                [formControl]="optionControl"
+                [required] = "isRequired"
+                (keyup.enter)="onKeyEnterUp($event)">
+      <mat-option *ngFor="let option of options" class="option-text"
+                  (click)="onClick(option)">
+        {{option.name}}
+      </mat-option>
+    </mat-select>
+
+    <mat-error *ngIf="optionControl.hasError('required')">{{ errorMessage }}</mat-error>
+  </mat-form-field>
+
+  <div *ngIf="option"
+       class="select-wrapper-close"
+       (click)="onReset()">
+    <div [innerHTML]="assessmentCloseSvg | safe">
+    </div>
+  </div>
+</div>

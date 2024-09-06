@@ -1,0 +1,68 @@
+<div class="overtime-table-wrapper">
+  <div class="overtime-table-wrapper-header">
+    <div>
+      <div class="title-h1 table-over-h1">
+        <span>{{ tableTitle }}</span>
+        <br>
+        <h2 *ngIf="isNullData" class="title-h2">{{ titleOfLink }}
+          <a class="title-link-h2" href="{{linkOnWiki}}" target="_blank">
+            <span class="title-link">{{ titleOfWiki }}</span>
+          </a>
+        </h2>
+      </div>
+    </div>
+    <div class="overtime-controls-wrapper">
+      <div *ngIf="types$ | async as types" class="overtime-select">
+        <mat-form-field appearance="fill" (keyup.enter)="onKeyEnterUp($event)">
+          <mat-select ngDefaultControl
+                      autofocus
+                      andteamScroll
+                      placeholder="Overtime type*"
+                      panelClass="overs-type-panel"
+                      disableOptionCentering
+                      [formControl]="typeControl"
+                      [disabled]="!types.length">
+            <mat-option *ngFor="let type of types"
+                        matTooltip="{{ type.description }}"
+                        matTooltipClass="overtype-tooltip"
+                        matTooltipPosition="left"
+                        [value]="type"
+                        (click)="onSelectType(type)"
+                        class="select">
+              {{ type.name }}
+            </mat-option>
+          </mat-select>
+
+          <div [innerHTML]="portalArrowSvg | safe"
+               class="arrow-down">
+          </div>
+        </mat-form-field>
+
+        <div *ngIf="types.length; else noOvertypes" class="overtime-period">{{hintMessage$ | async}}</div>
+
+        <ng-template #noOvertypes>
+          <div class="overtime-period">You can't add overtimes. Please contact your HR</div>
+        </ng-template>
+      </div>
+
+      <div class="overtime-button">
+        <andteam-button *ngIf="buttonName"
+                        [disabled]="typeControl.invalid"
+                        (click)="onClickButton()">
+          {{ buttonName }}
+        </andteam-button>
+      </div>
+    </div>
+  </div>
+
+  <ng-content *ngIf="(data && data.length); else noData"></ng-content>
+
+  <ng-template #noData>
+    <andteam-no-data [noDataMessage]="noDataMessage"
+                     [isLink]="true"
+                     [wikiMessage]="titleOfLink"
+                     [linkOnWiki]="linkOnWiki"
+                     [titleOfWiki]="titleOfWiki">
+    </andteam-no-data>
+  </ng-template>
+</div>

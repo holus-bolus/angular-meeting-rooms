@@ -1,0 +1,48 @@
+<div class="overtimes-form mat-elevation-z5">
+  <div class="overtimes-form__field overtimes-form__type">
+    <andteam-autocomplete
+      placeholder="Type"
+      [componentType]="componentsType"
+      [control]="form.get('type')"
+      [options]="filteredTypes">
+    </andteam-autocomplete>
+  </div>
+
+  <div class="overtimes-form__field overtimes-form__dates">
+    <andteam-date-period-picker
+      [startDate]="form.get('startDate')"
+      [endDate]="form.get('endDate')">
+    </andteam-date-period-picker>
+  </div>
+
+  <div class="overtimes-form__field overtimes-form__project">
+    <andteam-autocomplete placeholder="Project"
+                          class="project-field"
+                          [componentType]="componentsType"
+                          [options]="projectOptions$ | async"
+                          [control]="form.get('project')">
+    </andteam-autocomplete>
+  </div>
+
+  <div class="overtimes-form__field overtimes-form__actions">
+    <div class="overtimes-form__actions_button">
+      <andteam-button
+        [componentType]="buttonsComponentType"
+        [type]="buttonType.PRIMARY"
+        [disabled]="!isDataInputExists()"
+        (click)="onSubmit()">
+        Apply
+      </andteam-button>
+    </div>
+
+    <div class="overtimes-form__actions_button">
+      <andteam-button
+        [componentType]="buttonsComponentType"
+        [type]="buttonType.SECONDARY"
+        [disabled]="!isDataInputExists()"
+        (click)="onReset()">
+        Reset
+      </andteam-button>
+    </div>
+  </div>
+</div>

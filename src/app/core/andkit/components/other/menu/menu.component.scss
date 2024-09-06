@@ -1,0 +1,93 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.menu {
+  position: relative;
+  user-select: none;
+
+  &-avatar {
+    height: 45px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+
+  .avatar-vector {
+    color: $white-color;
+  }
+
+  .scrollable-avatar-vector {
+    color: $username-color;
+  }
+
+  &-vector {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    color: $white-color;
+
+    &:hover {
+      background-color: $primary-active;
+    }
+
+    &-active {
+      background-color: $primary-active;
+    }
+  }
+
+  &-box {
+    z-index: 2;
+    position: absolute;
+    top: 60px;
+    right: -15px;
+    width: 208px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  &-username {
+    @include font-base(16px, 500, 19px);
+
+    background: $text-tertiary;
+    color: $username-color;
+    padding: 30px 30px 20px;
+  }
+
+  &-list {
+    display: flex;
+    flex-direction: column;
+    background: $white-color;
+  }
+
+  &-item {
+    @include font-base(14px, 400, 16px);
+
+    text-decoration: none;
+    color: $username-color;
+    padding: 15px 30px;
+    cursor: pointer;
+
+    &:hover {
+      background: $menu-item-background;
+    }
+  }
+
+  .meeting-room {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.disabled {
+  background: $disabled-button-add;
+  cursor: default;
+  pointer-events: none;
+}
+
+.partition {
+  margin: 0 30px;
+  border-bottom: 1px solid $text-tertiary;
+}

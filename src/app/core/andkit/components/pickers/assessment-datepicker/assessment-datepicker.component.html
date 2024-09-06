@@ -1,0 +1,20 @@
+<div class="picker-wrapper">
+    <div class="control-panel">
+        <andteam-control-panel [currentDate]="currentDate"></andteam-control-panel>
+    </div>
+    <div class="calendar-days grid-days">
+        <span *ngFor="let day of weekDays" class="week-day">
+            {{day | truncate : 2 : false : ''}}
+        </span>
+        <span *ngFor="let day of days"
+              class="calendar-day"
+              [ngClass]="{
+              'calendar-day_selected': day.selected,
+              'calendar-day_not-selected': !day.selected && !day.disabled,
+              'calendar-day_disabled': day.disabled
+              }"
+        >
+      {{day.value}}
+      </span>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="confirmation">
+  <andteam-modal [isConfirmationType]="isConfirmationType"
+                 [isConfirmationModal]="isConfirmationModal"
+                 (closeClick)="cancelConfirm()">
+    <div class="confirmation-box">
+      <div class="confirmation-icon" [innerHTML]="cautionIcon"></div>
+      <div class="confirmation-titles">
+        <div *ngIf="text" class="confirmation-title">{{ text }}</div>
+        <div *ngIf="subText" class="confirmation-subtitle">{{ subText }}</div>
+      </div>
+    </div>
+    <div class="confirmation-button">
+      <andteam-button [type]="firstButtonType" (click)="cancelConfirm()">{{ cancelConfirmTextButton }}</andteam-button>
+      <andteam-button (click)="confirm()">{{ confirmTextButton }}</andteam-button>
+    </div>
+  </andteam-modal>
+</div>

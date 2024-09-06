@@ -1,0 +1,8 @@
+<ng-container *ngIf="offices$">
+    <andteam-office-selector
+      [isConfirmationModal]="isConfirmationModal"
+      [offices$]="offices$"
+      (officeSelected)="handleChildSelection($event)"
+      (closeClick)="onOpenConfirmationModal()">
+    </andteam-office-selector>
+</ng-container>

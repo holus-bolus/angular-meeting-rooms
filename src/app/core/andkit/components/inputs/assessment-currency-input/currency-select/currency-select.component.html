@@ -1,0 +1,3 @@
+<div class="select-wrapper" [ngClass]="{'error': error, 'assessment-focus': isFocused}">
+  <andteam-portal-select [componentType]="selectType" [option]="selectedCurrency" [options]="currencies" (selectOption)="onSelect($event.id)"></andteam-portal-select>
+</div>

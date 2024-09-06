@@ -1,0 +1,132 @@
+<div *ngIf="userInfo" class="tab-wrapper">
+  <div class="user-info">
+    <div class="avatar-box">
+      <div class="avatar">
+        <img *ngIf="userInfo.photo; else defaultPic"
+             [src]="userInfo.photo"
+             class="avatar-image" alt="avatar">
+
+        <ng-template #defaultPic>
+          <div [innerHTML]="defaultAvatar | safe" class="avatar-image"></div>
+        </ng-template>
+      </div>
+
+      <div *ngIf="false" class="avatar-loader">
+        <andteam-loader></andteam-loader>
+      </div>
+    </div>
+
+    <div class="info">
+      <div *ngIf="userInfo.resourceManagerHierarchy?.length" class="breadcrumbs">
+        <span class="breadcrumbs-title">Resource Managers</span>
+        <andteam-breadcrumbs [breadcrumbsList]="breadcrumbsList"
+                             [maxItemsVisible]="maxItemsVisible">
+        </andteam-breadcrumbs>
+      </div>
+
+      <div class="name">
+          <div class="name-en">{{ userInfo.fullNameEn || userInfo.fullNameRu }}</div>
+          <div
+            *ngIf="userInfo.fullNameEn && userInfo.fullNameEn !== userInfo.fullNameRu"
+            class="name-ru">{{ userInfo.fullNameRu }}
+          </div>
+      </div>
+
+      <div class="links">
+
+        <div *ngIf="(isSalaryReviewTab && userInfo.nextAssessmentDate) || userInfo.nextAssessmentDate" class="links-assessment" >
+          <span [innerHTML]="dateSvg | safe" class="links-assessment-icon"></span>
+          <button [ngClass]="{ 'disabled': !isSalaryReviewTab }"
+                  class="links-assessment-button"
+                  (click)="goSalaryReviewTab()">
+            <span class="links-text">The next assessment is no earlier than
+              <span>{{ userInfo.nextAssessmentDate | date: "MMMM yyyy"}}</span>
+            </span>
+          </button>
+        </div>
+
+        <div *ngIf="currentUserId !== userInfo.externalId" class="links-feedback">
+          <span [innerHTML]="feedbackIcon | safe" class="links-feedback-icon"></span>
+          <button class="links-feedback-button" (click)="goToFeedbackPage()">
+            <span class="links-text">Leave feedback</span>
+          </button>
+        </div>
+
+        <div *ngIf="userInfo.vacation" class="links-vacation">
+          <span [innerHTML]="vacationSvg | safe" class="links-vacation-icon"></span>
+            <span class="links-text__vacation">
+              Vacation:
+              <span class="links-text__date">
+                {{ userInfo.vacation.fromDate | date: "dd.MM.yyyy" + ' —'}}
+              </span>
+              <span class="links-text__date">
+                {{ userInfo.vacation.toDate | date: "dd.MM.yyyy" }}
+              </span>
+            </span>
+        </div>
+
+        <button *ngFor="let button of celebrationsButtons" class="feedback-button" (click)="openEventSendWindow(button)">
+          <img src="data:image/png;base64,{{ button.icon }}" alt="{{ button.shortName }}" class="feedback-button-icon">
+          <span class="feedback-text">{{ button.buttonName }}</span>
+        </button>
+
+        <ng-container *ngIf="surveyButton">
+          <ng-container *ngFor="let button of surveyButton">
+            <button class="feedback-button"
+                    [disabled]="button.isCompleted && !button.showResults"
+                    (click)="openSurveyWindow(button.isCompleted)">
+              <img [src]="'data:image/png;base64,' + button.icon" class="feedback-icon" alt=""/>
+              <span class="feedback-text">{{button.text}}</span>
+            </button>
+            <span *ngIf="button.resultDate && button.isCompleted && !button.showResults" class="link-error">
+              Results will be available {{ button.resultDate | date:'dd.MM.yyyy' }}
+            </span>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <div class="cards">
+
+    <andteam-user-skills-and-contacts
+      [userInfo]="userInfo"
+      [currentUserId]="currentUserId">
+    </andteam-user-skills-and-contacts>
+
+    <div class="cards-extra-mile-column">
+      <div *ngIf="userInfo.riskOfLeaving" class="user-info-leaving">
+        <p class="user-info-leaving-title">Risk of leaving</p>
+
+        <andteam-label-button [isDisabled]="isLabelDisabled"
+                              [label]="riskOfLeaving"
+                              (click)="goToOneToOnePage()">
+        </andteam-label-button>
+      </div>
+
+      <andteam-user-expert-activities
+        *ngIf="userInfo.expertActivities"
+        [isCanEditActivities]="userInfo.canEditExpertActivities"
+        [expertActivities]="userInfo.expertActivities"
+        [userId]="userInfo.externalId"
+        (editedActivitiesEmit)="updateExpertActivities($event)">
+      </andteam-user-expert-activities>
+
+      <andteam-user-extra-mile
+        *ngIf="userInfo.extraMile; else isNoExtraMileAccess"
+        [extraMiles]="userInfo.extraMile"
+        [userId]="userInfo.externalId">
+      </andteam-user-extra-mile>
+    </div>
+
+    <ng-template #isNoExtraMileAccess>
+      <div class="card"></div>
+    </ng-template>
+  </div>
+  <andteam-assessment-toast-notification
+    *ngIf="isActivitiesUpdate$ | async"
+    (fadeOut)="onFadeOut()"
+  >
+    <span>Expert activities updated</span>
+  </andteam-assessment-toast-notification>
+</div>

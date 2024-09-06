@@ -1,0 +1,32 @@
+<div class="wrapper">
+  <div class="projects">
+    <h2 class="projects-title">Projects</h2>
+
+    <div class="projects-list">
+      <div class="projects-list-item" *ngFor="let allocationCurrent of allocationsCurrent">
+        <andteam-user-project 
+          [userId]="userId"
+          [allocation]="allocationCurrent">
+        </andteam-user-project>
+      </div>
+    </div>
+
+    <ng-container *ngIf="allocationsPrevious?.length > 0">
+      <div *ngIf="isShowPreviousProjects" class="projects-list">
+        <div *ngFor="let allocationPrevious of allocationsPrevious" class="projects-list-item">
+          <andteam-user-project 
+            [userId]="userId"
+            [allocation]="allocationPrevious">
+          </andteam-user-project>
+        </div>
+      </div>
+
+      <button class="projects-btn" (click)="onTogglePrevProjects()">
+        <span class="btn-name">{{ toggleBtnName }}</span>
+        <span class="material-icons">
+          {{ isShowPreviousProjects ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+        </span>
+      </button>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,2 @@
+<div *ngIf="!isFull" [ngClass]="{'hover':onHover}" [innerHTML]="emptyIcon | safe"></div>
+<div *ngIf="isFull" [innerHTML]="fullicon | safe"></div>

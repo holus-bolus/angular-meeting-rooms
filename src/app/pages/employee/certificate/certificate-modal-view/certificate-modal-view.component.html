@@ -1,0 +1,71 @@
+<div class="certificate-modal">
+  <div class="certificate-modal-item">
+    <andteam-certificate-view
+      [certificate]="data.certificates[data.currentIndex]"
+      [techLevelList]="data.techLevelList"
+      [technologies]="data.technologies"
+      [isViewVersion]="true"
+      #download>
+    </andteam-certificate-view>
+
+    <div class="certificate-modal-item-date">
+      {{data.certificates[data.currentIndex].createDate | certificateDate | uppercase}}
+    </div>
+  </div>
+
+  <div
+    *ngIf="isArrowDisabled"
+    [innerHTML]="arrowIcon"
+    class="certificate-modal-arrow-left"
+    [class.disabled]="isLeftArrowDisabled"
+    (click)="slideLeft()">
+  </div>
+  <div
+    *ngIf="isArrowDisabled"
+    [innerHTML]="arrowIcon"
+    class="certificate-modal-arrow-right"
+    [class.disabled]="isRightArrowDisabled"
+    (click)="slideRight()">
+  </div>
+
+  <div *ngIf="isArrowDisabled" class="certificate-modal-bottom-count">
+    <div
+      *ngFor="let item of data.certificates; let index = index"
+      class="certificate-modal-bottom-count-item"
+      [class.active]="index === data.currentIndex"
+      (click)="slideToNextVersion(index)">
+    </div>
+  </div>
+</div>
+
+<div class="modal-header" [class.no-version]="!isArrowDisabled">
+  <div class="modal-header-counter" *ngIf="isArrowDisabled">
+    <span>{{data.currentIndex + 1}} / {{data.certificates.length}}</span>
+  </div>
+
+  <div class="modal-header-icons">
+    <span
+      *ngIf="data.canEdit && isLastCertificateVersion"
+      [innerHTML]="editIcon"
+      class="modal-header-icons-item"
+      (click)="editCertificateVersion()">
+    </span>
+    <span
+      *ngIf="data.canEdit && isLastCertificateVersion"
+      [innerHTML]="letterIcon"
+      class="modal-header-icons-item-send"
+      (click)="onSend()">
+    </span>
+    <span *ngIf="data.canSave" [innerHTML]="downloadIcon" class="modal-header-icons-item" (click)="downloadCertificate()"></span>
+    <span *ngIf="data.canPrint" [innerHTML]="printerIcon" class="modal-header-icons-item" (click)="printCertificate()"></span>
+  </div>
+</div>
+
+<button mat-dialog-close
+        class="modal-close"
+        [innerHTML]="closeIcon">
+</button>
+
+<andteam-assessment-toast-notification *ngIf="isCertificateNotification$ | async" (fadeOut)="onFadeOut()">
+  <span>{{getNotificationText}}</span>
+</andteam-assessment-toast-notification>

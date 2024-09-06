@@ -1,0 +1,110 @@
+<div class="tab-wrapper">
+  <ng-container *ngIf="vacationsInfo">
+    <div class="vacation">
+      <h2 class="vacation-header">{{ vacationsInfo.canCreate || isItOwnUserVacationAndDateExpire() ? vacationText.canCreateHeader : (vacationText.canNotCreateHeader + ' ' + employeeName )}}</h2>
+      <div class="vacation-year">
+        <div class="vacation-year-img" [innerHTML]="dateSvg"></div>
+        <span class="vacation-year-title">Working year:</span>
+        <span class="vacation-year-period">
+          {{ vacationsInfo.workingYear }}
+        </span>
+      </div>
+
+      <div *ngIf="vacationsInfo.canCreate || isItOwnUserVacationAndDateExpire(); else viewMode" class="vacation-plan">
+        <div class="vacation-block">
+          <h2 class="vacation-subheader">{{ isMonthsChosen.value ? vacationText.editHeder : vacationText.addHeader }}</h2>
+          <p *ngIf="isItOwnUserVacationAndDateExpire(); else defaultText" class="vacation-block-text">
+            You have chosen 2 main periods (only months) when you want to take a vacation in the following calendar year.
+            This info is necessary for the company to prepare a vacation schedule, but you can change the planned vacation periods by creating a
+            <a class="vacation-block-link" href="https://jsupport.andersenlab.com/servicedesk/customer/portal/11/create/122">ticket</a>.
+          </p>
+
+          <ng-template #defaultText>
+            <p class="vacation-block-text">
+              <ng-container *ngIf="isMonthsChosen.value; then editMainText; else addMainText"></ng-container>
+            </p>
+          </ng-template>
+
+          <ng-template #addMainText>
+            Please choose 2 main periods (only months) when you want to take a vacation in the following calendar year. 
+            This info is necessary for the company to prepare a vacation schedule, but you can change the planned vacation periods
+            before {{ vacationDeadlineDate }}, after this date by creating a ticket. All the data will be gathered and sent to Human
+            resource department the next day.
+          </ng-template>
+
+          <ng-template #editMainText>
+            You have chosen 2 main periods (only months) when you want to take a vacation in the following calendar year.
+            This info is necessary for the company to prepare a vacation schedule, but you can change the planned vacation periods
+            before {{ vacationDeadlineDate }}, after this date by creating a ticket. All the data will be gathered and sent to Human
+            resource department the next day.
+          </ng-template>
+
+          <p class="vacation-block-text">
+            A month before the start of your planned vacation you will receive an email with explanation on how to specify
+            the exact dates of the vacation or postpone your vacation periods. See more info
+            <a class="vacation-block-link" [href]="vacationWikiLink">on wiki</a>.
+          </p>
+        </div>
+
+        <div class="vacation-form">
+          <div class="vacation-form-select">
+            <andteam-select-new ngDefaultControl
+                            [formControl]="vacationFirstMonthControl"
+                            [placeholder]="'Part 1 — Month*'"
+                            [options]="firstMonthOptions"
+                            [option]="vacationsInfo.vacation?.firstMonth || null"
+                            [error]="true"
+                            [isFieldDisabled]="isItOwnUserVacationAndDateExpire()"
+                            disableOptionCentering
+                            (selectOption)="onSelectFirstMonth($event)">
+            </andteam-select-new>
+          </div>
+
+          <div class="vacation-form-select">
+            <andteam-select-new ngDefaultControl
+                            [formControl]="vacationSecondMonthControl"
+                            [placeholder]="'Part 2 — Month*'"
+                            [options]="secondMonthOptions"
+                            [option]="vacationsInfo.vacation?.secondMonth || null"
+                            [error]="true"
+                            [isFieldDisabled]="isItOwnUserVacationAndDateExpire()"
+                            disableOptionCentering
+                            (selectOption)="onSelectSecondMonth($event)">
+            </andteam-select-new>
+          </div>
+
+          <andteam-button
+            class="vacation-form-button"
+            [disabled]="!isButtonActive.value"
+            (click)="onSubmit()">
+            Save vacation periods
+          </andteam-button>
+        </div>
+      </div>
+
+      <ng-template #viewMode>
+        <div class="vacation-plan">
+          <div *ngIf="vacationsInfo.vacation; else emptyPage" class="vacation-block">
+            <h2 class="vacation-subheader">Employee`s vacation periods were added</h2>
+            <p class="vacation-block-text">
+              Employee chose 2 main periods (only months) when they want to take a vacation in the following calendar year:
+            </p>
+            <p class="vacation-block-text">part 1 — <span class="vacation-block-month">{{ vacationsInfo.vacation.firstMonth.name }}</span></p>
+            <p class="vacation-block-text">part 2 — <span class="vacation-block-month">{{ vacationsInfo.vacation.secondMonth.name }}</span></p>
+          </div>
+        </div>
+
+        <ng-template #emptyPage>
+            <div class="vacation-block vacation-block-no-data">
+              <div [innerHTML]="noDataIcon | safe" class="vacation-block-img"></div>
+              <p class="vacation-block-text">Employee hasn`t chosen their vacation periods yet</p>
+            </div>
+        </ng-template>
+      </ng-template>
+    </div>
+  </ng-container>
+</div>
+
+<andteam-assessment-toast-notification *ngIf="isToastNotification" (fadeOut)="onFadeOut()">
+  <span>{{ notificationText }}</span>
+</andteam-assessment-toast-notification>

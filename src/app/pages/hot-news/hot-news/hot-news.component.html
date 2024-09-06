@@ -1,0 +1,59 @@
+<div class="content" #hotNews>
+  <picture class="images">
+    <source type="image/webp" srcset="/assets/images/news.webp">
+    <source type="image/jpeg" srcset="/assets/images/news.jpg">
+    <img class="image" src="/assets/images/news.jpg">
+    <div class="gradient"></div>
+  </picture>
+  <div class="content-box">
+    <div class="content-title">Hot News<span class="content-title-point">.</span></div>
+
+    <div class="content-description">
+      Check our latest corporate news! Important. Official. Hot.
+    </div>
+
+  <div class="content-back" *ngIf="search.value">
+    <button (click)="goToHotNews(1)" class="backward-link">
+      <span [innerHTML]="backIcon" class="backward-icon"></span>
+      All articles
+    </button>
+  </div>
+    <div class="content-filter-box">
+       <andteam-portal-input
+       [formControl]="search"
+       placeholder="Search"></andteam-portal-input>
+
+       <andteam-tags
+        [allTags]="allTags"
+        [titleTags]="titleTags"
+        [formControl]="tag"></andteam-tags>
+    </div>
+
+    <div class="content-result" *ngIf="search.value">
+      There are {{totalItems | i18nPlural: messageMapping : locale}} found at your request
+    </div>
+  </div>
+
+  <div class="news-block">
+    <ng-container *ngIf="news.length">
+      <andteam-news-block
+        *ngFor="let pieceNews of news | paginate: paginationConfig"
+        [pieceNews]="pieceNews"
+        (deletion)="onDelete($event)"
+        (search)="searchByTag($event)"></andteam-news-block>
+    </ng-container>
+  </div>
+
+  <div class="pagination-block">
+    <andteam-pagination
+      *ngIf="news.length && !isOnePage"
+      [isPortalType]="isPortalType"
+      [paginationConfig]="paginationConfig"
+      (sendPageNumber)="goToPage($event)">
+    </andteam-pagination>
+  </div>
+</div>
+<div class="footer">
+  <andteam-footer></andteam-footer>
+</div>
+

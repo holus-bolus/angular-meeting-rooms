@@ -1,0 +1,35 @@
+<div class="wrapper-activities">
+  <h1 class="activities-title">Expert Activities</h1>
+  <andteam-expert-activities-filter [locationsList]="locationsList$ | async"
+                                    [technologiesList]="technologiesList$ | async"
+                                    [englishLevelList]="englishLevelLeList"
+                                    [techLevelList]="technologiesLevelList$ | async"
+                                    (filteredData)="getFilteredList($event)"
+                                    (resetData)="resetFilteredList()">
+  </andteam-expert-activities-filter>
+  <div class="activities-employers">
+    <span alt="icon" class="activities-employers-img" [innerHTML]="employeesIcon | safe"></span>
+    <span class="activities-employers-count">{{ totalItemsCount$ | async }}<span class="activities-employers-text"> Employers</span></span>
+  </div>
+  <andteam-expert-activities-table
+    class="activities-table"
+    [expertActivitiesList]="expertActivitiesList$ | async"
+    [isFilteredList]="isFilteredList"
+    (sendPageNumber)="onSendPageNumber($event)"
+    (sendItemsCount)="onSendItemsCount($event)"
+    (updateSortOptions)="onUpdateSortOptions($event)"
+    (totalItemsCountEmit)="getTotalItemsCount($event)"
+    (editedActivitiesEmit)="$event"
+    (sortChange)="onSortChange($event)"
+  >
+    <div *ngIf="isShowLoader$ | async" class="activities-spinner">
+      <andteam-spinner delay="0"></andteam-spinner>
+    </div>
+  </andteam-expert-activities-table>
+
+  <button  *ngIf="showScrollButton" class="activities-button" (click)="scrollTop()">
+    <i class="activities-button-up"></i>
+  </button>
+</div>
+
+<andteam-footer></andteam-footer>

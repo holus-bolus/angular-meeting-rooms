@@ -1,0 +1,46 @@
+<div class="select">
+  <mat-form-field appearance="fill" floatLabel="never"
+  [class.error-bottom]="error">
+    <mat-label  [attr.automation-id]="automationId + '-placeholder'"
+                class="placeholder"
+                [class.placeholder-none]="!!formControl.value">
+      {{ placeholder }}
+    </mat-label>
+
+    <mat-select [attr.automation-id]="automationId + '-select'"
+                andteamScroll
+                [panelClass]="panelClass"
+                [disableOptionCentering]="true"
+                [formControl]="formControl"
+                [disabled]="disabled">
+      <mat-option *ngFor="let option of options"
+                  [attr.automation-id]="automationId + '-option'"
+                  [value]="getExprValue(option)"
+                  [disabled]="option.disabled">
+        {{ getViewValue(option) }}
+      </mat-option>
+    </mat-select>
+
+    <div *ngIf="additionalInfo?.length && !formControl?.value">
+      <andteam-material-info-btn
+        [attr.automation-id]="automationId + '-info-button'"
+        class="select-info"
+        [btnText]="'i'"
+        [btnColor]="'yellow'"
+        disabled>
+      </andteam-material-info-btn>
+
+      <div class="select-info-popup">
+        <div class="select-info-popup-triangle">▲</div>
+        <p *ngFor="let str of additionalInfo" class="select-info-popup-text">{{ str }}</p>
+      </div>
+    </div>
+
+    <div [attr.automation-id]="automationId + '-arrow-icon'" 
+          [innerHTML]="portalArrow | safe"
+          class="arrow">
+    </div>
+  </mat-form-field>
+
+  <div *ngIf="error" class="error-text">{{ errorMessage }}</div>
+</div>

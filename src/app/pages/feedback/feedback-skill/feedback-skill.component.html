@@ -1,0 +1,62 @@
+<div class="feedback-skills">
+  <div class="feedback-skills-title">
+    <h3>
+      {{ feedbackSkill.name }}
+    </h3>
+    
+    <andteam-assessment-tooltip *ngIf="!isMobile; else iconWithPopup" alignTooltip="center" side="top" [isArrow]="true">
+      <andteam-assessment-matrix-icon
+        tooltip-base
+        [emptyIcon]="infoIcon"
+        [onHover]="true"
+      ></andteam-assessment-matrix-icon>
+
+      <div tooltip-content>
+        <div class="feedback-skills-tooltip">
+          <div class="feedback-skills-tooltip-description">{{ feedbackSkill.description }}</div>
+        </div>
+      </div>
+    </andteam-assessment-tooltip>
+  </div>
+  <div class="feedback-skills-row">
+    <ng-container *ngTemplateOutlet="tooltip; context: {id: 0}" ></ng-container>
+    <div class="line" [class.yellow]="value > 1"></div>
+    <ng-container *ngTemplateOutlet="tooltip; context: {id: 1}" ></ng-container>
+    <div class="line" [class.yellow]="value > 2"></div>
+    <ng-container *ngTemplateOutlet="tooltip; context: {id: 2}" ></ng-container>
+    <div class="line" [class.yellow]="value > 3"></div>
+    <ng-container *ngTemplateOutlet="tooltip; context: {id: 3}" ></ng-container>
+    <div class="line" [class.yellow]="value > 4"></div>
+    <ng-container *ngTemplateOutlet="tooltip; context: {id: 4}" ></ng-container>
+  </div>
+  <andteam-checkbox *ngIf="feedbackSkill.hasDisableCheckbox" [formControl]="switchRequirementControl">
+    <span class="text">{{ feedbackSkill.disableCheckboxText }}</span>
+  </andteam-checkbox>
+  <div class="feedback-skills-description" *ngIf="isMobile && value">
+    <h4 class="feedback-skills-description-title">{{ feedbackSkill.skillGroup[value].title }}</h4>
+    <span class="feedback-skills-description-text">{{ feedbackSkill.skillGroup[value].description }}</span>
+  </div>
+</div>
+
+<ng-template #tooltip let-description="description" let-title="title" let-id="id">
+  <div class="vert-wrapper">
+    <div (click)="writeValue(id + 1)" class="vert-line" [class.yellow]="value >= id + 1">
+      <andteam-assessment-tooltip *ngIf="!isMobile" alignTooltip="center" side="top" [isArrow]="true">
+        <div tooltip-base class="tootip-hint"></div>
+        <div class="feedback-skills-tooltip skill" tooltip-content>
+          <h4 class="feedback-skills-tooltip-title">{{ feedbackSkill.skillGroup[id].title }}</h4>
+          <div class="feedback-skills-tooltip-description">{{ feedbackSkill.skillGroup[id].description }}</div>
+        </div>
+      </andteam-assessment-tooltip>
+      <div class="small-thumb"></div>
+      <div class="thumb" *ngIf="id + 1 === value"><div class="thumb-inner"></div></div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #iconWithPopup>
+  <andteam-assessment-matrix-icon
+        [emptyIcon]="infoIcon"
+        [onHover]="true"
+        (click)="showSkillDescription()"
+      ></andteam-assessment-matrix-icon>
+</ng-template>

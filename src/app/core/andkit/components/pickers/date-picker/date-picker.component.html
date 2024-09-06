@@ -1,0 +1,27 @@
+<mat-form-field
+  class="date"
+  floatLabel="never"
+  [ngClass]="{
+    'error': error,
+    'assessment': isAssessment
+  }"
+>
+  <input matInput
+         [min]="minDate || minPreviousDate || currentDate"
+         [max]="maxDate || value"
+         [matDatepicker]="picker"
+         [value]="value"
+         [disabled]="disabled || isInputDisabled"
+         [placeholder]="placeholder"
+         (dateChange)="onDateChange($event)">
+  <mat-datepicker #picker
+                  [disabled]="!isInputDisabled">
+  </mat-datepicker>
+  <button class="button"
+          [disabled]="disabled"
+          [innerHTML]="dateIcon | safe"
+          (click)="picker.open()">
+  </button>
+</mat-form-field>
+
+<div *ngIf="error" class="error-text">{{ errorMessage }}</div>

@@ -1,0 +1,68 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+@import '~src/styles/shared-styles/vars';
+
+.mat-dialog-container {
+  padding: 0;
+  border-radius: 0;
+  //width: 580px;
+}
+
+.instruction-modal-wrap {
+  padding: 50px 40px 70px;
+}
+
+.mat-button {
+  border-radius: 0 !important;
+}
+
+.wrapper-one-to-one-instruction {
+  @include font-base(14px, 400, 21px, normal);
+
+  position: relative;
+  color: $objectives-text-color;
+
+  .title {
+    @include font-base(36px, 300, 47px, normal);
+  }
+
+  .text {
+    margin-top: 25px;
+  }
+
+  & .button {
+    @include font-base(14px, 500, 16px);
+    @include button(2px, solid, $primary, 150px, 42px, border-box);
+
+    background: $primary;
+    cursor: pointer;
+    margin-top: 35px;
+
+    &:hover,
+    &:focus {
+      background-color: $primary-hover;
+    }
+  }
+
+  & .close {
+    cursor: pointer;
+    opacity: 0.5;
+    position: absolute;
+    right: -40px;
+    top: -30px;
+    width: 20px;
+
+    & svg {
+      stroke: $white-color;
+      stroke-width: 1px;
+      fill-opacity: 0.5;
+      width: 20px;
+      height: 20px;
+    }
+
+    &:hover,
+    &:focus {
+      opacity: 1;
+    }
+  }
+}

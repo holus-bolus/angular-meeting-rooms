@@ -1,0 +1,73 @@
+<andteam-card>
+  <h1 class="title-h1">Filters</h1>
+  <form [formGroup]="filtersForm" class="wrapper">
+    <div class="col">
+      <div class="info-inline">
+        <andteam-autocomplete
+          placeholder="Last name"
+          [focus]="true"
+          [control]="filtersForm.get('surname')"
+          [options]="fullNames"
+          (selectOption)="onSelectOption($event, 'surname')">
+        </andteam-autocomplete>
+      </div>
+
+      <div class="info-inline">
+        <andteam-chips-autocomplete placeholder="All Roles"
+                                    *ngIf="roles"
+                                    [options]="roles"
+                                    (checkOption)="onCheckOption($event, 'roles')">
+        </andteam-chips-autocomplete>
+      </div>
+
+      <div class="info-inline">
+        <andteam-chips-autocomplete placeholder="All Resource Managers"
+                                    *ngIf="resourceManagers"
+                                    [options]="resourceManagers"
+                                    (checkOption)="onCheckOption($event, 'resourceManagers')">
+        </andteam-chips-autocomplete>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="info-inline">
+        <andteam-autocomplete
+          placeholder="Project Name (from 1C)"
+          [control]="filtersForm.get('project')"
+          [options]="projects"
+          (selectOption)="onSelectOption($event, 'project')">
+        </andteam-autocomplete>
+      </div>
+
+      <div class="info-inline">
+        <andteam-chips-autocomplete placeholder="All Technologies"
+                                    *ngIf="technologies"
+                                    [options]="technologies"
+                                    (checkOption)="onCheckOption($event, 'technologies')">
+        </andteam-chips-autocomplete>
+      </div>
+
+      <div class="info-inline">
+        <andteam-chips-autocomplete placeholder="All Locations"
+                                    *ngIf="locations"
+                                    [options]="locations"
+                                    (checkOption)="onCheckOption($event, 'locations')">
+        </andteam-chips-autocomplete>
+      </div>
+    </div>
+  </form>
+  <div class="btn-box">
+    <div class="btn-group">
+      <andteam-button type="primary" [componentType]="componentsType" (click)="onSendFilters()" class="btn">Filter</andteam-button>
+      <andteam-button type="secondary" [componentType]="componentsType" (click)="onResetFilters()" class="btn">Reset</andteam-button>
+    </div>
+    <div class="info-inline" [formGroup]="filtersForm" *ngIf="isAdmin$ | async">
+      <andteam-chips-autocomplete placeholder="All System Roles"
+                                  [options]="userRoles"
+                                  (checkOption)="onCheckOption($event, 'userRoles')">
+      </andteam-chips-autocomplete>
+    </div>
+  </div>
+</andteam-card>
+
+

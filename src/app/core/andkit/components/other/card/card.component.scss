@@ -1,0 +1,17 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.card {
+  padding: 80px;
+  box-sizing: border-box;
+  background-color: $white-color;
+  height: 100%;
+
+  ::ng-deep .search-field {
+    .placeholder {
+      @include font-base(18px, 300, 25px);
+
+      color: $tag-title-color;
+    }
+  }
+}

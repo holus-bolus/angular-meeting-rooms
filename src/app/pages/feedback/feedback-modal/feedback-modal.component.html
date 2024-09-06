@@ -1,0 +1,28 @@
+<div class="feedback-modal">
+  <div class="feedback-modal-wrapper">
+    <div class="feedback-modal-wrapper-icon" [innerHTML]="cautionSvg"></div>
+
+    <div class="feedback-modal-wrapper-message">
+      <p *ngIf="title" class="feedback-modal-wrapper-message-title">
+        {{ title }}
+      </p>
+  
+      <div  class="feedback-modal-wrapper-message-text">
+        <p *ngIf="subTitle"class="feedback-modal-wrapper-message-text-greetings">
+          {{ subTitle }}
+        </p>
+  
+        <p *ngIf="message"class="feedback-modal-wrapper-message-text-main">
+          {{ message }}
+        </p>
+      </div>
+    </div>
+
+    <andteam-button
+      class="feedback-modal-wrapper-button"
+      type="submit"
+      (click)="onSubmit()">
+      Got it
+    </andteam-button>
+  </div>
+</div>

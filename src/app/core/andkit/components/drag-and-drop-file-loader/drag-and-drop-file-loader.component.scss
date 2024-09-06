@@ -1,0 +1,108 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.drag-and-drop {
+  &__wrapper {
+    @include font-base(16px, 400, 160%);
+
+    color: $tag-title-color;
+  }
+
+  position: relative;
+  width: 389px;
+  height: 230px;
+  text-align: center;
+  border: 1px dashed $tag-box-border;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__input {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  &__img {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    background-color: $body-background;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    ::ng-deep {
+      svg {
+        height: 34px !important;
+        width: 34px !important;
+      }
+    }
+  }
+
+  &__browse {
+    color: $objectives-text-color;
+    border-bottom: 1px solid $objectives-text-color;
+  }
+
+  &__attachments {
+    width: 389px;
+  }
+
+  &__file {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-top: 10px;
+    width: 389px;
+    height: 28px;
+    background-color: $body-background;
+
+    &-name {
+      @include font-base(12px, 400, 160%);
+
+      display: inline-block;
+      max-width: 334px;
+      color: #000;
+      overflow: hidden;
+    }
+
+    &-icon {
+      display: inline-block;
+      margin: 6px 8px;
+    }
+  }
+
+  &__delete {
+    display: inline-block;
+    position: absolute;
+    right: 9px;
+    cursor: pointer;
+
+    ::ng-deep {
+      svg {
+        height: 10px !important;
+        width: 10px !important;
+      }
+    }
+  }
+
+  &__hint {
+    font-size: 16px;
+  }
+
+  &__subhint {
+    font-size: 12px;
+  }
+
+  &__error {
+    @include font-base(12px, 400, 160%);
+
+    color: $error-color;
+    width: 389px;
+    margin-top: 10px;
+  }
+}

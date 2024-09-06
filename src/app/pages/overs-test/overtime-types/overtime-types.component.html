@@ -1,0 +1,95 @@
+<div class="overtime-types">
+
+  <div class="overtime-types__search">
+    <andteam-autocomplete
+      [ngClass]="{'overtime-types__filled': searchControl.value}"
+      placeholder="Overtime type"
+      [focus]="true"
+      [control]="searchControl"
+      [options]="[]">
+    </andteam-autocomplete>
+  </div>
+
+  <div class="overtime-types__lists">
+
+    <ng-container *ngFor="let overGroup of filteredOverTypeGroups; let last = last">
+      <div class="overtime-types__list">
+
+        <div class="overtime-types__list_title">
+          {{ overGroup.name }}
+        </div>
+
+        <div
+          *ngIf="overGroup.overTypeGroups"
+          class="overtime-types__over_level-one">
+
+          <ng-container *ngFor="let overType of overGroup.overTypeGroups">
+            <div
+              class="overtime-types__over"
+              [ngClass]="{ 'selectedOver': overType.id === selectedOverId}"
+              (click)="onClickOverType(overType)">
+
+              <div class="overtime-types__over_name">
+                {{ overType.name }}
+              </div>
+
+              <div class="overtime-types__over_info">
+                <andteam-assessment-tooltip alignTooltip="center" side="top" [isArrow]="true">
+                  <andteam-assessment-matrix-icon
+                    tooltip-base
+                    [emptyIcon]="infoIcon"
+                    [fullicon]="infoActiveIcon"
+                  ></andteam-assessment-matrix-icon>
+
+                  <div tooltip-content class="overtime-types__tooltip">
+                    <div>{{ overType.description }}</div>
+                  </div>
+                </andteam-assessment-tooltip>
+              </div>
+
+              <div
+                *ngIf="overType.overTypes && overType.overTypes.length"
+                class="overtime-types__over_arrow"
+                [class.reverse]="overType.isOpened"
+                [innerHTML]="arrowIcon | safe">
+              </div>
+            </div>
+
+            <div
+              *ngIf="overType.overTypes && overType.isOpened"
+              class="overtime-types__over_level-two">
+              <div
+                *ngFor="let overTypeLevelTwo of overType.overTypes"
+                class="overtime-types__over"
+                [ngClass]="{ 'selectedOver': overTypeLevelTwo.id === selectedOverId}"
+                (click)="onClickOverType(overTypeLevelTwo)">
+                <div class="overtime-types__over_name">
+                  {{ overTypeLevelTwo.name }}
+                </div>
+
+                <div class="overtime-types__over_info" *ngIf="overTypeLevelTwo?.description">
+                  <andteam-assessment-tooltip alignTooltip="center" side="top" [isArrow]="true">
+                    <andteam-assessment-matrix-icon
+                      tooltip-base
+                      [emptyIcon]="infoIcon"
+                      [fullicon]="infoActiveIcon"
+                    ></andteam-assessment-matrix-icon>
+
+                    <div tooltip-content>
+                      <div>{{ overTypeLevelTwo.description }}</div>
+                    </div>
+                  </andteam-assessment-tooltip>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+        </div>
+
+      </div>
+
+      <div class="overtime-types__divider" *ngIf="!last"></div>
+    </ng-container>
+
+  </div>
+</div>

@@ -1,0 +1,95 @@
+<div class="wrapper">
+  <div class="review-plan"
+    [class.approved-review-plan]="isApprovedPage">
+
+    <ng-container *ngIf="isApprovedPage">
+      <div class="comments-box">
+        <div class="comments-title">Technology:</div>
+        <div class="comments-data">{{assessment?.technology}}</div>
+      </div>
+
+      <div class="comments-box">
+        <div class="comments-title">Current level:</div>
+        <div class="comments-data">{{assessment?.currentLevel}}</div>
+      </div>
+    </ng-container>
+
+    <div class="comments-box"
+         [class.planning-review-date]="assessment?.assessmentStatus === 'Planning' && !isApprovedPage">
+      <div class="comments-title">Interview date/time:</div>
+      <div class="date-box"
+           [class.disabled]="isShowLoader"
+           *ngIf="isShowForm; else placeholder"
+           (mouseleave)="onSaveInterviewDate($event)">
+        <andteam-date-picker
+          class="date-picker"
+          [error]="interviewDateError"
+          [placeholder]="datePlaceholder"
+          [isAssessment]="isAssessment"
+          [dateIcon]="dateIcon"
+          [disabled]="interviewerDisabled || isShowAssessmentLoading || isShowLoader"
+          [formControl]="assessmentForm.get('interviewDate')"
+          (blurDate)="onSaveInterviewDate($event)">
+        </andteam-date-picker>
+        <andteam-assessment-time-picker
+          [disabled]="isDisabledTimePicker"
+          [error]="interviewDateError"
+          [formControl]="assessmentForm.get('interviewTime')"
+        ></andteam-assessment-time-picker>
+        <andteam-progress-spinner class="date-box-spinner" *ngIf="isShowLoader" [diameter]="30">
+        </andteam-progress-spinner>
+      </div>
+    </div>
+    <div class="error-message">{{interviewDateErrorMessage}}</div>
+
+    <div class="comments-box"
+         [class.planning-review-date]="assessment?.assessmentStatus === 'Planning' && !isApprovedPage">
+      <div class="comments-title">Interviewer:</div>
+      <andteam-assessment-autocomplete
+        *ngIf="isShowForm; else placeholder"
+        class="autocomplete"
+        [error]="interviewerError"
+        [placeholder]="interviewerPlaceholder"
+        [options]="interviewers"
+        [disabled]="interviewerDisabled || isShowAssessmentLoading"
+        [formControl]="assessmentForm.get('interviewer')"
+        (blurField)="onBlurField($event)"
+        (clearField)="onDeleteInterviewer(assessment)"
+        (selectOption)="onSaveInterviewer($event, assessment)"></andteam-assessment-autocomplete>
+    </div>
+
+    <div class="comments-box" *ngIf="!assessmentIndex">
+      <div class="comments-title">Review date:</div>
+      <andteam-date-picker
+        class="autocomplete"
+        [minDate]="minReviewDate"
+        [error]="reviewDateError"
+        [placeholder]="datePlaceholder"
+        [isAssessment]="isAssessment"
+        [dateIcon]="dateIcon"
+        [disabled]="isShowAssessmentLoading"
+        [formControl]="assessmentForm.get('reviewDate')"
+        (blurDate)="onSaveReviewDate($event)">
+      </andteam-date-picker>
+    </div>
+    <div class="error-message" *ngIf="isShowReviewDateError">{{reviewDateErrorMessage}}</div>
+
+    <div class="comments-box box-button"
+      *ngIf="isApprovedPage">
+      <andteam-button
+        class="cancel"
+        [disabled]="isShowAssessmentLoading"
+        type="primary"
+        [componentType]="componentType"
+        (click)="onPlanned()">Plan</andteam-button>
+    </div>
+  </div>
+  <div class="loader" *ngIf="isShowAssessmentLoading">
+    <andteam-progress-spinner></andteam-progress-spinner>
+  </div>
+</div>
+
+<ng-template #placeholder>
+  <span>Not planned</span>
+</ng-template>
+

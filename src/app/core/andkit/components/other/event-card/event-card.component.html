@@ -1,0 +1,12 @@
+<a class="event-card" [routerLink]="['/event', event.urlName]" target="_blank">
+  <ng-container *ngIf="posterImage">
+    <img class="event-card__cover" [src]="posterImage" alt="">
+  </ng-container>
+  <div class="event-card__content">
+    <andteam-label  [iconUrl]="topicIcon"></andteam-label>
+    <p class="event-card__content__description">{{event.title}}</p>
+    <ng-container *ngIf="event.date">
+      <p class="event-card__content__date">{{event.date | timezone : 'MMM DD, H:mm'}}</p>
+    </ng-container>
+  </div>
+</a>

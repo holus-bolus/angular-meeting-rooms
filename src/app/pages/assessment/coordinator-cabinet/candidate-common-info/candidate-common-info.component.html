@@ -1,0 +1,87 @@
+<div class="wrapper">
+
+  <div class="candidate-info">
+    <andteam-candidate
+      class="candidate-details"
+      *ngIf="employee"
+      [employee]="employee"
+      [candidateId]="candidateId"></andteam-candidate>
+    <andteam-button *ngIf="activeTab === 'preparation'"
+                    class="consideration"
+                    type="primary"
+                    [componentType]="componentType"
+                    (click)="onAddToConsideration()">Add to consideration</andteam-button>
+    <andteam-button *ngIf="activeTab !== 'ready'"
+                    class="cancel"
+                    type="secondary"
+                    [componentType]="componentType"
+                    (click)="onOpenModal()">Cancel review</andteam-button>
+    <andteam-assessment-modal
+      *ngIf="isOpenCancelModal"
+      [isShowCloseIcon]="true"
+      (closeClick)="onCloseModal()">
+      <andteam-assessment-cancel
+        [employee]="employee"
+        [candidateId]="candidateId"
+        (updateCandidates)="onUpdateCandidates()"
+        (cancel)="onOpenCancelModal($event)"></andteam-assessment-cancel>
+    </andteam-assessment-modal>
+  </div>
+
+  <div class="common-info">
+
+    <div class="common-info-box" *ngIf="employee?.resourceManager">
+      <andteam-assessment-tooltip>
+        <div tooltip-base class="common-info-icon">RM</div>
+        <ng-container tooltip-content>{{resourceManagerTooltip}}</ng-container>
+      </andteam-assessment-tooltip>
+      <a *ngIf="employee.resourceManager.isWork; else notWorking"
+         [routerLink]="['/employee', employee?.resourceManager?.id]"
+         class="common-info-link">
+        {{employee.resourceManager.name}}
+      </a>
+
+      <ng-template #notWorking>
+        <span class="common-info-link-inactive">
+          {{employee.resourceManager.name}}
+        </span>
+      </ng-template>
+    </div>
+
+    <div class="common-info-box" *ngIf="confirmationManager">
+      <andteam-assessment-tooltip>
+        <div tooltip-base class="common-info-icon">MA</div>
+        <ng-container tooltip-content>{{managerTooltip}}</ng-container>
+      </andteam-assessment-tooltip>
+      <a *ngIf="confirmationManager.isWork; else notWorking"
+         [routerLink]="['/employee', confirmationManager?.id]"
+         class="common-info-link">{{confirmationManager.name}}
+      </a>
+
+      <ng-template #notWorking>
+        <span class="common-info-link-inactive">
+          {{confirmationManager.name}}
+        </span>
+      </ng-template>
+    </div>
+
+    <div class="common-info-box" *ngIf="employee?.location">
+      <andteam-assessment-tooltip>
+        <div tooltip-base class="common-info-location" [innerHTML]="locationIcon | safe"></div>
+        <ng-container tooltip-content>{{locationTooltip}}</ng-container>
+      </andteam-assessment-tooltip>
+      <span class="common-name">{{employee.location}}</span>
+    </div>
+
+    <ng-container *ngIf="employee?.projects && employee.projects.length">
+      <div class="common-info-box" *ngFor="let project of employee.projects">
+        <andteam-assessment-tooltip>
+          <div tooltip-base class="common-info-project" [innerHTML]="projectIcon | safe"></div>
+          <ng-container tooltip-content>{{projectTooltip}}</ng-container>
+        </andteam-assessment-tooltip>
+        <span class="common-name">{{project}}</span>
+      </div>
+    </ng-container>
+
+  </div>
+</div>

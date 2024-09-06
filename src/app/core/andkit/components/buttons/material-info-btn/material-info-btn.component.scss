@@ -1,0 +1,26 @@
+@import 'src/styles/shared-styles/colors';
+@import 'src/styles/shared-styles/mixins';
+@import 'src/styles/shared-styles/_vars.scss';
+
+.btn {
+  color: $objectives-text-color;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 50%;
+  font-family: 'Times New Roman', sans-serif;
+  cursor: pointer;
+}
+
+.yellow {
+  background-color: $primary;
+  font-weight: 700;
+
+  &:hover {
+    background-color: $primary-hover;
+  }
+
+  &:focus {
+    background-color: $primary-hover;
+  }
+}

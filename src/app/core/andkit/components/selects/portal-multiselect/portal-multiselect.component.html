@@ -1,0 +1,25 @@
+<div class="menu-wrapper">
+  <div class="menu">
+    <div *ngIf="labelText" class="menu-label">{{labelText}}</div>
+    <div class="menu-label__content" (click)="onCloseDropdown(true)">
+      <div [ngClass]="{
+      'content-placeholder': !isChecked,
+      'content-value': isChecked
+      }">
+        {{value}}</div>
+      <span [ngClass]="isSearchListOpen ? 'arrow-down' : 'arrow-up'" [innerHTML]="vectorIcon | safe"></span>
+    </div>
+  </div>
+  <div class="menu-list"
+       *ngIf="isSearchListOpen"
+       andteamOuterClick
+       (outerClick)="onCloseDropdown($event)">
+    <div class="item" *ngFor="let option of options">
+      <mat-checkbox
+        [ngClass]="{'checkbox-disabled': option.disabled}"
+        (change)="onSelectOption($event, option)"
+        [disabled]="option.disabled"
+        [checked]="option.checked">{{option.value}}</mat-checkbox>
+    </div>
+  </div>
+</div>

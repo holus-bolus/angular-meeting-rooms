@@ -1,0 +1,47 @@
+<div class="wrapper">
+  <div class="news-card-wrapper">
+
+    <div class="news-card"
+         #cardBlock
+         [class.news-card_first]="isFirst"
+         (click)="onClick(pieceNews)">
+      <div class="news-card__content">
+        <h3 *ngIf="!isFirst; else first"
+            class="portal-h3 card-title">
+          {{pieceNews.title | truncate : 36}}
+        </h3>
+
+        <ng-template #first>
+          <h3 class="portal-h3 card-title" [class.first-title]="isFirst">{{pieceNews.title}}</h3>
+        </ng-template>
+
+        <div class="news-card__content__description">
+          <p class="news-card__content__text text-middle"
+             [innerHTML]="(pieceNews?.previewText || pieceNews?.text) | truncate : 120"></p>
+        </div>
+      </div>
+
+      <div class="news-card__date">
+        <div>
+          <p class="date_small">Date</p>
+
+          <p class="date_main">{{pieceNews.published | date : 'MMM dd, yyyy'}}</p>
+        </div>
+
+        <ng-container *ngIf="topicIcon$ | async as topicIcon">
+          <span class="news-card__img" [innerHTML]="topicIcon | safe"></span>
+        </ng-container>
+      </div>
+    </div>
+
+    <ng-container *ngIf="isShowEditMenu$ | async">
+      <div class="news-card-menu">
+        <andteam-edit-menu
+          route="/edit-news"
+          [param]="pieceNews.urlName"
+          (delete)="onOpenConfirmationModal()">
+        </andteam-edit-menu>
+      </div>
+    </ng-container>
+  </div>
+</div>

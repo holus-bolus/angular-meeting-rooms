@@ -1,0 +1,70 @@
+<div class="portal-footer-wrapper">
+  <ul *ngIf="address" class="portal-footer">
+    <li class="hr-manager" *ngIf="!isError">
+      <div class="hr-select" *ngIf="hrsOptions.length > 1; else elseBlock">
+        <andteam-portal-select [option]="hrsOptions[0]"
+                               [options]="hrsOptions"
+                               prefixHr="HR - "
+                               (selectOption)="onSelectOption($event)"
+        ></andteam-portal-select>
+      </div>
+      <ng-template #elseBlock>
+        <div class="hr-manager-name">HR - {{hrsOptions[0].name}}</div>
+      </ng-template>
+      <div class="hr-manager-block">
+        <div class="hr-manager-phone" [innerHTML]="phoneIcon | safe"></div>
+        <div class="hr-manager-info">
+          <a class="phone" href="tel:{{ hr.phone }}">
+            {{hr.phone}}
+          </a>
+        </div>
+      </div>
+      <ng-container
+        *ngTemplateOutlet="managersBlock; context: {href: hr.email, hrefType: linkType.MAIL, icon: emailIcon, link: hr.email}">
+      </ng-container>
+      <ng-container
+        *ngTemplateOutlet="managersBlock; context: {href: hr.skype, hrefType: linkType.SKYPE, icon: skypeIcon, link: hr.skype}">
+      </ng-container>
+    </li>
+    <li class="location">
+      <div class="location-box">
+        <div class="location-box-title">Headquarters</div>
+        <div class="location-box-address">
+          {{ headquarterAdress }}
+        </div>
+      </div>
+    </li>
+    <li class="location">
+      <div class="location-box" *ngIf="!isError">
+        <div class="location-box-title">My office</div>
+        <div class="location-box-address">{{address}}</div>
+      </div>
+    </li>
+    <li class="andersen-lab">
+      <div class="andersen-lab-box">
+        <div class="andersen-lab-box-title">
+          <p>{{ companyService.companyFullName }}</p>
+        </div>
+        <div class="andersen-lab-box-icon">
+            <span class="lab-logo" [innerHTML]="logoIcon | safe"></span>
+          <a class="andersen-link" href="https://{{ companyService.companyUrl }}/">{{ companyService.companyUrl }}</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <div class="copyright">
+    <div class="copyright-box">
+      <span class="copyright-text">{{ copyrightText }}</span>
+      <a target="_blank" [href]="privacyPolicy" class="copyright-text dashed">Privacy Policy</a>
+    </div>
+  </div>
+</div>
+
+<ng-template #managersBlock let-href="href" let-hrefType="hrefType" let-link="link" let-icon="icon">
+  <div class="hr-manager-block">
+    <a [href]="href | link: hrefType | safe : url" class="hr-manager-info">
+      <span class="hr-manager-icon" [innerHTML]="icon | safe"></span>
+      <span class="hr-manager-link">{{link}}</span>
+    </a>
+  </div>
+</ng-template>

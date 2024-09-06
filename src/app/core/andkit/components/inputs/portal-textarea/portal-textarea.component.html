@@ -1,0 +1,34 @@
+<div class="form">
+  <mat-form-field floatLabel="never" [class.error]="error">
+    <mat-label [attr.automation-id]="automationId + '-placeholder'" class="placeholder">{{ placeholder }}</mat-label>
+    <textarea matInput
+              [attr.maxlength]="maxLength"
+              [attr.automation-id]="automationId + '-input'"
+              title=""
+              #autosize="cdkTextareaAutosize"
+              cdkTextareaAutosize
+              class="form-input"
+              cdkAutosizeMinRows="1"
+              cdkAutosizeMaxRows="{{maxRows}}"
+              [value]="value"
+              [disabled]="disabled"
+              (input)="onChangeValue($event)"
+              (keyup.enter)="onEnter()">
+    </textarea>
+  </mat-form-field>
+  <div *ngIf="value && isCloseIconShow" [innerHTML]="clearIcon" class="clear-icon" (click)="clearTextarea()"></div>
+  <div *ngIf="error; else hintBlock"
+       [attr.automation-id]="automationId + '-error'"
+       class="error-message"
+       [ngClass]="{ margin0: isNoErrorMargin }">
+    {{ hintMessage }}
+  </div>
+  <ng-template #hintBlock>
+    <div *ngIf="hint"
+        [attr.automation-id]="automationId + '-hint'"
+        class="hint-message"
+        [ngClass]="{ margin0: isNoErrorMargin }">
+      {{ hintMessage }}
+    </div>
+  </ng-template>
+</div>

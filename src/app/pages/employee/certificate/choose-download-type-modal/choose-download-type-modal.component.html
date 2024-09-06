@@ -1,0 +1,24 @@
+<div class="download-modal">
+  <div class="download-modal-box">
+    <div class="download-modal-titles">
+      <div class="download-modal-title">
+        Select the file format for saving
+      </div>
+    </div>
+    <div class="radio-buttons">
+      <mat-radio-group class="radio-group" (change)="onRadioButtonChange($event)">
+        <mat-radio-button
+          class="radio-group-button"
+          *ngFor="let format of options"
+          [value]="format.fileName"
+          [checked]="format.checked">
+            {{format.fileName}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div class="download-modal-btn">
+      <andteam-button [type]="cancelButtonType" (click)="cancel()">Cancel</andteam-button>
+      <andteam-button [type]="confirmButtonType" (click)="download()">Download</andteam-button>
+    </div>
+  </div>
+</div>

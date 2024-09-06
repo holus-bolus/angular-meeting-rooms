@@ -1,0 +1,140 @@
+<div override class="profile-button">
+  <andteam-portal-backward-link 
+    isStatic="true"
+    [path]="returnPath">
+    {{ titleForLink }}
+  </andteam-portal-backward-link>
+</div>
+
+<div class="page-wrapper">
+  <div class="project-block">
+    <div class="project-block-main">
+      <div class="project-block-main-title">{{ project.name }}</div>
+      <div class="project-block-main-score">{{ projectWithFeedbacks?.rating | number: '1.1-1' }}</div>
+    </div>
+    <div class="project-block-divider"></div>
+    <div class="project-block-sub">
+      <div class="project-block-sub-info">
+        <div class="project-block-sub-info-title">Duration</div>
+        <div class="project-block-sub-info-value">
+          <span *ngIf="project.startDate">{{ project.startDate | date: "dd.MM.yyyy" }}</span>
+          <span *ngIf="!project.startDate">not started</span>
+          - 
+          <span *ngIf="project.stopDate">{{ project.stopDate | date: "dd.MM.yyyy" }}</span>
+          <span *ngIf="!project.stopDate">till now</span>
+        </div>
+      </div>
+      <div class="project-block-sub-info">
+        <div class="project-block-sub-info-title">Project Manager</div>
+        <div class="project-block-sub-info-value">
+            <a [routerLink]="['/employee', project.projectManager.id]" class="employee-link">
+              {{ project.projectManager.name }}
+            </a>
+        </div>
+      </div>
+      <div class="project-block-sub-info">
+        <div class="project-block-sub-info-title">Delivery Manager</div>
+        <div class="project-block-sub-info-value">
+          <a [routerLink]="['/employee', project.deliveryManager.id]" class="employee-link">
+            {{ project.deliveryManager.name }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="header">
+    <h1 class="title">Feedback on project</h1>
+    <div class="header-controls">
+      <div 
+        class="header-controls-action"
+        [ngClass]="{'active': isFilterActive}"
+        (click)="isFilterActive = !isFilterActive">
+        <span 
+          class="header-controls-action-icon"
+          [innerHTML]="filterIcon | safe"></span>
+          Filter
+      </div>
+      <div 
+        class="header-controls-action"
+        [class.active]="isSortActive !== null"
+        [class.reverse]="isSortActive === false"
+        (click)="onClickSort()">
+        <span 
+          class="header-controls-action-icon"
+          [class.active]="isSortActive !== null"
+          [class.default]="isSortActive === false"
+          [innerHTML]="sortIcon | safe"></span>  
+          Sort by rate
+      </div>
+      <div 
+        class="header-controls-action"
+        (click)="downloadExcel()">
+        <span 
+        class="header-controls-action-icon"
+        [innerHTML]="downloadIcon | safe"></span>  
+        Export XLSX
+      </div>
+    </div>
+  </div>
+
+  <div 
+    class="filter"
+    *ngIf="isFilterActive">
+    <div class="filter-items">
+      <andteam-portal-multiple-select
+        placeholder="Select rating"
+        [isAllOptionEnabled]="false"
+        [options]="isGoodOptions"
+        [onlyOneChoose]="true"
+        (checkOptions)="onSelectIsGood($event)">
+      </andteam-portal-multiple-select>
+      <andteam-dates-period-picker
+        (blurDate)="changeDate($event)"
+        placeholder="Date">
+      </andteam-dates-period-picker>
+      <andteam-portal-multiple-select 
+        placeholder="Value"
+        [isAllOptionEnabled]="false"
+        [options]="valuableOptions"
+        [onlyOneChoose]="true"
+        (checkOptions)="onValuableCheck($event)">
+      </andteam-portal-multiple-select>
+    </div>
+    <div class="filter-buttons">
+      <andteam-button
+        [disabled]="isClearDisabled"
+        (click)="clearFilter()"
+        class="button">
+        Reset
+      </andteam-button>
+    </div>
+  </div>
+
+  <ng-container *ngIf="universalFeedbacksFilteredRS | async as universalFeedbacksFiltered">
+    <div class="feedback-list">
+      <div *ngIf="!universalFeedbacksFiltered.length"
+          class="no-feedback">
+        <span class="no-feedback-image" [innerHTML]="noFeedbacksSvg | safe"></span>
+        <p>No feedback yet</p>
+      </div>
+      <div *ngIf="universalFeedbacksFiltered.length > 0">
+        <span class="feedback-list-amount">Feedback ({{ universalFeedbacksFiltered.length }})</span>
+        <andteam-project-feedbacks-by-project-detail 
+          *ngFor="let feedback of universalFeedbacksFiltered; let i = index"
+          [isLastFeedback]="i === (universalFeedbacksFiltered.length - 1)"
+          [userFeedback]="feedback" [project]="project" [hasAccessToExtendedFilter]="hasAccessToExtendedFilter">
+        </andteam-project-feedbacks-by-project-detail>
+      </div>
+    </div>
+
+    <button *ngIf="universalFeedbacksFiltered.length > 3" class="btn-up" (click)="scrollTop()">
+      <i class="btn-up__arrow"></i>
+    </button>
+  </ng-container>
+</div>
+<div *ngIf="isLoader | async" class="loader">
+  <andteam-loader></andteam-loader>
+</div>
+<andteam-footer></andteam-footer>
+

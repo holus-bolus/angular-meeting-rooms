@@ -1,0 +1,302 @@
+@import 'src/styles/shared-styles/colors';
+@import 'src/styles/shared-styles/mixins';
+
+.project {
+  width: 290px;
+  height: 440px;
+  padding: 40px 30px;
+  background: $white-color;
+  box-shadow: 2px 5px 17px rgba(0, 0, 0, 0.1);
+
+  &-header {
+    @include align-elements;
+
+    position: relative;
+    margin: 0 0 16px 0;
+  }
+
+  &-allocation {
+    padding-bottom: 10px;
+  }
+
+  &-menu {
+    width: 20px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+    &:hover, &-active {
+      ::ng-deep svg path {
+        fill: $primary;
+      }
+    }
+  }
+
+  .menu-box {
+    z-index: 2;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 251px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+
+    &-list {
+      display: flex;
+      flex-direction: column;
+      background: $white-color;
+      padding: 5px 0;
+
+      &-item {
+        @include font-base(16px, 400, 47px);
+    
+        text-decoration: none;
+        color: $username-color;
+        text-align: center;
+        cursor: pointer;
+    
+        &:hover {
+          background: $menu-item-background;
+        }
+      }
+    }
+  }
+
+  &-wrapper-title {
+    &:hover {
+      .title-detail {
+        display: block;
+      }
+    }
+
+    .title {
+      @include font-base(26px, 300, 130%);
+
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      width: 225px;
+      color: $objectives-text-color;
+      cursor: default;
+
+    }
+
+    .title-detail {
+      position: absolute;
+      left: 0;
+      bottom: 65px;
+      display: none;
+      padding: 20px;
+      background-color: $white-color;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      cursor: auto;
+      z-index: 2;
+
+      &-triangle {
+        position: absolute;
+        bottom: -18px;
+        left: 25px;
+        font-size: 30px;
+        font-stretch: expanded;
+        text-shadow: 0 -5px 5px rgba(0, 0, 0, 0.2);
+        -webkit-transform: rotate(180deg) scaleX(1.5);
+        transform: rotate(180deg) scaleX(1.5);
+        border: none;
+        color: $white-color;
+      }
+    }
+  }
+
+  &-general-info {
+    @include font-base(14px, 300, 21px);
+
+    color: $text-secondary;
+    padding: 0 0 14px 0;
+  }
+
+  &-date {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 0 10px 0;
+
+    &-start {
+      padding: 0 15px 0 0;
+    }
+  }
+
+  &-team, &-managers {
+    &-header {
+      @include font-base(14px, 500, 21px);
+
+      color: $objectives-text-color;
+      margin: 0 0 15px 0;
+    }
+  }
+
+  &-team {
+    margin: 0 0 49px 0;
+
+    &-employees {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 0px;
+      gap: 16px;
+
+      &-icons {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        padding: 0px;
+        width: auto;
+        &-1 {
+          width: 32px;
+        }
+
+        &-2 {
+          width: 52px;
+        }
+
+        &-3 {
+          width: 72px;
+        }
+
+        &-img, .avatar-image {
+          width: 32px;
+          height: 32px;
+          position: relative;
+
+          &:nth-child(2) {
+            left: -12px;
+          }
+
+          &:nth-child(3) {
+            left: -24px;
+          }
+
+          ::ng-deep svg {
+            width: 32px;
+            height: 32px;
+          }
+
+          img {
+            border: 1px solid black;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            max-width: 32px;
+            max-height: 32px;
+            position: relative;
+            object-fit: cover;
+          }
+        }
+      }
+
+      &-count {
+        @include font-base(14px, 300, 14px);
+    
+        border: none;
+        border-bottom: 1px dashed $text-tertiary;
+        background-color: $white-color;
+        color: $objectives-text-color;
+        white-space: nowrap;
+    
+        &:hover {
+          @include border-bottom(1px, solid, $border-link-hover);
+    
+          cursor: pointer;
+        }
+    
+        &:disabled {
+          @include border-bottom(1px, dashed, $text-tertiary);
+    
+          cursor: default;
+        }
+      }
+    }
+  }
+
+  &-managers {
+    margin: 0 0 24px 0;
+  }
+
+  &-manager {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0 0 15px 0;
+
+    &-icon {
+      @include font-base(14px, 300, 16px);
+
+      color: $text-secondary;
+      padding: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $primary-disabled;
+      border-radius: 2px;
+      margin: 0 11px 0 0;
+    }
+
+    &-name {
+      @include font-base(16px, 300, 19px);
+
+      color: $text-primary;
+      text-decoration: none;
+
+      span {
+        @include border-bottom(1px, dashed, $text-tertiary);
+
+        &:hover {
+          @include border-bottom(1px, solid, $border-link-hover);
+
+          cursor: pointer;
+        }
+      }
+    }
+
+    &-inactive {
+      @include font-base(16px, 300, 19px);
+
+      color: $text-disabled;
+    }
+  }
+
+  &-working {
+    @include align-elements;
+
+    &-info {
+      color: $objectives-text-color;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    &-value {
+      @include font-base(36px, 300, 42px);
+
+      padding: 0 10px 0 0;
+    }
+
+    &-desc {
+      @include font-base(14px, 300, 16px);
+    }
+
+    &-icon {
+      @include font-base(42px, 200, 42px);
+
+      color: $text-tertiary;
+    }
+  }
+
+  .disabled {
+    pointer-events: none;
+    border-bottom: none;
+  }
+}
+
+.unpaid {
+  color: $text-disabled;
+}

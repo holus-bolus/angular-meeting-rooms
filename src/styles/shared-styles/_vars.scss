@@ -1,0 +1,36 @@
+$border-radius: 4px;
+$modal-z-index: 100;
+$dropdown-tags-z-index: 3;
+$portal-header-z-index: $modal-z-index - 1;
+$employee-avatar-z-index: $modal-z-index - 2;
+$tooltip-z-index: $modal-z-index - 2;
+$employee-avatar-loader-z-index: $modal-z-index - 3;
+$employee-card-width: 1200px;
+$interview-card-width: 1340px;
+$room-card-width: 540px;
+$social-networks-width: 1106px;
+$portal-header-height: 83px;
+$wrapper-portal: 1340px;
+$assessment-container: 1410px;
+$wrapper-portal-title: 1110px;
+$wrapper-overtimes-width: $wrapper-portal-title;
+$min-container-width: 1000px;
+$min-overtime-container-width: 800px;
+$tabs-side-padding: 115px;
+$tabs-bottom-padding: 104px;
+$overtime-modal-width: 450px;
+$overtime-modal-padding: 50px;
+$overtime-fields-gap: 40px;
+$padding-left: 20px;
+$portal-text-size: 18px;
+$portal-option-min-height: 46px;
+$overtime-options-padding: ($portal-option-min-height - $portal-text-size) / 2;
+
+//CCS breakpoints
+$mobile: 544px;
+$tablet: 768px;
+$tablet-md: 960px;
+$desktop: 1440px;
+
+//Font-Family
+$diamond-girl: diamond-girl;

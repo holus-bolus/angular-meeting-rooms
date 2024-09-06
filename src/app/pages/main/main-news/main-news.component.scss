@@ -1,0 +1,144 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+@import '~src/styles/shared-styles/vars';
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: $white-color;
+
+  &__content {
+    padding: 100px 115px;
+    width: 100%;
+
+    .content-description {
+      @include font-base(18px, 200, 160%);
+
+      color: $objectives-text-color;
+      margin-top: 20px;
+    }
+
+    .news-cards-wrapper {
+      width: 100%;
+      margin: 45px 0 40px;
+      display: grid;
+      grid-template: 'first first first'
+      'third fourth fifth' / 1fr 1fr 1fr;
+      gap: 30px;
+
+      .news-card-wrapper {
+        width: 100%;
+        max-width: 350px;
+
+        &:first-child {
+          width: 100%;
+          max-width: 1110px;
+          grid-area: first;
+        }
+      }
+    }
+
+    .link-box {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      .link {
+        @include font-base(16px, 500, 19px);
+
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        &-icon {
+          display: flex;
+          align-items: center;
+          margin-left: 5px;
+          width: 10px;
+          height: 5px;
+        }
+
+        .icon-less {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+
+  .content-filter-box {
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-between;
+
+    .content-filter-search {
+      width: 40%;
+      max-width: 350px;
+      margin-right: 70px;
+    }
+
+    .content-filter-tags {
+      width: 60%;
+    }
+
+    ::ng-deep
+    .form-input {
+      color: $tag-title-color;
+      border-bottom: 1px solid $portal-border-color;
+
+      &::placeholder {
+        color: $tag-title-color;
+      }
+    }
+
+    ::ng-deep
+    .tags-wrapper {
+      position: relative;
+
+      .tags {
+        justify-content: flex-end;
+      }
+
+      .tags-title {
+        width: 20%;
+        color: $tag-title-color;
+      }
+
+      .tags-item-box {
+        color: $tag-color;
+        background: $tag-background;
+
+        &:hover {
+          color: $tag-color;
+          background: linear-gradient(0deg, $primary, $primary), rgba(0, 0, 0, 0.1);
+        }
+      }
+
+      .active {
+        color: $tag-color;
+        background: linear-gradient(0deg, $primary, $primary), rgba(0, 0, 0, 0.1);
+      }
+
+      ::ng-deep
+      .dropdown-button {
+        background: $tag-background;
+
+        .dropdown-ellipse {
+          background: $tag-color;
+        }
+
+        &:hover {
+          background: linear-gradient(0deg, $primary, $primary), rgba(0, 0, 0, 0.1);
+        }
+      }
+
+      .dropdown-box {
+        z-index: $dropdown-tags-z-index;
+      }
+
+      .dropdown .tags-item-box {
+        color: $tag-color;
+      }
+    }
+  }
+}

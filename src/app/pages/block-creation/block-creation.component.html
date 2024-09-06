@@ -1,0 +1,42 @@
+<div class="wrapper">
+  <div class="wrapper__title">
+    <andteam-portal-title-input
+      placeholder="Put title here*"
+      [maxLength]="maxLength"
+      [error]="hasTitleError"
+      [errorMessage]="titleError"
+      [formControl]="title"></andteam-portal-title-input>
+  </div>
+  <div class="wrapper-content">
+    <div class="wrapper-content__edit">
+      <ng-content></ng-content>
+
+      <div class="editor-wrapper">
+        <div class="editor"
+             [class.error]="hasTextError">
+          <ckeditor
+            [data]="text"
+            [editor]="classicEditor"
+            [config]="config"
+            (blur)="onBlur($event)"
+            (ready)="onReady($event)"></ckeditor>
+        </div>
+        <div class="error-message"
+             *ngIf="textError">{{textError}}</div>
+      </div>
+
+      <div class="buttons">
+        <andteam-portal-button
+          class="button"
+          [disabled]="disabled"
+          (click)="onClick()">Save</andteam-portal-button>
+        <andteam-portal-button
+          [type]="buttonType"
+          (click)="onCancel()">Cancel</andteam-portal-button>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <andteam-footer></andteam-footer>
+  </div>
+</div>

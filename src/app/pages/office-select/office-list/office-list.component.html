@@ -1,0 +1,12 @@
+<div class="list-container">
+    <ng-container *ngFor="let item of offices$ | async">
+        <div class="list-item" (click)="onClick(item.id)">
+            <span *ngIf="item.id!==selectedId;else highlighted" class="list-item__marker"
+                [innerHTML]="plainMarker | safe"></span>
+            <ng-template #highlighted>
+                <span class="list-item__marker" [innerHTML]="highlightedMarker | safe"></span>
+            </ng-template>
+            <p>{{item.name}}</p>
+        </div>
+    </ng-container>
+</div>

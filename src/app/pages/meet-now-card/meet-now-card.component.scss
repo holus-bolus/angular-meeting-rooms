@@ -1,0 +1,60 @@
+@import '../../../styles/shared-styles/vars';
+@import '../../../styles/shared-styles/mixins';
+@import '../../../styles/shared-styles/colors';
+
+.meet-now-card__wrapper {
+  // padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  
+  .meet-now-card__name {
+
+    span:first-child {
+      color: #f8c200;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 13px;
+    }
+
+    @include font-base(26px, 300, 34px);
+    color: $objectives-text-color;
+    margin-bottom: 10px;
+  }
+
+  .meet-now-card__capacity {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .meet-now-card__availability {
+    margin-bottom: 10px;
+  }
+
+  .meet-now-card__controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px dashed $text-tertiary;
+
+    @include font-base(16px, 300, 19px);
+  }
+
+  .text-gray {
+    @include font-base(14px, 300, 21px);
+    color: $text-secondary;
+  }
+
+  .text-bold {
+    @include font-base(16px, 400, 24px);
+    color: $objectives-text-color;
+  }
+}
+
+
+::ng-deep button {
+  border: none !important; 
+}

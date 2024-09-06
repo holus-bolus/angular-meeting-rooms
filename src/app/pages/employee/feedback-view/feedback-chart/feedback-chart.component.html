@@ -1,0 +1,59 @@
+<div class="feedback-chart">
+  <h2 class="title">General feedback chart</h2>
+
+  <div class="hint">
+    <div class="circle yellow"></div>
+    <div class="text">Average feedback scale</div>
+    <div class="circle gray"></div>
+    <div class="text">Self-feedback scale</div>
+  </div>
+
+  <div class="info">
+    <div class="list">
+      <p>Often exceeds expectations</p>
+      <p>Sometimes exceeds expectations</p>
+      <p>Meets expectations</p>
+      <p>Sometimes fails to meet expectations</p>
+      <p>Often fails to meet expectations</p>
+    </div>
+
+    <div class="chart">
+      <div class="row"></div>
+      <div class="row"></div>
+      <div class="row"></div>
+      <div class="row"></div>
+      <div class="row"></div>
+    </div>
+  </div>
+
+  <div class="marks">
+    <div *ngFor="let item of chartDataList; let i = index" class="mark">
+      <div *ngIf="averageChartData; else isNoAverageChartData"
+           class="number">
+        {{ item[1] | number: '1.0-1'}}
+      </div>
+
+      <ng-template #isNoAverageChartData>
+        <div class="no-data"></div>
+      </ng-template>
+
+      <p>{{ getFeedbackSkillName(item[0]) }}</p>
+
+      <div class="columns">
+        <div class="column">
+          <mat-progress-bar *ngIf="averageChartData"
+                            mode="determinate"
+                            value="{{ averageChartData[i][1] * coefficient }}">
+          </mat-progress-bar>
+        </div>
+
+        <div class="column self-column">
+          <mat-progress-bar *ngIf="selfChartData"
+                            mode="determinate"
+                            value="{{ selfChartData[i][1] * coefficient }}">
+          </mat-progress-bar>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

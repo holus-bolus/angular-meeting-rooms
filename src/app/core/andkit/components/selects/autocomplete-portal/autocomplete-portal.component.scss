@@ -1,0 +1,19 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.form {
+  height: 100%;
+  display: flex;
+  align-items: center;
+
+  .input {
+    @include font-base(18px, 300, 14px);
+
+    width: 100%;
+    border: none;
+  }
+
+  .search-icon {
+    padding-right: 15px;
+  }
+}

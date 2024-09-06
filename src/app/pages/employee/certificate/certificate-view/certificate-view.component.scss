@@ -1,0 +1,498 @@
+@import 'src/styles/shared-styles/colors';
+@import 'src/styles/shared-styles/mixins';
+@import 'src/styles/shared-styles/_vars.scss';
+
+.certificate {
+  position: relative;
+  box-sizing: border-box;
+  z-index: 1;
+  width: 350px;
+  height: 247px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+  padding: 10.39px 16.63px 10.89px 16.63px;
+  color: $objectives-text-color;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: $white-color;
+
+  &.menu-opened {
+    .certificate-action {
+      opacity: 1;
+    }
+
+    .certificate-line {
+      display: block;
+    }
+  }
+
+  &.action-menu {
+    &:hover {
+      .certificate-action {
+        opacity: 1;
+      }
+
+      .certificate-line {
+        display: block;
+      }
+    }
+  }
+
+  &-line {
+    position: absolute;
+    display: none;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: $primary;
+  }
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 2px;
+
+    &-logo {
+      display: flex;
+      align-items: center;
+
+      &-icon {
+        position: relative;
+        top: 1.5px;
+
+        ::ng-deep svg {
+          width: 16.63px;
+          height: 16.63px;
+        }
+      }
+
+      &-title {
+        @include font-base(6.84px, 800, 6.84px);
+
+        text-transform: uppercase;
+        margin-left: 6.22px;
+      }
+    }
+
+    &-date {
+      font-size: 5.82px;
+      line-height: 7.82px;
+      margin-top: 2px;
+
+      p {
+        &:first-child {
+          margin-bottom: 3px;
+        }
+      }
+    }
+  }
+
+  &-title {
+    @include font-base(26.6px, 900, 26.6px);
+
+    margin-top: 5px;
+  }
+
+  &-describe {
+    @include font-base(9.14px, 300, 9.14px);
+
+    margin-top: 3px;
+  }
+
+  &-name {
+    @include font-base(9.14px, 500, 9.14px);
+
+    margin-top: 16.74px;
+  }
+
+  &-levels {
+    @include font-base(4.99px, 500, 4.99px);
+
+    display: flex;
+    color: $text-secondary;
+    margin-top: 13px;
+
+    &-level {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      line-height: 12px;
+
+      &-slash,
+      &-arrow {
+        transform: scale(0.5);
+
+        ::ng-deep svg {
+          vertical-align: middle;
+        }
+      }
+
+      &-arrow-icon {
+        transform: scale(4);
+        margin: 0 4px 1px 3px;
+        color: #b5b8bb;
+      }
+
+      &-text {
+        position: relative;
+
+        &__underline {
+          width: 100%;
+          position: absolute;
+          top: 11px;
+          height: 2px;
+          background-color: $primary;
+        }
+
+        &.active {
+          color: $objectives-text-color;
+        }
+      }
+    }
+  }
+
+  &-objectives {
+    @include font-base(4.99px, 300, 6.48px);
+
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(3, auto);
+    grid-column-gap: 27.43px;
+    grid-row-gap: 0;
+    margin-top: 4px;
+    width: 289.47px;
+    height: 50px;
+
+    &-title {
+      @include font-base(5.82px, 500, 5.82px);
+
+      margin-top: 15px;
+    }
+
+    &-goal {
+      display: flex;
+      width: 130.52px;
+
+      &-count {
+        font-weight: 500;
+        margin-right: 1.59px;
+      }
+    }
+
+    &.no-projects {
+      margin-bottom: 31.4px;
+    }
+  }
+
+  &-project {
+    @include font-base(5.82px, 400, 5.82px);
+
+    margin-top: 6.5px;
+
+    &-text {
+      font-weight: 500;
+    }
+  }
+
+  &-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+
+    &-language {
+      &-flag {
+        ::ng-deep svg {
+          width: 11px;
+          height: 10px;
+        }
+      }
+
+      &-level {
+        @include font-base(5.82px, 500, 7.57px);
+
+        position: relative;
+        top: -3px;
+
+        span {
+          margin-left: 3px;
+        }
+      }
+    }
+
+    &-assessment {
+      @include font-base(4.99px, 400, 17px);
+
+      letter-spacing: 0.1px;
+
+      &-date {
+        font-weight: 500;
+      }
+    }
+
+    &-signature {
+      @include font-base(4.99px, 300, 15px);
+
+      position: relative;
+      border-top: 1px solid $text-tertiary;
+
+      &-name {
+        font-weight: 500;
+        margin-left: 16.19px;
+      }
+
+      &-img {
+        position: absolute;
+        width: 65.26px;
+        transform: scale(0.4);
+
+        &.sign-andersen {
+          top: -40px;
+          left: -9px;
+        }
+      }
+    }
+  }
+
+  &-stamp {
+    position: absolute;
+    top: 42px;
+    right: -18px;
+    width: 128.03px;
+    height: 165.22px;
+    z-index: -1;
+    background-image: url('../../../../../assets/images/stamp.svg');
+    background-size: contain;
+
+    &-img {
+      width: 128.03px;
+    }
+  }
+
+  &-action {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    opacity: 0;
+  }
+
+  ::ng-deep {
+    .action-btn-icon {
+      color: $objectives-text-color;
+      line-height: 39px;
+      background: $primary-active;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+    }
+  }
+}
+
+.view-certificate {
+  display: flex;
+  flex-direction: column;
+  width: 842px;
+  height: 595px;
+  padding: 25px 40px;
+  cursor: auto;
+
+  .certificate {
+    &-header {
+      &-logo {
+        &-icon {
+          ::ng-deep svg {
+            width: 40px;
+            height: 40px;
+          }
+        }
+
+        &-title {
+          @include font-base(15px, 800, 15px);
+
+          margin: 0 0 3px 16px;
+          letter-spacing: 0.4px;
+        }
+      }
+
+      &-date {
+        @include font-base(14px, 400, 14px);
+
+        margin: 7px -2px 0 0;
+
+        p {
+          &:first-child {
+            margin-bottom: 10px;
+          }
+        }
+      }
+    }
+
+    &-title {
+      @include font-base(64px, 900, 64px);
+
+      margin-top: 16px;
+    }
+
+    &-describe {
+      @include font-base(22px, 300, 22px);
+
+      margin-top: 9px;
+    }
+
+    &-name {
+      @include font-base(22px, 500, 22px);
+
+      margin-top: 40px;
+    }
+
+    &-levels {
+      @include font-base(12px, 500, 12px);
+
+      display: flex;
+      color: $text-secondary;
+      margin-top: 30px;
+      vertical-align: middle;
+
+      &-level {
+        display: flex;
+        align-items: center;
+        line-height: 12px;
+
+        &-slash,
+        &-arrow {
+          transform: scale(1);
+          margin-right: 9.5px;
+
+          ::ng-deep svg {
+            height: 18px;
+          }
+
+          ::ng-deep svg path {
+            stroke: #b5b8bb;
+          }
+        }
+
+        &-arrow-icon {
+          transform: scale(2);
+          margin: 0 0 6px 2px;
+        }
+
+        &-text {
+          margin-right: 9px;
+          position: relative;
+
+          &__underline {
+            width: 100%;
+            position: absolute;
+            top: 19px;
+            height: 3px;
+            background-color: $primary;
+          }
+        }
+      }
+    }
+
+    &-objectives {
+      @include font-base(12px, 400, 15.6px);
+
+      grid-column-gap: 66px;
+      grid-row-gap: 0;
+      margin-top: 10px;
+      width: 694px;
+      height: 129px;
+
+      &-title {
+        @include font-base(14px, 500, 14px);
+
+        margin-top: 35px;
+      }
+
+      &-goal {
+        width: 314px;
+
+        &-count {
+          margin-right: 3px;
+        }
+      }
+
+      &.no-projects {
+        margin-bottom: 44px;
+      }
+    }
+
+    &-project {
+      @include font-base(14px, 400, 14px);
+
+      margin-top: 15px;
+    }
+
+    &-footer {
+      margin-top: 39px;
+
+      &-language {
+        &-flag {
+          ::ng-deep svg {
+            width: 26px;
+            height: 28.48px;
+          }
+        }
+
+        &-level {
+          @include font-base(14px, 500, 18.2px);
+
+          top: -10px;
+
+          span {
+            margin-left: 8px;
+          }
+        }
+      }
+
+      &-assessment {
+        @include font-base(12px, 400, 30px);
+
+        margin: 0 3px 1px 0;
+      }
+
+      &-signature {
+        @include font-base(12px, 300, 28px);
+
+        &-name {
+          margin-left: 40px;
+        }
+
+        &-img {
+          width: 157px;
+          transform: scale(1);
+
+          &.sign-andersen {
+            top: -53px;
+            left: 25px;
+          }
+        }
+      }
+    }
+
+    &-stamp {
+      top: 105px;
+      right: -40px;
+      width: 308px;
+      height: 398px;
+    }
+  }
+}
+
+.more-goals {
+  grid-template-rows: repeat(4, auto);
+}
+
+::ng-deep {
+  .cdk-overlay-connected-position-bounding-box {
+    .mat-menu-panel {
+      width: 150px;
+
+      button {
+        height: 42px;
+      }
+    }
+  }
+}

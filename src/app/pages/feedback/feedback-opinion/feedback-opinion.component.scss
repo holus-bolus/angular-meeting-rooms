@@ -1,0 +1,101 @@
+@import '~src/styles/shared-styles/mixins';
+@import '~src/styles/shared-styles/colors';
+
+.feedback-opinion {
+  @include shadow;
+
+  position: relative;
+  background: $white-color;
+  padding: 32px 32px 40px;
+
+  @media (max-width: $mobile) {
+    padding: 30px 30px 40px;
+  }
+  &-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 10px;
+
+    &-title {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      align-content: center;
+      padding: 0px;
+      gap: 8px;
+
+      h3 {
+        @include font-base(24px, 300, 32px);
+        color: $input-selected-color;
+        width: 100%;
+      }
+
+      span.valid > ::ng-deep svg > path {
+        fill: $clicked-link-color;
+      }
+    }
+
+    &-subtitle {
+      p {
+        @include font-base(16px, 400, 26px);
+        color: $tag-title-color;
+      }
+    }
+
+    margin-bottom: 30px;
+  }
+  
+  &-fields {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 35px;
+
+    &__improve,
+    &__strengths {
+      width: 100%;
+      flex: 1;
+
+      @media (max-width: $tablet-md) {
+        max-width: none;
+      }
+    }
+
+    &-error {
+      @include font-base(12px, 400, 16.88px);
+
+      margin-top: 8px;
+      color: $error-color;
+    }
+
+    @media (max-width: $tablet-md) {
+      flex-direction: column;
+    }
+
+    andteam-portal-textarea::ng-deep {
+      textarea, mat-label {
+        @include font-base(16px, 400, 26px);
+      }
+    }
+  }
+
+  ::ng-deep {
+    .feedback-opinion-input {
+      .placeholder {
+        font-size: 16px !important;
+        color: $tag-box-border !important;
+
+        @media (max-width: $mobile) {
+          font-size: 14px !important;
+        }
+      }
+
+      .hint-message {
+        position: relative !important;
+      }
+    }
+  }
+}

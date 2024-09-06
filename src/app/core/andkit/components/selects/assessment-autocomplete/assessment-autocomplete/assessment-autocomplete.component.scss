@@ -1,0 +1,107 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+@import '~src/styles/shared-styles/vars';
+
+.assessment-autocomplete {
+  height: 36px;
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+
+  .form-input {
+    @include font-base(14px, 400, 22px);
+
+    width: 100%;
+    box-sizing: border-box;
+    padding: 6px 8px;
+    border-radius: 4px;
+    border: 1px solid $text-tertiary;
+    word-break: keep-all;
+    color: $username-color;
+    cursor: pointer;
+
+    &:hover {
+      cursor: pointer;
+      border: 1px solid $text-secondary;
+    }
+
+    &:focus {
+      border: 1px solid $border-active;
+    }
+
+    &:disabled {
+      background: transparent;
+      border: 1px solid $text-tertiary;
+      cursor: default;
+    }
+
+    &::placeholder {
+      @include font-base(14px, 400, 22px);
+
+      color: $text-secondary;
+    }
+  }
+
+  .error {
+    border-color: $assessment-error-color;
+  }
+
+  .icon {
+    position: absolute;
+    top: 9px;
+    right: 15px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+
+    &-search {
+      opacity: 0.5;
+    }
+
+    &:disabled {
+      cursor: default;
+    }
+  }
+
+  .dropdown-list {
+    width: 100%;
+    max-height: 256px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: absolute;
+    z-index: $modal-z-index - 1;
+    bottom: -12px;
+    left: 0;
+    transform: translate(0, 100%);
+    background-color: $white-color;
+    box-shadow: 0 5px 15px rgba(5, 31, 43, 0.17);
+
+    .dropdown-option {
+      width: 100%;
+      padding-left: 16px;
+      min-height: 48px;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      background-color: $white-color;
+      cursor: pointer;
+
+      &_not-found {
+        justify-content: center;
+      }
+
+      &:hover {
+        background-color: $assessment-active-background;
+      }
+    }
+  }
+}
+
+.assessment-focus {
+  border: 1px solid $border-active;
+
+  .icon-search {
+    opacity: 1;
+  }
+}

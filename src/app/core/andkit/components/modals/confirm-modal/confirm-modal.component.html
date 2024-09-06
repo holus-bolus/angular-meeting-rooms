@@ -1,0 +1,16 @@
+<div class="confirm" [class.other]="data.isOther">
+  <div class="confirm-box">
+    <div class="confirm-icon" [innerHTML]="data.questionLogo ? questionLogoSvg : cautionSvg"></div>
+
+    <div class="confirm-titles">
+      <div class="confirm-title" [innerHTML]="data.titleText"></div>
+      <div class="confirm-subtitle">{{ data.subtitleText }}</div>
+    </div>
+  </div>
+
+  <div class="confirm-btn" [ngClass]="{'confirm-btn-single': data.oneButtonMode}">
+    <andteam-button *ngIf="!data.oneButtonMode" [type]="cancelButtonType" (click)="cancelConfirm()">{{ data.cancelBtnText }}</andteam-button>
+    <andteam-button [type]="confirmButtonType" (click)="confirm()">{{ data.confirmBtnText }}</andteam-button>
+  </div>
+</div>
+

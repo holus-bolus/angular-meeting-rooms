@@ -1,0 +1,13 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.room-card {
+  @include shadow;
+
+  padding: 30px;
+  box-sizing: border-box;
+  background-color: $white-color;
+  height: 100%;
+  width: $room-card-width;
+  color: $objectives-text-color;
+}

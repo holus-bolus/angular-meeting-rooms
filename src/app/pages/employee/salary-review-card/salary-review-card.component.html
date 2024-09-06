@@ -1,0 +1,50 @@
+<div class="tab-wrapper">
+  <ng-container *ngIf="reviewHistory$ | async as reviewHistory">
+    <h2 class="employee-h1">Assessment details</h2>
+
+    <div class="salary-review-card__content">
+      <div *ngIf="reviewHistory?.nextReviewDate" class="next-salary-date">
+        <andteam-icon [icon]="date | safe"></andteam-icon>
+
+        <span class="next-salary-date-label">
+          The next assessment is no earlier than {{ reviewHistory?.nextReviewDate | date: 'MMMM yyyy' }}
+        </span>
+      </div>
+
+      <div class="reviews-count">
+        <andteam-icon
+          class="reviews-count-icon"
+          [icon]="reviews | safe">
+        </andteam-icon>
+
+        {{total}}<span class="reviews-count-label">{{' review' + (total > 1 ? 's' : '')}}</span>
+      </div>
+
+      <div class="review-details">
+        <andteam-review-card
+          class="review-details-card"
+          *ngFor="let review of salaryReviews$ | async"
+          [review]="review">
+        </andteam-review-card>
+      </div>
+
+      <div *ngIf="isHaveNextPage" class="footer">
+        <div class="show-more" (click)="showMoreReviews()">
+          <span class="show-more-link">Show more</span>
+          <span class="arrow-down" [innerHTML]="vectorIcon | safe"></span>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <div *ngIf="isShowLoader">
+    <andteam-spinner delay="0"></andteam-spinner>
+  </div>
+</div>
+
+<andteam-matrix-modal
+  *ngIf="isOpenCancelModal"
+  [successMessage]="successCompleteMatrixMessage"
+  [errorMessage]="errorCompleteMatrixMessage"
+  (closeModal)="onCloseModal()">
+</andteam-matrix-modal>

@@ -1,0 +1,23 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+@import '~src/styles/shared-styles/vars';
+
+.toast-notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: $modal-z-index;
+  padding: 30px 40px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 5px 15px rgba(5, 31, 43, 0.17);
+  background-color: $white-color;
+
+  .checked-icon {
+    margin-right: 20px;
+  }
+
+  .toast-text {
+    @include font-base(18px, normal, 28px);
+  }
+}

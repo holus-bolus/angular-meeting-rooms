@@ -1,0 +1,117 @@
+<div class="merch">
+  <div class="merch-wrapper" #wrapperElement>
+    <div class="merch__header">
+      <div class="merch__header_block">
+        <div class="merch__header_info">
+          <div class="merch__header_title">
+            ANDERSEN INDULGES YOU
+          </div>
+
+          <div class="merch__header_description">
+            This is a store with things that you can’t buy with money. We only accept Andersen points. Feel free to look
+            in here more often. The storefront is replenished all the time.
+          </div>
+        </div>
+
+        <div class="merch__header_actions">
+          <div class="merch__header_points">
+            You have {{userPoints || 0}} points
+          </div>
+
+          <div>
+            <andteam-button
+              [type]="myOrdersButtonType"
+              textColor="white"
+              (click)="onNavigationToOrders()">
+              My orders
+            </andteam-button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="merch-main" #catalogElement>
+      <div
+        *ngIf="cartButtonMargin"
+        class="merch__cart-button"
+        [style.right]="cartButtonMargin + 'px'"
+      >
+        <button
+          mat-mini-fab
+          color="accent"
+          [matBadge]="productsInCart.length"
+          matBadgePosition="after"
+          matBadgeColor="warn"
+          (click)="onOpenCart()">
+          <mat-icon>shopping_cart</mat-icon>
+        </button>
+      </div>
+
+      <div class="merch-card"
+           *ngFor="let product of products">
+        <div class="merch-card-img">
+          <span class="merch-card-price">{{ product.price }} points</span>
+          <img [src]="product.url" class="merch-card-photo">
+        </div>
+
+        <div class="merch-card-content">
+          <h4 class="merch-card-title">
+            {{ product.name }}
+          </h4>
+
+          <div class="merch-card-description">
+            {{ product.description }}
+          </div>
+
+          <div class="merch-card-parametrs">
+            <div class="merch-card-parametrs-cell"
+                 *ngFor="let parameter of product.parameters">
+              <div class="merch-card-parametrs-title">
+                {{ parameter.name }}
+              </div>
+
+              <div class="merch-card-parametrs-value">
+
+                <ng-container *ngIf="isParameterColor(parameter.name); else parametersAsText">
+                  <div class="merch-card-parametrs-colors">
+                    <div class="merch-card-parametrs-color"
+                         *ngFor="let parameterValue of parameter.parameterValues"
+                         [style.background-color]="'#' + parameterValue.value">
+                    </div>
+                  </div>
+                </ng-container>
+
+                <ng-template #parametersAsText>
+                  <span *ngFor="let parameterValue of parameter.parameterValues; let last = last">
+                     {{ parameterValue.value }}{{ last ? '' : ',' }}
+                  </span>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <andteam-button
+          class="merch-card-button"
+          [disabled]="userPoints < product.price"
+          (click)="onChoseItem(product)">
+          View item
+        </andteam-button>
+      </div>
+
+      <div class="merch-footer">
+        <div class="merch-footer-text">
+          Dear friends! Please send your ideas on what items you’d like to see in our storefront to HR managers. We will
+          consider all your proposals and add the most relevant items to our store.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<andteam-assessment-toast-notification *ngIf="isShowToastNotification$.value" (fadeOut)="onFadeOut()">
+  <strong>Your order has been accepted.</strong> <br>
+  Our company’s employee will contact you for further details.
+</andteam-assessment-toast-notification>
+
+<andteam-footer></andteam-footer>

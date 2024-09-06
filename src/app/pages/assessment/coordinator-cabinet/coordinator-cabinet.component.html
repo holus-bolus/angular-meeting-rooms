@@ -1,0 +1,131 @@
+<div class="wrapper">
+  <div class="assessment">
+    <div *ngIf="validationError | async" class="assessment-error-message">Please fill in the required fields</div>
+
+    <andteam-tabs
+      class="tabs"
+      [tabs]="tabs"
+      [ngSwitch]="activeTab"
+      [allCandidates]="allCandidates"
+      (selectTab)="onSelectTab($event)">
+
+      <div class="tabs-wrapper"
+           *ngIf="allCandidates; else placeholder">
+        <div class="date-filters" *ngIf="activeTab === 'ready'">
+          <div class="date-filters-title">Review date:</div>
+
+          <andteam-date-filter
+            *ngFor="let date of reviewDates"
+            [isActive]="activeDate === date"
+            (click)="filterByDate(date)">
+            {{date | timezone: 'DD.MM'}}
+          </andteam-date-filter>
+        </div>
+
+        <div class="main-info">
+          <andteam-candidates-list
+            [sidebarCandidates]="sidebarCandidates"
+            [allCandidates]="allCandidates"
+            [technologies]="technologies"
+            [resourceManagers]="resourceManagers"
+            [interviewers]="interviewers"
+            [activeCandidateIndex]="activeCandidateIndex"
+            [activeTab]="activeTab"
+            [employeeForm]="employeeForm"
+            [activeDate]="activeDate"
+            [searchField]="searchField"
+            (setSearchField)="setSearchField($event)"
+            (filterCandidates)="onFilterCandidates($event)"
+            (setActiveCandidateIndex)="setActiveCandidateIndex($event)"
+            (showCandidateDetails)="onShowCandidateDetails($event)"></andteam-candidates-list>
+
+          <div class="content" *ngIf="isShowCandidateDetails; else noFilteredEmployees">
+            <andteam-candidate-common-info
+              [candidateDetails]="candidateDetails$"
+              [activeTab]="activeTab"
+              (addToConsideration)="onAddToConsideration()"
+              (updateCandidates)="onUpdateCandidates()">
+            </andteam-candidate-common-info>
+
+            <div class="scroll">
+              <ng-template ngSwitchCase="approved">
+                <andteam-approved-page
+                  [candidateDetails]="candidateDetails$"
+                  [isShowAssessmentLoading]="isShowAssessmentLoading"
+                  [plannedAssessmentId]="plannedAssessmentId"
+                  (planWithoutInterview)="onPlanWithoutInterview($event)"
+                  (updateCandidates)="onUpdateCandidates($event)"
+                  (formCreated)="onFormCreated($event)"
+                  (plan)="onPlan($event)">
+                </andteam-approved-page>
+              </ng-template>
+              <ng-template ngSwitchCase="interview">
+                <andteam-progress-page
+                  type="interview"
+                  [candidateDetails]="candidateDetails$"
+                  (updateCandidates)="onUpdateCandidates($event)">
+                </andteam-progress-page>
+              </ng-template>
+
+              <ng-template ngSwitchCase="preparation">
+                <andteam-progress-page
+                  type="preparation"
+                  [currencies]="currencies"
+                  [candidateDetails]="candidateDetails$"
+                  (updateCandidates)="onUpdateCandidates($event)"
+                  (formCreated)="onFormCreated($event)">
+                </andteam-progress-page>
+              </ng-template>
+
+              <ng-template ngSwitchCase="ready">
+                <andteam-ready-page
+                  [candidateDetails]="candidateDetails$"
+                  (updateCandidates)="onUpdateCandidates($event)"></andteam-ready-page>
+              </ng-template>
+
+              <div class="footer"></div>
+            </div>
+          </div>
+
+          <ng-template  #noFilteredEmployees>
+            <div class="no-data-block">
+              <div class="checked-icon" [innerHTML]="messageIcon | safe"></div>
+
+              <div class="no-filtered-candidates-message">{{noFilteredEmployeesMessage}}</div>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+
+      <ng-template  #placeholder>
+        <div *ngIf="isShowLoader; else noEmployee" class="placeholder">
+          <andteam-spinner delay="0"></andteam-spinner>
+        </div>
+
+        <ng-template #noEmployee>
+          <div class="no-data-block">
+            <div class="checked-icon" [innerHTML]="messageIcon | safe"></div>
+
+            <div class="no-candidates-message">{{noEmployeesMessage}}</div>
+          </div>
+        </ng-template>
+      </ng-template>
+
+      <div *ngIf="isShowLoader" class="placeholder">
+        <andteam-spinner delay="0"></andteam-spinner>
+      </div>
+    </andteam-tabs>
+  </div>
+
+  <andteam-assessment-toast-notification
+    *ngIf="isToastNotification"
+    (fadeOut)="onFadeOut()">
+    <ng-container [ngSwitch]="activeTab">
+      <span *ngSwitchCase="'preparation'">
+        {{employeeName}} has been added to consideration <strong>{{addedReviewDate | timezone : 'DD.MM.YYYY'}}</strong>
+      </span>
+
+      <span *ngSwitchDefault>{{planMessage}} <strong>{{employeeName}}</strong> has been planned</span>
+    </ng-container>
+  </andteam-assessment-toast-notification>
+</div>

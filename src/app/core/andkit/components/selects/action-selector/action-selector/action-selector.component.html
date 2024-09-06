@@ -1,0 +1,17 @@
+<button mat-icon-button class="action-btn" [matMenuTriggerFor]="menu" (menuOpened)="openMenu()">
+  <mat-icon class="action-btn-icon">{{ iconType }}</mat-icon>
+</button>
+
+<mat-menu #menu="matMenu" class="action-menu" (closed)="closeMenu()">
+  <button *ngFor="let item of menuItems; let index = index"
+          mat-menu-item
+          class="action-menu-item"
+          [ngClass]="{
+            'action-red' : isOptionRed(item.name),
+            'action-green' : isOptionGreen(item.name),
+            'action-dark-style': isMenuDark() }"
+          (click)="onSelectMenuOption(item)">
+    <span *ngIf="menuIcons" [innerHTML]="menuIcons[index]" class="action-menu-item-icon"></span>
+    <div class="action-menu-item-text" [class.with-icon]="menuIcons">{{ item.name }}</div>
+  </button>
+</mat-menu>

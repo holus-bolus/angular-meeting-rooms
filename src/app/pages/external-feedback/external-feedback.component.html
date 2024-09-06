@@ -1,0 +1,114 @@
+<andteam-external-header
+  [showInfoButton]="isFeedbackHasBeenSent$ | async"
+  (infoClick)="showModal()">
+</andteam-external-header>
+
+<div class="feedback-container" *ngIf="userInfo$ | async as user" [formGroup]="formGroup">
+  <div *ngIf="isFeedbackHasBeenSent$ | async" class="feedback">
+    <div class="feedback-header">
+      <h1>
+        Feedback on {{ user.employeeName }}
+      </h1>
+      <span *ngIf="!isMobile" class="icon-hint" [innerHTML]="infoIcon | safe" (click)="showModal()"></span>
+    </div>
+
+    <div class="feedback-block">
+      <div class="feedback-block-wrapper">
+        <div class="feedback-block-header">
+          <div class="feedback-block-header-title">
+            <span [ngClass]="{'valid':  formGroup.controls.availabilityTypeControl.valid}" class="feedback-block-dropdown-area-icon"
+              [innerHTML]="validationIcon | safe"></span>
+            <h3>
+              Please select the type of the feedback
+            </h3>
+          </div>
+        </div>
+        <div class="feedback-block-dropdown-area">
+          <andteam-select-new ngDefaultControl [placeholder]="availabilityTypeSelectPlaceholder"
+            [options]="availabilityTypeoptions" [option]="formGroup.controls.availabilityTypeControl.value"
+            [disableOptionCentering]="false" [showDescription]="true"
+            [formControl]="formGroup.controls.availabilityTypeControl"
+            [error]="formGroup.controls.availabilityTypeControl.invalid"
+            [errorMessage]="'Please select common project'">
+          </andteam-select-new>
+        </div>
+      </div>
+    </div>
+
+    <div class="feedback-block">
+      <div class="feedback-block-wrapper">
+        <div class="feedback-block-header">
+          <div class="feedback-block-header-title">
+            <span 
+              [ngClass]="{'valid':  formGroup.controls.communicationSkills.valid && 
+                                    formGroup.controls.overallPerformance.valid && 
+                                    formGroup.controls.problemSolvingSkills.valid && 
+                                    formGroup.controls.professionalSkills.valid && 
+                                    formGroup.controls.qualityOfWork.valid && 
+                                    formGroup.controls.reliability.valid }"
+              class="feedback-block-dropdown-area-icon" 
+              [innerHTML]="validationIcon | safe"></span>
+            <h3>
+              Please rate the employee according to the criteria
+            </h3>
+          </div>
+          <div class="feedback-block-header-subtitle">
+            <p>
+              Your feedback is important for the further growth and development of the employee. Please be the most objective about their professional qualities.
+            </p>
+          </div>
+        </div>
+        <div class="feedback-skills">
+          <div class="feedback-skills-item" *ngFor="let feedbackSkill of feedbackSkills">
+            <andteam-feedback-skill 
+              ngDefaultControl
+              [isMobile]="isMobile"
+              [feedbackSkill]="feedbackSkill"
+              [formControlName]="feedbackSkill.skill"
+              (showSkill)="openInfoModal(feedbackSkill)">
+            </andteam-feedback-skill>
+          </div>
+        </div>
+      </div>  
+    </div>
+
+    <andteam-feedback-opinion 
+      [strengthsMinLength]="strengthsMinLength"
+      [improveMinLength]="improveMinLength"
+      [maxLength]="maxLength"
+      [opinionStrengthsControl]="formGroup.controls.opinionStrengthsControl"
+      [opinionImproveControl]="formGroup.controls.opinionImproveControl">
+    </andteam-feedback-opinion>
+
+    <div *ngIf="isShowLoader" class="feedback-spinner">
+      <andteam-spinner delay="0"></andteam-spinner>
+    </div>
+    <div class="feedback-buttons">
+      <andteam-button [type]="'primary'"
+                      [disabled]="!formGroup.valid"
+                      (click)="onSubmit()">Submit</andteam-button>
+    </div>
+  </div>
+  <div *ngIf="(isFeedbackHasBeenSent$ | async) !== true" class="feedback-sent">
+    <span [innerHTML]="feedbackSentBgIcon | safe" class="feedback-sent-image"></span>
+    <div class="feedback-sent-wrapper">
+      <h2 class="feedback-sent-title">
+        Feedback has been sent
+      </h2>
+      <p class="feedback-sent-subtitle">
+        Thank you, {{ user.customerName }}! You can view more of our projects by clicking the button below
+      </p>
+      <a [href]="companyUrl"
+          target="_blank"
+          class="feedback-sent-button">
+        View our projects
+      </a>
+    </div>
+  </div>
+</div>
+
+<andteam-footer-external></andteam-footer-external>
+
+<ng-template #feedbackTypes>
+
+</ng-template>

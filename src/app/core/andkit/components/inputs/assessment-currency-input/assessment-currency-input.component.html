@@ -1,0 +1,17 @@
+<div class="currency-wrapper">
+  <div class="currency-select">
+    <andteam-currency-select [selectedCurrency]="selectedCurrency" [currencies]="currencies" (selectCurrency)="onSelect($event)">
+    </andteam-currency-select>
+  </div>
+  <div class="currency-input">
+    <andteam-assessment-input
+      placeholder="Add a sum"
+      [value]="value?.salaryRequirement"
+      [error]="!salaryControl.valid || error"
+      (blurSalary)="onSalaryBlur()"
+      (changeSalary)="onSalaryChange($event)"
+    ></andteam-assessment-input>
+    <div *ngIf="isRuble && salaryControl.valid && false" class="dollar-equivalent">~${{calculatedSalary}}</div>
+  </div>
+</div>
+

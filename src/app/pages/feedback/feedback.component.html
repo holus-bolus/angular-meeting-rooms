@@ -1,0 +1,123 @@
+<div override class="profile-button">
+  <andteam-portal-backward-link isStatic="true" [isNeedConfirm]="true" (linkClick)="isShowCancelModal = true"
+    [path]="pathToCancelFeedback">
+    {{ titleForLink }}
+  </andteam-portal-backward-link>
+</div>
+
+<div class="feedback-container" *ngIf="userInfo$ | async as user" [formGroup]="formGroup">
+  <div class="feedback">
+    <div class="feedback-header">
+      <div class="feedback-header-title">
+        <h1 *ngIf="!feedbackId && !isUniversalType">
+          Feedback on {{ user.employeeName }}
+        </h1>
+        <h1 *ngIf="feedbackId || isUniversalType">
+          {{ feedbackTitle }}
+        </h1>
+        <span class="icon-hint" [innerHTML]="infoIcon | safe" (click)="showInstructionModal(user.selfFeedback)"></span>
+      </div>
+      <h2 *ngIf="user.previousFeedbacksCount !== 0 && !feedbackId && !isUniversalType">
+        You have already left opinion about this person {{ user.previousFeedbacksCount }} times.
+        The latest on {{ user.lastFeedbackDate | date: 'dd.MM.yyyy' }}
+      </h2>
+      <h2 *ngIf="feedbackId || isUniversalType">
+        {{ feedbackSubTitle }}
+      </h2>
+    </div>
+
+    <div class="feedback-block" [hidden]="user.selfFeedback" #projectBlock>
+      <div class="feedback-block-wrapper">
+        <div class="feedback-block-header">
+          <div class="feedback-block-header-title">
+            <span [ngClass]="{'valid':  formGroup.controls.availabilityTypeControl.valid && 
+                                    formGroup.controls.projectControl.valid && 
+                                    formGroup.controls.typeControl.valid}" class="feedback-block-dropdown-area-icon"
+              [innerHTML]="validationIcon | safe"></span>
+            <h3 *ngIf="!feedbackId && !isUniversalType">
+              Please fill in all the fields to leave a feedback
+            </h3>
+            <h3 *ngIf="feedbackId || isUniversalType">
+              Please select the type of the feedback
+            </h3>
+          </div>
+        </div>
+        <div class="feedback-block-dropdown-area">
+          <andteam-select-new ngDefaultControl [placeholder]="availabilityTypeSelectPlaceholder"
+            [options]="availabilityTypeoptions" [option]="formGroup.controls.availabilityTypeControl.value"
+            [disableOptionCentering]="true" [showDescription]="true"
+            [isFieldDisabled]="isSelectionDisabledBS | async"
+            [formControl]="formGroup.controls.availabilityTypeControl"
+            [error]="formGroup.controls.availabilityTypeControl.invalid"
+            [errorMessage]="'Please select common project'">
+          </andteam-select-new>
+          <ng-container *ngIf="!feedbackId">
+            <andteam-select-new *ngIf="(positionTypes$ | async) as positionTypes" ngDefaultControl
+              [placeholder]="typeSelectPlaceholder" [options]="positionTypes"
+              [option]="formGroup.controls.typeControl.value" [showDescription]="true" [disableOptionCentering]="true"
+              [formControl]="formGroup.controls.typeControl" [error]="formGroup.controls.typeControl.invalid"
+              [errorMessage]="'Please select type'" (selectOption)="onSelectType()">
+            </andteam-select-new>
+            <andteam-select-new *ngIf="formGroup.controls.projectControl && !isUniversalType" ngDefaultControl [placeholder]="projectSelectPlaceholder" [options]="projectsRS | async"
+              [option]="formGroup.controls.projectControl.value" [disableOptionCentering]="true"
+              [formControl]="formGroup.controls.projectControl" [error]="formGroup.controls.projectControl.invalid"
+              [errorMessage]="'Please select common project'">
+            </andteam-select-new>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <div class="feedback-block" formGroupName="skillGroup">
+      <div class="feedback-block-wrapper">
+        <div class="feedback-block-header">
+          <div class="feedback-block-header-title">
+            <span [ngClass]="{'valid': formGroup.controls.skillGroup.valid}" class="feedback-block-dropdown-area-icon"
+              [innerHTML]="validationIcon | safe"></span>
+            <h3>
+              Please rate {{ employee }} according to the criteria
+            </h3>
+          </div>
+          <div class="feedback-block-header-subtitle">
+            <p>
+              Your feedback is important for the further growth {{ employeeSubText }}. Please be the most
+              objective about their professional qualities.
+            </p>
+          </div>
+        </div>
+        <div class="feedback-skills">
+          <div class="feedback-skills-item"
+            [ngClass]="{'feedback-skills-item-switcher': feedbackSkill.hasDisableCheckbox}"
+            *ngFor="let feedbackSkill of feedbackSkills">
+            <div class="feedback-skills-description" *ngIf="feedbackSkill.blockDesccription">{{
+              feedbackSkill.blockDesccription }}</div>
+            <andteam-feedback-skill ngDefaultControl [feedbackSkill]="feedbackSkill"
+              [formControlName]="feedbackSkill.skill" (switchRequirement)="switchRequirement($event, feedbackSkill)">
+            </andteam-feedback-skill>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <andteam-feedback-opinion [strengthsMinLength]="strengthsMinLength" [improveMinLength]="improveMinLength"
+      [maxLength]="maxLength" [opinionStrengthsControl]="formGroup.controls.opinionStrengthsControl"
+      [opinionImproveControl]="formGroup.controls.opinionImproveControl" [positionType]="this.formGroup.get('typeControl').value.value">
+    </andteam-feedback-opinion>
+
+    <div *ngIf="isShowLoader" class="feedback-spinner">
+      <andteam-spinner delay="0"></andteam-spinner>
+    </div>
+  </div>
+  <div class="feedback-buttons">
+    <andteam-button [type]="'previous'" (click)="isShowCancelModal = true">Cancel</andteam-button>
+    <andteam-button [type]="'primary'" [disabled]="!formGroup.valid" (click)="onSubmit()">Submit</andteam-button>
+  </div>
+</div>
+<andteam-footer></andteam-footer>
+
+<andteam-assessment-toast-notification *ngIf="isToastNotification" (fadeOut)="onFadeOut()">
+  <span>{{ notificationText }}</span>
+</andteam-assessment-toast-notification>
+
+<andteam-feedback-cancel-modal *ngIf="isShowCancelModal" (sendConfirmEvent)="goBack()" (sendCancelEvent)="close()">
+</andteam-feedback-cancel-modal>

@@ -1,0 +1,66 @@
+<div class="time-picker">
+  <div class="time-picker-box">
+    <div class="time-picker-title" *ngIf="isTitlesShow">Hour</div>
+    <div class="time-picker-input">
+      <input class="time-picker-value"
+             type="text"
+             #hoursElement
+             [disabled]="disabled"
+             [value]="hours"
+             [attr.maxlength]="maxLength"
+             [class.error]="error"
+             (blur)="onBlur(hoursField)"
+             (input)="onChangeValue($event.target.value, hoursField)">
+      <div class="time-picker-buttons">
+        <button class="time-picker-button"
+                andteamHoverEvent
+                [disabled]="disabled"
+                [class.hover]="isHoverEvent && arrow === upArrowHours"
+                (handleHover)="handleHover($event, upArrowHours)"
+                (click)="setTime(hoursField, true)">
+          <span [innerHTML]="upArrowIcon | safe"></span>
+        </button>
+        <button class="time-picker-button"
+                andteamHoverEvent
+                [disabled]="disabled"
+                [class.hover]="isHoverEvent && arrow === downArrowHours"
+                (handleHover)="handleHover($event, downArrowHours)"
+                (click)="setTime(hoursField, false)">
+          <span [innerHTML]="upArrowIcon | safe"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="time-picker-box">
+    <div class="time-picker-title" *ngIf="isTitlesShow">Minute</div>
+    <div class="time-picker-input">
+      <input class="time-picker-value"
+             type="text"
+             #minutesElement
+             [disabled]="disabled"
+             [value]="minutes"
+             [attr.maxlength]="maxLength"
+             [class.error]="error"
+             (blur)="onBlur(minutesField)"
+             (input)="onChangeValue($event.target.value, minutesField)">
+      <div class="time-picker-buttons">
+        <button class="time-picker-button"
+                andteamHoverEvent
+                [disabled]="disabled"
+                [class.hover]="isHoverEvent && arrow === upArrowMinutes"
+                (handleHover)="handleHover($event, upArrowMinutes)"
+                (click)="setTime(minutesField, true)">
+          <span [innerHTML]="upArrowIcon | safe"></span>
+        </button>
+        <button class="time-picker-button"
+                andteamHoverEvent
+                [disabled]="disabled"
+                [class.hover]="isHoverEvent && arrow === downArrowMinutes"
+                (handleHover)="handleHover($event, downArrowMinutes)"
+                (click)="setTime(minutesField, false)">
+          <span [innerHTML]="upArrowIcon | safe"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="color-select">
+  <div *ngFor="let option of options"
+       class="color-select__option"
+
+       [class.is-active]="option.id === value?.id"
+       (click)="onChangeValue(option)"
+  >
+    <div class="color-select__option_box"
+         [style.background-color]="'#' + option.value"
+    ></div>
+  </div>
+</div>

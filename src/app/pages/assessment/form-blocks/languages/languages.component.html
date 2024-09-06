@@ -1,0 +1,137 @@
+<div *ngFor="let language of candidateLanguagesList$ | async; index as i">
+  <div class="language">
+    <div class="language-box">
+      <div class="title">Language int. result:</div>
+
+      <div class="level">
+        <andteam-portal-select placeholder="Choose a foreign language"
+                               class="language-autocomplete"
+                               dropdownHeight="{{ dropdownHeight }}px"
+                               [options]="languagesList$ | async"
+                               [option]="{name: language.language,
+                                         id: language.id}"
+                               [componentType]="selectType"
+                               (selectOption)="updateLanguage($event, language)">
+        </andteam-portal-select>
+      </div>
+    </div>
+
+    <div class="language-box">
+      <div class="level" [ngClass]="{ 'disabled': !language.id }">
+
+      <andteam-portal-select placeholder="Choose a level"
+                             class="language-autocomplete"
+                             dropdownHeight="{{ dropdownHeight }}px"
+                             [options]="languagesLevelsList$ | async"
+                             [option]="{name: language.level,
+                                       id: language.level}"
+                             [componentType]="selectType"
+                             (selectOption)="updateLanguageLevel($event, language)">
+      </andteam-portal-select>
+      </div>
+    </div>
+
+    <div [ngClass]="{ 'disabled': !language.id }">
+      <andteam-form-field class="interview-autocomplete language-comment-field">
+        <andteam-form-comment form-input
+                              placeholder="Add a comment"
+                              [placeholder]="languageCommentPlaceholder"
+                              [value]="language.comment"
+                              [errorMessage]="maxLengthErrorMessage"
+                              [charactersLimit]="maxLengthLanguageComment"
+                              (commentChanges)="updateLanguageComment($event, language)">
+        </andteam-form-comment>
+      </andteam-form-field>
+    </div>
+  </div>
+
+  <div class="delete-button">
+    <div *ngIf="isMainClearButton; else otherLanguage">
+      <andteam-button class="language-button"
+                      type="secondary"
+                      (click)="deleteLanguage(language.id)">
+        <span class="language-eraser-icon" [innerHTML]="eraserIcon | safe"></span>
+
+        <span>Clear language fields</span>
+      </andteam-button>
+    </div>
+
+    <ng-template #otherLanguage>
+      <div class="language-button">
+        <andteam-button type="secondary"
+                        [ngClass]="{ 'disabled': i > numberOfLanguagesFields }"
+                        (click)="deleteLanguage(language.id)">
+          <span class="language-icon" [innerHTML]="clearIcon | safe"></span>
+          <span>Delete language fields</span>
+        </andteam-button>
+      </div>
+    </ng-template>
+  </div>
+</div>
+
+<div *ngIf="isAssessmentLanguageList$ | async">
+  <div class="language">
+    <div class="language-box">
+      <div class="title">Language int. result:</div>
+
+      <div class="level">
+        <andteam-portal-select placeholder="Choose a foreign language"
+                               class="language-autocomplete"
+                               dropdownHeight="{{ dropdownHeight }}px"
+                               [options]="languagesList$ | async"
+                               [componentType]="selectType"
+                               (selectOption)="onSelectLanguage($event)">
+        </andteam-portal-select>
+      </div>
+    </div>
+
+    <div class="language-box">
+      <div class="level" [ngClass]="{ 'disabled': true }">
+        <andteam-portal-select placeholder="Choose a level"
+                               class="language-autocomplete"
+                               dropdownHeight="{{ dropdownHeight }}px"
+                               [options]="languagesLevelsList$ | async"
+                               [componentType]="selectType">
+        </andteam-portal-select>
+      </div>
+    </div>
+
+    <div [ngClass]="{ 'disabled': true }">
+      <andteam-form-field class="interview-autocomplete language-comment-field">
+        <andteam-form-comment placeholder="Add a comment"
+                              form-input
+                              [charactersLimit]="maxLengthLanguageComment"
+                              [placeholder]="languageCommentPlaceholder"
+                              [errorMessage]="maxLengthErrorMessage">
+        </andteam-form-comment>
+      </andteam-form-field>
+    </div>
+  </div>
+
+  <div class="delete-button">
+    <andteam-button type="secondary"
+                    (click)="deleteLanguage('')">
+      <div *ngIf="isFirstClearButton; else otherLanguage" class="title">
+        <span class="language-eraser-icon" [innerHTML]="eraserIcon | safe"></span>
+
+        <span class="text">Clear language fields</span>
+      </div>
+
+      <ng-template #otherLanguage>
+        <span class="language-icon" [innerHTML]="clearIcon | safe "></span>
+
+        <span>Delete language fields</span>
+      </ng-template>
+    </andteam-button>
+  </div>
+</div>
+
+<div class="add-button">
+  <andteam-button *ngIf="isFullLanguageList"
+                  type="secondary"
+                  class="add-button-button-border"
+                  [ngClass]="{'disabled': isAssessmentLanguageList$ | async}"
+                  (click)="addLanguage()">
+    <span>Add language</span>
+  </andteam-button>
+</div>

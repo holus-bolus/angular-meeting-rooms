@@ -1,0 +1,13 @@
+<mat-form-field appearance="fill" class="settings-multi-select">
+  <div [innerHtml]="selectIcon | safe" class="settings-multi-select-icon"></div>
+  <mat-select [formControl]="columns" panelClass="settings-multiselect-panel" class="columns-select" multiple>
+    <h3 class="settings-multi-select-name">{{ selectName }}</h3>
+    <mat-option *ngFor="let select of selectList"
+                class="settings-multi-select-option"
+                [value]="select.name"
+                [disabled]="select.disabled"
+                (click)="changeSelect(select)">
+      {{select.name | titlecase}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

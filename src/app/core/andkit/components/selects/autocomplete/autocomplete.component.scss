@@ -1,0 +1,222 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.search-field {
+  max-width: 353px;
+
+  &-form {
+    width: 100%;
+
+    ::ng-deep {
+      .mat-form-field-wrapper {
+        padding: 0;
+      }
+
+      .mat-form-field-infix {
+        padding: 0;
+        border: none;
+      }
+
+      .mat-form-field-flex {
+        position: relative;
+      }
+
+      .mat-form-field-underline {
+        display: none;
+      }
+
+      .mat-input-element {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        width: 100%;
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-appearance: none;
+        appearance: none;
+      }
+
+      .error {
+        border-color: $error-color !important;
+      }
+
+      .error-message {
+        @include font-base(12px, 300, 130%);
+
+        color: $error-color;
+        position: absolute;
+        top: calc(100% + 5px);
+      }
+
+      .search-field-icons {
+        position: absolute;
+        top: 5px;
+        right: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .search-icon {
+          cursor: pointer;
+          color: $primary;
+          top: 50%;
+          right: 11px;
+          transform: translateY(50%);
+        }
+
+        .close-icon {
+          display: flex;
+          top: 50%;
+          right: 11px;
+          margin-right: 10px;
+          transform: translateY(50%);
+          cursor: pointer;
+          color: $white-color;
+
+          svg path {
+            stroke: $news-gray-light-icon;
+          }
+        }
+      }
+    }
+  }
+}
+
+.header-search {
+  .search-field-form {
+    width: 290px;
+
+    ::ng-deep {
+      .mat-input-element {
+        height: 24px !important;
+      }
+
+      .search-field-icons {
+        bottom: 13px;
+        top: unset;
+      }
+
+      .placeholder {
+        padding-bottom: 5px;
+      }
+    }
+  }
+}
+
+.portal {
+  .search-field-form {
+    ::ng-deep {
+      .mat-input-element {
+        @include font-base(14px, 400, 16px);
+
+        height: 43px;
+        padding: 0 45px 0 0;
+        color: $objectives-text-color;
+        border-bottom: 1px solid $tag-box-border;
+      }
+
+      .search-field-label {
+        @include font-base(12px, 400, 14px);
+
+        display: block;
+        margin-bottom: 6px;
+        color: $text-secondary;
+      }
+    }
+  }
+
+  .search-block-white-text {
+    .mat-input-element {
+      color: $white-color;
+      border-bottom-color: $border-link-hover;
+    }
+
+    .placeholder {
+      color: $white-color;
+    }
+  }
+
+  .placeholder {
+    color: $tag-title-color;
+  }
+}
+
+.overtime {
+  ::ng-deep {
+    .mat-form-field {
+      @include font-base(18px, 300, 25px);
+
+      color: $text-secondary;
+      padding: 0;
+    }
+
+    .mat-input-element {
+      @include font-base(18px, 300, 25px);
+
+      height: 32px;
+      color: $text-primary;
+      padding-bottom: 8px;
+      border-bottom: 1px solid $text-secondary;
+
+      &:hover {
+        @include border-bottom(1px, solid, $text-primary);
+      }
+
+      &:focus {
+        @include border-bottom(1px, solid, $text-primary);
+      }
+    }
+
+    .placeholder {
+      top: -14px;
+    }
+  }
+}
+
+.placeholder {
+  position: absolute;
+  top: -6px;
+  transform: translateY(50%);
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+::ng-deep {
+  .search-field-option {
+    @include font-base(14px, 400, 37px);
+
+    height: 42px;
+    padding: 0 15px;
+    color: $text-primary;
+
+    .search-field-option-link {
+      &, &:active, &:visited {
+        text-decoration: none;
+        color: $text-primary;
+      }
+    }
+
+    .photo {
+      line-height: 15px;
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+      border-radius: 50%;
+      object-fit: cover;
+      vertical-align: middle;
+    }
+
+    &.no-results {
+      height: 47px;
+      line-height: 47px;
+      color: $text-secondary;
+      text-align: center;
+    }
+  }
+
+  .mat-autocomplete-visible.mat-autocomplete-panel:not([class*=mat-elevation-z]) {
+    box-shadow: 0 5px 15px rgba(5, 31, 43, 0.17);
+    border-radius: 0;
+    max-height: 192px;
+  }
+}

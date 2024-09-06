@@ -1,0 +1,126 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+@import '~src/styles/shared-styles/vars';
+
+.wrapper {
+  background: $body-background;
+  padding: 15px;
+  min-height: 100%;
+  box-sizing: border-box;
+  flex-direction: column;
+
+  .scroll {
+    overflow: auto;
+    height: calc(100vh - 371px);
+  }
+
+  .assessment {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 85px auto 0;
+    background: $white-color;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-sizing: border-box;
+    max-width: $assessment-container;
+    min-width: $min-container-width;
+    min-height: 100%;
+    height: 100%;
+    flex: 1;
+
+    .tabs-wrapper {
+      width: 100%;
+    }
+
+    .placeholder {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: $employee-avatar-loader-z-index;
+      height: 100%;
+    }
+
+    .no-data-block {
+      min-height: 144px;
+      width: 100%;
+      height: calc(100vh - (81px + 108px));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .no-candidates-message {
+        @include font-base(16px, 400, 20px);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $text-secondary;
+        margin-top: 30px;
+      }
+
+      .no-filtered-candidates-message {
+        @include font-base(16px, 400, 20px);
+
+        color: $text-secondary;
+        margin-top: 30px;
+      }
+    }
+
+    &-error-message {
+      @include font-base(14px, normal, 140%);
+
+      position: absolute;
+      right: 25px;
+      top: 26px;
+      color: $assessment-error-color;
+    }
+
+    .main-info {
+      display: flex;
+
+      .content {
+        flex: 1;
+        padding: 30px;
+
+        & .footer {
+          height: 500px;
+        }
+      }
+    }
+
+    .date-filters {
+      display: flex;
+      align-items: center;
+      padding: 15px 25px;
+      border-bottom: 1px solid $assessment-border-color;
+
+      &-title {
+        @include font-base(12px, 400, 20px);
+
+        margin-right: 10px;
+        color: $text-secondary;
+      }
+    }
+
+    ::ng-deep .nav.nav-tabs {
+      padding: 0 25px;
+      align-items: center;
+      height: 70px;
+      border-bottom: 1px solid rgba(224, 224, 224, 0.5);
+      margin-bottom: 0;
+
+      .tabs-item {
+        padding: 26px 0;
+        margin-right: 27px;
+        min-width: 10px;
+      }
+    }
+  }
+
+  ::ng-deep .tab-content {
+    position: relative;
+  }
+}

@@ -1,0 +1,64 @@
+<div class="wrapper-paginator">
+  <div *ngIf="isShowItemsCount"
+       class="pagination-counter">
+    <p class="pagination-text">Show items</p>
+    <div class="pagination-select">
+      <andteam-select class="pagination-selector"
+                      [option]="selectOption"
+                      [options]="selectOptions"
+                      [disableOptionCentering]="true"
+                      [formControl]="selectFormControl"
+                      [panelClass]="panelClass"
+                      [placeholder]="'count'"
+                      [isBlackArrow]="true"
+                      (selectOption)="onItemsCount($event)"
+      ></andteam-select>
+    </div>
+  </div>
+
+  <div class="pagination-count">
+    <pagination-template #pagination="paginationApi"
+                         class="team-pagination"
+                         [ngClass]="{'portal-pagination': isPortalType}"
+                         [maxSize]="maxSize"
+                         (pageChange)="onSendPageNumber($event)">
+
+      <button class="pagination-button"
+              [class.pagination-disabled]="!isShowPrevious"
+              [innerHTML]="isPortalType ? arrowIcon: vectorIcon"
+              (click)="pagination.previous()">
+      </button>
+
+      <div class="pagination-list" *ngIf="pagination.pages">
+        <div *ngFor="let page of pagination.pages | paginate: paginationConfig"
+             class="pagination-item"
+             [class.current]="pagination.getCurrent() === page.value"
+             (click)="openList(pagination, page)">
+          <a *ngIf="pagination.getCurrent() !== page.value"
+             class="pagination-link">
+            <span>{{ page.label }}</span>
+          </a>
+
+          <div *ngIf="pagination.getCurrent() === page.value">
+            <span>{{ page.label }}</span>
+          </div>
+
+          <div *ngIf="showList(page)"
+               andteamOuterClick
+               class="pagination-pages"
+               (outerClick)="onCloseList($event)">
+            <div *ngFor="let selectedPage of pages"
+                 class="pagination-pages-item"
+                 (click)="goToPage(pagination, selectedPage)">{{selectedPage}}</div>
+          </div>
+        </div>
+      </div>
+
+      <button class="pagination-button"
+              [class.pagination-disabled]="!isShowNext || totalPages === 1"
+              [innerHTML]="isPortalType ? arrowIcon: vectorIcon"
+              (click)="pagination.next()">
+      </button>
+    </pagination-template>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+<div class="form" [ngClass]="{assessment: isAssessment, overtime: isOvertime, portal: isPortal}">
+  <div *ngIf="isPortal" class="search-icon" [innerHTML]="searchIcon | safe"></div>
+  <ng-container [ngSwitch]="inputType">
+    <ng-container *ngSwitchCase="defaultInputType">
+      <ng-container *ngTemplateOutlet="regularInput"></ng-container>
+    </ng-container>
+    <ng-container *ngSwitchCase="numberInputType">
+      <ng-container *ngTemplateOutlet="regularInput"></ng-container>
+    </ng-container>
+    <ng-container *ngSwitchCase="hoursInputType">
+      <ng-container *ngTemplateOutlet="timeInput; context: hoursContext"></ng-container>
+    </ng-container>
+    <ng-container *ngSwitchCase="minutesInputType">
+      <ng-container *ngTemplateOutlet="timeInput; context: minutesContext"></ng-container>
+    </ng-container>
+  </ng-container>
+
+  <ng-template #regularInput>
+    <input class="form-input"
+           step="0.01"
+           [attr.maxlength]="maxLength"
+           [type]="inputType"
+           [placeholder]="placeholder"
+           [class.form-input_error]="error"
+           [value]="value"
+           [disabled]="disabledInput"
+           (input)="onChangeValue($event)"
+           (keydown)="onKeyDown($event)"
+           (keyup.enter)="onKeyupEnter($event)">
+  </ng-template>
+
+  <ng-template #timeInput let-start="start" let-end="end">
+    <input class="form-input"
+           type="text"
+           andteamNumberOnly
+           andteamTime
+           autocomplete="disabled"
+           [selectionStartRegExp]="start"
+           [selectionEndRegExp]="end"
+           [placeholder]="placeholder"
+           [class.form-input_error]="error"
+           [value]="value"
+           (input)="onChangeValue($event)"
+           (keyup.enter)="onKeyupEnter($event)">
+  </ng-template>
+
+  <div *ngIf="error && isOvertime" class="error-message">
+    {{errorMessage}}
+  </div>
+
+  <div *ngIf="hintMessage && !error" class="error-message hint-message">
+    {{hintMessage}}
+  </div>
+
+  <div class="close-icon"
+       *ngIf="!hideCloseButton && value"
+       [innerHTML]="closeIcon | safe"
+       (click)="onReset()">
+  </div>
+  <ng-content></ng-content>
+</div>

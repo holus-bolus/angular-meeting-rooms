@@ -1,0 +1,28 @@
+<div class="confirmation-modal">
+  <div class="confirmation">
+    <div class="confirmation-box">
+      <div class="confirmation-icon" [innerHTML]="cautionSvg"></div>
+
+      <div class="confirmation-titles">
+        <div automation-id="one-to-one-confirm-title" class="confirmation-title">{{ modalTitles.title }}</div>
+        <div automation-id="one-to-one-confirm-subtitle" class="confirmation-subtitle">{{ modalTitles.subtitle }}</div>
+      </div>
+    </div>
+
+    <div class="confirmation-btn">
+      <andteam-button
+        automation-id="one-to-one-confirm-cancel-button" 
+        [type]="cancelButtonType" 
+        (click)="cancelConfirm()">
+        No
+      </andteam-button>
+      <andteam-button
+        automation-id="one-to-one-confirm-confirm-button" 
+        [type]="confirmButtonType" 
+        (click)="confirm()">
+        Yes
+      </andteam-button>
+    </div>
+  </div>
+</div>
+

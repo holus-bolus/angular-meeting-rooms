@@ -1,0 +1,101 @@
+<div *ngIf="hrInterviewList$ | async as interviewList" class="hr-interview-form">
+  <div class="hr-interview-form__item">
+    <div class="hr-interview-form__item-filled"></div>
+    <div class="hr-interview-form__item-user">
+      <div class="user-photo">
+        <img class="user-photo-avatar" [src]="avatar" alt="avatar">
+      </div>
+      <div class="user-name">{{username}}</div>
+    </div>
+  </div>
+
+  <div
+    *ngFor="let interviewItem of interviewList"
+    #question
+    class="hr-interview-form__item"
+    [class.error]="!checkIsFilled(interviewItem.id, question) && isSubmitted">
+    <div *ngIf="checkIsFilled(interviewItem.id)" class="hr-interview-form__item-filled"></div>
+    <div class="hr-interview-form__item-label">
+      {{interviewItem.questionIndex + 1}}/12. {{interviewItem.questionText}} *
+    </div>
+
+    <div
+      *ngIf="interviewItem.questionType === singleAnswer; else checkboxes"
+      class="hr-interview-form__item-radiobuttons">
+      <mat-radio-group class="radio-group">
+        <mat-radio-button
+          *ngFor="let answer of interviewItem.answers; let index = index"
+           class="radio-group-button"
+          [disableRipple]="true"
+          [value]="answer"
+          (change)="onRadioButtonChoose(answer.id, interviewItem.id)">
+          <div class="radio-group-button-item">
+            <div class="hr-interview-form-label">
+              <div>{{answer.answer}}</div>
+            </div>
+            <div *ngIf="answer.answer === otherField || answer.answer === otherFieldEng" class="hr-interview-form-textarea">
+              <andteam-portal-textarea
+                [maxRows]="9"
+                [disabled]="isDisabled(index, interviewItem.id)"
+                (changeValue)="onSaveOtherField($event, interviewItem.id, answer.id)">
+              </andteam-portal-textarea>
+            </div>
+          </div>
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <ng-template #checkboxes>
+      <div
+        [ngClass]="{'english-version': isEngVersion}"
+        class="hr-interview-form__item-checkboxes"
+        [class.first]="interviewItem.questionIndex === 0">
+        <div
+          *ngFor="let answer of interviewItem.answers; let index = index"
+          class="checkbox-item-wrapper">
+          <mat-checkbox
+            class="checkbox-item"
+            [checked]="answer.checked"
+            (change)="onCheckboxChange($event, interviewItem.id, answer.id)">
+            <div class="hr-interview-form-label">
+              <div>{{answer.answer}}</div>
+            </div>
+            <div
+              *ngIf="answer.answer.toLowerCase() === otherField.toLowerCase()
+              || answer.answer.toLowerCase() === otherFieldEng.toLowerCase()"
+              class="hr-interview-form-textarea">
+              <andteam-portal-textarea
+                [maxRows]="9"
+                [disabled]="isDisabled(index, interviewItem.id)"
+                (changeValue)="onSaveOtherField($event, interviewItem.id, answer.id)">
+              </andteam-portal-textarea>
+            </div>
+          </mat-checkbox>
+        </div>
+      </div>
+    </ng-template>
+
+    <div *ngIf="!checkIsFilled(interviewItem.id) && isSubmitted" class="hr-interview-form__item-error">
+      <div class="item-error-circle"></div>
+      <div class="item-error-label">{{ isEngVersion ? 'Required field' : 'Это обязательный вопрос' }}</div>
+    </div>
+  </div>
+
+  <div class="hr-interview-form__item">
+    <div class="hr-interview-form__item-label">12/12. {{ isEngVersion ? otherQuestion.english.questionText : otherQuestion.russian.questionText }}
+      <div class="hr-interview-form-textarea">
+        <andteam-portal-textarea
+          [placeholder]="isEngVersion ? otherQuestion.english.placeholder : otherQuestion.russian.placeholder"
+          [maxRows]="9"
+          (changeValue)="onAddOtherField($event)">
+        </andteam-portal-textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="hr-interview-form__button">
+    <andteam-button class="hr-interview-form__button-confirm" [type]="confirmButtonType" (click)="sendInterview()">
+       {{ isEngVersion ? 'Send' : 'Отправить' }}
+    </andteam-button>
+  </div>
+</div>

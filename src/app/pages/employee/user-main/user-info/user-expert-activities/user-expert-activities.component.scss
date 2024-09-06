@@ -1,0 +1,139 @@
+@import 'src/styles/shared-styles/colors';
+@import 'src/styles/shared-styles/mixins';
+
+.activities {
+  margin-top: 3px;
+
+  &-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 20px;
+
+    &-title {
+      @include font-base(14px, 300, 130%);
+
+      color: $text-secondary;
+    }
+
+    &-tooltip {
+      @include font-base(12px, 400, 19.2px);
+
+      display: none;
+      position: absolute;
+      top: -60px;
+      right: 131px;
+      background-color: $white-color;
+      color: $objectives-text-color;
+      border-radius: 4px;
+      box-shadow: 0 0 8px $gray-color;
+      padding: 8px;
+
+      &::before {
+        content: '';
+        position: absolute;
+        display: block;
+        width: 0px;
+        left: 50%;
+        bottom: 5px;
+        border: 5px solid transparent;
+        border-bottom: 0;
+        border-top: 5px solid $white-color;
+        transform: translate(-50%, calc(100% + 5px));
+      }
+    }
+
+    &-icon {
+      margin: 8px 0 0 8px;
+      cursor: pointer;
+
+      ::ng-deep {
+        svg {
+          &:hover,
+          :focus {
+            cursor: pointer;
+            path {
+              stroke: $primary-hover;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &-main {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+
+    &-item {
+      @include font-base(14px, 300, 160%);
+
+      padding: 1.5px 11px;
+      margin-right: 10px;
+      margin-bottom: 13px;
+      color: $activities-text-color;
+      border: 1px solid $activities-border-color;
+      border-radius: 4px;
+      cursor: pointer;
+
+      &-wrapper {
+        position: relative;
+      }
+    }
+
+    &-tooltip {
+      @include font-base(12px, 400, 19.2px);
+
+      display: none;
+      position: absolute;
+      top: -45px;
+      right: calc(50% - 33px);
+      background-color: $white-color;
+      color: $objectives-text-color;
+      border-radius: 4px;
+      box-shadow: 0 0 8px $gray-color;
+      padding: 8px;
+
+      &::before {
+          content: '';
+          position: absolute;
+          display: block;
+          width: 0px;
+          left: 50%;
+          bottom: 5px;
+          border: 5px solid transparent;
+          border-bottom: 0;
+          border-top: 5px solid $white-color;
+          transform: translate(-50%, calc(100% + 5px));
+      }
+    }
+
+    &-item:hover + span {
+      display: block;
+    }
+  }
+}
+
+.disable-add {
+  ::ng-deep {
+    svg {
+      &:hover,
+      :focus {
+        path {
+          stroke: $text-secondary;
+        }
+      }
+    }
+  }
+}
+
+.disable-add:hover + span {
+  display: block;
+}
+
+::ng-deep {
+  .mat-select-panel {
+    margin: 42px 16px;
+  }
+}

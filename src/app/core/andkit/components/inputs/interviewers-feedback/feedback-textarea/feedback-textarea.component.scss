@@ -1,0 +1,88 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.textarea-wrapper {
+  position: relative;
+  border-bottom: 1px solid $portal-border-color;
+  box-sizing: border-box;
+
+  .textarea {
+    @include font-base(14px, 400, 22px);
+
+    width: 100%;
+    border-radius: 4px;
+    word-break: keep-all;
+    color: $username-color;
+    cursor: text;
+    border: 1px solid transparent;
+
+    &-editing {
+      width: calc(100% - 68px);
+      padding-right: 68px;
+    }
+
+    &::placeholder {
+      @include font-base(14px, 400, 22px);
+
+      color: $text-secondary;
+    }
+
+    &:disabled {
+      background-color: transparent;
+      cursor: inherit;
+    }
+  }
+
+  .floating-icon {
+    position: absolute;
+    top: 2px;
+  }
+
+  .control-icon {
+    right: 0;
+
+    .control {
+      height: 100%;
+      width: 100%;
+      margin-right: 10px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .warning-icon {
+    left: 125px;
+  }
+
+  .floating-message {
+    @include font-base(12px, 300, 130%);
+
+    position: absolute;
+    bottom: -12px;
+    transform: translateY(100%);
+  }
+
+  .counter-message {
+    color: $text-secondary;
+  }
+
+  .error-message {
+    color: $error-color;
+  }
+}
+
+.error {
+  border-bottom: 1px solid $error-color;
+}
+
+::ng-deep {
+  .tooltip-content {
+    span {
+      margin-left: 20px;
+      width: 100px !important;
+      padding: 12px !important;
+    }
+  }
+}

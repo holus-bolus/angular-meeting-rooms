@@ -1,0 +1,12 @@
+<div class="location" (click)="onModalOpen()">
+  <span class="location__icon" [innerHTML]="locationMarkerSvgIcon | safe"></span>
+  <a class="location__name">
+    <span *ngIf="location.value; else noLocation">
+      {{location.value.countryTitle}}, {{location.value.cityTitle}}
+    </span>
+    <ng-template #noLocation>
+      Please specify your location
+    </ng-template>
+  </a>
+</div>
+

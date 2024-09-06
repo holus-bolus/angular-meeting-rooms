@@ -1,0 +1,20 @@
+<div class="modal-ask-for-feedback-successful">
+  <div [innerHTML]="mailIcon | safe" class="modal-ask-for-feedback-successful-icon"></div>
+
+  <h2 class="modal-ask-for-feedback-successful-title">Request for feedback has been sent</h2>
+
+  <h3 class="modal-ask-for-feedback-successful-subtitle">
+    Your request has been sent to
+  </h3>
+
+  <div class="modal-ask-for-feedback-successful-list">
+    <span *ngFor="let employee of requestedEmployees; let arrayIndex = index">
+      {{employee.name}}{{arrayIndex === requestedEmployees.length -1 ? '' : ', '}}
+    </span>
+  </div>
+
+  <andteam-button class="modal-ask-for-feedback-successful-button"
+                  (click)="onClose()">
+    Ok
+  </andteam-button>
+</div>

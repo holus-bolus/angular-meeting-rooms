@@ -1,0 +1,6 @@
+<div *ngIf="isOpen"
+     andteamOuterClick
+     class="dropdown-body"
+     (outerClick)="onCloseDropdown($event)">
+  <ng-content></ng-content>
+</div>

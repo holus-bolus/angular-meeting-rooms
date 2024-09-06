@@ -1,0 +1,105 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.candidate {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 25px 30px 20px;
+  border-top: 1px solid $assessment-border-color;
+
+  &-box {
+    display: flex;
+  }
+
+  &-position-box {
+    @include font-base(12px, 400, 130%);
+
+    color: $text-secondary;
+    display: flex;
+    align-items: center;
+  }
+
+  &-icon {
+    opacity: 0.5;
+    color: $text-secondary;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+      color: $primary;
+    }
+
+    &-inactive {
+      margin-top: 5px;
+      color: $text-disabled;
+
+      &:hover {
+        opacity: 0.5;
+        cursor: default;
+        color: $text-disabled;
+      }
+    }
+  }
+
+  &-name {
+    margin-left: 15px;
+
+    &-link {
+      @include font-base(14px, 400, 140%);
+
+      display: inline-block;
+      color: $text-primary;
+      border-bottom: 1px dashed $text-secondary;
+      text-decoration: none;
+
+      &:hover {
+        cursor: pointer;
+        border-bottom: 1px dashed $primary;
+        transform: matrix(1, 0, 0, 1, 0, 0);
+      }
+    }
+
+    &-inactive {
+      @include font-base(14px, 400, 140%);
+
+      color: $text-disabled;
+    }
+  }
+
+  .ellipsis {
+    max-width: 159px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &-position-box {
+    margin-top: 2px;
+  }
+
+  &-storage {
+    @include font-base(10px, 400, 12px);
+
+    background: $white-color;
+
+    border: 1px solid $assessment-border-color;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 4px;
+  }
+
+  &-date {
+    @include font-base(14px, 400, 140%);
+
+    margin-left: 5px;
+  }
+
+  &-level {
+    margin-left: 5px;
+  }
+}
+
+.candidate.active-candidate {
+  background: $assessment-active-background;
+}

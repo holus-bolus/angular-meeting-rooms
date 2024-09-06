@@ -1,0 +1,62 @@
+<div class="search-field"
+     [ngClass]="{'assessment': isAssessment, 'overtime': isOvertime, 'portal': isPortal, 'header-search': isHeaderSearch}"
+     (keyup.enter)="onKeyEnterUp($event)">
+  <div class="search-field-label" *ngIf="labelText">{{labelText}}</div>
+
+  <form>
+    <mat-form-field floatLabel="never"
+                    class="search-field-form"
+                    [ngClass]="{'search-block-white-text': transparentHeader}">
+      <input type="text" #searchInput
+             matInput [class.error]="error"
+             [formControl]="control"
+             #automcomplete="matAutocompleteTrigger"
+             [matAutocomplete]="auto"
+             matAutocompletePosition="below">
+
+      <div *ngIf="!control.value" class="placeholder">{{placeholder}}</div>
+
+      <div *ngIf="error && isOvertime" class="error-message">{{errorMessage}}</div>
+
+      <div class="search-field-icons" *ngIf="!labelText">
+        <div class="close-icon"
+             *ngIf="!!control.value"
+             [innerHTML]="closeIcon | safe"
+             (click)="onReset()"></div>
+
+        <div *ngIf="isPortal || isShowSearchIcon" class="search-icon" [innerHTML]="searchIcon | safe"></div>
+      </div>
+
+      <mat-autocomplete #auto="matAutocomplete" class="search-dropdown">
+        <mat-option *ngFor="let option of options"
+                    (click)="onClick(option)"
+                    [value]="option.name"
+                    class="search-field-option">
+          <ng-container *ngIf="!isHeaderSearch; else isHeader">
+            <ng-container *ngTemplateOutlet="defaultOption; context: { $implicit: option }"></ng-container>
+          </ng-container>
+
+          <ng-template #isHeader>
+            <a class="search-field-option-link" [routerLink]="['/employee', option.id]" (click)="onHeaderSearchClick($event)">
+              <div class="search-field-link-container">
+                <ng-container *ngTemplateOutlet="defaultOption; context: { $implicit: option }"></ng-container>
+              </div>
+            </a>
+          </ng-template>
+        </mat-option>
+        <mat-option [disabled]="disabled" *ngIf="!options" class="search-field-option no-results">
+          {{ noResultsText }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+</div>
+
+<ng-template #defaultOption let-option>
+  <img class="photo" [src]="option.photoUrl" *ngIf="isImage(option); else defaultAvatar">
+
+  <ng-template #defaultAvatar>
+    <span class="photo" [innerHTML]="option.photo"></span>
+  </ng-template>
+  {{option.name}}
+</ng-template>

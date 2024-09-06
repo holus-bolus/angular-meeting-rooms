@@ -1,0 +1,33 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+:host ::ng-deep {
+  height: 100%;
+
+  .mat-slide-toggle {
+    @include font-base(18px, 300);
+
+    height: 100%;
+    color: $tag-title-color;
+
+    .mat-slide-toggle-bar {
+      color: black;
+      background-color: $toggler-color;
+
+      .mat-slide-toggle-thumb {
+        background-color: $primary;
+      }
+    }
+  }
+
+  .unchecked {
+    .mat-slide-toggle-bar {
+      color: black;
+      background-color: $tag-title-color;
+
+      .mat-slide-toggle-thumb {
+        background-color: $text-tertiary
+      }
+    }
+  }
+}

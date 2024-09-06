@@ -1,0 +1,31 @@
+<andteam-assessment-modal
+  [isShowCloseIcon]="isShowCloseIcon"
+  (closeClick)="onCancel()">
+  <div class="matrix-modal"
+       *ngIf="isOpenCancelModal">
+    <div class="icon" [innerHTML]="(isSuccessModal ? successIcon : errorIcon) | safe"></div>
+    <div class="message-box">
+      <div class="message">{{mainMessage}}</div>
+      <div class="additional-message" *ngIf="additionalMessage">{{additionalMessage}}</div>
+      <div *ngIf="matrixErrors">
+        <div *ngFor="let tip of interviewerTips" class="errors-tip">{{tip}}</div>
+        <div class="errors-list">You have missed the following cells: {{matrixErrors}}</div>
+      </div>
+    </div>
+
+    <a class="error-link"
+       *ngIf="isModalContainsLink; else buttonBlock"
+       target="_blank"
+       [href]="matrixLink">{{buttonName}}</a>
+    <ng-template #buttonBlock>
+      <andteam-button
+        [type]="buttonPrimary"
+        (click)="onCancel()">{{buttonName}}</andteam-button>
+    </ng-template>
+  </div>
+
+  <andteam-progress-spinner
+    class="loader"
+    *ngIf="isLoading">
+  </andteam-progress-spinner>
+</andteam-assessment-modal>

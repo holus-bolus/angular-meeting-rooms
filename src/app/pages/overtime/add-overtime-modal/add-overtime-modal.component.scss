@@ -1,0 +1,391 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+@import '~src/styles/shared-styles/vars';
+
+.overs-modal-wrapper {
+  position: absolute;
+
+  ::ng-deep {
+    .modal-body {
+      padding: 0;
+      min-width: 0;
+      width: inherit;
+    }
+
+    .project-field .search-field-form .search-field-icons {
+      top: -5px;
+
+      .close-icon {
+        color: $primary;
+        margin-right: 3px;
+      }
+    }
+  }
+}
+
+.overtime {
+  &-button-move {
+    ::ng-deep {
+      .project-field .search-field-form .search-field-icons {
+        right: 25px;
+      }
+    }
+  }
+
+  &-type {
+    width: 30px;
+  }
+
+  &-title {
+    padding: $overtime-modal-padding - 10px $overtime-modal-padding 0 $overtime-modal-padding;
+    max-width: $overtime-modal-width  - $overtime-modal-padding * 2;
+    font-size: 24px !important;
+    line-height: 31.2px !important;
+  }
+
+  &-wrapper {
+    display: flex;
+    box-sizing: border-box;
+    padding: $overtime-modal-padding;
+    flex-wrap: wrap;
+    width: $overtime-modal-width;
+  }
+
+  &-presale {
+    &-btn {
+      position: absolute;
+      right: 50px;
+      top: 200px;
+    }
+
+    &-pop-up {
+      @include font-base(14px, 400, 22.4px);
+
+      box-sizing: border-box;
+      padding: 12px;
+      position: absolute;
+      right: -70px;
+      top: 232px;
+      width: 250px;
+      background-color: $white-color;
+      box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    &-triangle {
+      position: absolute;
+      top: -18px;
+      left: 107px;
+      font-size: 30px;
+      font-stretch: expanded;
+      text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.2);
+      transform: scale(0.7);
+      border: none;
+      color: $white-color;
+    }
+  }
+
+  &-description {
+    padding: 20px 0 0 50px;
+    width: 350px;
+
+    & p {
+      @include font-base(14px, 300, 23px);
+
+      color: $text-secondary;
+    }
+  }
+
+  &-pop-up {
+    @include font-base(14px, 400, 22.4px);
+
+    box-sizing: border-box;
+    padding: 12px;
+    position: absolute;
+    right: -70px;
+    top: 160px;
+    width: 250px;
+    background-color: $white-color;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+
+  &-triangle {
+    position: absolute;
+    top: -18px;
+    left: 107px;
+    font-size: 30px;
+    font-stretch: expanded;
+    text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.2);
+    transform: scale(0.7);
+    border: none;
+    color: $white-color;
+  }
+
+  &-block {
+    flex-basis: $overtime-modal-width;
+    max-width: $overtime-modal-width - $overtime-modal-padding * 2;
+    margin-top: $overtime-fields-gap;
+
+    ::ng-deep {
+      .mat-form-field-infix {
+        textarea {
+          cursor: auto;
+        }
+      }
+    }
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &-btn {
+      margin-top: 2.5px;
+    }
+
+    &-type {
+      display: flex;
+      justify-content: space-between;
+      gap: 5px;
+
+      andteam-select {
+        width: 100%;
+      }
+
+      ::ng-deep {
+        .select .placeholder {
+          color: $news-gray-light-icon !important;
+        }
+
+        .mat-form-field-infix {
+          padding-bottom: 10px !important;
+        }
+
+        .mat-form-field-label-wrapper {
+          label {
+            .label {
+              font-size: 16px !important;
+              font-weight: 400 !important;
+              line-height: 25.6px !important;
+              color: $objectives-text-color !important;
+            }
+          }
+        }
+
+        .mat-select-value {
+          display: none;
+        }
+      }
+    }
+  }
+
+  &-location {
+    ::ng-deep {
+      .mat-select-value {
+        color: transparent !important;
+      }
+    }
+  }
+
+  &-attachments {
+    padding-top: 10px;
+  }
+
+  &-hidden-field {
+    display: none;
+  }
+
+  &-file {
+    display: flex;
+    align-items: center;
+  }
+
+  &-attachment {
+    @include align-elements;
+
+    padding: 10px 0;
+
+    &-name {
+      @include font-base(18px, 300, 25px);
+
+      color: $objectives-text-color;
+      padding-left: 8px;
+      text-overflow: ellipsis;
+      width: 300px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    &-close {
+      ::ng-deep svg path {
+        fill: $text-tertiary;
+      }
+
+      &:hover {
+        cursor: pointer;
+
+        ::ng-deep svg path {
+          @include transition();
+
+          fill: $tag-title-color;
+        }
+      }
+    }
+  }
+
+  .static-field {
+    @include font-base(18px, 300, 25px);
+    @include transition;
+
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 8px;
+    border-bottom: 1px solid $text-secondary;
+  }
+
+  .jira-link {
+    display: contents;
+  }
+
+  .disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  .two-fields {
+    display: flex;
+    gap: 35px;
+
+    &.disabled {
+      pointer-events: none;
+    }
+
+    .field-first {
+      flex: 2;
+      margin-right: 58px;
+    }
+
+    .field-second {
+      flex: 1.3;
+
+      ::ng-deep .mat-form-field-underline {
+        bottom: 6px;
+      }
+    }
+  }
+
+  &-buttons {
+    display: flex;
+    margin-top: 40px;
+    flex: 1;
+    justify-content: space-between;
+
+    ::ng-deep {
+      .btn {
+        width: 150px;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .sum-field {
+    display: contents;
+  }
+}
+
+.cancel-button {
+  position: relative;
+  border: 2px solid $primary;
+  height: 43px;
+  width: 150px;
+  box-sizing: border-box;
+
+  &:hover {
+    border-color: $primary-hover;
+  }
+
+  &:focus {
+    border-color: $primary-hover;
+  }
+
+  &:active {
+    border-color: $primary-active;
+  }
+
+  &_text {
+    position: absolute;
+    top: 10px;
+    right: 50px;
+  }
+}
+
+.icon-hint {
+  position: absolute;
+  margin-top: 2px;
+  margin-left: 5px;
+  width: 24px;
+  height: 24px;
+  background-image: url('../../../../assets/images/hint.svg');
+  background-repeat: no-repeat;
+
+  &:hover {
+    background-image: url('../../../../assets/images/hint-hover.svg');
+  }
+
+  &:hover + .hint {
+    visibility: visible;
+  }
+}
+
+.hint {
+  position: absolute;
+  padding: 5.25px 8px 5.75px;
+  width: 130%;
+  margin-top: 32px;
+  margin-left: -90px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  visibility: hidden;
+  background: $white-color;
+  color: $text-primary;
+  border-radius: 5px;
+}
+
+::ng-deep {
+  .overtimes-type.mat-select-panel {
+    margin: 50px 0 0 15px;
+    min-width: 350px !important;
+  }
+
+  .placeholder {
+    color: $news-gray-light-icon !important;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    line-height: 25.6px !important;
+  }
+
+  .label {
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    line-height: 25.6px !important;
+    color: $objectives-text-color !important;
+  }
+
+  .form-input,
+  .mat-input-element,
+  .static-field {
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    line-height: 25.6px !important;
+    color: $objectives-text-color !important;
+
+    &::placeholder {
+      color: $news-gray-light-icon !important;
+      font-size: 16px !important;
+      font-weight: 400 !important;
+      line-height: 25.6px !important;
+    }
+  }
+}

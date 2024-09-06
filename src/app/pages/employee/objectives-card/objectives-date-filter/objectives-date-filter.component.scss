@@ -1,0 +1,12 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .date-filter-wrapper {
+    margin-bottom: 10px;
+  }
+}

@@ -1,0 +1,43 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.backward {
+
+  &-content {
+    border-bottom: 1px solid $border-link-hover;
+    line-height: 22.4px;
+  }
+
+  &-icon {
+    @include transition;
+
+    height: 12px;
+    margin-right: 10px;
+    opacity: .7;
+  }
+
+  &-link {
+    @include transition;
+    @include font-base(14px, 400, 16px);
+
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    color: $white-color;
+
+    .backward-icon {
+      color: $border-link-hover;
+    }
+
+    &:hover {
+      color: $border-link-hover;
+
+      .backward-icon {
+        opacity: 1;
+      }
+    }
+  }
+}

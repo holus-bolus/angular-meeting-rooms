@@ -1,0 +1,107 @@
+<mat-table
+  class="mat-theme mat-table fake-header">
+  <ng-container matColumnDef="employee">
+    <mat-header-cell *matHeaderCellDef class="mat-cell-header">Employee</mat-header-cell>
+  </ng-container>
+  <ng-container matColumnDef="level">
+    <mat-header-cell *matHeaderCellDef class="mat-cell-header">Level</mat-header-cell>
+  </ng-container>
+  <ng-container matColumnDef="rm">
+    <mat-header-cell *matHeaderCellDef class="mat-cell-header"> RM</mat-header-cell>
+  </ng-container>
+  <ng-container matColumnDef="role">
+    <mat-header-cell *matHeaderCellDef class="mat-cell-header"> Role</mat-header-cell>
+  </ng-container>
+  <ng-container matColumnDef="location">
+    <mat-header-cell *matHeaderCellDef class="mat-cell-header"> Location</mat-header-cell>
+  </ng-container>
+  <ng-container matColumnDef="userRoles">
+    <mat-header-cell *matHeaderCellDef class="mat-cell-header"> System Role</mat-header-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="columnDefs;" class="mat-header-row"></mat-header-row>
+</mat-table>
+
+<div class="fake-tbody" #tbody [class.table-no-data]="isNoData">
+  <andteam-progress-spinner *ngIf="isSpinnerShown"></andteam-progress-spinner>
+  <mat-table *ngIf="!isSpinnerShown"
+             [dataSource]="rowDataEmployee"
+             class="mat-theme wrapper-grid mat-table">
+    <ng-container matColumnDef="employee">
+      <mat-header-cell *matHeaderCellDef class="mat-cell-header"></mat-header-cell>
+      <mat-cell *matCellDef='let element' class="mat-cell">
+        <a *ngIf="element.isWork; else notWorking" class="grid-link grid-link-employees grid-content"
+           [routerLink]="['/employee', element.externalId]"
+           (click)="onEmployeeClick()">
+          {{ element.fullNameRu }}
+        </a>
+        <ng-template #notWorking>
+          <span class="grid-link-employees-inactive">{{ element.fullNameRu }}</span>
+        </ng-template>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="level">
+      <mat-header-cell *matHeaderCellDef class="mat-cell-header"></mat-header-cell>
+      <mat-cell *matCellDef="let element" class="mat-cell">
+        <div *ngIf="element.level"> {{ element.level }}</div>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="rm">
+      <mat-header-cell *matHeaderCellDef class="mat-cell-header"></mat-header-cell>
+      <mat-cell *matCellDef='let element' class="mat-cell">
+        <a *ngIf="listType === 'employees' && element?.resourceManager.isWork; else notWorking"
+           class="grid-link grid-link-employees grid-content"
+           [routerLink]="['/employee', element.resourceManager.id]"
+           (click)="onEmployeeClick()">
+          {{ element.resourceManager.name }}
+        </a>
+        <a *ngIf="listType === 'projectInfo'"
+           class="grid-link grid-link-employees grid-content"
+           [routerLink]="['/employee', element.resourceManagerId]">
+          {{ element.resourceManagerName }}
+        </a>
+        <ng-template #notWorking>
+          <span class="grid-link-employees-inactive">{{ element.resourceManager.name }}</span>
+        </ng-template>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="role">
+      <mat-header-cell *matHeaderCellDef class="mat-cell-header"></mat-header-cell>
+      <mat-cell *matCellDef='let element' class="mat-cell">
+        <span class="grid-content"> {{ element.roles }} </span>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="location">
+      <mat-header-cell *matHeaderCellDef class="mat-cell-header"></mat-header-cell>
+      <mat-cell *matCellDef='let element' class="mat-cell">
+        <span class="grid-link grid-content"> {{ element.locationName }} </span>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="userRoles">
+      <mat-header-cell *matHeaderCellDef class="mat-cell-header"></mat-header-cell>
+      <mat-cell *matCellDef='let element' class="mat-cell">
+        <andteam-portal-multiselect placeholder="No additional role"
+                                    [options]="element.userRolesOptions"
+                                    [valueOptionFlag]="true"
+                                    (checkOption)="onCheckOption($event, element)"
+                                    class="multi-select">
+        </andteam-portal-multiselect>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="columnDefs;" class="mat-header-row"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columnDefs;"></mat-row>
+  </mat-table>
+</div>
+
+<andteam-pagination *ngIf="isPagination && totalPages > 1"
+                    [isPortalType]="isPortalType"
+                    [paginationConfig]="paginationConfig"
+                    [totalPages]="totalPages"
+                    (sendPageNumber)="onSendPageNumber($event)">
+</andteam-pagination>
+

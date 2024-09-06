@@ -1,0 +1,167 @@
+<div class="modal-ask-for-feedback">
+  <button [innerHTML]="closeIcon | safe" class="modal-ask-for-feedback-close" (click)="onClose(rightButtonName$.value)"></button>
+
+  <h2 class="modal-ask-for-feedback-title">Ask for feedback</h2>
+
+  <div *ngIf="isInternalFeedback$ | async">
+    <p class="modal-ask-for-feedback-subtitle">
+      Choose one or more colleagues whose opinions you value. We will send them an email, asking to leave a feedback about you
+    </p>
+
+    <div class="modal-ask-for-feedback-row">
+      <p class="modal-ask-for-feedback-row-name">
+        Сhoose from all users
+      </p>
+      <andteam-feedback-autocomplete-employee-search [placeholder]="'Enter last name'"
+                                                     [approverNameControl]="allUsersControl"
+                                                     [employeeId]="data.userId"
+                                                     [chipsList]="allUsersChips"
+                                                     (selectOption)="addChip($event)">
+      </andteam-feedback-autocomplete-employee-search>
+      <div class="modal-ask-for-feedback-chips-container">
+        <div *ngFor="let chip of allUsersChips" class="modal-ask-for-feedback-chips">
+          {{chip.name}}
+          <span class="modal-ask-for-feedback-chips-close"
+                (click)="removeAllUsersChip(chip)"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-ask-for-feedback-row">
+      <p class="modal-ask-for-feedback-row-name">
+        Сhoose from teammates
+      </p>
+      <andteam-feedback-autocomplete-teammates-search [placeholder]="'Add teammates or enter last name'"
+                                                      [approverNameControl]="teammatesControl"
+                                                      [teammates]="data.teammates"
+                                                      [employeeId]="data.userId"
+                                                      [chipsList]="allUsersChips"
+                                                      (selectOption)="addChip($event)">
+      </andteam-feedback-autocomplete-teammates-search>
+    </div>
+
+    <andteam-spinner
+      *ngIf="isShowSpinner$ | async"
+      [delay]="delayBeforeSpinner">
+    </andteam-spinner>
+
+    <andteam-button class="modal-ask-for-feedback-button"
+                    [type]="btnSubmit"
+                    [ngClass]="{
+                      'modal-ask-for-feedback-button-disabled': isButtonDisabled$ | async
+                    }"
+                    [disabled]="isButtonDisabled$ | async"
+                    (click)="onSubmit()">
+      Done
+    </andteam-button>
+  </div>
+
+  <div *ngIf="isExternalFeedback$ | async">
+    <p class="modal-ask-for-feedback-subtitle">
+      You can send your client a link with a questionnaire about the employee. The feedback will appear on the employee’s Feedback tab
+    </p>
+
+    <p class="modal-ask-for-feedback-row-name">
+      Client information
+    </p>
+
+    <div class="modal-ask-for-feedback-row" [class.disabled]="isLink$ | async">
+      <div class="modal-ask-for-feedback-row-twins">
+        <andteam-portal-input class="first"
+                              [formControl]="externalFeedbackNameControl"
+                              [componentType]="componentsType"
+                              [placeholder]="'Name*'"
+                              [error]="!externalFeedbackNameControl.value && nameError$ | async"
+                              [errorMessage]="errorMessage">
+        </andteam-portal-input>
+
+        <andteam-portal-input class="second"
+                              [formControl]="externalFeedbackSurnameControl"
+                              [componentType]="componentsType"
+                              [placeholder]="'Surname*'"
+                              [error]="!externalFeedbackSurnameControl.value && surnameError$ | async"
+                              [errorMessage]="errorMessage">
+        </andteam-portal-input>
+      </div>
+
+      <div class="modal-ask-for-feedback-row-twins">
+        <andteam-portal-input class="first"
+                              [formControl]="externalFeedbackEmailControl"
+                              [componentType]="componentsType"
+                              [placeholder]="'Email'"
+                              [error]="externalFeedbackEmailControl.invalid && emailError$ | async"
+                              [errorMessage]="errorEmailMessage">
+        </andteam-portal-input>
+
+        <andteam-portal-input class="second"
+                              [formControl]="externalFeedbackPositionControl"
+                              [componentType]="componentsType"
+                              [placeholder]="'Position*'"
+                              [error]="!externalFeedbackPositionControl.value && positionError$ | async"
+                              [errorMessage]="errorMessage">
+        </andteam-portal-input>
+      </div>
+      <div class="modal-ask-for-feedback-row-one">
+        <andteam-select ngDefaultControl
+                        [placeholder]="'Project*'"
+                        [formControl]="externalFeedbackProjectControl"
+                        [options]="availableProjects$ | async"
+                        [option]="selectedProject"
+                        [panelClass]="askForFeedbackSelectPanel"
+                        [error]="projectError$ | async"
+                        (selectOption)="OnSelectProject($event)">
+        </andteam-select>
+      </div>
+    </div>
+
+    <p class="modal-ask-for-feedback-row-name">
+      Link
+    </p>
+
+    <div class="modal-ask-for-feedback-link">
+      <span [class.link-color]="isLink$ | async">{{ linkHint }}</span>
+    </div>
+
+    <div class="modal-ask-for-feedback-button modal-ask-for-feedback-button-margin">
+      <andteam-button *ngIf="leftButtonName$ | async as leftButtonName" (click)="onExternalSubmit(leftButtonName)">
+        {{ leftButtonName }}
+      </andteam-button>
+
+      <andteam-button *ngIf="rightButtonName$ | async as rightButtonName"
+        class="cancel-button"
+        [type]="buttonSecondary"
+        (click)="onClose(rightButtonName)">
+        <span class="cancel-button_text">{{ rightButtonName }}</span>
+      </andteam-button>
+    </div>
+  </div>
+
+  <div *ngIf="askForTypeFeedback$ | async">
+    <h3 class="modal-ask-for-feedback-subtitle">
+      Choose a person you’d like to ask for feedback:
+    </h3>
+
+    <div class="modal-ask-for-feedback-select">
+      <mat-radio-group class="type-radio-group">
+        <mat-radio-button *ngFor="let feedbackType of typesSelectedFeedback; let index = index"
+                          ngDefaultControl
+                          class="type-radio-group-button"
+                          [value]="feedbackType"
+                          [checked]="!index"
+                          (click)="onRadioButtonChoose(feedbackType)">
+          {{feedbackType}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <andteam-button class="modal-ask-for-feedback-button modal-ask-for-feedback-button-margin"
+                    (click)="onRadioButtonChooseSubmit(typeSelectedFeedback)">
+      Next
+    </andteam-button>
+  </div>
+</div>
+
+<andteam-assessment-toast-notification *ngIf="isLinkCopied$ | async"
+                                       (fadeOut)="onFadeOut()">
+  <span>Link copied to clipboard</span>
+</andteam-assessment-toast-notification>

@@ -1,0 +1,195 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.autocomplete-search {
+  position: relative;
+  width: 350px;
+
+  & + & {
+    margin-top: 55px;
+  }
+
+  &-placeholder {
+    @include font-base(16px, normal, 21px);
+
+    position: absolute;
+    top: 10px;
+    color: $tag-box-border;
+  }
+
+  &-icons {
+    display: flex;
+    position: absolute;
+    right: 7px;
+    top: 10px;
+  }
+
+  &-close {
+    cursor: pointer;
+  }
+
+  &-icon {
+    margin-left: 15px;
+    color: $primary;
+    cursor: pointer;
+  }
+
+  &-form {
+    @include font-base(16px, 400, 25px);
+
+    width: 100%;
+    padding-bottom: 0;
+  }
+
+  &-photo {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+    vertical-align: middle;
+    object-fit: cover;
+  }
+
+  &-hint {
+    @include font-base(14px, 400, 16px);
+
+    color: $tag-box-border;
+    margin-top: 5px;
+    position: absolute;
+    top: 50px;
+  }
+
+  &-info {
+    position: absolute;
+    right: 32px;
+    top: 9px;
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+    box-sizing: border-box;
+    display: flex;
+
+    &:hover + .autocomplete-search-info-popup {
+      visibility: visible;
+    }
+
+    &-popup {
+      @include font-base(14px, 400, 22px);
+
+      visibility: hidden;
+      box-sizing: border-box;
+      position: absolute;
+      width: 350px;
+      background-color: $white-color;
+      padding: 20px 30px;
+      top: 43px;
+      left: 0;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      cursor: auto;
+      z-index: 2;
+
+      &-triangle {
+        position: absolute;
+        top: -18px;
+        right: 27px;
+        font-size: 30px;
+        font-stretch: expanded;
+        text-shadow: 0 -5px 5px rgba(0, 0, 0, 0.2);
+        transform: scale(0.7);
+        border: none;
+        color: $white-color;
+      }
+    }
+  }
+
+  &-dropdown {
+    max-height: 245px;
+  }
+
+  &-option {
+    @include font-base(14px, 400, 16px);
+  }
+
+  &-error-message {
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 300;
+    color: $error-color;
+  }
+
+  ::ng-deep {
+    .autocomplete-search {
+      &-info {
+        .btn {
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+
+    .autocomplete-search-close svg {
+      width: 12px;
+      height: 12px;
+      color: #8c8c8c;
+    }
+
+    .mat-form-field {
+      &-wrapper {
+        padding: 0;
+      }
+
+      &-infix {
+        padding: 0;
+        border: 0;
+      }
+
+      &.mat-focused {
+        .mat-input-element {
+          color: $black-color;
+        }
+
+        .mat-form-field-ripple {
+          display: none;
+        }
+      }
+    }
+
+    .mat-error {
+      position: absolute;
+      bottom: -26px;
+    }
+
+    .mat-input-element {
+      height: 44px;
+      border-bottom: thin solid $border-bottom-color;
+    }
+
+    .mat-form-field-disabled {
+      .autocomplete-search-icon {
+        color: $tag-box-border;
+      }
+    }
+
+    .mat-form-field-invalid .mat-input-element,
+    .mat-warn .mat-input-element {
+      caret-color: $black-color;
+    }
+
+    .mat-form-field-underline {
+      bottom: -2px;
+
+      .mat-form-field-ripple {
+        height: 1px;
+      }
+    }
+
+    .mat-form-field-disabled .mat-form-field-underline {
+      border-bottom: thin solid $border-bottom-color;
+      background-image: none;
+    }
+
+    .mat-option {
+      height: 47px;
+    }
+  }
+}

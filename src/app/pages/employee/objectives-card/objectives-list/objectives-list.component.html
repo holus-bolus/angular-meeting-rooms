@@ -1,0 +1,99 @@
+<div>
+  <table mat-table [dataSource]="objectives">
+    <ng-container
+      *ngFor="let column of displayedColumnsData"
+      [matColumnDef]="column.field">
+
+      <ng-container *ngIf="column.field !== statusColumnName; else status">
+        <th mat-header-cell *matHeaderCellDef>{{column.label | uppercase}}</th>
+        <td mat-cell *matCellDef="let element">
+          <ng-container *ngIf="column.field !== dateColumnName; else date">
+            <div class="text-wrapper">
+              <div class="text"
+                   [ngStyle]="{'-webkit-box-orient': 'vertical'}"
+                   [class.one-word]="isCommentOneWord(element[column.field])"
+                   [title]="element[column.field]">
+                {{element[column.field]}}
+              </div>
+            </div>
+          </ng-container>
+
+          <ng-template #date>
+            {{ (element[column.field] + utcPostfix) | date: "dd.MM.yyyy" }}
+          </ng-template>
+        </td>
+      </ng-container>
+
+      <ng-template #status>
+        <th mat-header-cell *matHeaderCellDef [ngClass]="{
+          'status-with-button': showStatusActions,
+          'status-without-button': !showStatusActions
+        }">
+          {{column.label | uppercase}}
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="!showStatusActions; else statusAction">
+            <span [ngClass]="{
+              'status-done': objectiveStatusEnum.DONE === element[column.field],
+              'status-failed': objectiveStatusEnum.FAILED === element[column.field]
+            }">{{element[column.field]}}</span>
+          </span>
+
+          <ng-template #statusAction>
+            <div class="status-action__menu" (click)="stopPropagation($event)">
+
+              <button mat-button [matMenuTriggerFor]="menu">
+                <mat-icon class="objectives-menu">more_vert</mat-icon>
+              </button>
+
+              <mat-menu #menu="matMenu"
+                        xPosition="before"
+                        yPosition="below"
+                        class="mat-menu">
+
+                <div class="mat-menu-content">
+                  <button
+                    mat-menu-item
+                    class="status-open"
+                    (click)="openStatus(element)">
+                    Open
+                  </button>
+
+                  <ng-container *ngIf="canEdit">
+                    <button
+                      mat-menu-item
+                      class="status-edit"
+                      (click)="editStatus(element)">
+                      Edit
+                    </button>
+
+                    <button
+                      mat-menu-item
+                      class="status-done"
+                      (click)="setStatus(element, objectiveStatusDone)">
+                      Done
+                    </button>
+
+                    <button
+                      mat-menu-item
+                      class="status-failed"
+                      (click)="setStatus(element, objectiveStatusFailed)">
+                      Failed
+                    </button>
+                  </ng-container>
+                </div>
+
+              </mat-menu>
+            </div>
+          </ng-template>
+
+        </td>
+      </ng-template>
+
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="rowClick(row)"></tr>
+  </table>
+
+</div>

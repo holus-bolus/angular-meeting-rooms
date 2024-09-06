@@ -1,0 +1,34 @@
+<div class="employee-list-modal-wrap">
+  <div class="employee-list-wrapper">
+    <h1 class="title">{{ data.title }}</h1>
+    <div class="table total">
+      <span *ngFor="let column of columnDefs" class="table-list table-title-name">{{ column }}</span>
+    </div>
+
+    <div class="employee-list">
+      <div *ngFor="let employee of data.employeeList" class="table">
+        <a class="table-button"
+                mat-dialog-close
+                [disabled]="!employee.isWork"
+                [routerLink]="['/employee/', employee.externalId || employee.id]">
+          <span>{{ employee.name || employee.fullNameRu }}</span>
+        </a>
+        <span class="table-list">
+            {{ employee.technology }}{{ employee.level ? ' / ' + employee.level : '' }}
+        </span>
+        <span class="table-list">{{ employee.roles }}</span>
+        <a *ngIf="employee.resourceManager" class="table-button"
+                mat-dialog-close
+                [disabled]="!employee.resourceManager.isWork"
+                [routerLink]="['/employee/', employee.resourceManager.id]">
+          <span>{{ employee.resourceManager?.name }}</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="total">Total: {{ data.employeeList.length }}</div>
+
+    <button mat-dialog-close [innerHTML]="closeIcon | safe" class="icon"></button>
+
+  </div>
+</div>

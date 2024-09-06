@@ -1,0 +1,29 @@
+<div class="autocomplete-wrapper">
+  <input type="text"
+         [ngClass]="{'autocomplete-field-active': searchField.length}"
+         [(ngModel)]="searchField"
+         aria-label="Number"
+         matInput
+         [formControl]="autocompleteControl"
+         [matAutocomplete]="auto"
+         class="autocomplete-field"
+         (keyup.enter)="onKeyEnterUp($event)">
+  <div class="autocomplete-placeholder">
+    <span class="">{{ placeholder }}</span>
+    <span class="autocomplete-arrow" [innerHTML]="selectArrowIcon | safe"></span>
+  </div>
+  <span *ngIf="searchField" [innerHTML]="clearButtonIcon | safe" class="autocomplete-clear-button" (click)="clearSearchField()"></span>
+</div>
+
+<mat-autocomplete
+  [class]="panelPosition"
+  autoActiveFirstOption
+  #auto="matAutocomplete">
+  <mat-option *ngFor="let option of filteredOptions$ | async"
+              class="select-option"
+              [value]="option.name"
+              [disabled]="option.disabled"
+              (selectstart)="onSelectOption(option.name)">
+    {{option.name}}
+  </mat-option>
+</mat-autocomplete>

@@ -1,0 +1,87 @@
+<table mat-table [dataSource]="plannedVacationsList" class="vacation-employee-info">
+  <ng-container matColumnDef="year">
+    <th mat-header-cell class="vacation-employee-info-header" *matHeaderCellDef>
+      {{ titleList.YEAR }}
+    </th>
+    <td mat-cell class="vacation-employee-info-item plan-vacations-item-name" *matCellDef="let employeVacation">
+      {{ employeVacation.year }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="working-year">
+    <th mat-header-cell class="vacation-employee-info-header" *matHeaderCellDef>
+      {{ titleList.WORKING_YEAR }}
+    </th>
+    <td mat-cell class="vacation-employee-info-item" *matCellDef="let employeVacation">
+      {{ employeVacation.workingYearFrom | date: 'dd.MM.yyyy' }}
+      - <br>
+      {{ employeVacation.workingYearTo | date: 'dd.MM.yyyy' }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="absence-periods">
+    <th mat-header-cell class="vacation-employee-info-header" *matHeaderCellDef>
+      {{ titleList.ABSENCE_PERIODS }}
+    </th>
+    <td mat-cell class="vacation-employee-info-item" *matCellDef="let employeVacation">
+      {{ employeVacation.absencePeriodFrom | date: 'dd.MM.yyyy' }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="annual-norm">
+    <th mat-header-cell class="vacation-employee-info-header" *matHeaderCellDef>
+      {{ titleList.ANNUAL_NORM }}
+    </th>
+    <td mat-cell class="vacation-employee-info-item" *matCellDef="let employeeVacation">
+      {{ employeeVacation.annualNorm }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="accrued-days">
+    <th mat-header-cell class="vacation-employee-info-header" *matHeaderCellDef>
+      {{ titleList.ACCRUED_DAYS }}
+    </th>
+    <td mat-cell class="vacation-employee-info-item" *matCellDef="let employeeVacation">
+      {{ employeeVacation.accruedDays }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="used-days">
+    <th mat-header-cell class="vacation-employee-info-header" *matHeaderCellDef>
+      {{ titleList.USED_DAYS }}
+    </th>
+    <td mat-cell class="vacation-employee-info-item" *matCellDef="let employeeVacation">
+      {{ employeeVacation.usedDays }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="remaining-days">
+    <th mat-header-cell class="vacation-employee-info-header" *matHeaderCellDef>
+      {{ titleList.REMAINING_DAYS }}
+    </th>
+    <td mat-cell class="vacation-employee-info-item" *matCellDef="let employeeVacation">
+      {{ employeeVacation.remainingDays }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="compensation-days">
+    <th mat-header-cell class="vacation-employee-info-header" *matHeaderCellDef>
+      {{ titleList.COMPENSATION_DAYS }}
+    </th>
+    <td mat-cell class="vacation-employee-info-item" *matCellDef="let employeeVacation">
+      {{ employeeVacation.compensationDays }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="reason">
+    <th mat-header-cell class="vacation-employee-info-header" *matHeaderCellDef>
+      {{ titleList.REASON }}
+    </th>
+    <td mat-cell class="vacation-employee-info-item" *matCellDef="let employeeVacation">
+      {{ employeeVacation.reason }}
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumnsList"></tr>
+  <tr mat-row class="plan-vacations-item" *matRowDef="let row; columns: displayedColumnsList;"></tr>
+</table>

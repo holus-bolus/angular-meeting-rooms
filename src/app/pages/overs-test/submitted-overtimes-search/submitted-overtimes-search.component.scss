@@ -1,0 +1,61 @@
+@import '~src/styles/shared-styles/mixins';
+@import '~src/styles/shared-styles/colors';
+
+.overtimes-form {
+  display: flex;
+  justify-content: space-between;
+  padding: 32px;
+  margin-bottom: 32px;
+  box-shadow: 0 2px 12px $news-border-color;
+
+  &__field {
+    width: 100%;
+    margin-right: 39px;
+
+    ::ng-deep {
+      .placeholder {
+        font-size: 16px !important;
+        font-weight: 400 !important;
+        line-height: 25.6px !important;
+        color: $tag-box-border !important;
+      }
+
+      svg {
+        display: none !important;
+      }
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+
+    ::ng-deep {
+      .btn {
+        font-size: 14px !important;
+        font-weight: 500 !important;
+        line-height: 16.41px !important;
+      }
+
+      .btn_secondary.disabled {
+        border-color: $anonymous-icon-background !important;
+      }
+
+      .disabled {
+        color: $tag-title-color !important;
+      }
+    }
+
+    &_button {
+      margin-right: 16px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

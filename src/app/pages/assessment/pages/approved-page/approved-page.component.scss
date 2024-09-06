@@ -1,0 +1,191 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.comments {
+  padding: 35px 0 10px;
+  display: flex;
+  flex-wrap: wrap;
+
+  &-box {
+    width: 450px;
+    box-sizing: border-box;
+    margin-right: 30px;
+
+    &:last-child {
+      display: flex;
+      margin-bottom: 10px;
+    }
+  }
+
+  &-block {
+    display: flex;
+    margin-bottom: 10px;
+
+    &:last-child {
+      margin-bottom: 10px;
+    }
+  }
+
+  &:last-child {
+    margin: 10px 30px 5px 0;
+    width: 450px;
+    box-sizing: border-box;
+    display: flex;
+  }
+
+  &-title {
+    @include font-base(12px, 400, 20px);
+
+    color: $tag-title-color;
+    margin-right: 10px;
+    white-space: nowrap;
+    flex-basis: 130px;
+    text-align: right;
+  }
+
+  &-data {
+    @include font-base(14px, 400, 140%);
+
+    color: $text-primary;
+    flex: 1;
+  }
+
+  .coordinator-comment {
+    display: block;
+  }
+
+  &-textarea {
+    margin-top: -8px;
+
+    @media (max-width: 1380px) {
+      margin-top: 0;
+    }
+  }
+
+  &-scheduled {
+    @include font-base(12px, 400, 130%);
+
+    color: $text-secondary;
+    line-height: 20px;
+  }
+}
+
+.review-plans {
+  display: flex;
+  flex-wrap: wrap;
+
+  .review-plan {
+    width: 450px;
+    border-top: 1px solid rgba(224, 224, 224, 0.5);
+    padding: 25px 0;
+
+    &:first-child {
+      margin-right: 30px;
+
+      @media (max-width: 1360px) {
+        margin-right: 0;
+      }
+    }
+
+    .comments-box {
+      margin: 5px 30px 5px 0;
+      display: flex;
+      align-items: center;
+
+      &:last-child {
+        justify-content: flex-end;
+        margin-bottom: 0;
+
+        ::ng-deep .btn_primary {
+          @include font-base(14px, 400, 22px);
+
+          width: 120px;
+          height: 32px;
+          margin-top: 8px;
+        }
+      }
+
+      .date-box {
+        flex: 1;
+        display: flex;
+        justify-content: space-between;
+
+        .date-picker {
+          margin-right: 20px;
+        }
+      }
+
+      .comments-title {
+        text-align: right;
+      }
+
+      .autocomplete {
+        flex: 1;
+      }
+
+      .date-picker {
+        flex: 1;
+
+        ::ng-deep .mat-form-field {
+          width: 160px;
+        }
+      }
+    }
+
+    .planned-box {
+      margin: 20px 30px 22px 0;
+      display: flex;
+      max-width: 450px;
+      width: 100%;
+      box-sizing: border-box;
+
+      &:last-child {
+        justify-content: flex-end;
+        margin-top: 25px;
+      }
+
+      .planned {
+        @include transition;
+        @include font-base(14px, 400, 22px);
+
+        border: none;
+        border-radius: 50px;
+        box-shadow: none;
+        width: 120px;
+        height: 32px;
+        color: $text-primary;
+        margin: 0;
+        background: $primary-disabled;
+        padding: 5px 0;
+        box-sizing: border-box;
+        text-align: center;
+      }
+    }
+
+    .planned-data {
+      @include font-base(14px, 400, 22px);
+
+      color: $text-secondary;
+      flex: 1;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+    }
+
+    .planned-date {
+      margin-right: 10px;
+    }
+
+    @media (max-width: 1360px) {
+      margin-right: 0;
+    }
+  }
+}
+
+.error-message {
+  @include font-base(14px, 400, 140%);
+
+  color: $assessment-error-color;
+  margin: 0 0 10px 140px;
+}
+

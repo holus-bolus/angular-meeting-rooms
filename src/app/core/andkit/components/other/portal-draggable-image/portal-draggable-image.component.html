@@ -1,0 +1,22 @@
+<div class="image-pick"
+     *ngIf="isShowImage"
+     andteamHoverEvent
+     andteamDraggable
+     [colors]="colors"
+     [class.error]="hasImageErrors"
+     (handleFiles)="handleFiles($event)"
+     (handleHover)="handleHover($event)">
+  <div class="image-background"
+       [class.default-background]="fileImage"
+       *ngIf="showTitleBox">
+    <div class="image-box">
+      <p class="image-pick__description"
+         [class.hover-image-title]="fileImage">{{description}}</p>
+      <andteam-portal-input-file
+        (handleFiles)="handleFiles($event)"></andteam-portal-input-file>
+    </div>
+  </div>
+  <img class="image"
+       *ngIf="fileImage"
+       [src]="fileImage">
+</div>

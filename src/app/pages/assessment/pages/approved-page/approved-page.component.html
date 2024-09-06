@@ -1,0 +1,119 @@
+<div class="comments">
+
+  <div class="comments-box">
+    <div class="comments-block">
+      <div class="comments-title">Review date from 1C:</div>
+
+      <div class="manager-comment">
+        <ng-container *ngIf="isUnscheduled; else dateFrom1C">
+          <div class="comments-scheduled">Unscheduled</div>
+        </ng-container>
+
+        <ng-template #dateFrom1C>
+          <div class="comments-data">{{reviewDateFrom1C | timezone: 'DD.MM.YYYY'}}</div>
+        </ng-template>
+      </div>
+    </div>
+
+    <div class="comments-block">
+      <div class="comments-title">Manager's comment:</div>
+
+      <div class="comments-data">{{managerComment}}</div>
+    </div>
+  </div>
+
+  <andteam-form-field class="comments-box coordinator-comment">
+    <ng-container form-label>Coordinator's comment:</ng-container>
+
+    <andteam-comment form-input commentType="coordinator" [reviewId]="candidateId" [formControl]="coordinatorCommentControl">
+    </andteam-comment>
+  </andteam-form-field>
+</div>
+
+<div class="review-plans">
+  <ng-container *ngIf="planningAssessments.length">
+
+    <andteam-approved-assessment
+      *ngFor="let assessment of planningAssessments; let i = index"
+      [reviewDate]="reviewDate"
+      [isShowAssessmentLoading]="isShowAssessmentLoading && plannedAssessmentId === assessment.id"
+      [employee]="employee"
+      [planningAssessmentsLength]="planningAssessments.length"
+      [candidateId]="candidateId"
+      [assessment]="assessment"
+      [isShowForm]="isShowForm"
+      [isApprovedPage]="isApprovedPage"
+      [minReviewDate]="minReviewDate"
+      (updateCandidates)="onUpdateCandidates($event)"
+      (changeInterviewDate)="onChangeInterviewDate($event, i)"
+      (formCreated)="onFormCreated($event)"
+      (plan)="onPlan($event)">
+    </andteam-approved-assessment>
+
+  </ng-container>
+
+  <div class="review-plan" *ngIf="plannedAssessment && plannedAssessment.assessmentStatus !== 'Planning'">
+    <div class="comments-box">
+      <div class="comments-title">Technology:</div>
+
+      <div class="comments-data">{{plannedAssessment.technology}}</div>
+    </div>
+
+    <div class="comments-box">
+      <div class="comments-title">Current level:</div>
+
+      <div class="comments-data">{{plannedAssessment.currentLevel}}</div>
+    </div>
+
+    <div class="planned-box">
+      <div class="comments-title">Interview date/time:</div>
+
+      <ng-container *ngIf="plannedAssessment.interviewDateTime">
+        <div class="planned-data">
+          <div class="planned-date">{{plannedAssessment.interviewDateTime | timezone: 'DD.MM.YYYY'}}</div>
+
+          <div class="planned-time">{{plannedAssessment.interviewDateTime | timezone: 'HH:mm'}}</div>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="planned-box">
+      <div class="comments-title">Interviewer:</div>
+
+      <div class="planned-data">{{plannedAssessment.interviewer.name}} {{plannedAssessment.interviewer.surname}}</div>
+    </div>
+
+    <div class="planned-box">
+      <div class="comments-title">Review date:</div>
+
+      <div class="planned-data" *ngIf="reviewDate">{{reviewDate | timezone: 'DD.MM.YYYY'}}</div>
+    </div>
+
+    <div class="planned-box">
+      <div class="planned">Planned</div>
+    </div>
+  </div>
+
+  <div class="review-plan" *ngIf="!planningAssessments.length">
+    <div class="comments-box">
+      <div class="comments-title">Review date:</div>
+
+      <andteam-date-picker
+        class="autocomplete"
+        [error]="reviewDateError"
+        [placeholder]="datePlaceholder"
+        [isAssessment]="isAssessment"
+        [dateIcon]="dateIcon"
+        [formControl]="reviewDateControl"
+        (blurDate)="onSaveReviewDate($event)">
+      </andteam-date-picker>
+    </div>
+    <div class="error-message">{{reviewDateError}}</div>
+
+    <div class="comments-box">
+      <andteam-button class="cancel" type="primary" [componentType]="componentType" (click)="onPlanWithoutInterview()">Plan</andteam-button>
+    </div>
+  </div>
+</div>
+
+

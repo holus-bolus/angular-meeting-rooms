@@ -1,0 +1,12 @@
+<label
+  class="checkbox-label">
+  <input
+    [checked]="isChecked"
+    (change)="onCheckedChange()"
+    class="checkbox"
+    type="checkbox">
+    <span class="checkbox-icon"
+          *ngIf="isChecked"
+          [innerHTML]="checkboxIcon"></span>
+    <ng-content></ng-content>
+</label>

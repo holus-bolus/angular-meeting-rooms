@@ -1,0 +1,117 @@
+<ng-container *ngIf="event$ | async as event">
+  <div class="wrapper">
+    <div class="wrapper-image">
+      <ng-container *ngIf="image$ | async as image">
+        <img [src]="image" class="image">
+      </ng-container>
+      <div class="images-gradient"></div>
+      <div class="event-headers-wripper">
+        <div class="event-headers"
+             *andteamPunctuationTitle="event.title; let title = title; let symbols = symbols">
+          <span>{{ title }}</span>
+          <span class="event-headers-symbols">{{ symbols }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrapper-info">
+      <div class="info">
+        <ng-container *ngIf="icon$ | async as icon">
+          <span [innerHTML]="icon | safe" class="icon"></span>
+        </ng-container>
+
+        <span class="info__title">About the event</span>
+
+        <ng-container *ngIf="isShowLink$ | async">
+          <div class="info__link-wrapper">
+            <a [href]="event?.signupUrl" target="_blank" class="info__link">Registration</a>
+          </div>
+        </ng-container>
+
+        <div class="event-edit-menu">
+          <ng-container *ngIf="isAdminHr$ | async">
+            <andteam-edit-menu
+              route="edit-event"
+              [param]="event?.urlName"
+              (delete)="onOpenConfirmationModal(event)">
+            </andteam-edit-menu>
+          </ng-container>
+        </div>
+      </div>
+
+      <div class="time-location">
+        <div>
+          <div class="when">
+            <span class="time-location__header">WHEN</span>
+            <span class="time-location__text">{{ event?.date | timezone : 'MMM DD, YYYY' }}</span>
+          </div>
+
+          <div class="time">
+            <span class="time-location__header">WHAT TIME</span>
+            <span class="time-location__text">{{ event?.date | timezone : 'HH:mm' }}</span>
+          </div>
+
+          <div class="where">
+            <span class="time-location__header">WHERE</span>
+            <span class="time-location__text">{{ place$ | async }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-container *ngIf="event.text">
+      <div class="descriptions">
+        <div class="descriptions__right-column">
+          <span class="descriptions__header">Description</span>
+        </div>
+
+        <div class="descriptions__left-column">
+          <andteam-editor-content [rawHTML]="event?.text"></andteam-editor-content>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="moreEvents$ | async as moreEvents">
+      <div class="wrapper-content" *ngIf="moreEvents.length">
+        <div class="more-events">
+          <h2 class="portal-h2 more-events__title">More Events</h2>
+          <div class="more-events__slider">
+            <andteam-slider [itemsPerSlide]="3"
+                            [slideItemsGap]="'25px'"
+                            [amountOfItems]="moreEvents.length">
+              <ng-container *ngFor="let event of moreEvents">
+                <div class="event-wrapper" *andteamSlideItem>
+                  <andteam-more-event-card [event]="event"></andteam-more-event-card>
+                  <div class="event-card_menu">
+                    <ng-container *ngIf="isAdminHr$ | async">
+                      <andteam-edit-menu route="edit-event"
+                                         [param]="event?.urlName"
+                                         (delete)="onOpenConfirmationModal(event)">
+                      </andteam-edit-menu>
+                    </ng-container>
+                  </div>
+                </div>
+              </ng-container>
+            </andteam-slider>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <andteam-assessment-toast-notification
+    *ngIf="eventsService.isEventPublished$ | async"
+    (fadeOut)="onFadeOut()">
+    <span>Event has been published</span>
+  </andteam-assessment-toast-notification>
+</ng-container>
+
+<div class="footer">
+  <andteam-footer></andteam-footer>
+</div>
+
+<andteam-confirmation-modal *ngIf="isOpenConfirmationModal"
+                            [text]="title"
+                            [subText]="subTitle"
+                            (sendConfirmEvent)="onDeleteEvent(confirmationEvent.id)"
+                            (sendCloseEvent)="onCloseConfirmationModal()">
+</andteam-confirmation-modal>

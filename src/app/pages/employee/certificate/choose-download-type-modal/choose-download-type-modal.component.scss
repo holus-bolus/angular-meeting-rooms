@@ -1,0 +1,82 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+@import '~src/styles/shared-styles/vars';
+
+.mat-dialog-container {
+  padding: 0;
+  border-radius: 0;
+}
+
+.download-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+
+  &-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: center;
+    height: 100%;
+  }
+
+  &-titles {
+    display: flex;
+    flex-direction: column;
+    margin: 58px 0 44px 0;
+  }
+
+  &-title {
+    @include font-base(24px, 400, 130%);
+
+    color: $objectives-text-color;
+  }
+
+  &-btn {
+    @include align-elements;
+    @include font-base(14px, 500, 16px);
+
+    color: $text-primary;
+    width: 400px;
+
+    .btn {
+      width: 180px !important;
+      font-weight: 500 !important;
+    }
+  }
+
+  .radio-buttons {
+    margin: 0 0 41px 3px;
+  }
+
+  .radio-group {
+    display: grid;
+    grid-row-gap: 20px;
+  }
+
+  .mat-radio-label-content {
+    @include font-base(16px, 400, 25.6px);
+
+    padding-left: 11px;
+  }
+
+  .mat-radio-inner-circle {
+    width: 24px;
+    height: 24px;
+    top: -3px;
+    left: -3px;
+    background-color: $primary !important;
+  }
+
+  .mat-radio-outer-circle {
+    width: 18px;
+    height: 18px;
+    border-width: 1px;
+    border-color: $border-bottom-color;
+  }
+
+  .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: $primary;
+  }
+}

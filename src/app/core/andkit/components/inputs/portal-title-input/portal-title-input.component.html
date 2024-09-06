@@ -1,0 +1,11 @@
+<div [ngClass]="{ 'portal-title_dark-theme' : darkTheme }" class="form portal-title"
+     [class.error]="error">
+  <input class="form-input"
+         type="text"
+         [attr.maxlength]="maxLength"
+         [value]="value"
+         [attr.placeholder]="placeholder"
+         (input)="onCheckedChange($event)">
+</div>
+<div class="error-message"
+     *ngIf="errorMessage">{{errorMessage}}</div>

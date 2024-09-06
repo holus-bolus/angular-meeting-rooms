@@ -1,0 +1,21 @@
+<div class="portal-menu" [ngClass]="{'scrollable-portal-menu': isScrollableHeader}">
+  <div class="portal-menu-search"
+        *ngIf="!isSearchFieldOpen"
+        [innerHTML]="searchIcon"
+        (click)="openSearchField()">
+  </div>
+  <ng-container *ngIf="isSearchFieldOpen">
+    <andteam-autocomplete
+      andteamOuterClick
+      placeholder="Name, last name, skype"
+      [control]="surname"
+      [options]="fullNames"
+      [focus]="isFocus"
+      [isHeaderSearch]="true"
+      [transparentHeader]="!isScrollableHeader"
+      (outerClick)="closeSearchField($event)"
+      (selectOption)="onSelectOption($event)">
+    </andteam-autocomplete>
+  </ng-container>
+</div>
+

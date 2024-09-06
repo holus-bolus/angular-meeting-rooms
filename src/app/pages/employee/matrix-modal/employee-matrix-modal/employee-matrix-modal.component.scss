@@ -1,0 +1,115 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+:host {
+  position: relative;
+
+  ::ng-deep .modal .modal-body {
+    min-width: 500px;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: 0 3px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .matrix-modal {
+    width: 500px;
+    box-sizing: border-box;
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    .message-box {
+      margin: 35px 0;
+      text-align: center;
+      color: $username-color;
+
+      .message {
+        @include font-base(22px, 300, 140%);
+
+        max-width: 415px;
+        margin-bottom: 20px;
+      }
+
+      .additional-message {
+        @include font-base(14px, 300, 140%);
+
+        margin-top: 20px;
+      }
+
+      .errors-list {
+        @include font-base(14px, 300, 18px);
+
+        margin-top: 20px;
+        text-align: left;
+        padding-left: 10px;
+      }
+
+      .errors-tip {
+        @include font-base(14px, 300, 18px);
+
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 5px;
+        padding-left: 10px;
+        text-align: left;
+        position: relative;
+
+        &::before {
+          content: '•';
+          position: absolute;
+          top: 0;
+          left: 0;
+          display: block;
+          width: 3px;
+          height: 3px;
+          color: $primary;
+        }
+      }
+    }
+
+    .error-link {
+      @include font-base(14px, 500, 160%);
+
+      background-color: $primary;
+      width: 210px;
+      height: 47px;
+      text-align: center;
+      color: $username-color;
+      padding: 12px;
+      box-sizing: border-box;
+      text-decoration: none;
+
+      &:hover {
+        background-color: $primary-hover;
+      }
+
+      &:active {
+        background-color: $primary-active;
+      }
+
+      &.disabled {
+        color: $text-disabled;
+        background-color: $primary-disabled;
+        cursor: default;
+      }
+    }
+  }
+
+  ::ng-deep .btn.btn_primary {
+    @include font-base(14px, 500, 160%);
+
+    color: $username-color;
+    width: 210px;
+    height: 47px;
+    border-radius: 0;
+  }
+
+  .loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -32px 0 0 -32px;
+  }
+}

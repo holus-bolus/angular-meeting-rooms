@@ -1,0 +1,82 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.form {
+  width: 100%;
+  position: relative;
+
+  &-input {
+    @include font-base(18px, 300, 21px);
+
+    border-bottom: none;
+    color: $username-color;
+    padding-bottom: 5px;
+  }
+
+  .error-message {
+    position: absolute;
+    margin-top: 5px;
+    font-size: 12px;
+    font-weight: 300;
+    color: $error-color;
+  }
+
+  .hint-message {
+    position: absolute;
+    margin-top: 5px;
+    font-size: 12px;
+    font-weight: 300;
+    color: $portal-border-color;
+  }
+
+  .margin0 {
+    margin-top: 0;
+  }
+
+  ::ng-deep {
+    .mat-form-field {
+      width: 100%;
+    }
+
+    .error {
+      .mat-form-field-flex {
+        border-bottom: 1px solid $error-color;
+      }
+    }
+
+    .mat-form-field-flex {
+      border-bottom: 1px solid $portal-border-color;
+    }
+
+    .mat-form-field-label {
+      @include font-base(18px, 300, 90%);
+
+      color: $tag-title-color;
+      top: 18px;
+    }
+
+    .mat-form-field.mat-focused .mat-form-field-ripple {
+      background-color: $tag-title-color;
+      height: 1px;
+    }
+
+    .mat-form-field-underline {
+      display: none;
+    }
+
+    .mat-form-field-wrapper {
+      padding-bottom: 0;
+    }
+  }
+
+  .placeholder {
+    color: $tag-title-color;
+  }
+
+  .close-icon {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,79 @@
+<div *ngIf="oneToOne" class="one-to-one" (click)="onViewOneToOne()">
+  <div automation-id="one-to-one-row-interview-date"
+       class="one-to-one-date"
+       [ngClass]="{ 'red-date': oneToOne.isExpired }">
+    {{ oneToOne.interviewDate | date: 'dd.MM.yyyy' }}
+  </div>
+
+  <div  class="date-row-info-popup">
+    <div class="date-row-info-popup-triangle">▲</div>
+    <p *ngIf="oneToOne.isExpired" 
+      automation-id="one-to-one-row-expired">
+      Expired!
+    </p>
+    <p automation-id="one-to-one-row-next-interview-date">
+      Next interview date: {{ oneToOne.nextInterviewDate | date: 'dd.MM.yyyy' }}
+    </p>
+    <p *ngIf="oneToOne.isExpired">
+      Please hold it again.
+    </p>
+  </div>
+
+  <div class="one-to-one-interviewer">
+    <span *ngIf="interviewerPosition?.label"
+          automation-id="one-to-one-row-interviewer-position"
+          class="one-to-one-interviewer-icon">
+      {{ interviewerPosition.label }}
+    </span>
+    <a automation-id="one-to-one-row-interviewer-name"
+       class="one-to-one-interviewer-name"
+       [routerLink]="['/employee', oneToOne.interviewer.id]"
+       (click)="$event.stopPropagation()">
+      <span>{{ oneToOne.interviewer.name }}</span>
+    </a>
+  </div>
+
+  <div class="one-to-one-type" automation-id="one-to-one-row-type">
+    {{ oneToOne.type }}
+  </div>
+
+  <div class="one-to-one-risk">
+    <andteam-label-button 
+      [isDisabled]="isLabelDisabled" 
+      [label]="label"
+      automation-id="one-to-one-row-risk">
+    </andteam-label-button>
+  </div>
+
+  <div class="one-to-one-date" automation-id="one-to-one-row-modify-date">
+    {{oneToOne.modifyDate |  date: 'dd.MM.yyyy' }}
+  </div>
+
+  <div automation-id="one-to-one-row-risk-firing-reason-abbreviation" 
+       class="one-to-one-reason" >
+       {{oneToOne.riskFiringReason?.abbreviation || '-'}}
+  </div>
+
+  <div *ngIf="oneToOne.riskFiringReason?.name" 
+       automation-id="one-to-one-row-risk-firing-reason-name"
+       class="one-to-one-reason-info">
+    <div class="one-to-one-reason-triangle">▲</div>
+    <p>{{oneToOne.riskFiringReason?.name}}</p>
+  </div>
+
+  <div class="one-to-one-comment">
+    <p automation-id="one-to-one-row-comment" class="one-to-one-comment-text">
+      {{ oneToOne.comment }}
+    </p>
+  </div>
+
+  <div class="one-to-one-action">
+    <andteam-action-selector
+      automation-id="one-to-one-row-action-selector" 
+      [iconType]="iconType"
+      [menuItems]="menuItems"
+      (click)="$event.stopPropagation()"
+      (menuOptionSelected)="onSelectMenuOption($event)">
+    </andteam-action-selector>
+  </div>
+</div>

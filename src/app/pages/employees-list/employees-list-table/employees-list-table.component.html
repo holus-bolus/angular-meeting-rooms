@@ -1,0 +1,12 @@
+<andteam-table
+  listType="employees"
+  [paginationConfig]="paginationConfig"
+  [data]="employees"
+  [columnDefs]="columnDefs"
+  [isSpinnerShown]="isSpinnerShown"
+  [isLoading]="isLoading"
+  [totalItemsCount]="totalItemsCount"
+  [totalPages]="totalPages"
+  tableTitle="Employees:"
+  (sendPageNumber)="onSendPageNumber($event)">
+</andteam-table>

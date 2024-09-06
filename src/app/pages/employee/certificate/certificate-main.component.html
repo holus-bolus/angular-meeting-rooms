@@ -1,0 +1,72 @@
+<div class="certificate-wrapper" *ngIf="certificateList">
+  <h1 class="certificate-wrapper-title">Certificates</h1>
+  <div *ngIf="certificateList?.certificates?.length; else emptyPage" class="certificate-wrapper-list-content">
+    <andteam-certificate-view
+      class="certificate-download-version"
+      [certificate]="certificateList?.certificates[currentIndex][0]"
+      [techLevelList]="technologyLevelList"
+      [isViewVersion]="true">
+    </andteam-certificate-view>
+    <div class="certificate-wrapper-list">
+      <div
+        *ngFor="let certificate of certificateList.certificates; let index = index"
+        class="certificate-wrapper-list-item"
+        [style.transform]="'translate(' + (cardWidth * cardsOffset) + 'px)'">
+        <div
+          *ngIf="certificateList.canEdit && certificate.length > 1"
+          #versions
+          class="certificate-wrapper-list-versions"
+          [style.top.px]="-versionsHeight">
+          <div
+            *ngFor="let version of certificateVersions; let i = index"
+            class="versions-item"
+            [style.width.%]="certificateVersionsWidth[i]">
+          </div>
+        </div>
+        <div
+          class="certificate-wrapper-list-item-view"
+          (mouseenter)="toggleCertificateHover(certificate[0])"
+          (mouseleave)="toggleCertificateHover(certificate[0])">
+          <andteam-certificate-view [certificate]="certificate[0]"
+                                    [canEdit]="certificateList?.canEdit"
+                                    [canSave]="certificateList?.canSave"
+                                    [canPrint]="certificateList?.canPrint"
+                                    [techLevelList]="technologyLevelList"
+                                    [technologies]="technologies"
+                                    [isLastCertificateVersion]="isLastCertificate(certificateList, certificate)"
+                                    (actionChoose)="onActionChoose($event, index)"
+                                    (showNotification)="showNotification($event)"
+                                    (click)="certificateView(certificate, certificateList)">
+          </andteam-certificate-view>
+        </div>
+        <div class="certificate-wrapper-list-item-date">
+          {{certificate[0].createDate | date | uppercase}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <span
+    *ngIf="certificateList?.certificates?.length > 3"
+    [innerHTML]="sliderLeftIcon | safe"
+    [class.disabled]="!slideLeftAvailable"
+    class="certificate-wrapper-slider-left"
+    (click)="slideLeft()">
+  </span>
+  <span
+    *ngIf="certificateList?.certificates?.length > 3"
+    [innerHTML]="sliderRightIcon | safe"
+    [class.disabled]="!slideRightAvailable"
+    class="certificate-wrapper-slider-right"
+    (click)="slideRight()">
+  </span>
+</div>
+
+<ng-template #emptyPage>
+  <andteam-empty-page [errorMessage]="noCertificateMessage">
+  </andteam-empty-page>
+</ng-template>
+
+<andteam-assessment-toast-notification *ngIf="isCertificateNotification$ | async" (fadeOut)="onFadeOut()">
+  <span>{{getNotificationText}}</span>
+</andteam-assessment-toast-notification>

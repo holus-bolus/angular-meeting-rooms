@@ -1,0 +1,22 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.label {
+  display: inline-block;
+  background-color: $primary-disabled;
+  border-radius: $border-radius;
+  padding: 1px 12px;
+
+  &-enabled {
+    cursor: pointer;
+
+    &:hover {
+      background: $border-link-hover;
+    }
+  }
+
+  span {
+    @include font-base(12px, 400px, 20px);
+    color: $text-primary;
+  }
+}

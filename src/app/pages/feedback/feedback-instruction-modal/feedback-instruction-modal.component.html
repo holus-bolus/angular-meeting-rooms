@@ -1,0 +1,41 @@
+<div class="feedback-instruction-modal-wrap">
+  <div class="feedback-instruction">
+    <h1 class="feedback-instruction-title">Instruction</h1>
+
+    <div *ngIf="data.isMyFeedbackInstruction">
+      <p class="feedback-instruction-paragraph">Please, give a fair feedback to yourself, it's not complicated. Try to look at yourself from the outside and grade yourself upon six indicators on an expectations scale.</p>
+      <p class="feedback-instruction-paragraph">Every indicator has the form of a competence and has a brief explanation on how to understand it. It requires you to state how you possess a competence or how your work meet other people's expectations (from 'often fails to meet expectations' through 'meets expectations' to 'often exceeds expectations').</p>
+      <p class="feedback-instruction-paragraph">Thank you!</p>
+    </div>
+
+    <div *ngIf="!data.isMyFeedbackInstruction && !data.isExternal && !data.isProject">
+      <p class="feedback-instruction-paragraph">Dear colleague,</p>
+      <p class="feedback-instruction-paragraph"> Please, give me a fair feedback, it's not complicated. Grade me upon several indicators on the expectations scales.</p>
+      <p class="feedback-instruction-paragraph">Every indicator has the form of a competence and has a brief explanation on how to understand it. It requires you to state how I possess a competence or how my work meet your expectations.</p>
+      <p class="feedback-instruction-paragraph">In the end, please, give your general opinion on me as your colleague or team-mate in a text form (minimum 100 characters) about my Strengths and what I need to improve.</p>
+      <p class="feedback-instruction-paragraph">I thank you and greatly appreciate your feedback!</p>
+    </div>
+
+    <div *ngIf="data.isExternal">
+      <p class="feedback-instruction-paragraph">Dear client,</p>
+      <p class="feedback-instruction-paragraph">Please, give a fair feedback about the employee, it's not complicated. Grade him/her upon six indicators on an expectations scale.</p>
+      <p class="feedback-instruction-paragraph">Every indicator has the form of a competence and has a brief explanation on how to understand it. It requires you to state how the employee possesses a competence or how his/her work meets your expectations (from 'Complete frustration' through 'Ok. Right on target' to 'Absolute delight. One in a million!').</p>
+      <p class="feedback-instruction-paragraph">In the end, please, give your general opinion on the employee in a text form (minimum 100 characters) about Strengths and what he/she needs to improve.</p>
+      <p class="feedback-instruction-paragraph">We thank you and greatly appreciate your feedback!</p>
+    </div>
+
+    <div *ngIf="data.isProject">
+      <p class="feedback-instruction-paragraph">Dear Andersen employee,</p>
+      <p class="feedback-instruction-paragraph">Please, give us a fair feedback on your project, it's not complicated.</p>
+      <p class="feedback-instruction-paragraph">You are expected to evaluate a project's six parameters by five indicators (from “Complete frustration” through “Ok. Right on target” to “Absolute delight. One in a million!”). Every parameter has a brief explanation on how to understand it.</p>
+      <p class="feedback-instruction-paragraph">In the end, please, give your general opinion on the project in a text form (minimum 100 characters) about what is good and what needs to be improved.</p>
+      <p class="feedback-instruction-paragraph">We greatly appreciate your feedback!</p>
+    </div>
+
+    <div mat-dialog-actions>
+      <button mat-dialog-close class="feedback-instruction-button">Got it</button>
+    </div>
+
+    <button mat-dialog-close [innerHTML]="closeIcon | safe" class="icon"></button>
+  </div>
+</div>

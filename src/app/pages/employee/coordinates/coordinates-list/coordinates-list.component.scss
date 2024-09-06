@@ -1,0 +1,250 @@
+@import 'src/styles/shared-styles/colors';
+@import 'src/styles/shared-styles/mixins';
+@import 'src/styles/shared-styles/_vars.scss';
+
+.coordinates {
+  border-collapse: separate;
+  border-spacing: 0;
+
+  &-header {
+    @include font-base(14px, 500, 150%);
+
+    color: $table-header;
+    padding: 35px 12px 21px;
+    white-space: nowrap;
+    z-index: 1;
+    box-sizing: border-box;
+
+    ::ng-deep {
+      .title {
+        @include font-base(14px, 500, 150%);
+
+        color: $objectives-text-color !important;
+      }
+
+      .autocomplete-field-active {
+        @include font-base(14px, 500, 150%);
+
+        color: $objectives-text-color;
+      }
+    }
+
+    &-fixed {
+      position: sticky;
+      min-width: 200px;
+      left: 0;
+      top: auto;
+      will-change: transform;
+    }
+
+    &-fixed-width {
+      min-width: 130px;
+    }
+
+    &-title {
+      cursor: pointer;
+
+      .icon {
+        margin-left: 5px;
+        fill: $table-header;
+      }
+
+      .active {
+        fill: $primary;
+      }
+    }
+  }
+
+  &-item {
+    @include font-base(16px, normal, 160%);
+
+    color: $objectives-text-color;
+    padding: 32px 12px;
+    z-index: 1;
+    -webkit-user-select: none;
+
+    &-fixed {
+      position: sticky;
+      position: -webkit-sticky;
+      width: 200px;
+      left: 0;
+      top: auto;
+      will-change: transform;
+    }
+
+    &-level {
+      min-width: 60px;
+    }
+
+    &-technology {
+      min-width: 160px;
+    }
+
+    &-lang {
+      min-width: 60px;
+    }
+
+    &-project {
+      min-width: 260px;
+    }
+
+    &-assm {
+      min-width: 65px;
+    }
+
+    &-onetoone {
+      position: relative;
+      min-width: 65px;
+
+      .past {
+        color: $red-color;
+      }
+
+      &-date {
+        cursor: pointer;
+
+        &:hover {
+          + .coordinates-item-onetoone-hover {
+            display: block;
+          }
+        }
+      }
+
+      &-hover {
+        @include font-base(14px, 400, 22px);
+
+        box-sizing: border-box;
+        display: none;
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        left: -280px;
+        width: 274px;
+        padding: 20px 30px;
+        background-color: $white-color;
+        box-shadow: 0 3px 20px rgba(0, 0, 0, 0.1);
+
+        .triangle {
+          position: absolute;
+          right: -16px;
+          top: 50%;
+          transform: rotate(90deg) scaleX(1.1) translate(-50%, 0);
+          font-size: 20px;
+          font-stretch: expanded;
+          text-shadow: 0 -5px 5px rgba(0, 0, 0, 0.1);
+          border: none;
+          color: $white-color;
+        }
+      }
+    }
+
+    &-risk {
+      min-width: 80px;
+    }
+
+    &-rm {
+      min-width: 180px;
+    }
+
+    &-location {
+      min-width: 135px;
+    }
+  }
+
+  &-link {
+    @include font-base(16px, normal, 19px);
+    @include border-bottom(1px, dashed, $text-tertiary);
+
+    color: $text-primary;
+    text-decoration: none;
+
+    &:hover,
+    :focus {
+      @include border-bottom(1px, solid, $border-link-hover);
+
+      cursor: pointer;
+    }
+  }
+}
+
+.coordinates-table-header {
+  height: 8px;
+}
+
+.btn-up {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: absolute;
+  right: 10px;
+  bottom: 130px;
+  background-color: $border-link-hover;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $primary-hover;
+  }
+
+  &:focus {
+    background-color: $primary-hover;
+  }
+
+  &__arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    -webkit-transform: rotate(-135deg);
+    transform: rotate(-135deg);
+  }
+}
+
+::ng-deep {
+  .mat-autocomplete-panel {
+    min-width: 230px !important;
+  }
+}
+
+.mat-header-row {
+  background-color: $white-color !important;
+
+  & .coordinates-header-fixed {
+    background-color: $white-color !important;
+  }
+}
+
+.mat-row {
+  background-color: $white-color !important;
+
+  & .coordinates-item-fixed {
+    background-color: $white-color !important;
+  }
+
+  &:nth-child(even) {
+    background-color: $body-background !important;
+
+    &:nth-child(even) .coordinates-item-fixed {
+      background-color: $body-background !important;
+    }
+  }
+}
+
+td.mat-cell,
+td.mat-footer-cell,
+th.mat-header-cell {
+  border-bottom-width: 0;
+  border-bottom-style: none;
+}
+
+td.mat-cell:first-of-type,
+td.mat-footer-cell:first-of-type,
+th.mat-header-cell:first-of-type {
+  padding-left: 35px;
+}
+
+td.mat-cell:last-of-type,
+td.mat-footer-cell:last-of-type,
+th.mat-header-cell:last-of-type {
+  padding-right: 35px;
+}

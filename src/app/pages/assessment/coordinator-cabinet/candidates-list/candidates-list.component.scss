@@ -1,0 +1,87 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.wrapper {
+  min-height: 100%;
+  width: 330px;
+  border-right: 1px solid $assessment-border-color;
+
+  .employee {
+    position: relative;
+    padding: 25px 25px 15px;
+    border-bottom: 1px solid $assessment-border-color;
+
+    &-info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    &-box {
+      display: flex;
+      align-items: center;
+    }
+
+    &-name {
+      @include font-base(18px, 400, 26px);
+
+      color: $text-primary;
+    }
+
+    &-quantity {
+      @include font-base(16px, 400, 26px);
+
+      color: $quantity-color;
+      margin: 2px 0 0 10px;
+    }
+
+    &-filter {
+      color: $text-secondary;
+      opacity: 0.5;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    &-filter.active {
+      opacity: 1;
+      color: $border-link-hover;
+
+      &:hover {
+        color: $primary-hover;
+      }
+    }
+
+    .autocomplete {
+      margin-top: 10px;
+      display: block;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      margin-top: 10px;
+
+      ::ng-deep .chip:hover {
+        background: $primary-disabled;
+      }
+    }
+  }
+
+  .candidates {
+    height: calc(100vh - 320px);
+    overflow-x: hidden;
+
+    &-item {
+      display: block;
+      cursor: pointer;
+
+      &:hover {
+        background: $option-hover;
+      }
+    }
+  }
+}

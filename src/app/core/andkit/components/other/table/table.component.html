@@ -1,0 +1,40 @@
+<div class="table-wrapper">
+  <span *ngIf="listType === 'employees'" class="title-h1 table-h1">
+    {{tableTitle}} {{totalItemsCount}}
+  </span>
+
+  <andteam-table-material-employees-project *ngIf="isProjectInfo"
+                                            [tableTitle]="tableTitle"
+                                            [isNoData]="data && !data.length"
+                                            [isSpinnerShown]="isSpinnerShown"
+                                            [rowData]="data"
+                                            [columnDefs]="columnDefs"
+                                            [isLoading]="isLoading"
+                                            (employeeClick)="onEmployeeClick()">
+  </andteam-table-material-employees-project>
+
+  <andteam-table-material-employees *ngIf="isEmployees && data?.length"
+                                    [isNoData]="data && !data.length"
+                                    [isSpinnerShown]="isSpinnerShown"
+                                    [rowData]="data | paginate: paginationConfig"
+                                    [columnDefs]="columnDefs"
+                                    [listType]="listType"
+                                    [isLoading]="isLoading"
+                                    [isPortalType]="isPortalType"
+                                    [paginationConfig]="paginationConfig"
+                                    [isPagination]="isPagination"
+                                    [totalPages]="totalPages"
+                                    (employeeClick)="onEmployeeClick()"
+                                    (sendPageNumber)="onSendPageNumber($event)">
+  </andteam-table-material-employees>
+
+  <andteam-table-material-projects *ngIf="isProjects"
+                                   [rowData]="data"
+                                   [columnDefs]="columnDefs"
+                                   (cellClicked)="onCellClicked($event)">
+  </andteam-table-material-projects>
+
+  <div class="wrapper-quantity" *ngIf="!paginationConfig">Total: {{data && data.length}}</div>
+
+  <andteam-no-data *ngIf="isNoDataComponent" [noDataMessage]="noDataMessage"></andteam-no-data>
+</div>

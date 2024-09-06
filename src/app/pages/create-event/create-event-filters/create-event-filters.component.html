@@ -1,0 +1,44 @@
+<div class="wrapper wrapper__create-event">
+  <div class="col">
+    <div class="info-inline picker_date">
+      <andteam-date-picker
+        [formControl]="date"
+        [error]="dateError"
+        placeholder="Date*"></andteam-date-picker>
+    </div>
+    <div class="info-inline picker_time">
+      <andteam-event-time-picker
+        [hoursError]="hoursError"
+        [minutesError]="minutesError"
+        [hour]="hour"
+        [minute]="minute">
+      </andteam-event-time-picker>
+    </div>
+    <div class="info-inline select_office">
+      <andteam-portal-multiple-select placeholder="Office*"
+                                      [options]="offices"
+                                      [error]="officeError"
+                                      (checkOptions)="onSelectOptions($event)">
+      </andteam-portal-multiple-select>
+    </div>
+    <div class="info-inline placeholder">
+      Event address or Default office address
+    </div>
+    <div class="info-inline input_office-address">
+      <andteam-portal-input [formControl]="place"></andteam-portal-input>
+    </div>
+    <div class="info-inline select_topic">
+      <andteam-portal-select placeholder="Topic*"
+                             [option]="topic"
+                             [options]="topics"
+                             [error]="topicError"
+                             (selectOption)="onSelectOption($event)"
+      ></andteam-portal-select>
+    </div>
+    <div class="info-inline input_link">
+      <andteam-portal-input
+        [formControl]="signupUrl"
+        placeholder="Registration link"></andteam-portal-input>
+    </div>
+  </div>
+</div>

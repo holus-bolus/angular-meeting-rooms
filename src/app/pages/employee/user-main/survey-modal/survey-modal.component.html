@@ -1,0 +1,80 @@
+<section class="survey-window">
+  <div class="survey-window-wrapper">
+    <button [innerHTML]="closeIcon | safe" class="survey-window-close" (click)="onClose()"></button>
+    <h2 class="survey-window-title">
+      Tindersen
+    </h2>
+    <div class="survey-window-content">
+      <div *ngFor="let page of arrayPage(); let tabIndex = index; let tabFirst = first; let tabLast = last;">
+        <ng-container *ngFor="let option of onFeedbackSkillsOnPage()[tabIndex]; let questionIndex = index;">
+          <article class="survey-block"
+                   [attr.data-number]="'0' + (questionIndex + 1)"
+                   [ngClass]="getSurveyBlockClasses(questionIndex)"
+                   [ngStyle]="{'display': questionIndex > prevIndexSkill && questionIndex < currIndexSkill ? 'block' : 'none'}">
+            <div class="survey-block-wrapper">
+              <h3 class="survey-block-title">
+                {{option.questionText}}
+              </h3>
+              <div class="survey-block-questions">
+                <ng-container *ngIf="option.questionType === 'SingleAnswer'">
+                  <mat-radio-group class="radio-group">
+                    <mat-radio-button ngDefaultControl
+                                      class="radio-group-button"
+                                      *ngFor="let answer of option.answers; let idx = index"
+                                      (change)="onRadioChanged(questionIndex, answer.id, option.id)"
+                                      [formControl]="questionsFormArray.controls[questionIndex]"
+                                      [value]="answer.id">
+                      <div class="radio-group-content">
+                        <h3 class="radio-group-content-title">{{ answer.answer }}</h3>
+                        <p></p>
+                      </div>
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </ng-container>
+                <ng-container *ngIf="option.questionType === 'MultipleChoice'">
+                  <mat-checkbox *ngFor="let answer of option.answers; let index = index"
+                                class="survey-block-checkbox"
+                                [formControl]="questionsFormArray.controls[questionIndex]"
+                                [disabled]="!answer.checked && checkboxes.length >= 3"
+                                (change)="onSelect(answer, $event.checked, option.id, answer.id)">
+                    {{answer.answer}}
+                  </mat-checkbox>
+                </ng-container>
+              </div>
+            </div>
+          </article>
+        </ng-container>
+      </div>
+    </div>
+    <div class="survey-window-pagination">
+      <ng-container *ngFor="let option of paginationLength(); let buttonIndex = index;">
+        <button class="survey-window-pagination-button" [ngClass]="{'survey-window-pagination-button-active' : buttonIndex === paginationIndex}">
+        </button>
+      </ng-container>
+    </div>
+    <div class="survey-window-buttons">
+      <andteam-button *ngIf="currIndexSkill !== 2"
+                      class="survey-window-button"
+                      [type]="btnPrevious"
+                      (click)="onPreviousPage()">
+        Previous
+      </andteam-button>
+
+      <andteam-button *ngIf="currIndexSkill >= options.length"
+                      class="survey-window-button"
+                      [type]="btnNext"
+                      [disabled]="!checkboxes.length"
+                      (click)="onSubmit()">
+        Send results
+      </andteam-button>
+
+      <andteam-button *ngIf="currIndexSkill < options.length"
+                      class="survey-window-button btn_primary"
+                      [type]="btnNext"
+                      [disabled]="!questionsFormArray.controls[currIndexSkill - 2].valid || !questionsFormArray.controls[currIndexSkill - 1].valid"
+                      (click)="onNextPage()">
+        Next
+      </andteam-button>
+    </div>
+  </div>
+</section>

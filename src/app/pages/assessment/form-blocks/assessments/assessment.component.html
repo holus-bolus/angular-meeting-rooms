@@ -1,0 +1,100 @@
+<div class="assessment">
+  <div class="assessment-column">
+      <div class="assessment-box">
+        <div class="assessment-title">Technology:</div>
+        <div class="assessment-block">
+          <div class="assessment-data">{{assessment?.technology}}</div>
+        </div>
+      </div>
+      <div class="assessment-box">
+        <div class="assessment-title">Level:</div>
+        <div class="assessment-block">
+          <div class="assessment-data">{{assessment?.currentLevel}}</div>
+        </div>
+      </div>
+
+      <ng-container *ngIf="isInterviewPage">
+        <div class="assessment-box matrix-data"
+             [class.planning-matrix]="assessment?.assessmentStatus === 'Planning'">
+          <div class="assessment-title">Employee's matrix:</div>
+          <div class="assessment-data" *ngIf="assessment?.selfMatrix; else placeholder">
+            <andteam-assessment-matrix-icon class="assessment-icon"
+                                            [isFull]="assessment?.selfMatrix?.isDone"></andteam-assessment-matrix-icon>
+            <andteam-button class="assessment-button-border" type="secondary">
+              <a target="_blank" class="matrix-link" [href]="assessment?.selfMatrix?.link">View</a>
+            </andteam-button>
+          </div>
+        </div>
+        <div class="assessment-box matrix-data"
+             [class.planning-matrix]="assessment?.assessmentStatus === 'Planning'">
+          <div class="assessment-title">Interview's matrix:</div>
+          <div class="assessment-data" *ngIf="assessment?.interviewerMatrix; else placeholder">
+            <andteam-assessment-matrix-icon class="assessment-icon"
+                                            [isFull]="assessment?.interviewerMatrix?.isDone"></andteam-assessment-matrix-icon>
+            <andteam-button class="assessment-button-border" type="secondary" [disabled]="isChangingInterviewer">
+              <a *ngIf="!isChangingInterviewer; else disabledLink" target="_blank" class="matrix-link"
+                 [href]="assessment?.interviewerMatrix?.link">View</a>
+
+              <ng-template #disabledLink>View</ng-template>
+            </andteam-button>
+            <andteam-button class="assessment-button-border"
+                            type="secondary"
+                            [disabled]="isSent || isChangingInterviewer"
+                            (click)="onSendMatrix()">{{isSent ? 'Sent' : 'Send'}}</andteam-button>
+          </div>
+        </div>
+      </ng-container>
+      <div class="assessment-box matrix-data">
+        <div class="assessment-title">Result matrix:</div>
+        <div class="assessment-data" *ngIf="assessment?.mergeMatrix; else placeholder">
+          <andteam-assessment-matrix-icon class="assessment-icon"
+                                          [isFull]="assessment?.mergeMatrix?.isDone"></andteam-assessment-matrix-icon>
+          <andteam-button class="assessment-button-border" type="secondary">
+            <a target="_blank" class="matrix-link" [href]="assessment?.mergeMatrix?.link">View</a>
+          </andteam-button>
+        </div>
+      </div>
+
+      <ng-container *ngIf="isInterviewPage && !assessment?.interviewerMatrix?.isDone; else staticInterview">
+        <andteam-approved-assessment
+          [isShowForm]="assessment?.assessmentStatus !== 'Planning'"
+          [candidateId]="candidateId"
+          [assessmentIndex]="assessmentIndex"
+          [reviewDate]="reviewDate"
+          [minReviewDate]="minReviewDate"
+          [assessment]="assessment"
+          (changeInterviewDate)="onChangeInterviewDate($event)"
+          (startChangingInterviewer)="onChangingInterviewer()"
+          (updateCandidates)="onUpdateCandidates($event)">
+        </andteam-approved-assessment>
+      </ng-container>
+
+      <ng-template #staticInterview>
+        <div class="assessment-box">
+          <div class="assessment-title date-title">Interview date/time:</div>
+          <div class="assessment-data">
+            {{assessment.interviewDateTime | timezone : 'DD.MM.YY HH:mm'}}
+          </div>
+        </div>
+        <div class="assessment-box">
+          <div class="assessment-title date-title">Interviewer:</div>
+          <div class="assessment-data">
+            {{assessment?.interviewer?.name || ''}}
+          </div>
+        </div>
+      </ng-template>
+
+      <div *ngIf="type === 'preparation'" class="assessment-box assessment-box_checked">
+        <div class="assessment-title">Interviewers feedback:</div>
+        <div *ngIf="assessment.interviewerFeedback; else placeholder" class="assessment-checked"
+             [innerHTML]="checkedIcon | safe"></div>
+        <div *ngIf="interviewerFeedbackError | async"
+             class="warning-icon"
+             [innerHTML]="warningIcon | safe"></div>
+      </div>
+  </div>
+</div>
+
+<ng-template #placeholder>
+  <span>No</span>
+</ng-template>

@@ -1,0 +1,78 @@
+<div override class="profile-button">
+  <andteam-portal-backward-link isStatic="true" [isNeedConfirm]="true" (linkClick)="isShowCancelModal = true"
+    [path]="returnPath">
+    {{ backLinkTitle }}
+  </andteam-portal-backward-link>
+</div>
+<ng-container>
+  <div class="feedback-container" [formGroup]="formGroup">
+    <div class="feedback">
+      <div class="feedback-header">
+        <div class="feedback-header-title">
+          <h1>
+            Feedback on {{ project.name }}
+          </h1>
+          <span class="icon-hint" [innerHTML]="infoIcon | safe" (click)="showInstructionModal()"></span>
+        </div>
+        <h2>
+          Please leave your objective opinion on the project you are working / used to work
+        </h2>
+      </div>
+
+      <div class="feedback-block" formGroupName="skillGroup">
+        <div class="feedback-block-wrapper">
+          <div class="feedback-block-header">
+            <div class="feedback-block-header-title">
+              <span [ngClass]="{'valid': formGroup.controls.skillGroup.valid}" class="feedback-block-dropdown-area-icon"
+                [innerHTML]="validationIcon | safe"></span>
+              <h3>
+                Please rate the project according to the criteria
+              </h3>
+            </div>
+            <div class="feedback-block-header-subtitle">
+              <p>
+                Your feedback is important for the further growth and development of the project. Please be the most objective about their professional qualities.
+              </p>
+            </div>
+          </div>
+          <div class="feedback-skills">
+            <div class="feedback-skills-item"
+              [ngClass]="{'feedback-skills-item-switcher': feedbackSkill.hasDisableCheckbox}"
+              *ngFor="let feedbackSkill of feedbackSkills">
+              <div class="feedback-skills-description" *ngIf="feedbackSkill.blockDesccription">{{
+                feedbackSkill.blockDesccription }}</div>
+              <andteam-feedback-skill ngDefaultControl [feedbackSkill]="feedbackSkill"
+                [formControlName]="feedbackSkill.skill" (switchRequirement)="switchRequirement($event, feedbackSkill)">
+              </andteam-feedback-skill>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <andteam-feedback-opinion 
+        [strengthsMinLength]="strengthsMinLength" 
+        [improveMinLength]="improveMinLength"
+        [maxLength]="maxLength" 
+        [opinionStrengthsControl]="formGroup.controls.opinionStrengthsControl"
+        [opinionImproveControl]="formGroup.controls.opinionImproveControl"
+        positionType='Project'>
+      </andteam-feedback-opinion>
+
+      <div *ngIf="isShowLoader" class="feedback-spinner">
+        <andteam-spinner delay="0"></andteam-spinner>
+      </div>
+    </div>
+    <div class="feedback-buttons">
+      <andteam-button [type]="'previous'" (click)="isShowCancelModal = true">Cancel</andteam-button>
+      <andteam-button [type]="'primary'" [disabled]="!formGroup.valid" (click)="onSubmit()">Submit</andteam-button>
+    </div>
+  </div>
+</ng-container>
+<andteam-footer></andteam-footer>
+
+<andteam-assessment-toast-notification *ngIf="isToastNotification" (fadeOut)="onFadeOut()">
+  <span>{{ notificationText }}</span>
+</andteam-assessment-toast-notification>
+
+<andteam-feedback-cancel-modal *ngIf="isShowCancelModal" (sendConfirmEvent)="goBack()" (sendCancelEvent)="close()">
+</andteam-feedback-cancel-modal>

@@ -1,0 +1,158 @@
+@import 'src/styles/shared-styles/colors';
+@import 'src/styles/shared-styles/mixins';
+@import 'src/styles/shared-styles/_vars.scss';
+
+.mat-dialog-container {
+  padding: 0;
+  border-radius: 0;
+}
+
+.view-modal-wrap {
+  padding: 40px 50px 50px;
+}
+
+.modal-view-one-to-one {
+  @include font-base(16px, 400, 26px, normal);
+
+  position: relative;
+  color: $objectives-text-color;
+
+  &-title {
+    @include font-base(24px, 400, 32px, normal);
+
+    padding-bottom: 10px;
+  }
+
+  &-row {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &-column {
+    position: relative;
+    width: 320px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid $tag-box-border;
+
+    &-full-width {
+      width: 100%;
+    }
+  }
+
+  &-textarea {
+    @include font-base(16px, 400, 25.6px);
+
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 260px;
+    overflow-y: auto;
+  }
+
+  .general {
+    @include border-bottom(1px, solid, $tag-box-border);
+
+    position: relative;
+    margin-top: 40px;
+    padding-bottom: 10px;
+  }
+
+  .pop-up {
+    box-sizing: border-box;
+    position: absolute;
+    display: none;
+    width: 360px;
+    background-color: $white-color;
+    padding: 15px;
+    top: 30px;
+    left: -30px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+    cursor: auto;
+    z-index: 2;
+
+    p {
+      @include font-base(12px, 400, 16px, normal);
+
+      margin: 5px 0;
+    }
+
+    .triangle {
+      position: absolute;
+      top: -5px;
+      left: 80px;
+      font-size: 30px;
+      font-stretch: expanded;
+      text-shadow: 0 -5px 5px rgba(0, 0, 0, 0.2);
+      transform: scale(0.7);
+      border: none;
+      color: $white-color;
+    }
+  }
+
+  &-position {
+    @include font-base(14px, 400, 16px);
+
+    color: $tag-box-border;
+    margin-right: 13px;
+    background-color: $one-to-one-position-chips;
+    padding: 3px;
+    border-radius: $border-radius;
+  }
+
+  &-risk {
+    margin-right: 10px;
+  }
+
+  .info {
+    position: absolute;
+    top: -1px;
+    left: 57px;
+
+    &:hover {
+      + .pop-up {
+        display: block;
+      }
+    }
+
+    .btn {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  .mat-button {
+    min-width: 0;
+  }
+
+  &-close {
+    cursor: pointer;
+    opacity: 0.5;
+    position: absolute;
+    right: -34px;
+    top: -28px;
+    width: 20px;
+
+    svg {
+      stroke: $white-color;
+      stroke-width: 1px;
+      fill-opacity: 0.5;
+      width: 20px;
+      height: 20px;
+    }
+
+    &:hover,
+    &:focus {
+      opacity: 1;
+    }
+  }
+}
+.one-to-one-comment {
+  font-weight: 400;
+  font-size: 14px;
+  color: #828282;
+}
+
+.one-to-one-update-container {
+  display: flex;
+  flex-direction: column;
+}

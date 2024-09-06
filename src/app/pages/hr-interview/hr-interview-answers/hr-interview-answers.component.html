@@ -1,0 +1,30 @@
+<div class="hr-interview-answers" #answersCapture>
+  <span [innerHTML]="logoIcon" class="hr-interview-answers-logo-icon" ></span>
+  <div class="hr-interview-answers__label">{{ hint }}:</div>
+  <div class="hr-interview-answers__label">«{{ title }}»</div>
+  <div class="hr-interview-answers__divider"></div>
+  <div class="hr-interview-answers__user">
+    <div class="user-photo">
+      <img class="user-photo-avatar" [src]="avatar" alt="avatar">
+    </div>
+    <div class="user-name">{{username}}</div>
+  </div>
+  <div *ngFor="let question of hrInterviewAnswersList" class="hr-interview-answers__item">
+    <div class="hr-interview-answers__item-question">{{question.questionIndex + 1}}. {{question.questionText}}</div>
+    <div *ngFor="let answerItem of question.answers" class="hr-interview-answers__item-answers">
+      <div *ngIf="showAnswerLabel(answerItem, question)" class="answers-item">
+        <div class="answers-item__icons">
+          <div 
+            *ngIf="answerItem.checked && question.questionType !== otherAnswer" 
+            class="answers-item__icons-checked">
+            <span [innerHTML]="checkedIcon | safe" class="checked-icon"></span>
+          </div>
+          <div *ngIf="showUncheckedIcon(answerItem, question)" class="answers-item__icons-unchecked">
+            <span [innerHTML]="uncheckedIcon | safe" class="unchecked-icon"></span>
+          </div>
+        </div>
+        <div *ngIf="showAnswerLabel(answerItem, question)" class="answers-item__text">{{answerItem.answer}}</div>
+      </div>
+    </div>
+  </div>
+</div>

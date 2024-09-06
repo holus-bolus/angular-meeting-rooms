@@ -1,0 +1,57 @@
+<div class="location">
+  <div class="location__title">
+    Current location
+  </div>
+
+  <div class="location__subtitle">
+    If you can't find your country, please contact your HR.
+  </div>
+
+  <div class="location__field">
+    <andteam-autocomplete
+      class="location__autocomplete"
+      [control]="formGroup.controls.countryControl"
+      [componentType]="componentsType"
+      [options]="options.country$ | async"
+      [placeholder]="'Choose country'"
+      [isShowOptionsAfterReset]="true"
+      (click)="onCountryClick()"
+      (valueReseted)="onCountryReset($event)"
+      (selectOption)="onSelectCountry($event)">
+    </andteam-autocomplete>
+  </div>
+
+  <div class="location__subtitle">
+    If you can’t find your city in the list, please select the nearest one.
+  </div>
+
+  <div class="location__field">
+    <andteam-autocomplete
+      class="location__autocomplete"
+      [control]="formGroup.controls.cityControl"
+      [componentType]="componentsType"
+      [options]="options.city$ | async"
+      [placeholder]="'Choose city'"
+      [isShowOptionsAfterReset]="true"
+      (click)="onCityClick()"
+      (valueReseted)="onCityReset()"
+      (selectOption)="onSelectCity($event)">
+    </andteam-autocomplete>
+  </div>
+
+  <div class="location__buttons">
+    <andteam-button
+      [componentType]="componentsType"
+      [type]="buttonType.SECONDARY"
+      (click)="onCancel()">
+      Cancel
+    </andteam-button>
+    <andteam-button
+      [componentType]="componentsType"
+      [disabled]="!formGroup.valid || !selectedCity"
+      [type]="buttonType.PRIMARY"
+      (click)="onSubmit()">
+      Submit
+    </andteam-button>
+  </div>
+</div>

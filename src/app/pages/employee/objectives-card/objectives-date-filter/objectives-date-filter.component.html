@@ -1,0 +1,10 @@
+<div class="wrapper">
+  <div *ngFor="let date of dates; let first = first" class="date-filter-wrapper">
+    <andteam-date-filter
+      [isActive]="date === activeDate"
+      (click)="onDateSelect(date)"
+    >
+      {{first ? 'Current' : (date | date : 'dd.MM.yyyy')}}
+    </andteam-date-filter>
+  </div>
+</div>

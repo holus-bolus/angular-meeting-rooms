@@ -1,0 +1,84 @@
+<div class="card" [class.card-active]="review?.isCurrent" [class.card-canceled]="review?.isCanceled">
+  <div class="card-header">
+    <div class="card-head-info">
+      <div class="card-head-info-left">
+        <div *ngIf="review?.isCanceled" class="card-canceled-badge">
+          Canceled
+        </div>
+
+        <span class="label">Review date:</span><span
+        class="card-date"> {{review?.reviewDate | timezone : 'DD.MM.YYYY'}}</span>
+      </div>
+
+      <div class="card-head-info-right">{{review?.position}}</div>
+    </div>
+  </div>
+  <div *ngIf="review?.assessments?.length" class="card-body">
+    <div class="card-body-col">
+      <span class="card-body-col-title">Assessment technology</span>
+
+      <span *ngFor="let assessment of review?.assessments" class="card-body-cell">
+        {{assessment?.assessmentTechnology}}
+      </span>
+    </div>
+
+    <div class="card-body-col">
+      <span class="card-body-col-title">Matrix</span>
+
+      <div *ngFor="let assessment of review?.assessments" class="card-body-cell-matrix-wrapper">
+        <ng-container *ngIf="assessment?.matrix; else noMatrix">
+          <a *ngIf="!review?.isCanceled; else disabledLink"
+             class="card-body-cell-matrix"
+             [href]="assessment.matrix.link">
+            {{assessment.matrix.isDone ? 'View' : 'Edit'}}
+          </a>
+
+          <ng-template #disabledLink>
+            <span class="card-body-cell-matrix">{{assessment.matrix.isDone ? 'View' : 'Edit'}}</span>
+          </ng-template>
+        </ng-container>
+
+        <ng-template #noMatrix>Not ready</ng-template>
+      </div>
+    </div>
+    <div class="card-body-col">
+      <span class="card-body-col-title">Interviewer</span>
+
+      <div *ngFor="let interviewer of review?.interviewers" class="card-body-cell-interviewer">
+        <ng-container *ngIf="!review?.isCanceled; else disabledSkype">
+          <div *ngIf="interviewer.isWork; else notWorking" class="card-body-cell-interviewer-wrapper">
+            <andteam-assessment-tooltip>
+              <a tooltip-base class="card-body-cell-interviewer-icon"
+                 [href]="interviewer.skype | link: linkType.SKYPE | safe : 'url'"
+                 [innerHTML]="skypeIcon | safe"></a>
+              <ng-container tooltip-content>{{interviewer.skype}}</ng-container>
+            </andteam-assessment-tooltip>
+            <a [routerLink]="['/employee', interviewer.id]" class="card-body-cell-interviewer-name">
+              {{interviewer.name}} {{interviewer.surname}}
+            </a>
+          </div>
+          <ng-template #notWorking>
+            <span class="card-body-cell-interviewer-icon-inactive"
+                  [innerHTML]="skypeIcon | safe">
+            </span>
+             <span class="card-body-cell-interviewer-name-inactive">
+                  {{interviewer.name}} {{interviewer.surname}}
+             </span>
+          </ng-template>
+        </ng-container>
+
+        <ng-template #disabledSkype>
+          <a class="card-body-cell-interviewer-icon-disabled" [innerHTML]="skypeIcon | safe"></a>
+          <span class="card-body-cell-interviewer-name">{{interviewer.name}} {{interviewer.surname}}</span>
+        </ng-template>
+      </div>
+    </div>
+    <div class="card-body-col">
+      <span class="card-body-col-title">Interview Date & Time</span>
+
+      <span *ngFor="let date of review.interviewsDatesTimes" class="card-body-cell">
+        {{date | timezone : 'DD.MM.YYYY HH:mm'}}
+      </span>
+    </div>
+  </div>
+</div>

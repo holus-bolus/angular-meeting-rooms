@@ -1,0 +1,259 @@
+@import 'src/styles/shared-styles/colors';
+@import 'src/styles/shared-styles/mixins';
+
+.mat-dialog-container {
+  padding: 0;
+  border-radius: 0;
+}
+
+.modal-ask-for-feedback {
+  padding: 50px 40px;
+  position: relative;
+  color: $objectives-text-color;
+
+  &-title {
+    @include font-base(36px, 300, 46.8px);
+  }
+
+  &-subtitle {
+    margin-top: 20px;
+    line-height: 22.4px;
+    color: $tag-title-color;
+  }
+
+  &-close {
+    @include transition;
+
+    position: absolute;
+    right: 17px;
+    top: 17px;
+    cursor: pointer;
+    opacity: 0.5;
+    width: 20px;
+    min-width: 20px;
+    border: none;
+    background-color: transparent;
+
+    &-btn {
+      height: 20px;
+    }
+
+    svg {
+      stroke: $white-color;
+      stroke-width: 1px;
+      fill-opacity: 0.5;
+      width: 20px;
+      height: 20px;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &-row {
+    &-name {
+      margin-top: 40px;
+      margin-bottom: 20px;
+      line-height: 22.4px;
+    }
+
+    .autocomplete-search {
+      width: 100% !important;
+
+      .mat-input-element {
+        border-bottom: none !important;
+      }
+    }
+
+    &-one {
+      margin-top: 20px;
+
+      .placeholder {
+        font-weight: 400 !important;
+        font-size: 16px !important;
+      }
+
+      mat-label {
+        color: transparent;
+      }
+
+      .mat-select-value {
+        color: $objectives-text-color;
+      }
+    }
+
+    &-twins {
+      display: flex;
+      margin-top: 20px;
+      padding-bottom: 20px;
+
+      .form-input {
+        font-size: 16px !important;
+        font-weight: 400 !important;
+
+        &::placeholder {
+          color: $tag-box-border !important;
+        }
+      }
+
+      .first {
+        margin-right: 25px;
+      }
+
+      .second {
+        margin-right: 0;
+      }
+    }
+  }
+
+  &-link {
+    @include border-bottom(1px, solid, $tag-box-border);
+    @include font-base(16px, 400, 30.6px);
+
+    color: $tag-box-border;
+    white-space: nowrap;
+    overflow: scroll;
+
+    &::-webkit-scrollbar-thumb {
+      background: inherit;
+    }
+
+    .link-color {
+      color: $objectives-text-color;
+    }
+  }
+
+  &-chips-container {
+    margin-top: 12px;
+  }
+
+  &-chips {
+    @include transition;
+
+    position: relative;
+    display: inline-block;
+    padding: 2px 31px 2px 11px;
+    color: $tag-color;
+    background-color: $primary-disabled;
+    line-height: 22.4px;
+    margin-right: 5px;
+    margin-bottom: 7px;
+    border-radius: 4px;
+    cursor: default;
+
+    &:hover {
+      background-color: $primary;
+    }
+
+    &-close {
+      position: absolute;
+      top: 7px;
+      right: 5px;
+      width: 15px;
+      height: 15px;
+      cursor: pointer;
+
+      &::before,
+      &::after {
+        transition: all 0.3s ease;
+        position: absolute;
+        left: 7px;
+        width: 1px;
+        height: 12px;
+        content: '';
+        background-color: #8c8c8c;
+      }
+
+      &::before {
+        transform: rotate(45deg);
+      }
+
+      &::after {
+        transform: rotate(-45deg);
+      }
+    }
+  }
+
+  &-button {
+    margin-top: 85px;
+    display: inline-block;
+
+    .disabled {
+      background-color: $button-disabled-color !important;
+      border: $button-disabled-color !important;
+      color: $text-secondary !important;
+      opacity: 1 !important;
+    }
+
+    .btn {
+      min-width: 150px;
+      font-weight: 500 !important;
+      font-size: 14px !important;
+
+      &_submit {
+        width: 150px !important;
+      }
+    }
+
+    &-margin {
+      margin-top: 50px;
+    }
+
+    .cancel-button {
+      position: relative;
+      box-sizing: border-box;
+      margin-left: 20px;
+    }
+
+    &-disabled {
+      pointer-events: none;
+    }
+  }
+
+  .type-radio-group {
+    display: flex;
+    flex-direction: column;
+
+    &-button {
+      margin-top: 10px;
+
+      &.mat-radio-checked {
+        .mat-radio-outer-circle {
+          border-color: $primary;
+        }
+      }
+
+      .mat-radio-outer-circle {
+        border-color: $text-tertiary;
+        border-width: 1px;
+      }
+
+      .mat-radio-inner-circle {
+        left: -3.84px;
+        top: -3.8px;
+        width: 28px;
+        height: 28px;
+        background-color: $primary;
+      }
+    }
+  }
+
+  .disabled {
+    pointer-events: none;
+    opacity: 0.7;
+  }
+}
+
+.spinner-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.ask-for-feedback-panel-class {
+  position: absolute;
+  top: 48px;
+  left: 16px;
+  min-width: 100% !important;
+}

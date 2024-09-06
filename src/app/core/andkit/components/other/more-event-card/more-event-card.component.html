@@ -1,0 +1,31 @@
+<a class="card-image" [routerLink]="['/event', event.urlName]">
+  <ng-container *ngIf="(posterImage$ | async) as posterImage">
+    <img class="card-image__cover" [src]="posterImage" alt="">
+  </ng-container>
+  <div class="card-image__content">
+    <andteam-label [iconUrl]="topicIcon$ | async"></andteam-label>
+  </div>
+  <div class="card-body">
+    <p class="card-body__title">{{event.title}}</p>
+    <ng-container *ngIf="event.date">
+      <p class="card-body__date">
+        <span class="card-body__row">
+          <span [innerHTML]="calendarIcon | safe" class="icon"></span>
+          <span class="card-body__text">{{event.date | timezone : 'D MMM, Y '}}</span>
+        </span>
+        <span class="partition">
+          <span [innerHTML]="dotIcon | safe"></span>
+        </span>
+        <span class="card-body__row">
+          <span [innerHTML]="locationIcon | safe" class="icon"></span>
+          <span class="offices card-body__text">
+            <span *ngFor="let office of event.offices; last as isLast"
+              class="office">{{office.name}}
+              <span *ngIf="!isLast">{{', '}}</span>
+            </span>
+          </span>
+        </span>
+      </p>
+    </ng-container>
+  </div>
+</a>

@@ -1,0 +1,12 @@
+<div class="modal">
+  <div class="modal-wrapper" (click)="onCloseClick()">
+    <div class="modal-body" (click)="onModalClick($event)">
+      <div class="modal-close"
+           *ngIf="!isConfirmationType"
+           (click)="onCloseClick()">
+        <andteam-icon *ngIf="isCloseIconView" [icon]="closeIcon | safe"></andteam-icon>
+      </div>
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

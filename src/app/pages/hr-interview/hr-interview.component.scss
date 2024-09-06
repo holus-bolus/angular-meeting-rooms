@@ -1,0 +1,40 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.hr-interview {
+  display: flex;
+  flex-direction: column;
+  margin: 177px auto 131px;
+  padding: 70px 115px 90px;
+  background-color: $body-background;
+  width: 1340px;
+  color: $objectives-text-color;
+  box-sizing: border-box;
+
+  &__title {
+    @include font-base(42px, 300, 130%);
+
+    color: $objectives-text-color;
+    margin-bottom: 20px;
+  }
+
+  &__add-info {
+    color: $tag-title-color;
+    max-width: 800px;
+
+    .add-info-text {
+      @include font-base(14px, 400, 22.4px);
+    }
+
+    .add-info-required {
+      @include font-base(16px, normal, 160%);
+
+      margin-top: 10px;
+    }
+  }
+
+  &-mailing {
+    position: fixed;
+    opacity: 0;
+  }
+}

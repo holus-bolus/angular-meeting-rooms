@@ -1,0 +1,10 @@
+.dropdown-body {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: -17px;
+  right: 0;
+  transform: translate(0, 100%);
+  background-color: #fff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}

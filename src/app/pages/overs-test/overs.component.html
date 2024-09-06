@@ -1,0 +1,77 @@
+<div class="wrapper">
+
+  <div class="wrapper__container">
+    <andteam-card>
+      <div class="title">
+        Overtimes List
+      </div>
+
+      <div class="tabs">
+        <andteam-tabs
+          [isLazyTabs]="false"
+          [tabs]="tabs"
+          (selectTab)="onSelectTab($event)"
+        ></andteam-tabs>
+
+        <div class="tabs__text">
+          Read how to submit overtime
+          <a href="{{linkOnWiki}}" class="tabs__link">on wiki</a>
+        </div>
+      </div>
+
+      <div class="tabs-content">
+        <div class="overtime"
+             *ngIf="activeTab === overtimeTabs.create">
+          <div class="overtime__sidebar mat-elevation-z5">
+            <andteam-overtime-types
+              *ngIf="overs$ | async as overs"
+              [overTypeGroups]="overs"
+              [isRemoveSelect]="isRemoveSelect$.value"
+              [canSelectType]="!this.isShowConfirmModal && canSelectType.value"
+              (overChosen)="onChooseOver($event)"
+            ></andteam-overtime-types>
+          </div>
+
+          <div class="overtime__form mat-elevation-z5">
+            <andteam-overtime-form
+              *ngIf="selectedOverType$ | async as selectedOverType; else emptyPage"
+              [configuration]="selectedOverType"
+              (formTouched)="onFormTouch()"
+              (formReseted)="onFormReset()"
+              (overCreated)="onOverCreate()">
+            </andteam-overtime-form>
+
+            <ng-template #emptyPage>
+              <div class="overtime__form-empty">
+                <div [innerHTML]="noDataIcon | safe" class="overtime__form-empty-img"></div>
+                <div class="overtime__form-empty-text">
+                  <p>Select the required overtime from the list</p>
+                  <p>and fill in the fields</p>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+
+        <div class="submitted"
+             *ngIf="activeTab === overtimeTabs.submitted">
+          <andteam-submitted-overtimes-table
+            *ngIf="overs$ | async as overs"
+            [overTypes]="overs">
+          </andteam-submitted-overtimes-table>
+        </div>
+      </div>
+    </andteam-card>
+
+    <andteam-assessment-toast-notification
+      *ngIf="isOverCreated$ | async"
+      (fadeOut)="onFadeOut()">
+      <span>The overtime has been successfully added</span>
+    </andteam-assessment-toast-notification>
+
+  </div>
+</div>
+
+<andteam-footer></andteam-footer>
+
+

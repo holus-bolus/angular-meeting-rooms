@@ -1,0 +1,25 @@
+<div *ngIf="breadcrumbsList?.length" class="breadcrumbs">
+  <div *ngIf="breadcrumbsList.length > maxItemsVisible" class="breadcrumbs-controls">
+    <a class="breadcrumbs-arrow material-icons"
+       (click)="onToggleBreadcrumbs()">
+      {{ isBreadcrumbsExpanded ? 'keyboard_arrow_left' : 'keyboard_arrow_right' }}
+    </a>
+    <span class="breadcrumbs-dots"
+          [ngClass]="isBreadcrumbsExpanded ? 'breadcrumbs-item-hidden' : 'breadcrumbs-item-visible'">
+      ...
+    </span>
+  </div>
+
+  <ul class="breadcrumbs-list">
+    <li *ngFor="let breadcrumb of breadcrumbsList"
+        class="breadcrumb"
+        [ngClass]="isBreadcrumbsExpanded ? 'breadcrumbs-item-visible' : 'breadcrumbs-item-hidden'">
+      <span class="breadcrumb-slash">/</span>
+      <a [ngClass]="{'breadcrumb-link-inactive' : !breadcrumb.isWork}"
+         class="breadcrumb-link"
+         [routerLink]="breadcrumb.link">
+        {{ breadcrumb.name }}
+      </a>
+    </li>
+  </ul>
+</div>

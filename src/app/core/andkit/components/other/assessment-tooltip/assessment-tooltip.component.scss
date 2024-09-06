@@ -1,0 +1,52 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+@import '~src/styles/shared-styles/vars';
+
+.tooltip {
+  position: relative;
+
+  &-base {
+    cursor: pointer;
+  }
+
+  &-content {
+    display: none;
+
+    .text {
+      @include font-base(12px, 400, 140%);
+
+      min-width: 110px;
+      color: $text-primary;
+      position: fixed;
+      background: $white-color;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      border-radius: 4px;
+      padding: 6px 8px;
+      z-index: $tooltip-z-index;
+    }
+
+    .bottom {
+      top: 25px;
+    }
+
+    .top {
+      top: -12px;
+    }
+
+    .arrow {
+      position: fixed;
+      box-sizing: border-box;
+      bottom: -5px;
+      border: 7px solid $white-color;
+      box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.05);
+      transform: rotate(45deg);
+      width: 5px;
+      height: 5px;
+      z-index: 100;
+    }
+  }
+}
+
+.overtime-form-tooltip {
+  width: auto;
+}

@@ -1,0 +1,189 @@
+@import 'src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+$data-row-height: 90px;
+
+:host {
+  padding: 10px 17px 35px 0;
+}
+
+.table {
+  width: 100%;
+  min-width: 1190px;
+  position: relative;
+  overflow: auto;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+
+  .name {
+    @include border-bottom(1px, dashed, $border-bottom-color);
+
+    text-decoration: none;
+    color: $text-primary;
+    margin-bottom: 5px;
+
+    &:hover {
+      @include border-bottom(1px, solid, $border-link-hover);
+    }
+
+    &:focus {
+      @include border-bottom(1px, solid, $border-link-hover);
+    }
+  }
+
+  .text {
+    width: 236px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-top: 4px;
+    padding: 1px 0;
+  }
+
+  ::ng-deep a {
+    @include border-bottom(1px, dashed, $border-bottom-color);
+
+    word-break: break-all;
+    text-decoration: none;
+    color: $text-primary;
+
+    &:hover {
+      @include border-bottom(1px, solid, $border-link-hover);
+    }
+
+    &:focus {
+      @include border-bottom(1px, solid, $border-link-hover);
+    }
+  }
+}
+
+.comment-container {
+  width: 236px;
+  overflow: hidden;
+
+  p {
+    margin: 0;
+    word-break: break-all;
+  }
+}
+
+.mat-table {
+  padding-top: 35px;
+  padding-bottom: 35px;
+}
+
+.mat-header-row {
+  padding-right: 35px;
+  padding-left: 35px;
+  border: none;
+  height: $data-row-height;
+
+  .mat-header-cell {
+    color: $table-header;
+    padding-left: 35px;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+}
+
+.mat-row {
+  padding-right: 35px;
+  padding-left: 35px;
+  border: none;
+  height: $data-row-height;
+
+  &:nth-child(odd) {
+    background: #f9f9fc;
+  }
+
+  &:nth-child(odd) .mat-cell .two-strings-comment::after {
+    background: #f9f9fc;
+  }
+
+  .mat-cell {
+    padding-left: 35px;
+    line-height: 1.37em;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 35px;
+    }
+
+    .two-strings-comment {
+      position: relative;
+      max-height: calc(1.335em * 2);
+      overflow: hidden;
+      padding-right: 0.8em;
+    }
+
+    @media (min-width: 3800px) {
+      .two-strings-comment {
+        max-height: calc(1.3em * 2);
+      }
+    }
+
+    .two-strings-comment::before {
+      position: absolute;
+      content: '...';
+      bottom: 0;
+      right: 0;
+    }
+
+    .two-strings-comment::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      width: 1.2em;
+      height: 1.2em;
+      background: white;
+    }
+  }
+}
+
+.mat-column-type {
+  min-width: 200px;
+}
+
+.mat-column-project {
+  min-width: 130px;
+}
+
+.mat-column-date {
+  min-width: 120px;
+}
+
+.mat-column-sum-hours {
+  min-width: 105px;
+}
+
+.mat-column-comment {
+  min-width: 236px;
+  overflow-wrap: anywhere;
+}
+
+.mat-column-status {
+  min-width: 100px;
+}
+
+.mat-column-menu {
+  max-width: 40px;
+}
+
+.menu-button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: $primary;
+}
+
+.delete-red {
+  color: $assessment-error-color;
+}

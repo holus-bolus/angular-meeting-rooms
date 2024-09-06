@@ -1,0 +1,87 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.wrapper-activities {
+  display: flex;
+  flex-direction: column;
+  margin: 177px auto 131px;
+  padding: 90px 75px 70px;
+  background-color: $body-background;
+  width: 1340px;
+  color: $objectives-text-color;
+  box-sizing: border-box;
+
+  .activities {
+    &-title {
+      @include font-base(42px, 300, 54.6px, normal);
+
+      margin-bottom: 30px;
+    }
+
+    &-employers {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 30px;
+      margin-bottom: 15px;
+
+      &-img {
+        width: 36px;
+        margin-right: 10px;
+      }
+
+      &-count {
+        @include font-base(28px, 300, 36.4px, normal);
+      }
+
+      &-text {
+        font-size: 16px;
+        line-height: 25.6px;
+      }
+    }
+
+    &-button {
+      align-self: flex-end;
+      position: sticky;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      bottom: 130px;
+      margin: -83px -60px 33px 0;
+      background-color: $border-link-hover;
+      border: none;
+
+      &:hover {
+        cursor: pointer;
+        background-color: $primary-hover;
+      }
+
+      &-up {
+        border: solid black;
+        border-width: 0 3px 3px 0;
+        display: inline-block;
+        padding: 3px;
+        -webkit-transform: rotate(-135deg);
+        transform: rotate(-135deg);
+      }
+    }
+
+    &-table {
+      position: relative;
+    }
+
+    &-spinner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+
+      ::ng-deep .spinner-wrapper {
+        box-sizing: border-box;
+        align-items: flex-start;
+        padding-top: 200px;
+      }
+    }
+  }
+}

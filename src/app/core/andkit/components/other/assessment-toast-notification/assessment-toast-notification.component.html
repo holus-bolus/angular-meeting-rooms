@@ -1,0 +1,11 @@
+<div
+  class="toast-notification"
+  [@InOut]="triggerState"
+  (contextmenu)="onClick($event)"
+  (@InOut.done)="onAnimationEnd(triggerState)"
+>
+  <div class="checked-icon" [innerHTML]="checkedIcon | safe"></div>
+  <div class="toast-text">
+    <ng-content></ng-content>
+  </div>
+</div>

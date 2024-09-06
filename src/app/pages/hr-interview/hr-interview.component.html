@@ -1,0 +1,23 @@
+<div class="hr-interview">
+  <div class="hr-interview__title">{{ title }}</div>
+  <div class="hr-interview__add-info">
+    <div class="add-info-text">{{ mainText }}</div>
+    <div class="add-info-required">{{ requiredText }}</div>
+  </div>
+  <andteam-hr-interview-form
+    [avatar]="avatar"
+    [username]="username"
+    [isEngVersion]="isEngVersion"
+    [hrInterviewList]="hrInterviewList$ | async"
+    (sendForm)="onSendForm($event)">
+  </andteam-hr-interview-form>
+  <andteam-hr-interview-answers
+    *ngIf="isView"
+    class="hr-interview-mailing"
+    [avatar]="avatar"
+    [username]="username"
+    [isEngVersion]="isEngVersion"
+    [hrInterviewListId]="hrInterviewListId"
+    [hrInterviewAnswersList]="hrInterviewAnswersList">
+  </andteam-hr-interview-answers>
+</div>

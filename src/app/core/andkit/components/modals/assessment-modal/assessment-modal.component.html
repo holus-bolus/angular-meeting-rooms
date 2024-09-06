@@ -1,0 +1,12 @@
+<div class="modal">
+  <div class="modal-wrapper">
+    <div class="modal-body" andteamOuterClick (outerClick)="onCloseModal($event)">
+      <div class="modal-close"
+           *ngIf="isShowCloseIcon"
+           (click)="onCloseModal(false)">
+        <andteam-icon [icon]="closeIcon | safe"></andteam-icon>
+      </div>
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

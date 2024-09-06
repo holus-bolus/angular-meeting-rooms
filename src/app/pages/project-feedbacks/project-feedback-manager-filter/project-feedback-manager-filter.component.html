@@ -1,0 +1,51 @@
+<div class="wrapper">
+  <div class="wrapper-item wrapper-filter">
+    <andteam-autocomplete
+      [ngClass]="{'wrapper-filter__filled': searchControl.value }"
+      placeholder="Search manager"
+      [focus]="true"
+      [control]="searchControl"
+      [options]="[]">
+    </andteam-autocomplete>
+  </div>
+  <div class="wrapper-item wrapper-radio">
+    <mat-radio-group class="radio-group">
+      <mat-radio-button class="radio-group-button"
+                        *ngFor="let option of managerTypes; let idx = index"
+                        (click)="onManagerTypeSelect(option)"
+                        [checked]="option.value === selectedManagerType"
+                        [value]="option.value">
+        <div class="radio-group-content">
+          <h3 class="radio-group-content-title">{{ option.title }}</h3>
+        </div>
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <ng-container *ngIf="managerListFiltered.length > 0; else noManagers">
+    <div class="manager-list">
+      <div
+        *ngFor="let manager of managerListFiltered"
+        class="wrapper-item wrapper-manager"
+        [ngClass]="{'active': manager.manager.id === selectedManager}"
+        (click)="onCheck(manager)">
+        <ng-container *ngTemplateOutlet="managerChip;"></ng-container>
+        {{ manager.manager.name }}
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<ng-template #noManagers>
+  <div class="wrapper-item wrapper-manager wrapper-item-empty">
+    No managers...
+  </div>
+</ng-template>
+
+<ng-template #managerChip>
+  <div *ngIf="selectedManagerType === managerType.pc" class="chips">PC</div>
+  <div *ngIf="selectedManagerType === managerType.projectManager" class="chips">PM</div>
+  <div *ngIf="selectedManagerType === managerType.sdm" class="chips">SDM</div>
+  <div *ngIf="selectedManagerType === managerType.deliveryManager" class="chips">DM</div>
+  <div *ngIf="selectedManagerType === managerType.adm" class="chips">ADM</div>
+  <div *ngIf="selectedManagerType === managerType.dd" class="chips">DD</div>
+</ng-template>

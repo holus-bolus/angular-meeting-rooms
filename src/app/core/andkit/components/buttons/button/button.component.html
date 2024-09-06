@@ -1,0 +1,32 @@
+<button
+  class="btn"
+  [ngClass]="{
+    'btn_primary' : type === buttonType.PRIMARY,
+    'btn_secondary': type === buttonType.SECONDARY,
+    'btn_previous': type === buttonType.PREVIOUS,
+    'btn_submit': type === buttonType.SUBMIT,
+    'btn_text': type === buttonType.TEXT,
+    'btn_fab': type === buttonType.FAB,
+    'disabled' : disabled,
+    'assessment' : componentType === 'assessment',
+    'overtime' : componentType === 'overtime',
+    'employee_list' : componentType === 'employee-list',
+
+    'text-color-black': textColor === 'black',
+    'text-color-white': textColor === 'white',
+
+    'color-primary': color === 'primary',
+    'color-accent': color === 'accent',
+    'color-warn': color === 'warn'
+  }"
+  [disabled]="disabled">
+  <ng-container *ngIf="type !== buttonType.FAB; else icon">
+    <ng-content ></ng-content>
+  </ng-container>
+
+  <ng-template #icon>
+    <div class="btn-icon" [innerHTML]="buttonIcon | safe"></div>
+  </ng-template>
+</button>
+
+

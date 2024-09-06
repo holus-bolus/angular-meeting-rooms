@@ -1,0 +1,228 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.wrapper-select {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  cursor: pointer;
+
+  .portal-select {
+    @include font-base(18px, 300);
+
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: none;
+    align-items: flex-end;
+    appearance: none;
+    border-bottom: 1px solid $portal-border-color;
+
+    .placeholder {
+      color: $tag-title-color;
+    }
+
+    .selected-option {
+      color: $black-color;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 5px;
+      right: 0;
+
+      &-up {
+        top: 0;
+        bottom: 8px;
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .assessment-select {
+    height: 36px;
+    width: 100%;
+    background: $white-color;
+    border: 1px solid $text-tertiary;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 7px 8px;
+    position: relative;
+
+    &:hover {
+      border: 1px solid $text-secondary;
+    }
+
+    .placeholder {
+      @include font-base(14px, 300, 22px);
+
+      color: $text-primary;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 7px;
+      right: 12px;
+
+      &-up {
+        top: 11px;
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .overtime-select {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 8px;
+    border-bottom: 1px solid $text-secondary;
+
+    .selected-option {
+      @include font-base(18px, 300, 25px);
+
+      width: 95%;
+    }
+
+    .placeholder {
+      @include font-base(18px, 300, 25px);
+
+      color: $tag-title-color;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 4px;
+      right: 0;
+
+      &-up {
+        top: 3px;
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .english-level-select {
+    height: 36px;
+    width: 100%;
+    background: $white-color;
+    border: 1px solid $text-tertiary;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 8px 16px 8px 8px;
+    position: relative;
+    display: flex;
+
+    &:hover {
+      border: 1px solid $text-secondary;
+    }
+
+    .selected-option {
+      @include font-base(14px, 400, 22px);
+    }
+
+    .placeholder {
+      @include font-base(14px, 400, 22px);
+
+      color: $border-hover;
+    }
+
+    .arrow {
+      margin-left: auto;
+      top: 7px;
+      right: 12px;
+
+      &-up {
+        top: 11px;
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .floating-message {
+    @include font-base(12px, 300, 130%);
+
+    position: absolute;
+    top: calc(100% + 5px);
+    width: calc(100% + 20px);
+  }
+
+  .error {
+    border-color: $error-color;
+
+    &-message {
+      @include font-base(12px, 300, 130%);
+
+      color: $error-color;
+    }
+
+    .select-mat {
+      color: $error-color;
+    }
+  }
+
+  .portal-options {
+    width: 100%;
+    overflow-y: scroll;
+    position: absolute;
+    z-index: 2;
+    bottom: -10px;
+    transform: translate(0, 100%);
+    background-color: $white-color;
+    box-shadow: 0 5px 15px rgba(5, 31, 43, 0.17);
+
+    .portal-option {
+      @include font-base($portal-text-size, 300);
+
+      min-height: $portal-option-min-height;
+      display: flex;
+      align-items: center;
+      padding-left: $padding-left;
+      color: $black-color;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #f0f0f0;
+      }
+    }
+
+    .overtime-option {
+      @extend .portal-option;
+
+      min-height: unset;
+      padding: $overtime-options-padding 0 $overtime-options-padding $padding-left;
+    }
+  }
+
+  .assessment-options {
+    @extend .portal-options;
+
+    box-shadow: 0 5px 15px rgba(5, 31, 43, 0.17);
+    border-radius: 4px;
+    height: 185px;
+
+    .assessment-option {
+      @include font-base(14px, 300, 22px);
+
+      color: $text-primary;
+      padding: 7px 15px;
+      background: $white-color;
+
+      &:hover {
+        background: $option-hover;
+      }
+    }
+  }
+}
+
+.error-message {
+  color: $error-color;
+}
+
+.hint-message {
+  color: $text-secondary;
+}

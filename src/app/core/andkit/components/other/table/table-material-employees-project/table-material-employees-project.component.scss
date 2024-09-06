@@ -1,0 +1,180 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+$data-row-height: 66px;
+
+:host {
+  width: 100%;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  background-color: $white-color;
+
+  .title {
+    @include font-base(36px, 200, 130%);
+
+    margin: 35px;
+    padding-top: 15px;
+  }
+
+  .wrapper-grid {
+    width: 100%;
+    border-radius: $border-radius;
+  }
+
+  .fake-header {
+    position: relative;
+    z-index: 1;
+    border-radius: $border-radius $border-radius 0 0;
+  }
+
+  .fake-tbody {
+    height: 100%;
+    overflow-y: scroll;
+    border-radius: 0 0 $border-radius $border-radius;
+    background-color: #fff;
+
+    &::-webkit-scrollbar {
+      width: 2px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $tag-title-color;
+      border-radius: 2px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: $text-tertiary;
+      border-radius: 2px;
+    }
+
+    .mat-header-row {
+      display: none;
+      height: 0;
+    }
+  }
+
+  .mat-theme {
+    box-sizing: border-box;
+
+    .mat-header-cell {
+      @include font-base(14px, normal, 130%);
+
+      padding: 0;
+      color: $text-secondary;
+
+      &::after {
+        border-right: 0;
+      }
+    }
+
+    .mat-header-row {
+      border-bottom: 1px solid rgba(177, 168, 168, 0.3);
+      border-radius: $border-radius $border-radius 0 0;
+      margin: 0 50px;
+    }
+
+    .mat-cell {
+      @include font-base(16px, 300, 160%);
+
+      flex-direction: column;
+      align-items: baseline;
+      justify-content: center;
+      padding: 18px 0 18px 0;
+      border: none;
+      color: $black-color;
+      display: inline;
+    }
+
+    .mat-row {
+      border-bottom: 1px solid #e8e8e8;
+      height: $data-row-height;
+      margin: 0 50px;
+    }
+
+    .mat-row:first-child {
+      margin-top: 65px;
+    }
+
+    .grid-content {
+      display: inline-flex;
+    }
+
+    .grid-link {
+      @include font-base(16px, 300, 160%);
+
+      text-decoration: none;
+      color: $text-primary;
+    }
+
+    .grid-link-rm-employee {
+      border-bottom: 1px dotted $border;
+      cursor: pointer;
+
+      &:hover {
+        border-bottom: 1px solid $primary;
+      }
+    }
+
+    .grid-link-employees {
+      position: relative;
+      border-bottom: 1px dotted $border;
+      cursor: pointer;
+      display: inline;
+      padding-bottom: 2px;
+
+      &:hover {
+        border-bottom: 1px solid $primary;
+      }
+    }
+
+    .grid-text {
+      color: $text-secondary;
+      font-size: 12px;
+      line-height: 0;
+    }
+
+    .grid-link-project-employee {
+      position: relative;
+      border-bottom: 1px dotted $border;
+      cursor: pointer;
+      font-weight: 500;
+
+      &:hover {
+        border-bottom: 1px solid $border-link-hover;
+      }
+    }
+
+    .grid-default {
+      font-weight: 400;
+    }
+
+    .icon-manager {
+      @include font-base(10px, 400, 20px);
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: 20px;
+      height: 20px;
+      color: $text-secondary;
+      border: 1px solid $border;
+      border-radius: $border-radius;
+      box-sizing: border-box;
+      margin-right: 10px;
+    }
+
+    .main-row-info {
+      @include font-base(14px, 500, 20px);
+    }
+
+    .grid-inner-col {
+      display: flex;
+    }
+  }
+
+  .table-no-data {
+    height: auto;
+  }
+}

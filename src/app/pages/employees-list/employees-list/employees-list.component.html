@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="employee-header">
+    <h1 class="title-h1">Employee List <span [innerHTML]="dot | safe"></span></h1>
+  </div>
+  <andteam-employees-list-filter
+    [params]="params"
+    [isAdmin$]="isAdmin$"
+    (sendFilters)="onSendFilters($event)"></andteam-employees-list-filter>
+  <div class="employee-count" #totalEmployeesBlock></div>
+  <andteam-employees-list-table
+    [employees]="employees"
+    [totalItemsCount]="totalItemsCount"
+    [totalPages]="totalPages"
+    [paginationConfig]="paginationConfig"
+    [isSpinnerShown]="isSpinnerShown"
+    [isLoading]="isLoading"
+    [isAdmin]="isAdmin$ | async"
+    (sendPageNumber)="onSendPageNumber($event)"></andteam-employees-list-table>
+</div>
+<div class="footer">
+  <andteam-footer></andteam-footer>
+</div>

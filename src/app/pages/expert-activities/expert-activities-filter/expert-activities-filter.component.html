@@ -1,0 +1,73 @@
+<div class="activities-filter-wrapper">
+  <div class="activities-filter-wrapper-row">
+    <div class="activities-filter-wrapper-row-item">
+      <andteam-autocomplete placeholder="Last name"
+                            [options]="surnameList$ | async"
+                            [control]="filtersForm.get(controlsList.SURNAME)">
+      </andteam-autocomplete>
+    </div>
+
+    <div class="activities-filter-wrapper-row-item">
+      <andteam-chips-autocomplete [placeholder]="placeholders.technology"
+                                  [options]="technologiesList$ | async"
+                                  (checkOption)="onCheckTechnologiesOption($event)">
+      </andteam-chips-autocomplete>
+    </div>
+
+    <div class="activities-filter-wrapper-row-item">
+      <andteam-chips-autocomplete [placeholder]="placeholders.location"
+                                  [options]="locationsList$ | async"
+                                  [isAllOptionEnabled]="true"
+                                  [isSearchActive]="false"
+                                  (checkOptions)="onCheckLocationOptions($event)"
+                                  (checkOption)="onCheckLocationOption($event)">
+      </andteam-chips-autocomplete>
+    </div>
+  </div>
+
+  <div class="activities-filter-wrapper-row">
+    <div class="activities-filter-wrapper-row-item">
+      <andteam-select ngDefaultControl
+                      class="activities-filter-type"
+                      [options]="typeOfActivitiesList"
+                      [option]="expertActivitiesTypeOption$ | async"
+                      [formControl]="filtersForm.get(controlsList.EXPERT_ACTIVITIES)"
+                      [disableOptionCentering]="true"
+                      [placeholder]="placeholders.type"
+                      (selectOption)="onSelectActivity($event)">
+      </andteam-select>
+    </div>
+
+    <div class="activities-filter-wrapper-row-item">
+      <andteam-chips-autocomplete [placeholder]="placeholders.technologyLevel"
+                                  [options]="technologyLevelList$ | async"
+                                  (checkOption)="onCheckLevelTechnologyOption($event)">
+      </andteam-chips-autocomplete>
+    </div>
+
+    <div class="activities-filter-wrapper-row-item">
+      <andteam-chips-autocomplete [placeholder]="placeholders.languageLevel"
+                                  [isSearchActive]="false"
+                                  [options]="englishLevelList$ | async"
+                                  (checkOption)="onCheckEnglishLevelOption($event)">
+      </andteam-chips-autocomplete>
+    </div>
+  </div>
+
+  <div class="activities-filter-wrapper-buttons">
+    <andteam-button
+      [type]="confirmButtonType"
+      class="activities-filter-wrapper-buttons-confirm"
+      (click)="onFilterApply()">
+      Apply
+    </andteam-button>
+
+    <andteam-button
+      [type]="cancelButtonType"
+      class="activities-filter-wrapper-buttons-cancel"
+      (click)="onFilterReset()">
+      Reset
+    </andteam-button>
+  </div>
+</div>
+

@@ -1,0 +1,11 @@
+export const ADD_EVENT_ROUTE_NAME = '/add-event';
+export const ADD_NEWS_ROUTE_NAME = '/add-news';
+export const LEAVE_FEEDBACK_ROUTE_NAME = '/feedback';
+export const EMPLOYEE_ROUTE_NAME = '/employee';
+export const EMPLOYEE_PERSONAL_INFO = '/personal-info';
+export const EMPLOYEE_FEEDBACK_VIEW = '/feedback-view';
+export const EMPLOYEE_SALARY_REVIEW = '/salary-review';
+export const EMPLOYEE_FEEDBACK_ON_PROJECT_VIEW = '/feedback-on-project-view';
+export const LEAVE_FEEDBACK_ON_PROJECT_NAME = '/projectfeedback';
+export const MANAGER_PROJECT_FEEDBACK = '/project-feedbacks';
+export const ONE_TO_ONE = '/one-to-one';

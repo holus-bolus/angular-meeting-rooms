@@ -1,0 +1,54 @@
+@import '~src/styles/shared-styles/mixins';
+
+.feedback-scale {
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &-description {
+    @include font-base(14px, 400, 20px);
+    width: 40%;
+  }
+
+  &-mark {
+    width: 54%;
+
+    .line-block {
+      position: relative;
+      box-sizing: border-box;
+      padding: 0 0 0 5px;
+      display: flex;
+      align-items: center;
+      left: 0;
+      width: 213px;
+      bottom: 25px;
+
+      .line {
+        width: 25%;
+        height: 2px;
+        background-color: $one-to-one-position-chips;
+
+        &.yellow {
+          background-color: $primary;
+          height: 4px;
+        }
+      }
+
+      .vert-line {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: $one-to-one-position-chips;
+
+        &.yellow {
+          background-color: $primary;
+        }
+      }
+    }
+  }
+
+  &-range-slider {
+    width: 100%;
+  }
+}

@@ -1,0 +1,76 @@
+<div class="wrapper-select">
+
+  <ng-container [ngSwitch]="componentType">
+    <div *ngSwitchCase="'assessment'"
+         class="assessment-select"
+         [class.error]="error"
+         (click)="toggleDropdown()"
+         (mouseenter)="onFocus()">
+      <div class="placeholder">{{option.name}}</div>
+      <div [innerHTML]="assessmentArrow | safe"
+           class="arrow"
+           [ngClass]="{'arrow-up': isDropdownOpen, 'arrow-down': !isDropdownOpen}">
+      </div>
+    </div>
+
+    <div *ngSwitchCase="'overtime'"
+         class="overtime-select"
+         [class.error]="error"
+         (click)="toggleDropdown()"
+         (mouseenter)="onFocus()">
+      <span [ngClass]="{'selected-option': option.name !== placeholder, 'placeholder': option.name === placeholder}">
+        {{option.name}}
+      </span>
+      <div [innerHTML]="portalArrow | safe"
+           class="arrow"
+           [ngClass]="{'arrow-up': isDropdownOpen, 'arrow-down': !isDropdownOpen}">
+      </div>
+      <div *ngIf="error" class="floating-message error-message">{{errorMessage}}</div>
+      <div *ngIf="!error && hintMessage" class="floating-message hint-message">{{hintMessage}}</div>
+    </div>
+
+    <div *ngSwitchCase="'english-level'"
+         class="english-level-select"
+         [class.error]="error"
+         (click)="toggleDropdown()"
+         (mouseenter)="onFocus()">
+      <span [ngClass]="{'selected-option': option.name !== placeholder, 'placeholder': option.name === placeholder}">
+        {{option.name}}
+      </span>
+      <div [innerHTML]="upArrowIcon | safe"
+           class="arrow"
+           [ngClass]="{'arrow-up': isDropdownOpen, 'arrow-down': !isDropdownOpen}">
+      </div>
+      <div *ngIf="error" class="error-message">{{errorMessage}}</div>
+    </div>
+
+    <div *ngSwitchDefault
+         class="portal-select"
+         [class.error]="error"
+         (click)="toggleDropdown()"
+         (mouseenter)="onFocus()">
+      <span [ngClass]="{'selected-option': option.name !== placeholder, 'placeholder': option.name === placeholder}">
+        {{prefixHr}}{{option.name}}
+      </span>
+      <div [innerHTML]="portalArrow | safe"
+           class="arrow"
+           [ngClass]="{'arrow-up': isDropdownOpen, 'arrow-down': !isDropdownOpen}">
+      </div>
+    </div>
+  </ng-container>
+
+  <div *ngIf="isDropdownOpen"
+       andteamOuterClick
+       (outerClick)="onOuterCLick($event)"
+       [ngClass]="{'portal-options': !isAssessment, 'assessment-options': isAssessment}"
+       [ngStyle]="{maxHeight: dropdownHeight}">
+    <div [ngClass]="{'portal-option': !isAssessment, 'assessment-option': isAssessment, 'overtime-option': isOvertime}"
+         *ngFor="let option of options"
+         (click)="onSelectClick($event, option)">
+      <span>
+        {{option.name}}
+      </span>
+    </div>
+  </div>
+
+</div>

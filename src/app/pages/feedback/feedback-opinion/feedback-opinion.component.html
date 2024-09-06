@@ -1,0 +1,50 @@
+<section class="feedback-opinion">
+  <div class="feedback-opinion-header">
+    <div class="feedback-opinion-header-title">
+      <span 
+        [ngClass]="{'valid': opinionStrengthsControl.valid && opinionImproveControl.valid }"
+        [innerHTML]="validationIcon | safe"></span>
+      <h3>
+        Please send a general opinion
+      </h3>
+    </div>
+    <div class="feedback-opinion-header-subtitle">
+      <p>
+        {{ description }}
+      </p>
+    </div>
+  </div>
+
+  <div class="feedback-opinion-fields">
+    <div class="feedback-opinion-fields__strengths">
+      <andteam-portal-textarea [placeholder]="strengthPlaceholder"
+                               class="feedback-opinion-input"
+                               (keyup)="onKeyUpControl(opinionStrengthsControl, strengthsErrorText)"
+                               (click)="onClickStrengthsField()"
+                               [maxLength]="maxLength"
+                               [formControl]="opinionStrengthsControl"
+                               [error]="!isStrengthsFormValid"
+                               [hint]="true"
+                               [hintMessage]="strengthsErrorText | async">
+      </andteam-portal-textarea>
+      <p *ngIf="opinionStrengthsControl.errors?.pattern" class="feedback-opinion-fields-error">
+        {{ errorLatinOnly }}
+      </p>
+    </div>
+    <div class="feedback-opinion-fields__improve">
+      <andteam-portal-textarea [placeholder]="opinonPlaceholder"
+                               class="feedback-opinion-input"
+                               (keyup)="onKeyUpControl(opinionImproveControl, improveErrorText)"
+                               (click)="onClickImproveField()"
+                               [maxLength]="maxLength"
+                               [formControl]="opinionImproveControl"
+                               [error]="!isImproveFormValid"
+                               [hint]="true"
+                               [hintMessage]="improveErrorText | async">
+      </andteam-portal-textarea>
+      <p *ngIf="opinionImproveControl.errors?.pattern" class="feedback-opinion-fields-error">
+        {{ errorLatinOnly }}
+      </p>
+    </div>
+  </div>
+</section>

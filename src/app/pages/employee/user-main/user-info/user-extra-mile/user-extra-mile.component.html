@@ -1,0 +1,25 @@
+<div *ngIf="extraMiles" class="extra-mile">
+  <div *ngIf="extraMiles.canEdit" class="extra-mile-selector">
+    <div class="extra-mile-selector-toggle">
+      <andteam-slide-toggler [checked]="extraMiles.isExtraMile"
+                             (click)="onClickExtraMile()">
+      </andteam-slide-toggler>
+    </div>
+    <span class="extra-mile-selector-label">Extra mile</span>
+  </div>
+
+  <div *ngIf="extraMiles.isExtraMile" class="extra-mile-comment">
+    <div *ngIf="extraMiles.canEdit" class="extra-mile-comment-title">Comment</div>
+    <div *ngIf="!extraMiles.canEdit" class="extra-mile-comment-title">Extra mile</div>
+    <div class="extra-mile-comment-text">
+      {{ extraMiles.comment }}
+    </div>
+  </div>
+</div>
+
+<andteam-user-extra-mile-modal *ngIf="isShowModal"
+                               [isExtraMileOn]="extraMiles.isExtraMile"
+                               (confirmExtraMile)="onChangeExtraMile($event)"
+                               (cancelExtraMile)="onChangeExtraMile($event)"
+                               (closeModal)="onCloseModal()">
+</andteam-user-extra-mile-modal>

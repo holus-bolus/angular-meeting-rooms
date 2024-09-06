@@ -1,0 +1,84 @@
+<div class="objectives-modal-wrapper">
+  <div class="objectives-modal">
+    <button [innerHTML]="closeIcon | safe" class="objectives-modal-close" (click)="onClose()"></button>
+
+    <h2 class="objectives-modal-title">
+      {{modalTitle}}
+    </h2>
+
+    <div class="objectives-modal-field">
+      <andteam-portal-textarea
+        ngDefaultControl
+        placeholder="Objective*"
+        [formControl]="objectiveControl"
+        [error]="showTextErrorMessage(objectiveControl)"
+        [hintMessage]="hintTextMessageText(objectiveControl)"
+        [hint]="objectiveControl.valid">
+      </andteam-portal-textarea>
+    </div>
+
+    <div class="objectives-modal-raw">
+      <div class="objectives-modal-field objectives-modal-column">
+        <ng-container *ngIf="!isDisabled; else typeAsText">
+          <andteam-select
+            ngDefaultControl
+            [options]="typeOfObjectives"
+            [option]="typeControl.value"
+            placeholder="Type*"
+            [formControl]="typeControl"
+            [disableOptionCentering]="true"
+            [panelClass]="matSelectPanelClass"
+            [error]="!typeControl.value && typeControl.touched"
+            [errorMessage]="errorRequiredField">
+          </andteam-select>
+        </ng-container>
+      </div>
+      <div class="objectives-modal-field objectives-modal-column">
+        <andteam-date-picker
+          ngDefaultControl
+          [formControl]="dateControl"
+          placeholder="Due date*"
+          [minDate]="minDate"
+          [error]="!dateControl.value && dateControl.touched"
+          [errorMessage]="errorRequiredField">
+        </andteam-date-picker>
+      </div>
+    </div>
+
+    <div class="objectives-modal-field">
+      <andteam-portal-textarea
+        ngDefaultControl
+        placeholder="Comment"
+        [formControl]="commentControl"
+        [error]="showCommentErrorMessage"
+        [hint]="commentControl.valid"
+        [hintMessage]="hintCommentMessageText"
+        [isNoErrorMargin]="true">
+      </andteam-portal-textarea>
+    </div>
+
+    <div *ngIf="!isDisabled" class="objectives-modal-buttons">
+      <andteam-button
+        [type]="cancelButtonType"
+        class="objectives-modal-buttons-btn objectives-modal-buttons-btn-cancel"
+        (click)="onClose()">
+        Cancel
+      </andteam-button>
+      <andteam-button
+        [type]="confirmButtonType"
+        class="objectives-modal-buttons-btn objectives-modal-buttons-btn-confirm"
+        (click)="onSubmit()">
+        {{formData ? 'Save' : 'Add'}}
+      </andteam-button>
+    </div>
+  </div>
+</div>
+
+<ng-template #typeAsText>
+  <andteam-portal-textarea
+    class="select-as-text"
+    ngDefaultControl
+    placeholder="Type*"
+    [formControl]="typeControl">
+  </andteam-portal-textarea>
+</ng-template>

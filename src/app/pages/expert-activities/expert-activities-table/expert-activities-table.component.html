@@ -1,0 +1,151 @@
+<div class="wrapper-activities-table" *ngIf="expertActivitiesList$ | async as expertActivitiesList">
+  <ng-container *ngIf="expertActivitiesList.expertActivities?.length; else noActivities">
+    <table mat-table [dataSource]="expertActivitiesList.expertActivities" class="activities">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell class="activities-header" *matHeaderCellDef>
+          <div class="activities-header-title--surname" (click)="onSortChange('surname', sortOptions.surname.control)">
+            <span>NAME&SURNAME</span>
+
+            <span class="icon"
+                  [innerHTML]="arrowDown | safe"
+                  [class.active]="sortOptions.surname.isActive"
+                  [class.default]="sortOptions.surname.isDesc">
+            </span>
+          </div>
+        </th>
+
+        <td mat-cell class="activities-item activities-item-name" *matCellDef="let activities">
+          <a [routerLink]="['/employee', activities.employeeId]" class="activities-link">
+            {{activities.nameEn || activities.nameRu}}
+          </a>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="level">
+        <th mat-header-cell class="activities-header" *matHeaderCellDef>
+          <div class="activities-header-title" (click)="onSortChange('level', sortOptions.level.control)">
+            <span>LEVEL</span>
+            <span class="icon"
+                  [innerHTML]="arrowDown | safe"
+                  [class.active]="sortOptions.level.isActive"
+                  [class.default]="sortOptions.level.isDesc">
+            </span>
+          </div>
+        </th>
+        <td mat-cell class="activities-item activities-item-level" *matCellDef="let activities">
+          {{activities.technologies[0]?.level}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="technology">
+        <th mat-header-cell class="activities-header" *matHeaderCellDef>
+          <span>TECHNOLOGY</span>
+        </th>
+
+        <td mat-cell class="activities-item activities-item-technology" *matCellDef="let activities">
+          <div class="chips">
+            <ng-container *ngFor="let technology of activities.technologies">
+              <div class="chips-text">
+                <span>{{ technology.name }}</span>
+                <span *ngIf="technology.level"> / {{ technology?.level }}</span>
+              </div>
+            </ng-container>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="language">
+        <th mat-header-cell class="activities-header" *matHeaderCellDef>
+          <div class="activities-header-title" (click)="onSortChange('engLevel', sortOptions.engLevel.control)">
+            <span>ENG LEVEL</span>
+
+            <span class="icon"
+                  [innerHTML]="arrowDown | safe"
+                  [class.active]="sortOptions.engLevel.isActive"
+                  [class.default]="sortOptions.engLevel.isDesc">
+            </span>
+          </div>
+        </th>
+
+        <td mat-cell class="activities-item activities-item-language" *matCellDef="let activities">
+          {{activities.englishLevel}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="location">
+        <th mat-header-cell class="activities-header" *matHeaderCellDef>
+          <span>LOCATION</span>
+        </th>
+
+        <td mat-cell class="activities-item activities-item-location" *matCellDef="let activities">
+          {{activities.location}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="activities">
+        <th mat-header-cell class="activities-header" *matHeaderCellDef>
+          <span>EXPERT ACTIVITIES</span>
+        </th>
+
+        <td mat-cell class="activities-item activities-item-activities" *matCellDef="let activities">
+          <div class="activities-item-container">
+            <div *ngFor="let activity of activities.expertActivities" class="activities-item-wrapper">
+              <span
+                class="activities-item-activity"
+                (click)="editActivitiesModal(activities.employeeId, activities.canEdit, true, activities.expertActivities, activity)">
+                {{activity.activityName}}
+              </span>
+              <span *ngIf="activity.dueDate" class="activities-item-tooltip">{{activity.dueDate | date: 'dd.MM.y'}}</span>
+            </div>
+          </div>
+
+          <div class="activities-item-edit">
+            <span
+              *ngIf="activities.canEdit"
+              [innerHTML]="plusIcon | safe"
+              [ngClass]="{'disable-add': activities.expertActivities.length >= allActivities.length}"
+              class="activities-item-editor"
+              (click)="editActivitiesModal(activities.employeeId, activities.canEdit, false, activities.expertActivities)">
+            </span>
+            <span *ngIf="activities.expertActivities.length >= allActivities.length" class="activities-item-editor-tooltip">
+              <div>
+                All possible expert activities
+              </div>
+              <div>
+                are added for the employee
+              </div>
+            </span>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row class="coordinates-item" *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <andteam-pagination *ngIf="expertActivitiesList?.totalPages > 1"
+      [totalPages]="expertActivitiesList.totalPages"
+      [paginationConfig]="paginationConfig"
+      [isShowItemsCount]="true"
+      [selectOption]="paginationDefaultOption"
+      [selectOptions]="paginationOptions"
+      (sendItemsCount)="onSendItemsCount($event)"
+      (sendPageNumber)="onSendPageNumber($event)">
+    </andteam-pagination>
+
+    <andteam-assessment-toast-notification
+      *ngIf="isActivitiesUpdate$ | async"
+      (fadeOut)="onFadeOut()">
+      <span>Expert activities updated</span>
+    </andteam-assessment-toast-notification>
+  </ng-container>
+
+  <ng-template #noActivities>
+    <div class="no-activities">
+        <div class="no-activities-icon" [innerHTML]="noActivitiesSvg | safe"></div>
+        <div class="no-activities-text">The list is empty</div>
+    </div>
+  </ng-template>
+  <ng-content></ng-content>
+</div>
+

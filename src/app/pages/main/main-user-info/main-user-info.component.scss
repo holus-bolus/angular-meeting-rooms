@@ -1,0 +1,222 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 35px;
+  padding: 0 115px;
+
+  .__disabled {
+    pointer-events: none;
+  }
+
+  &__avatar {
+    position: relative;
+    box-sizing: border-box;
+    width: 140px;
+    height: 140px;
+    margin-right: 50px;
+    border: 4px solid $body-background;
+    border-radius: 91px;
+    overflow: hidden;
+    cursor: pointer;
+
+    &:hover {
+      .user-info__avatar-shadow {
+        display: block;
+      }
+    }
+  }
+
+  &__avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__avatar-shadow {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 50%;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+
+  &__name {
+    color: $white-color;
+    -webkit-user-select: inherit;
+    user-select: inherit;
+
+    &_ru {
+      @include font-base(50px, 300, 1.15);
+
+      text-decoration: none;
+      color: $white-color;
+    }
+
+    &_en {
+      @include font-base(22px, 300, 1.6);
+
+      text-decoration: none;
+      color: $white-color;
+    }
+  }
+
+  .button__text {
+    @include font-base(12px, 300, 1.6);
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 100%;
+    padding-bottom: 12px;
+    box-sizing: border-box;
+    color: $white-color;
+  }
+}
+
+::ng-deep .modal .image-cropper-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 422px;
+}
+
+::ng-deep .modal .modal-body {
+  min-width: 480px;
+  width: 480px;
+}
+
+::ng-deep .button__text .button {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: transparent !important;
+  font-size: 0 !important;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 24px;
+    background-image: url('../../../../assets/images/upload-picture.svg');
+  }
+}
+
+.main {
+  &-label {
+    @include font-base(36px, 200, 130%);
+
+    width: 390px;
+    height: 47px;
+    margin: 0 0 40px;
+    color: $text-primary;
+  }
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+
+  .controls {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  ::ng-deep .btn {
+    @include font-base(14px, 500, 16px);
+
+    width: 130px;
+    height: 42px;
+    border-radius: 0;
+
+    &_primary {
+      margin-right: 20px;
+    }
+
+    &_secondary {
+      border: 2px solid $primary;
+    }
+  }
+}
+
+.center {
+  width: 100%;
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+}
+
+.wrapper {
+  width: 100%;
+  align-items: center;
+  display: flex;
+  padding: 0.5em;
+  position: relative;
+  z-index: 100;
+
+  &::after,
+  &::before {
+    content: '';
+    width: 30px;
+    height: 21px;
+    color: #333;
+    font-size: 1rem;
+    font-weight: 300;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('../../../../assets/images/picture-placeholder.svg');
+  }
+
+  &::after {
+    background-size: 25px;
+  }
+
+  & > input[type='range'] {
+    appearance: none;
+    background: $primary-disabled;
+    border-radius: 2px;
+    height: 8px;
+    width: 100%;
+    margin: 0 0.5em;
+    outline: none;
+    transition: all 300ms ease;
+
+    &::-moz-range-thumb {
+      appearance: none;
+      background: $primary;
+      border-radius: 50%;
+      cursor: ew-resize;
+      height: 16px;
+      width: 16px;
+      transition: all 300ms ease;
+    }
+
+    &::-webkit-slider-thumb {
+      appearance: none;
+      background: $primary;
+      border-radius: 50%;
+      cursor: ew-resize;
+      height: 16px;
+      width: 16px;
+    }
+  }
+}

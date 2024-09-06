@@ -1,0 +1,58 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.portal-title {
+  @include transition;
+  @include font-base(18px, 300, 25px);
+
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid $white-color;
+  padding-bottom: 10px;
+  color: $white-color;
+  width: 100%;
+  box-sizing: border-box;
+
+  &:focus,
+  &:active {
+    outline: none;
+  }
+
+  .form-input {
+    @include font-base(56px, 200, 66px);
+
+    width: 100%;
+    background: transparent;
+    color: $white-color;
+    padding-left: 0;
+    outline: none;
+    border: none;
+
+    &::placeholder {
+      color: $tag-title-color;
+    }
+  }
+
+  &_dark-theme {
+    border-bottom: 1px solid $tag-box-border;
+
+    .form-input {
+      color: $white-color;
+
+      &::placeholder {
+        color: $white-color;
+      }
+    }
+  }
+}
+
+.error {
+  border-color: $error-color;
+}
+
+.error-message {
+  margin-top: 5px;
+  font-size: 12px;
+  font-weight: 300;
+  color: $error-color;
+}

@@ -1,0 +1,27 @@
+@import '~src/styles/shared-styles/colors';
+
+.select-wrapper {
+  height: 36px;
+
+  ::ng-deep {
+    .assessment-options {
+      max-height: 72px;
+    }
+  }
+}
+
+.assessment-focus {
+  ::ng-deep {
+    .assessment-select {
+      border: 1px solid $border-active;
+    }
+  }
+}
+
+.error {
+  ::ng-deep {
+    .assessment-select {
+      border: 1px solid $assessment-border-color;
+    }
+  }
+}

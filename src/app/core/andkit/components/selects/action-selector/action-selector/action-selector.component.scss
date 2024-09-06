@@ -1,0 +1,65 @@
+@import 'src/styles/shared-styles/colors';
+@import 'src/styles/shared-styles/mixins';
+
+.action {
+  &-btn {
+    &-icon {
+      color: $primary;
+    }
+  }
+
+  &-menu-item {
+    display: flex;
+
+    &-text {
+      &.with-icon {
+        margin-left: 10px;
+      }
+    }
+
+    &-icon {
+      ::ng-deep {
+        svg {
+          width: 24px;
+          vertical-align: middle;
+
+          path {
+            fill: #b5b8bb;
+          }
+        }
+      }
+    }
+  }
+}
+
+::ng-deep {
+  .mat-menu-panel {
+    min-height: 40px !important;
+  }
+
+  .mat-menu-content {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+
+    .action-dark-style {
+      padding-left: 30px;
+
+      &:hover {
+        background-color: $news-edit-hover;
+      }
+    }
+  }
+
+  .action-red {
+    color: $red-color;
+  }
+
+  .action-green {
+    color: $green-color;
+  }
+
+  .action-dark-style {
+    background-color: $news-edit-background-color;
+    color: white;
+  }
+}

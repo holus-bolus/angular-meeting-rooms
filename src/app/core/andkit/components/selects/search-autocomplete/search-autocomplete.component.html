@@ -1,0 +1,55 @@
+<div class="autocomplete-search">
+  <mat-form-field floatLabel="never"
+                  class="autocomplete-search-form"
+                  (keyup.enter)="onEnterOption($event)">
+    <input type="text"
+           matInput
+           matAutocompletePosition="below"
+           [required]="isRequired"
+           [matAutocomplete]="auto"
+           [formControl]="control">
+
+    <div *ngIf="!control.value" class="autocomplete-search-placeholder">{{ placeholder }}</div>
+
+    <div class="autocomplete-search-icons">
+      <div class="autocomplete-search-close"
+           *ngIf="!!control.value"
+           [innerHTML]="closeIcon | safe"
+           (click)="onReset()">
+      </div>
+      <div class="autocomplete-search-icon" *ngIf="!control.value" [innerHTML]="searchIcon | safe"></div>
+    </div>
+
+    <mat-autocomplete #auto="matAutocomplete" class="autocomplete-search-dropdown">
+      <mat-option *ngFor="let option of options"
+                  class="autocomplete-search-option"
+                  [value]="option.name"
+                  (click)="onSelectOption(option)"
+                  [disabled]="option.disabled">
+        <img class="autocomplete-search-photo" [src]="'api/employee/photothumbnail/' + option.id">
+        {{ option.name }}
+      </mat-option>
+      <mat-option [disabled]="disabled" *ngIf="!options">
+        Not found
+      </mat-option>
+    </mat-autocomplete>
+
+    <div *ngIf="additionalInfo && !control.value">
+      <andteam-material-info-btn
+        class="autocomplete-search-info"
+        [btnText]="'i'"
+        [btnColor]="yellow"
+        disabled>
+      </andteam-material-info-btn>
+
+      <div class="autocomplete-search-info-popup">
+        <div class="autocomplete-search-info-popup-triangle">▲</div>
+        <p>{{ additionalInfo }}</p>
+      </div>
+
+    </div>
+  </mat-form-field>
+
+  <div *ngIf="control.value && hintMessage && !error" class="autocomplete-search-hint">{{ hintMessage }}</div>
+ <mat-error *ngIf="error">Required Field</mat-error>
+</div>

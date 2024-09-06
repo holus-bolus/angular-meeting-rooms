@@ -1,0 +1,129 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+:host {
+  .settings-multi-select {
+    position: relative;
+
+    .columns-select {
+      position: relative;
+      top: 25px;
+    }
+  }
+}
+
+.settings-multi-select {
+  &-name {
+    padding: 10px 15px 17px;
+  }
+
+  &-option {
+    font-size: 14px !important;
+    height: 44px !important;
+  }
+
+  ::ng-deep {
+    .settings-multi-select-icon svg {
+      width: 25px;
+      height: 25px;
+
+      &:hover {
+        path {
+          fill: $primary;
+        }
+      }
+    }
+
+    .mat-form-field-wrapper {
+      padding: 0;
+    }
+
+    .mat-form-field {
+      &-flex {
+        vertical-align: middle;
+        padding: 0;
+        background-color: transparent;
+      }
+
+      &-infix {
+        width: 25px;
+        height: 25px;
+        padding: 0;
+        margin: 0;
+        border: none;
+      }
+
+      &-underline {
+        display: none;
+      }
+
+      &-label-wrapper {
+        display: none;
+      }
+    }
+
+    .mat-select {
+      position: absolute;
+      left: 0;
+      height: 100%;
+      pointer-events: none;
+
+      &-arrow-wrapper {
+        display: none;
+      }
+    }
+  }
+}
+
+::ng-deep {
+  .settings-multi-select.mat-focused {
+    .settings-multi-select-icon svg path {
+      fill: $primary;
+    }
+  }
+
+  .cdk-overlay-pane .mat-select-panel-wrap {
+    .mat-select-panel {
+      .settings-multi-select-option .mat-pseudo-checkbox {
+        width: 22px;
+        height: 22px;
+        margin-right: 11px;
+        border: thin solid $text-tertiary;
+
+        &-checked {
+          background-color: $primary;
+          border-color: $primary;
+
+          &::after {
+            left: 5px;
+            top: 5px;
+            width: 8px;
+            height: 5px;
+          }
+        }
+      }
+
+      .mat-option {
+        &:hover {
+          background-color: $body-background;
+
+          .settings-multi-select-option .mat-pseudo-checkbox {
+            border-color: $primary;
+          }
+        }
+
+        &.mat-active {
+          background-color: transparent;
+
+          &:hover {
+            background-color: $body-background;
+          }
+        }
+
+        &.mat-selected:not(.mat-option-disabled) {
+          color: $black-color;
+        }
+      }
+    }
+  }
+}

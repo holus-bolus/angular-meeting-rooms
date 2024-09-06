@@ -1,0 +1,40 @@
+<div class="interview">
+  <div class="interview-box">
+    <div class="interview-title">Technology:</div>
+    <div class="interview-data">{{assessment?.technology}}</div>
+  </div>
+
+  <div class="interview-box">
+    <div class="interview-title">Current level:</div>
+    <div class="interview-data">{{assessment?.currentLevel}}</div>
+  </div>
+
+  <div class="interview-box">
+    <div class="interview-title">Result matrix:</div>
+    <div class="interview-data" *ngIf="assessment?.mergeMatrix">
+      <andteam-assessment-matrix-icon
+        class="interview-icon"
+        [isFull]="assessment.mergeMatrix.isDone"></andteam-assessment-matrix-icon>
+      <andteam-button
+        class="interview-button"
+        [type]="secondaryTypeButton">
+          <a target="_blank" class="matrix-link" [href]="assessment.mergeMatrix.link">View</a>
+        </andteam-button>
+    </div>
+  </div>
+
+  <div class="interview-box">
+    <div class="interview-title">Interview date/time:</div>
+    <div class="interview-data" *ngIf="assessment?.interviewDateTime">
+      <div class="interview-date">{{assessment.interviewDateTime | date: 'dd.MM.yyyy'}}</div>
+      <div class="interview-time">{{assessment.interviewDateTime | date: 'HH:mm'}}</div>
+    </div>
+  </div>
+
+  <div class="interview-box">
+    <div class="interview-title">Interviewer:</div>
+    <div class="interview-data">{{assessment?.interviewer?.name}}</div>
+  </div>
+
+  <ng-content></ng-content>
+</div>

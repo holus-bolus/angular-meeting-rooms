@@ -1,0 +1,39 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.checkbox {
+  display: none;
+}
+
+.checkbox-label {
+  @include font-base(14px, 300, 16px);
+
+  color: $text-primary;
+  padding-left: 25px;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  &::before {
+    content: '';
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    background: $white-color;
+    border: 1px solid $text-tertiary;
+    box-sizing: border-box;
+    border-radius: 4px;
+    margin-right: 10px;
+  }
+
+  &:hover::before {
+    border-color: $text-secondary;
+  }
+
+  .checkbox-icon {
+    position: absolute;
+    left: 28px;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,35 @@
+<ng-container [ngSwitch]="componentType">
+  <ng-container *ngSwitchCase="portalType">
+    <input type="file"
+           class="file"
+           [id]="uniqueId"
+           accept=".jpg,.jpeg,.png"
+           multiple
+           (change)="handleFileInput($event)">
+
+    <label [for]="uniqueId" class="button" #triggerButton>
+      Browse file
+    </label>
+  </ng-container>
+
+  <div *ngSwitchCase="overtimeType" class="file-wrapper">
+    <div class="file-input" [class.error]="error">
+
+      <label *ngIf="!isSelectorDisabled" class="file-icon-right" [for]="uniqueId" [innerHTML]="fileActiveIcon | safe"></label>
+      <label *ngIf="isSelectorDisabled" class="file-icon-right" [for]="uniqueId" [innerHTML]="fileInactiveIcon | safe"></label>
+
+      <span class="placeholder">{{placeholder}}</span>
+
+      <input type="file"
+             accept=".xls, .xlsx, .txt, .doc, .docx, .jpg, .jpeg, .heif, .png, .pdf, .zip, .rar, .csv, .gif"
+             [id]="uniqueId"
+             [style.display]="'none'"
+             [disabled]="isSelectorDisabled"
+             (change)="handleFileInput($event)">
+    </div>
+
+    <div *ngIf="error" class="error-message">
+      {{errorMessage}}
+    </div>
+  </div>
+</ng-container>

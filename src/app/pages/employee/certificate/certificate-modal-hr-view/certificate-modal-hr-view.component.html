@@ -1,0 +1,44 @@
+<div class="certificate-hr">
+  <div class="certificate-hr-list">
+
+    <andteam-certificate-view *ngIf="currentIndex"
+                              class="certificate-download-version"
+                              [certificate]="data.certificates[currentIndex]"
+                              [techLevelList]="data.techLevelList"
+                              [isViewVersion]="true">
+    </andteam-certificate-view>
+
+    <div
+      *ngFor="let certificate of data.certificates; let index = index"
+      class="certificate-hr-list-item"
+      (mouseenter)="toggleCertificateHover(certificate[0])"
+      (mouseleave)="toggleCertificateHover(certificate[0])">
+      <andteam-certificate-view 
+        [certificate]="certificate"
+        [isLastCertificateVersion]="index === 0"
+        [techLevelList]="data.techLevelList"
+        [technologies]="data.technologies"
+        [isFromHr]="true"
+        [canEdit]="true"
+        [canSave]="true"
+        [canPrint]="true"
+        (showNotification)="showNotification($event)"
+        (click)="viewCertificateVersion(index)"
+        (actionChoose)="onActionChoose($event, index)">
+      </andteam-certificate-view>
+      <div class="certificate-hr-list-item-date">{{certificate.createDate | certificateDate | uppercase}}</div>
+    </div>
+  </div>
+</div>
+
+<div class="certificate-hr-header" *ngIf="isShowHeader | async"></div>
+
+<button *ngIf="isShowHeader | async"
+        mat-dialog-close
+        class="certificate-hr-close"
+        [innerHTML]="closeIcon">
+</button>
+
+<andteam-assessment-toast-notification *ngIf="isCertificateNotification$ | async" (fadeOut)="onFadeOut()">
+  <span>{{getNotificationText}}</span>
+</andteam-assessment-toast-notification>

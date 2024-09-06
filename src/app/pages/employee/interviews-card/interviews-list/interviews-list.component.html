@@ -1,0 +1,50 @@
+<div class="interview-card">
+  <h1 class="employee-h1 title">Interview list</h1>
+
+  <div class="interview-card__content">
+    <ng-container *ngIf="interviews">
+      <div class="interview-panel">
+        <div class="interview-panel__toggle">
+          <span class="toggle-state">Active</span>
+          <andteam-slide-toggler class="toggle-button" [checked]="isCurrent"
+                                 (toggle)="onToggleActive($event)"></andteam-slide-toggler>
+          <span class="toggle-state toggle-state_right">Previous</span>
+        </div>
+        <div class="interview-panel__total">
+          <span class="total-icon" [innerHTML]="listIcon | safe"></span>
+          <span class="total-text">
+            <span class="total-text__count">{{totalItems}}</span>
+            <span class="total-text__word">{{ ' interview' | multyWordEnd: totalItems }}</span>
+          </span>
+        </div>
+      </div>
+
+      <ng-container *ngIf="interviews?.length; else noData">
+        <div *ngFor="let interview of interviews; trackBy: trackById let isFirst = first"
+             class="interview-wrapper"
+             [class.interview-wrapper_first]="isFirst"
+        >
+          <andteam-interview
+            [interview]="interview"
+            [isInterviewer]="isInterviewer"
+            (interviewFinished)="onFinish()"></andteam-interview>
+        </div>
+      </ng-container>
+      <ng-template #noData>
+        <div class="interview-placeholder">
+          <andteam-no-data [noDataMessage]="isCurrent ? noActiveInterviewsMessage : noPreviousInterviewsMessage"
+                           [noDataIcon]="noInterviewsIcon">
+          </andteam-no-data>
+        </div>
+      </ng-template>
+
+      <div *ngIf="hasNextPage" class="link interview-show-more" (click)="onShowMore()">
+        Show More
+      </div>
+    </ng-container>
+
+    <div *ngIf="isShowSpinner" class="placeholder">
+      <andteam-spinner></andteam-spinner>
+    </div>
+  </div>
+</div>

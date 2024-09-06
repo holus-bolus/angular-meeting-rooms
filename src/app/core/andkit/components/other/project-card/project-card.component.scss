@@ -1,0 +1,87 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.project-wrapper {
+  min-width: 267px;
+  background-color: $white-color;
+  box-sizing: border-box;
+
+  .project-content {
+    height: 100%;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 40px;
+
+    &__title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 35px;
+
+      .title-project {
+        @include font-base(26px, 300, 30px);
+      }
+
+      .team-qty {
+        @include font-base(14px, normal, 130%);
+
+        cursor: pointer;
+
+        .grid-link-icon {
+          width: 24px;
+          height: 24px;
+          vertical-align: middle;
+        }
+
+        &_disabled {
+          cursor: default;
+          border-bottom: none;
+
+          &:hover {
+            border-bottom: none;
+          }
+        }
+      }
+    }
+
+    &__managers-row {
+      display: flex;
+      flex-direction: column;
+
+      .manager {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 10px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      .icon-manager {
+        @include font-base(14px, 300, 16px);
+
+        color: $text-secondary;
+        height: 26px;
+        width: 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $primary-disabled;
+        border-radius: 2px;
+      }
+
+      .grid-link {
+        @include font-base(14px, 300, 16px);
+
+        margin-left: 10px;
+        text-decoration: none;
+        color: $text-primary;
+        border-bottom: 1px dotted $text-tertiary;
+      }
+    }
+  }
+}

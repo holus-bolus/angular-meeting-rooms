@@ -1,0 +1,94 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+::ng-deep {
+  .cdk-overlay-pane {
+    .mat-input-select-panel-left {
+      position: absolute;
+      right: 0;
+    }
+  }
+}
+
+.select-option {
+  @include font-base(14px, 400, 22px);
+}
+
+.autocomplete {
+  &-wrapper {
+    position: relative;
+  }
+
+  &-arrow {
+    width: 16px;
+    height: 17px;
+    margin-left: 5px;
+    display: flex;
+
+    ::ng-deep > svg > path {
+      fill: $table-header;
+    }
+  }
+
+  &-placeholder {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 1px;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  &-field {
+    @include font-base(14px, 500, 24px);
+
+    padding-right: 21px;
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid $white-color;
+    text-align: left;
+
+    &[aria-expanded='true'] {
+      border-bottom-color: $tag-box-border;
+
+      + .autocomplete {
+        &-placeholder {
+          justify-content: space-between;
+
+          .autocomplete-arrow ::ng-deep > svg > path {
+            fill: $primary !important;
+          }
+        }
+      }
+    }
+
+    &-active {
+      font-weight: 500;
+
+      ~ .autocomplete-placeholder {
+        display: none;
+      }
+
+      ~ .autocomplete-clear-button {
+        display: block;
+      }
+    }
+
+    &:focus,
+    &:active {
+      border-bottom-color: $tag-box-border;
+    }
+  }
+
+  &-clear-button {
+    display: none;
+    position: absolute;
+    width: 12px;
+    height: 13px;
+    right: 0;
+    cursor: pointer;
+    top: 3px;
+  }
+}

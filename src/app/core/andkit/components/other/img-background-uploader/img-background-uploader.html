@@ -1,0 +1,51 @@
+<button class="button upload-button">
+  <div *ngIf="!isBackgroundCropperActive" class="button__wrapper">
+    <andteam-portal-input-file
+                               (handleFiles)="handleFiles($event)"></andteam-portal-input-file>
+
+    <div class="button__container">
+      <span class="button__description-text">{{imageMessages.description}}</span>
+      <div *ngIf="isButton" class="button__button">
+        <andteam-portal-button
+          class="button"
+          [disabled]="false">
+          <div class="button__icon icon"></div>
+          <p class="button__text">Browse image</p>
+        </andteam-portal-button>
+      </div>
+      <div *ngIf="!isButton" class="button__container__icon">
+        <div class="icon" [innerHTML]="cameraSVG | safe"></div>
+      </div>
+    </div>
+  </div>
+
+  <span class="button__cropper" *ngIf="isBackgroundCropperActive">
+    <div class="background-image-cropper-block">
+      <andteam-progress-spinner *ngIf="!isCropperImageBackgroundLoaded"></andteam-progress-spinner>
+      <image-cropper
+              [imageFile]="fileImageBackgroundToCrop"
+              [maintainAspectRatio]="true"
+              [aspectRatio]="11 / 3"
+              [resizeToWidth]="1400"
+              [cropperMinWidth]="401"
+              [onlyScaleDown]="true"
+              [roundCropper]="false"
+              (imageLoaded)="onBackgroundImageLoaded()"
+              (imageCropped)="onBackgroundImageCropped($event)"
+              [style.display]="isCropperImageBackgroundLoaded ? null : 'none'"
+              format="png"
+              alignImage="center"
+      ></image-cropper>
+      <div class="buttons">
+        <andteam-button
+                class="save"
+                [type]="'primary'"
+                (click)="cropBackgroundImage()">Save</andteam-button>
+        <andteam-button
+                class="save"
+                [type]="'secondary'"
+                (click)="cancelCropBackground()">Cancel</andteam-button>
+      </div>
+    </div>
+  </span>
+</button>

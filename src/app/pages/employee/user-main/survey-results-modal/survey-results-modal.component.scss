@@ -1,0 +1,141 @@
+@import 'src/styles/shared-styles/colors';
+@import 'src/styles/shared-styles/mixins';
+
+.mat-dialog-container {
+  padding: 0;
+  border-radius: 0;
+}
+
+.survey-results-window {
+  background-color: $white-color;
+
+  &-wrapper {
+    position: relative;
+    padding: 40px 50px;
+  }
+
+  &-close {
+    @include transition;
+
+    position: absolute;
+    right: 17px;
+    top: 17px;
+    cursor: pointer;
+    opacity: 0.5;
+    width: 20px;
+    min-width: 20px;
+    border: none;
+    background-color: transparent;
+
+    &-btn {
+      height: 20px;
+    }
+
+    svg {
+      stroke: $white-color;
+      stroke-width: 1px;
+      fill-opacity: 0.5;
+      width: 20px;
+      height: 20px;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &-title {
+    @include font-base(24px, 400, 31.2px);
+  }
+
+  &-subtitle {
+    @include font-base(16px, 400, 25.6px);
+
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    color: $tag-title-color;
+  }
+
+  &-content {
+    margin-top: 40px;
+  }
+
+  &-button {
+    display: block;
+    margin-top: 50px;
+  }
+}
+
+.survey-results-match {
+  &-title {
+    @include font-base(18px, 400, 28.7px);
+  }
+
+  &-content {
+    margin-top: 20px;
+  }
+
+  &-data {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & + & {
+      margin-top: 10px;
+    }
+  }
+
+  &-group {
+    &:nth-child(even) {
+      margin-top: 30px;
+    }
+  }
+
+  &-name-wrapper {
+    width: 40%;
+  }
+
+  &-name {
+    @include font-base(16px, 400, 25.6px);
+
+    border-bottom: 1px dashed $text-tertiary;
+    text-decoration: none;
+    color: $black-color;
+  }
+
+  &-status {
+    @include font-base(16px, 400, 25.6px);
+
+    width: 35%;
+    color: $tag-title-color;
+  }
+
+  &-result {
+    @include font-base(12px, 400, 19.2px);
+
+    width: 25%;
+    text-align: center;
+    color: $tag-title-color;
+  }
+
+  &-result-bar {
+    margin-top: 2px;
+    background-color: $one-to-one-position-chips;
+    height: 4px;
+    border-radius: 2px;
+    width: 100%;
+  }
+
+  &-result-line {
+    display: block;
+    height: 100%;
+    background-color: $primary;
+    border-radius: inherit;
+  }
+
+  &-result-underline {
+    border-bottom: 1px solid $text-tertiary;
+    margin-top: 30px;
+  }
+}

@@ -1,0 +1,133 @@
+<form class="order-details"
+      [formGroup]="form">
+  <button [innerHTML]="closeIcon | safe"
+          class="close-button"
+          (click)="onClose()"></button>
+
+  <div class="order-details__title">{{ getModalTitle() }}</div>
+
+  <div class="order-details__divider"></div>
+
+  <div class="order-details__products"
+       formArrayName="products">
+
+    <ng-container *ngIf="products.length; else noProducts">
+      <ng-container *ngFor="let product of products; let index = index; let last = last">
+        <div class="order-details__product">
+          <andteam-order-product
+            [formControlName]="index"
+            [product]="product"
+            [points]="points"
+            [canDelete]="canDeleteProduct"
+            [actionType]="actionType"
+            (delete)="onDelete($event)"
+          ></andteam-order-product>
+        </div>
+        <div class="order-details__divider" *ngIf="!last"></div>
+      </ng-container>
+    </ng-container>
+
+    <ng-template #noProducts>
+      <div class="order-details__no-products">
+        <div class="order-details__no-products_image">
+          <img
+            class="order-details__no-products_icon"
+            alt="There are no items in your order yet."
+            src="assets/images/empty-page.svg"/>
+        </div>
+
+        <div class="order-details__no-products_info">
+          <div class="order-details__no-products_text">
+            There are no items in your order yet.
+          </div>
+
+          <div class="order-details__no-products_button">
+            <andteam-button
+              [type]="buttonTypeText"
+              [disabled]="isLoading"
+              (click)="onClose()">
+              Explore our store
+            </andteam-button>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+
+  <div class="order-details__divider"></div>
+
+  <div class="order-details__total">
+    <div>
+      <div class="order-details__total_label">
+        Total:
+      </div>
+
+      <div class="order-details__total_hint">
+        <span>You have {{ points }} points</span>
+      </div>
+    </div>
+
+    <div
+      class="order-details__total_sum"
+      [class.error]="!isEnoughPoints()">
+      <div class="order-details__total_points">
+        <span>
+          {{ totalPoints }} points
+        </span>
+      </div>
+
+      <div
+        *ngIf="!isEnoughPoints(); else enoughPointsHint"
+        class="order-details__total_error">
+        You don’t have enough points for purchase
+      </div>
+
+      <ng-template #enoughPointsHint>
+        <div
+          *ngIf="isOrder"
+          class="order-details__total_hint">
+          <span *ngIf="differenceBetweenPoints < 0">You will receive {{ differenceBetweenPoints * -1 }} points in your wallet after saving your order</span>
+          <span *ngIf="differenceBetweenPoints > 0">You have to pay only {{ differenceBetweenPoints }} points</span>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+  <div class="order-details__divider"></div>
+
+  <div class="order-details__footer">
+    <div class="order-details__notice">
+      <div class="order-details__notice_icon">
+        <img src="assets/images/caution.svg" alt="notice">
+      </div>
+
+      <div class="order-details__notice_text">
+        Please note, orders made on days 1-15 of the month will be processed the same month, orders made after that
+        period will be processed next month.
+      </div>
+    </div>
+
+    <div class="order-details__actions">
+      <div
+        *ngIf="!isOrder"
+        class="order-details__actions_button"
+      >
+        <andteam-button
+          [type]="buttonTypeSecondary"
+          [disabled]="isLoading"
+          (click)="onClose()">
+          Continue shopping
+        </andteam-button>
+      </div>
+
+      <div class="order-details__actions_button">
+        <andteam-button
+          [type]="buttonTypePrimary"
+          [disabled]="isLoading || !getProductsFormArray().length || !isEnoughPoints()"
+          (click)="onSubmit()">
+          {{ getNameOfOrderButton() }}
+        </andteam-button>
+      </div>
+    </div>
+  </div>
+</form>

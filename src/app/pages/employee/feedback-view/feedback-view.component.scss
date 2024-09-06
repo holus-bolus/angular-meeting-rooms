@@ -1,0 +1,161 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+@import '~src/styles/shared-styles/_vars.scss';
+
+.tab-wrapper {
+  background-color: $body-background;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  color: $text-primary;
+  position: relative;
+  padding: 60px 68px !important;
+
+  .title {
+    @include font-base(42px, 300, 54.6px);
+
+    margin-bottom: 50px;
+  }
+
+  button {
+    @include font-base(14px, 500, 16px);
+
+    background-color: $border-link-hover;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-feedback {
+    width: 180px;
+    height: 42px;
+    padding: 10px 30px;
+    margin: 10px 20px 50px 0;
+    font-weight: 600;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &:hover {
+      background-color: $primary-hover;
+    }
+
+    &:focus {
+      background-color: $primary-hover;
+    }
+  }
+
+  .btn-block {
+    display: flex;
+    align-items: center;
+  }
+
+  .btn-feedback-wrapper {
+    margin-top: 50px;
+  }
+
+  .feedback-list {
+    background-color: $white-color;
+    padding: 32px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+
+    .list-title {
+      @include font-base(36px, 300, 37px);
+
+      margin: 0 0 20px 0;
+    }
+
+    .no-feedback {
+      @include font-base(18px, 400, 28.8px);
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 28px 0 8px;
+      text-align: center;
+      color: $tag-title-color;
+
+      &-image {
+        display: flex;
+        align-items: center;
+        width: 140px;
+        height: 140px;
+        background-color: $body-background;
+        border-radius: 50%;
+
+        ::ng-deep {
+          svg {
+            margin-left: 19px !important;
+          }
+        }
+      }
+    }
+  }
+
+  .disabled {
+    cursor: default;
+    color: $text-primary;
+    pointer-events: none;
+
+    &:hover {
+      background-color: $border-link-hover;
+    }
+  }
+
+  .btn-up {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: absolute;
+    right: 8px;
+    bottom: 130px;
+
+    &:hover {
+      background-color: $primary-hover;
+    }
+
+    &:focus {
+      background-color: $primary-hover;
+    }
+
+    &__arrow {
+      border: solid black;
+      border-width: 0 3px 3px 0;
+      display: inline-block;
+      padding: 3px;
+      -webkit-transform: rotate(-135deg);
+      transform: rotate(-135deg);
+    }
+  }
+}
+
+.feedback-block {
+  @include font-base(36px, 300);
+
+  background-color: $white-color;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  margin-bottom: 50px;
+  padding: 40px;
+  width: 1020px;
+  height: 635px;
+}
+
+.icon-style {
+  width: 100%;
+  position: relative;
+  top: 245px;
+  left: 450px;
+}
+
+.info-feedback {
+  @include font-base(20px, 300, 140%);
+
+  color: $text-secondary;
+  position: relative;
+  top: 260px;
+  left: 35px;
+  text-align: center;
+}
+
+.error-feedback-message {
+  color: $error-color;
+  margin: 10px 0 50px -15px;
+}

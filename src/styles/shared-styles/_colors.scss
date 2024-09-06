@@ -1,0 +1,165 @@
+
+@import '../../../appConfigs/theme';
+
+// цвет фона элементов; основной желтый
+// primary button background
+$primary: #feda00 !default;
+// цвет основной желтый при hover
+// primary button hover
+$primary-hover: #fec600 !default;
+// цвет основной желтый при клике
+// primary button active
+$primary-active: #f8c200 !default;
+// цвет второстепенных букв логотипа
+$secondary-logo: #f8c200 !default;
+// цвет границы у ссылок при hover
+$border-link-hover: #feda00 !default;
+$clicked-link-color: #f2cb00 !default;
+$not-done: #F3A737 !default;
+$toggler-color: #feda008a !default;
+
+@if $theme == 'andersen' {
+    $primary: #feda00;
+    $primary-hover: #fec600;
+    $primary-active: #f8c200;
+    $secondary-logo: #f8c200;
+    $border-link-hover: #feda00;
+    $clicked-link-color: #f2cb00;
+    $not-done: #F3A737;
+    $toggler-color: #feda008a;
+} @else {
+    @error "Unknown theme #{$theme}.";
+}
+// цвет фона у disabled элементов
+// primary button disabled
+$primary-disabled: #efeff0;
+// цвет основного текста
+$text-primary: #212121;
+// цвет второстепенного текста
+$text-secondary: #888d92;
+// цвет третичного текста
+// input placeholder
+// secondary button text disabled
+$text-tertiary: #e0e0e0;
+// цвет disabled для текста
+// primary button text disabled
+// input label text disabled
+$text-disabled: #c1c3c6;
+
+// цвет границы у элементов (secondary button; input; link)
+$border: $text-tertiary;
+// цвет границы при hover
+$border-hover: $text-secondary;
+// цвет границы при клике
+$border-active: #82888d;
+
+// цвет фона у options в select при hover
+$option-hover: #f3f3f3;
+// цвет фона у options в select при acive
+$option-active: #dcdcdc;
+
+// цвет фона (body)
+$body-background: #fafafa;
+// цвет placeholder полей ввода
+$placeholder-color: #a2a2a2;
+// цвет фона элемента в выпадающем списке
+$menu-item-background: #f0f0f0;
+// цвет фона главной страницы
+$main-page-background: #020d1c;
+
+//colors
+$white-color: #fff;
+$black-color: #000;
+$error-color: #ef4b41;
+$skype-color: #13aef5;
+$skype-disabled-color: #c3c6c8;
+$username-color: #000;
+$objectives-text-color: #020303;
+$header-line: #eaeaea;
+$tag-color: #556170;
+$tag-manager: #EBEBEB;
+$tag-title-color: #828282;
+$tag-background: rgba(0, 0, 0, 0.1);
+$tag-box-border: #adadad;
+$portal-border-color: #757575;
+$dot-color: #202020;
+$quantity-color: #c2c5c7;
+$assessment-border-color: rgba(224, 224, 224, 0.5);
+$assessment-active-background: #f2f2f2;
+$filter-list-box-shadow: rgba(5, 31, 43, 0.17);
+$filter-border-color: rgba(136, 141, 146, 0.2);
+$assessment-error-color: #ff1818;
+$border-bottom-color: #e0e0e0;
+$disabled-button-add: #f0f0f0;
+$one-to-one-position-chips: #ebebeb;
+$tag-color-dark-theme: #fff;
+$tag-background-dark-theme: rgba(71, 74, 79, 1);
+$tag-dropdown-menu-background-dark-theme: rgba(42, 45, 49, 1);
+$green-color: #17d04b;
+$red-color: #ef4b41;
+$gray-color: #4b4a4a;
+
+// table
+$table-header: #a6a6a6;
+
+// feedback
+// цвет фона иконки анонима
+$anonymous-icon-background: #e4e4e5;
+//цвет бордера Detailed feedback
+$detailed-feedback-border: #dbddde;
+// цвета для чипсов
+$secret-chips-color: #f9bb1e;
+$secret-chips-bg-color: #fff1ca;
+$client-chips-bg-color: #e7f3f7;
+$anonymous-chips-bg-color: #eaeaea;
+$position-chips-bg-color: #F5ECFF;
+$tag-active: #fef5dd;
+$tag-inactive: #efeff0;
+
+// цвета для новостей
+$news-preview-color: #c7c7c7;
+$news-text-color-white: #fafafa;
+$news-border-color: #e0e0e0;
+$news-background-color: #171b20;
+$news-background-dark-theme: rgba(2, 3, 3, 1);
+$news-list-active: #3a3b3c;
+$news-edit-background-color: #2a2d31;
+$news-edit-hover: #3a3b3c;
+$news-placeholder-dark-theme: #adadad;
+$news-gray-light-icon: #8c8c8c;
+$news-gray-dark-figure: #474a4f;
+
+//дизейбл кнопка в ask for feedback
+$button-disabled-color: $anonymous-icon-background;
+
+// Эти переменные использовать только для чипсов RISK OF LEAVING; т.к. могут измениться в любой момент
+$risk-of-leaving-none: #e5e5e5;
+$risk-of-leaving-low: #b3d7ec;
+$risk-of-leaving-mid: #bbe4b8;
+$risk-of-leaving-high: #f8d7a7;
+$risk-of-leaving-critical: #f8b7ae;
+
+//дизейбл элементы Expert Activities
+$activities-disabled-color: #d5d7d9;
+$activities-text-color: $objectives-text-color;
+$activities-border-color: $anonymous-icon-background;
+$activities-checkbox-color: #ffe963;
+$activities-table-background: #f8f8f8;
+$activities-disabled-icon: $skype-disabled-color;
+
+$certificates-icons-color: #b5b8bb;
+
+// datetime picker
+$arrows-and-lines: #adadad;
+$week-days: #828282;
+$box-shadow-color: #0000001F;
+
+$merch-grey-color: #f6f6f6;
+
+$label-green-color: #dcf8e4;
+$label-yellow-color: #fef5dd;
+$label-red-color: #fde4e3;
+
+$input-hover-color:#8c8c8c;
+$input-unselected-color: #adadad;
+$input-selected-color: #020303;

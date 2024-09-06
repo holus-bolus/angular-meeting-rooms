@@ -1,0 +1,238 @@
+<ng-container *ngIf="baseProjectFeedbackList$ | async as baseProjectFeedbackList">
+  <div class="wrapper" *ngIf="(projectFeedbackList$ | async) as projectFeedbackList">
+    <h1 class="title">Feedback on projects</h1>
+    <div class="subtitle">
+        <div class="feedbacks-amount">
+          {{ projectAmount }}<span> Projects</span>
+           / {{ feedbackAmount }}<span> Feedback</span>
+        </div>
+        <div *ngIf="baseProjectFeedbackList.length > 0" class="feedbacks-controls">
+          <div 
+            class="feedbacks-action" 
+            [class.disabled]="!atLeastOneChecked"
+            (click)="downloadExcel()">
+            <span 
+            class="feedbacks-icon"
+            [innerHTML]="downloadIcon | safe"></span>
+            Export XLSX
+          </div>
+          <div 
+            (click)="showOnlySelected()" 
+            [class.disabled]="!atLeastOneChecked && (projectFeedbackList.length > 0)">
+              <mat-checkbox 
+              [disabled]="!atLeastOneChecked && (projectFeedbackList.length > 0)"
+              [checked]="filters.onlySelected.isActive"
+              (click)="$event.preventDefault()"
+            ></mat-checkbox>
+            Show only selected
+          </div>
+        </div>
+    </div>
+    <div class="wrapper-feedbacks-table">
+      <ng-container *ngIf="baseProjectFeedbackList.length > 0; else noFeedbacks">
+        <table mat-table [dataSource]="projectFeedbackList" class="feedbacks">
+          <ng-container matColumnDef="active">
+            <th mat-header-cell class="feedbacks-header" *matHeaderCellDef>
+              <mat-checkbox [disabled]="projectFeedbackList.length === 0" [checked]="allChecked" (change)="checkAll()"></mat-checkbox>
+            </th>
+    
+            <td mat-cell *matCellDef="let project">
+              <mat-checkbox [checked]="project.checked" (change)="check(project)"></mat-checkbox>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="project">
+            <th mat-header-cell class="feedbacks-header" *matHeaderCellDef>
+              <div 
+                cdkOverlayOrigin
+                #projectFilter
+                class="feedbacks-header-column feedbacks-action">
+                <div 
+                  class="feedbacks-header-column-filter"
+                  (click)="openFilterWindow('projectFilterTemplate')" >
+                  <span>Project</span>
+                  <span class="feedbacks-action-icon"
+                    [class.active]="filters.project.isActive"
+                    [innerHTML]="filterIcon | safe">
+                  </span>
+                </div>
+                <span 
+                  *ngIf="filters.project.isActive"
+                  class="feedbacks-action-icon feedbacks-action-icon-close"
+                  (click)="clearFilters('project')" 
+                  [innerHTML]="closeGreyIcon | safe">
+                </span>
+              </div>
+            </th>
+    
+            <td mat-cell *matCellDef="let project">
+              <a [routerLink]="['/project-feedbacks', project.project.id]" class="project-link">
+                {{ project.project.name }}
+              </a>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="manager">
+            <th mat-header-cell class="feedbacks-header" *matHeaderCellDef>
+              <div
+                cdkOverlayOrigin
+                #managerFilter
+                class="feedbacks-header-column feedbacks-action">
+                <div 
+                  class="feedbacks-header-column-filter"
+                  (click)="openFilterWindow('managerFilterTemplate')">
+                  <span>Managers</span>
+                  <span class="feedbacks-action-icon"
+                    [class.active]="filters.manager.isActive"
+                    [innerHTML]="filterIcon | safe">
+                </span>
+                </div>
+                <span 
+                  *ngIf="filters.manager.isActive"
+                  class="feedbacks-action-icon feedbacks-action-icon-close"
+                  (click)="clearFilters('manager')" 
+                  [innerHTML]="closeGreyIcon | safe">
+                </span>
+              </div>
+            </th>
+    
+            <td mat-cell *matCellDef="let project">
+              <div class="feedbacks-item">
+                <div 
+                class="chips manager"
+                >{{ selectedManagerTypeTitle }}</div>
+                <a [routerLink]="['/employee', project.project[selectedManagerType].id]" class="project-link">
+                  {{ project.project[selectedManagerType].name }}
+                </a>
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="lastFeedback">
+            <th mat-header-cell class="feedbacks-header" *matHeaderCellDef>
+              <div 
+                class="feedbacks-header-column feedbacks-action"
+                (click)="onSortChange('lastFeedback')">
+                <span>Last feedback</span>
+                <span class="feedbacks-action-icon"
+                      [innerHTML]="sortIcon | safe"
+                      [class.active]="sortOptions.lastFeedback.isActive"
+                      [class.default]="sortOptions.lastFeedback.isDesc">
+                </span>
+              </div>
+            </th>
+    
+            <td mat-cell *matCellDef="let project">
+              {{ project.lastFeedback | date: 'd.M.yyyy' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="amountOfFeedback">
+            <th mat-header-cell class="feedbacks-header" *matHeaderCellDef>
+              <div 
+                class="feedbacks-header-column feedbacks-action" 
+                (click)="onSortChange('amountOfFeedback')">
+                <span>Amount of <br /> feedback</span>
+                <span class="feedbacks-action-icon"
+                      [innerHTML]="sortIcon | safe"
+                      [class.active]="sortOptions.amountOfFeedback.isActive"
+                      [class.default]="sortOptions.amountOfFeedback.isDesc">
+                </span>
+              </div>
+            </th>
+    
+            <td mat-cell *matCellDef="let project">
+              {{ project.amountOfFeedback }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="rating">
+            <th mat-header-cell class="feedbacks-header" *matHeaderCellDef>
+              <div 
+                class="feedbacks-header-column feedbacks-action" 
+                (click)="onSortChange('rating')">
+                <span>Rating</span>
+                <span class="feedbacks-action-icon"
+                      [innerHTML]="sortIcon | safe"
+                      [class.active]="sortOptions.rating.isActive"
+                      [class.default]="sortOptions.rating.isDesc">
+                </span>
+              </div>
+            </th>
+    
+            <td mat-cell *matCellDef="let project">
+              {{ project.rating | number: '1.0-1' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <th mat-header-cell class="feedbacks-header" *matHeaderCellDef>
+              <div 
+                cdkOverlayOrigin 
+                #statusFilter
+                class="feedbacks-header-column feedbacks-action">
+                <div 
+                  class="feedbacks-header-column-filter"
+                  (click)="openFilterWindow('statusFilterTemplate')" >
+                  <span>Status</span>
+                  <span class="feedbacks-action-icon"
+                    [class.active]="filters.status.isActive"
+                    [innerHTML]="filterIcon | safe">
+                  </span>
+                </div>
+                <span 
+                  *ngIf="filters.status.isActive"
+                  class="feedbacks-action-icon feedbacks-action-icon-close"
+                  (click)="clearFilters('status')" 
+                  [innerHTML]="closeGreyIcon | safe">
+                </span>
+              </div>
+            </th>
+    
+            <td mat-cell *matCellDef="let project">
+              <div *ngIf="project.project.isActive === true" class="chips active">Active</div>
+              <div *ngIf="project.project.isActive === false" class="chips inactive">Closed</div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </ng-container>
+    </div>
+    <div *ngIf="isLoader | async" class="wrapper-loader">
+      <andteam-loader></andteam-loader>
+    </div>
+    <ng-template cdk-portal #projectFilterTemplate="cdkPortal">
+      <andteam-project-feedback-project-filter
+        [options]="filteredProjectList"
+        (checkedOption)="onProjectOptionChecked($event)">
+      </andteam-project-feedback-project-filter>
+    </ng-template>
+    <ng-template cdk-portal #managerFilterTemplate="cdkPortal">
+      <andteam-project-feedback-manager-filter
+        [selectedManagerType]="selectedManagerType"
+        [selectedManager]="this.filters.manager.value"
+        [options]="baseProjectFeedbackList"
+        (managerSelect)="onManagerSelected($event)"
+        (typeSelect)="onManagerTypeSelected($event)">
+      </andteam-project-feedback-manager-filter>
+    </ng-template>
+    <ng-template cdk-portal #statusFilterTemplate="cdkPortal">
+      <andteam-project-feedback-status-filter 
+        [options]="filters.status.value"
+        (checkedOptions)="onStatusOptionChecked($event)">
+      </andteam-project-feedback-status-filter>
+    </ng-template>
+  </div>
+</ng-container>
+
+<andteam-footer></andteam-footer>
+
+<ng-template #noFeedbacks>
+    <div class="no-feedbacks">
+        <div class="no-feedbacks-icon" [innerHTML]="noDataIcon | safe"></div>
+        <div class="no-feedbacks-text">The list is empty</div>
+    </div>
+</ng-template> 
+

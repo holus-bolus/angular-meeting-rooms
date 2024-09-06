@@ -1,0 +1,83 @@
+<header class="portal-header-wrapper"
+        [ngClass]="{'portal-scrollable-header': isScrollableHeader}"
+        (click)="closeTimePicker()">
+  <div [ngClass]="{'disabledHeader': isBlockBackground}" class="portal-header">
+    <div class="portal-header-search">
+      <a [routerLink]="['/']"
+         class="portal-header-logo"
+         (click)="refresh()">
+         <ng-container class="short-logo" *ngIf="!showLongHeaderLogo; else longLogo">
+          <span [innerHTML]="logoIcon" class="logo-icon"></span>
+          <span [innerHTML]="logoTextIcon" class="logo-title"
+            [ngClass]="{'logo-title--black': isScrollableHeader}"></span>
+         </ng-container>
+      </a>
+      <div class="location-box">
+        <andteam-location [ngClass]="{'location-alt-colors': isScrollableHeader}"></andteam-location>
+      </div>
+      <andteam-main-menu
+        class="portal-header-search-block"
+        [headerType]="headerType"
+        [isScrollableHeader]="isScrollableHeader">
+      </andteam-main-menu>
+    </div>
+    <div class="portal-header-box">
+      <div class="meeting-room" *ngIf="isShowMettingRoom && !isAssessmentPath">
+        <a *ngIf="this.companyService.showMerch" routerLink="merch"
+           class="portal-header-item">
+          {{ companyService.companyName }} Merch
+        </a>
+        <a [routerLink]="['/meeting-rooms']"
+           class="portal-header-item"
+           rel="noreferrer noopener">Meeting Room</a>
+        <a class="portal-header-item" mat-button [matMenuTriggerFor]="supportMenu">Have a problem?</a>
+        <a [href]="userAccountPath" class="portal-header-item no-hover">
+          <img class="portal-header-item__avatar-img"
+               [src]="avatar" alt="avatar">
+        </a>
+        <mat-menu #supportMenu="matMenu">
+          <a mat-menu-item href="{{selectMenuOption(menuOptions.SUPPORT)}}"
+             target="_blank">{{ menuOptions.SUPPORT }}</a>
+          <a mat-menu-item href="{{selectMenuOption(menuOptions.FUNCTIONALITY)}}"
+             target="_blank">{{ menuOptions.FUNCTIONALITY }}</a>
+        </mat-menu>
+      </div>
+      <div class="portal-header-menu">
+        <!-- deleted [meetingRoom] directive from menu -->
+        <andteam-menu
+          [username]="username"
+          [externalId]="externalId"
+          [headerType]="headerType"
+          [isScrollableHeader]="isScrollableHeader"
+          [isShowMettingRoom]="isShowMettingRoom"
+          [isAssessmentCoordinator]="isAssessmentCoordinator$ | async"
+          (navigatePath)="onNavigatePath($event)"
+          (openProblemModal)="onOpenProblemModal($event)"></andteam-menu>
+      </div>
+    </div>
+  </div>
+</header>
+
+<andteam-portal-problem-modal
+  *ngIf="isOpenProblemModal"
+  (send)="onSend($event)"
+  (sendCloseEvent)="onOpenProblemModal(false)"></andteam-portal-problem-modal>
+
+<andteam-selector-wrapper
+  *ngIf="isOpenModalOfficeWindow"
+  (sendCloseEvent)="onOpenModalOfficeWindow(false)"
+  (selectionComplete)="locationNewOffice($event)">
+</andteam-selector-wrapper>
+
+<div class="alert" *ngIf="isOpenAlertModal">
+  <andteam-modal
+    (closeClick)="onOpenAlertModal()">
+    <div class="alert-icon" [innerHTML]="alertIcon"></div>
+    <div class="alert-title">Thanks for letting us know <br> about the problem.
+    </div>
+  </andteam-modal>
+</div>
+
+<ng-template #longLogo>
+  <span [innerHTML]="longLogoIcon" [ngClass]="{'logo-title--primary-color': isScrollableHeader}"></span>
+</ng-template>

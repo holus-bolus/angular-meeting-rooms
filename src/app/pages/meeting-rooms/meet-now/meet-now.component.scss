@@ -1,0 +1,32 @@
+@import '../../../../styles/shared-styles/colors';
+@import '../../../../styles/shared-styles/mixins';
+
+:host() {
+  padding: 80px 115px;
+  display: block;
+  background-color: $white-color;
+}
+
+.meet-now__nav {
+  @include font-base(20px, 400, 26px);
+  
+  color: $text-secondary;
+  display: flex;
+  gap: 40px;
+  margin-bottom: 40px;
+
+  a {
+    cursor: pointer;
+  }
+  
+  .active {
+    color: $objectives-text-color;
+  }
+}
+
+
+.meet-now__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}

@@ -1,0 +1,44 @@
+<andteam-block-creation
+  [title]="creationNewsForm.get('title')"
+  [text]="creationNewsForm.get('text').value"
+  [titleError]="titleError"
+  [hasTitleError]="hasTitleError"
+  [hasTextError]="hasTextError"
+  [textError]="textError"
+  [disabled]="disabled"
+  (changeData)="onChangeData($event)"
+  (saveData)="onSaveData()"
+  (cancelCreation)="onCancelCreation()">
+  <div class="creation-block">
+    <div class="selections">
+      <div class="selections-box">
+        <andteam-chips-autocomplete placeholder="Tags"
+                                    [options]="tags"
+                                    type="events"
+                                    (checkOption)="onCheckOption($event, 'tags')">
+        </andteam-chips-autocomplete>
+      </div>
+      <div class="selections-box">
+        <andteam-portal-select placeholder="Topic*"
+                               [option]="topic"
+                               [options]="topics"
+                               [error]="topicError"
+                               (selectOption)="onCheckOption($event, 'topic')"
+        ></andteam-portal-select>
+      </div>
+    </div>
+    <andteam-portal-selected-filters
+      buttonTitle="Clear tags"
+      [selectedFilters]="selectedTags"
+      (clearAll)="onClearAll()"
+      (removeTag)="onCheckOption($event, 'tags')"></andteam-portal-selected-filters>
+  </div>
+  <div class="textarea">
+    <andteam-portal-textarea
+      [formControl]="creationNewsForm.get('previewText')"
+      [error]="hasPreviewTextError"
+      [placeholder]="placeholder"></andteam-portal-textarea>
+    <div class="error-message"
+         *ngIf="previewTextError">{{previewTextError}}</div>
+  </div>
+</andteam-block-creation>

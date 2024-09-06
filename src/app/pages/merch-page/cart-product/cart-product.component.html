@@ -1,0 +1,73 @@
+<div
+  class="product"
+  *ngIf="form" [formGroup]="form"
+  [class.is-add-to-cart]="isAddToCart">
+  <div class="product__image">
+    <img [src]="product?.url" [alt]="product?.name">
+  </div>
+
+  <div class="product__info">
+    <div class="product__title">
+      {{ product?.name }}
+    </div>
+
+    <div class="product__parameters">
+      <ng-container *ngFor="let parameter of (product?.parameters || []); let index = index">
+        <div class="product__parameter"
+             *ngIf="parameter.parameterValues.length > 1"
+             [ngClass]="parameter.name.toLowerCase()">
+          <div class="product__parameter_title">
+            {{ parameter.name }}:
+          </div>
+
+          <div class="product__parameter_control">
+            <ng-container *ngIf="parameter.isColorCode; else selectControl">
+              <andteam-color-select
+                [options]="parameterOptions[parameter.id]"
+                [formControl]="getParameterControlById(parameter.id)"></andteam-color-select>
+            </ng-container>
+
+            <ng-template #selectControl>
+              <andteam-select
+                ngDefaultControl
+                [formControl]="getParameterControlById(parameter.id)"
+                [disableLabel]="true"
+                [options]="parameterOptions[parameter.id]">
+              </andteam-select>
+            </ng-template>
+          </div>
+        </div>
+
+      </ng-container>
+
+      <div class="product__parameter quantity">
+        <div class="product__parameter_title">
+          Quantity:
+        </div>
+
+        <div class="product__parameter_control">
+          <andteam-quantity-select
+            formControlName="quantity"></andteam-quantity-select>
+        </div>
+      </div>
+
+      <div class="product__spacer"></div>
+
+      <div class="product__parameter">
+        <div class="product__parameter_control">
+          {{ productPrice }} points
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="product__actions">
+    <andteam-button
+      *ngIf="canDelete"
+      [type]="buttonType.FAB"
+      [buttonIcon]="trashIcon"
+      color="warn"
+      (click)="onDelete()"
+    ></andteam-button>
+  </div>
+</div>

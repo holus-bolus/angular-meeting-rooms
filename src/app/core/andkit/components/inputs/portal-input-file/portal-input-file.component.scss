@@ -1,0 +1,112 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+:host {
+  display: block;
+}
+
+.file {
+  display: none;
+}
+
+.button {
+  @include transition;
+  @include font-base(14px, 500, 16px);
+
+  background-color: $primary;
+  padding: 12px 54px;
+  color: $text-primary;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $primary-hover;
+  }
+
+  &:active {
+    background-color: $primary-active;
+    box-shadow: none;
+  }
+
+  &.disabled {
+    color: $text-disabled;
+    background-color: $primary-disabled;
+  }
+}
+
+.file-wrapper {
+  position: relative;
+
+  .file-input {
+    @include transition;
+    @include font-base(18px, 300, 25px);
+
+    position: relative;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid $portal-border-color;
+    padding: 0 30px 10px 0;
+    color: $tag-title-color;
+    width: 100%;
+    max-width: inherit;
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
+
+    &:hover {
+      @include border-bottom(1px, solid, $text-primary);
+    }
+
+    &:focus {
+      @include border-bottom(1px, solid, $text-primary);
+    }
+
+    &::placeholder {
+      color: $tag-title-color;
+    }
+
+    &:focus,
+    &:active {
+      outline: none;
+    }
+
+    .value {
+      color: $text-primary;
+    }
+
+    .close-icon {
+      position: absolute;
+      top: 2px;
+      right: 8px;
+      cursor: pointer;
+      color: $primary;
+    }
+
+    .file-icon, .file-icon-right, .file-icon-left {
+      position: absolute;
+      top: 3px;
+      cursor: pointer;
+    }
+
+    .file-icon-right {
+      right: 8px;
+    }
+
+    .file-icon-left {
+      position: relative;
+      left: 0;
+    }
+  }
+
+  .error-message {
+    @include font-base(12px, 300, 130%);
+
+    color: $error-color;
+    position: absolute;
+    top: calc(100% + 5px);
+  }
+
+  .error {
+    border-color: $error-color;
+  }
+}

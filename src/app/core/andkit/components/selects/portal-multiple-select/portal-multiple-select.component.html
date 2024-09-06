@@ -1,0 +1,36 @@
+<div 
+  [class.active]="isChecked"
+  [ngClass]="{active: isChecked}"
+  class="chips-wrapper chips-wrapper-portal"
+  [class.error]="error">
+  <div class="chips">
+    <div 
+    [class.active]="isChecked"  
+    class="chips-list chips-list-portal"
+      (click)="onCloseDropdown(true)">
+      <div class="chips-all-items">
+          <div class="list">
+            <div [ngClass]="{
+            'list-value': isChecked,
+            'list-placeholder': !isChecked
+            }">
+              {{value}}
+            </div>
+          </div>
+      </div>
+      <span 
+      [ngClass]="isSearchListOpen ? 'chips-list-arrow-down' : 'chips-list-arrow-up'" 
+      [class.active]="isChecked"
+      [innerHTML]="vectorIcon | safe"></span>
+    </div>
+  </div>
+  <andteam-search-list
+    *ngIf="isSearchListOpen"
+    [options]="options"
+    [title]="labelText"
+    [isAllOptionEnabled]="isAllOptionEnabled"
+    (closeDropdown)="onCloseDropdown($event)"
+    (checkOption)="onCheckOption($event)"
+    (checkOptions)="onCheckAllOptions($event)">
+  </andteam-search-list>
+</div>

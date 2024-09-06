@@ -1,0 +1,113 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 5px 0px;
+
+  position: relative;
+  width: 280px;
+  min-height: 205px;
+  max-height: 398px;
+  overflow-y: scroll;
+  background: #FFFFFF;
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+  overflow: hidden;
+
+  .manager-list {
+    overflow: scroll;
+    width: 100%;
+  }
+
+  &-filter {
+    height: 65px;
+
+    ::ng-deep {
+      andteam-autocomplete {
+        width: 100%;
+      }
+
+      input.mat-input-element {
+        height: 37px !important;
+        font-size: 16px !important;
+        line-height: 25.6px !important;
+      }
+
+      .placeholder {
+        @include font-base(16px, 400, 25.6px);
+
+        color: $tag-title-color;
+      }
+
+      path {
+        fill: $tag-box-border !important;
+      }
+    }
+
+    &__filled {
+      ::ng-deep {
+        path {
+          fill: $primary !important;
+        }
+      }
+    }
+  }
+
+  &-manager {
+    height: 47px;
+
+    &:hover {
+      background-color: $option-hover !important;
+    }
+
+    &.active {
+      background-color: $option-active;
+    }
+  }
+
+  &-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 14px 20px;
+    gap: 10px;
+    width: 100% !important;
+    box-sizing: border-box;
+    cursor: pointer;
+
+    @include font-base(16px, 400, 18.75px, normal);
+
+    &-empty {
+      color: $text-secondary;
+    }
+  }
+
+  .radio-group {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 12px;
+    width: 228px;
+    height: 30px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    .mat-radio-button {
+      width: 63px;
+    }
+  }
+}
+
+.chips {
+  @include font-base(14px, 400, 16.41px);
+  color: $tag-box-border;
+  border-radius: 4px;
+  text-align: center;
+  width: auto;
+  padding: 2px 11px;
+  background-color: $one-to-one-position-chips;
+}

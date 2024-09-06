@@ -1,0 +1,75 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.time-picker {
+  display: flex;
+  align-items: center;
+
+  &-box:first-child {
+    margin-right: 8px;
+  }
+
+  &-title {
+    @include font-base(12px, 400, 20px);
+
+    color: $text-secondary;
+    margin-bottom: 5px;
+  }
+
+  &-input {
+    position: relative;
+    width: 60px;
+  }
+
+  &-value {
+    @include font-base(14px, 400, 22px);
+
+    height: 36px;
+    width: 100%;
+    position: absolute;
+    padding: 7px 10px;
+    color: $text-primary;
+    border: 1px solid $text-tertiary;
+    box-sizing: border-box;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      border: 1px solid $border-active;
+    }
+
+    &:disabled {
+      background: transparent;
+      border: 1px solid $text-tertiary;
+      cursor: default;
+    }
+  }
+
+  &-button {
+    border: none;
+    background: transparent;
+    z-index: 1;
+    position: absolute;
+    right: 10px;
+    color: $text-tertiary;
+    cursor: pointer;
+    top: 2px;
+
+    &:last-child {
+      transform: rotate(180deg);
+      top: 20px;
+    }
+
+    &:disabled {
+      cursor: default;
+    }
+  }
+
+  .hover {
+    color: $border-active;
+  }
+
+  .error {
+    border-color: $assessment-error-color;
+  }
+}

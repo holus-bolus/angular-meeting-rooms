@@ -1,0 +1,451 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+@import '~src/styles/shared-styles/vars';
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body,
+html {
+  @include font-base(14px, 400, 16px);
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: $black-color;
+  color: $black-color;
+}
+
+a,
+button,
+input,
+select,
+textarea {
+  &:hover,
+  &:focus,
+  &:active {
+    outline: none;
+  }
+}
+
+.container {
+  max-width: $wrapper-portal;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 0 auto;
+}
+
+.assessment-input {
+  border-radius: 4px;
+
+  &:hover {
+    border: 1px solid $text-secondary;
+  }
+}
+
+.assessment-focus {
+  border: 1px solid $border-active;
+}
+
+.title-h1 {
+  @include font-base(42px, 300, 73px);
+
+  padding-top: 30px;
+  padding-bottom: 15px;
+}
+
+.title-h2 {
+  @include font-base(18px, 400);
+
+  color: $tag-title-color;
+}
+
+.title-link {
+  @include font-base(20px, 400);
+}
+
+.title-link-h2 {
+  color: black;
+  text-decoration: underline $primary-active;
+  display: inline-block;
+}
+
+.portal-h2 {
+  @include font-base(56px, 200, 66px);
+
+  color: $black-color;
+}
+
+.portal-h3 {
+  @include font-base(24px, 300, 35px);
+}
+
+.assessment-h2 {
+  @include font-base(20px, normal, 28px);
+}
+
+.employee-h1 {
+  @include font-base(56px, 200, 130%);
+
+  color: $username-color;
+}
+
+.divider {
+  border-bottom: 1px solid rgba(136, 141, 146, 0.2);
+}
+
+.vertical-divider {
+  border-right: 1px solid rgba(136, 141, 146, 0.2);
+}
+
+h1 {
+  @include font-base(28px, 400, 33px);
+}
+
+h2 {
+  @include font-base(20px, 400, 23px);
+}
+
+h3 {
+  @include font-base(16px, 400, 19px);
+}
+
+h4 {
+  @include font-base(14px, 400, 16px);
+}
+
+h5 {
+  @include font-base(12px, 400, 14px);
+}
+
+h6 {
+  @include font-base(10px, 400, 12px);
+}
+
+.text-main,
+.text-middle,
+.text-small {
+  color: $text-secondary;
+}
+
+.text-main {
+  font-size: 24px;
+}
+
+.text-middle {
+  font-size: 20px;
+}
+
+.text-small {
+  font-size: 18px;
+}
+
+.link {
+  @include font-base(14px, 500, 20px);
+
+  text-align: center;
+  color: $black-color;
+  text-decoration: none;
+  border-bottom: 1px dotted $border;
+  cursor: pointer;
+
+  &:hover {
+    border-bottom: 1px solid $border-link-hover;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &-double {
+    border-bottom: 2px dotted $border;
+
+    &:hover {
+      border-bottom: 1px solid $border-link-hover;
+    }
+  }
+}
+
+.hover {
+  opacity: 0.5;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 1;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $primary;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.ck-editor__editable_inline {
+  min-height: 500px;
+}
+
+.mat-calendar {
+  &-table-header {
+    color: $week-days;
+  }
+  .mat-calendar-arrow {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    transform: rotate(45deg);
+    border-bottom: 1px solid $arrows-and-lines;
+    border-right: 1px solid $arrows-and-lines;
+    border-left: 0;
+    border-top: 0;
+    margin: 0 0 5px 5px;
+    color: rgba(0, 0, 0, 0.54);
+  }
+
+  .mat-calendar-body-cell-content {
+    @include font-base(16px, 400, 18.75px);
+
+    color: $text-primary;
+    border-radius: 0;
+    padding: 5px;
+  }
+
+  .mat-calendar-body-cell-content:hover {
+    background-color: $border-link-hover !important;
+  }
+
+  .mat-calendar-body-today:not(.mat-calendar-body-selected) {
+    border-color: $primary;
+    border-radius: 0;
+  }
+
+  .mat-calendar-body-selected {
+    background-color: $primary;
+  }
+
+  .mat-calendar-body-label {
+    padding: 0 !important;
+    opacity: 0;
+  }
+
+  .mat-calendar-period-button {
+    @include font-base(16px, 400, 18.75px);
+
+    font-weight: inherit;
+  }
+
+  .mat-calendar-previous-button:after,
+  .mat-calendar-next-button:after {
+    border-width: 1px 0 0;
+    border-color: $arrows-and-lines;
+    border-radius: 1px;
+  }
+
+  .mat-calendar-next-button:after {
+    border-right-width: 1px;
+  }
+
+  .mat-calendar-previous-button:after {
+    border-left-width: 1px;
+  }
+
+  .mat-calendar-table-header-divider:after {
+    left: 8px;
+    right: 8px;
+    background-color: $arrows-and-lines;
+  }
+}
+
+.mat-calendar-arrow.mat-calendar-invert {
+  transform: rotate(225deg) !important;
+  margin-top: 5px;
+}
+
+.mat-datepicker-content {
+  .time-container:before {
+    left: 16px !important;
+    right: 16px  !important;
+    background-color: $arrows-and-lines !important;
+  }
+
+  .mat-button {
+    .mat-icon {
+      color: $arrows-and-lines;
+      font-weight: 100 !important;
+    }
+
+    border-color: $arrows-and-lines !important;
+  }
+}
+
+.ngx-mat-timepicker {
+  font-size: 16px !important;
+
+  &-spacer {
+    position: relative;
+    font-weight: 400 !important;
+    left: 5px !important;
+    bottom: 5px !important;
+  }
+
+
+  form {
+    min-width: 65px !important;
+  }
+
+  &-table {
+    max-height: 70px !important;
+
+    .mat-form-field {
+      max-width: 23px !important;
+      width: 23px !important;
+    }
+
+    input {
+      position: relative;
+      left: 2px !important;
+    }
+
+    .mat-icon {
+      width: 32px;
+      height: 24px;
+    }
+
+    .mat-form-field-wrapper {
+      padding-left: 5px;
+      padding-bottom: 16px;
+    }
+
+    tr:first-child {
+      .mat-icon-button {
+        text-shadow: $arrows-and-lines 0 -1px 1px;
+        color: white;
+
+        .mat-icon {
+          font-size: 32px !important;
+        }
+      }
+    }
+
+    tr:last-child {
+      .mat-icon-button {
+        text-shadow: $arrows-and-lines 0 1px 1px;
+        color: white;
+
+        .mat-icon {
+          font-size: 32px !important;
+        }
+      }
+    }
+  }
+}
+
+#time-picker-wrapper {
+  background: transparent !important;
+
+  #time-picker {
+    position: sticky;
+    width: 330px !important;
+    box-shadow: 0 5px 15px rgba(5, 31, 43, 0.17) !important;
+
+    .selected {
+      color: $primary !important;
+    }
+
+    .time-picker-selected-time {
+      margin-bottom: 15px;
+    }
+
+    .time-picker-clock {
+      background: $body-background !important;
+
+      button {
+        @include font-base(18px, 300, 21px);
+      }
+    }
+
+    .time-picker-footer {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+
+      button {
+        padding: 10px 37px !important;
+        color: $text-primary !important;
+      }
+
+      button:first-child {
+        background: transparent !important;
+      }
+
+      button:last-child {
+        background: $primary !important;
+      }
+    }
+  }
+}
+
+.mat-checkbox .mat-checkbox-inner-container {
+  height: 20px;
+  width: 17px;
+
+  .mat-ripple {
+    display: none;
+  }
+}
+
+.cdk-overlay-pane .mat-select-panel-wrap .settings-multiselect-panel {
+  min-width: unset;
+  max-height: unset;
+  width: 165px;
+  box-shadow: 0 3px 20px rgba(0, 0, 0, 0.1);
+}
+
+.cdk-overlay-pane .mat-select-panel-wrap .coordinates-select-panel {
+  position: absolute;
+  left: -125px !important;
+  width: 230px !important;
+  top: 30px !important;
+}
+
+@font-face {
+  font-family: diamond-girl;
+  src: url('../assets/styles/Font-family/Diamond_Girl_Skinny_С_Skinny.otf') format('opentype');
+}
+//class="fill-theme-color stroke-theme-color"
+.fill-theme-color {
+  fill: $primary;
+}
+
+.fill-theme-primary-active-color {
+  fill: $primary-active;
+}
+
+.stroke-theme-color {
+  stroke: $primary;
+}
+
+.theme-color {
+  color: $primary;
+}
+
+.stroke-not-done-theme-color {
+  stroke: $not-done;
+}

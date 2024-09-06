@@ -1,0 +1,199 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.portal-footer-wrapper {
+  background-color: $main-page-background;
+
+  @media (max-width: $wrapper-portal) {
+    width: $wrapper-portal;
+  }
+
+  .portal-footer {
+    list-style: none;
+    padding: 120px 0 45px;
+    margin: 0 auto;
+    color: $white-color;
+    display: flex;
+    max-width: $wrapper-portal-title;
+    min-width: $min-container-width;
+
+    li {
+      max-width: 25%;
+      min-width: 25%;
+      padding-right: 20px;
+
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+
+    .hr-manager {
+
+      ::ng-deep .selected-option {
+        @include font-base(16px, normal, 21px);
+
+        color: $white-color;
+      }
+
+      ::ng-deep .portal-select {
+        padding-bottom: 14px;
+
+        .arrow.arrow-up {
+          bottom: unset;
+        }
+      }
+
+      &-title {
+        @include font-base(18px, normal, 21px);
+
+        margin: 17px 0 14px;
+      }
+
+      &-name {
+        @include font-base(16px, 400, 26px);
+
+        margin-bottom: 20px;
+        border-bottom: 1px solid $portal-border-color;
+        padding-bottom: 12.5px;
+      }
+
+      &-block {
+        display: flex;
+        align-items: center;
+        margin: 12px 0;
+      }
+
+      &-icon {
+        margin-right: 10px;
+        height: 14px;
+        width: 20px;
+      }
+
+      &-link {
+        color: $white-color;
+        text-decoration: none;
+        padding-bottom: 1px;
+        border-bottom: 1px dashed $border-bottom-color;
+      }
+
+      &-phone {
+        margin-right: 10px;
+        height: 20px;
+        width: 20px;
+      }
+
+      &-info {
+        @include font-base(14px, 400, 23px);
+
+        text-decoration: none;
+        color: $white-color;
+        display: flex;
+        align-items: center;
+
+        &:hover .hr-manager-link {
+          color: $primary;
+        }
+
+        & .phone {
+          color: #fff;
+          text-decoration: none;
+          padding-bottom: 1px;
+          border-bottom: 1px dashed $border-bottom-color;
+
+          &:hover {
+            color: $primary;
+          }
+        }
+      }
+    }
+
+    .location {
+      &-box {
+        margin-bottom: 30px;
+
+        &-title {
+          @include font-base(16px, 400, 26px);
+
+          margin-bottom: 20px;
+          border-bottom: 1px solid $portal-border-color;
+          padding-bottom: 12.5px;
+        }
+
+        &-address {
+          @include font-base(14px, 400, 23px);
+
+          line-height: 160%;
+          color: $white-color;
+        }
+      }
+
+      &-box:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    .andersen-lab {
+      &-box {
+        &-title {
+          @include font-base(16px, 400, 26px);
+
+          margin-bottom: 20px;
+          border-bottom: 1px solid $portal-border-color;
+          padding-bottom: 12.5px;
+        }
+
+        &-icon {
+          display: flex;
+          align-items: center;
+
+          & .lab-logo {
+            margin-right: 15px;
+          }
+
+          & .andersen-link {
+            @include font-base(14px, 400, 23px);
+
+            padding-bottom: 1px;
+            border-bottom: 1px dashed $border-bottom-color;
+            text-decoration: none;
+            color: $white-color;
+          }
+
+          & .andersen-link:hover {
+            border-bottom: 1px solid $primary;
+          }
+        }
+      }
+    }
+  }
+
+  .copyright {
+
+    &-box {
+      padding: 20px 0;
+      margin: 0 auto;
+      max-width: $wrapper-portal-title;
+    }
+
+    &-text {
+      @include font-base(12px, 400, 14px);
+
+      color: $white-color;
+      opacity: 0.7;
+      text-decoration: none;
+      margin-right: 30px;
+      &.dashed {
+        padding-bottom: 1px;
+        border-bottom: 1px dashed $border-bottom-color;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .portal-footer-wrapper {
+    .portal-footer {
+      padding: 120px 0 45px;
+    }
+  }
+}

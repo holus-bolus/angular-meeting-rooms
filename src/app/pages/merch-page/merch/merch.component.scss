@@ -1,0 +1,196 @@
+@import '../../../../styles/shared-styles/colors';
+@import '../../../../styles/shared-styles/mixins';
+
+::ng-deep {
+  & .cart-modal-container {
+
+    & .mat-dialog-container {
+      padding: 0;
+      border-radius: 0;
+    }
+  }
+}
+
+.merch {
+  background-color: $main-page-background;
+
+  &__cart-button {
+    position: fixed;
+    top: 550px;
+    z-index: 1;
+
+    &::ng-deep .mat-badge-content {
+      right: 5px!important;
+      top: 4px;
+      background-color: $black-color;
+      width: 15px;
+      height: 15px;
+      line-height: 15px;
+      font-size: 9px;
+    }
+  }
+
+  &__header {
+    height: 762px;
+    width: 100%;
+    background: linear-gradient(transparent 15%, $main-page-background), url('/assets/images/merchHeader.png') no-repeat center center;
+    background-size: cover;
+
+    &_block {
+      display: flex;
+      justify-content: space-between;
+      max-width: 1340px;
+      margin: 0 auto;
+      padding-top: 393px;
+      color: $white-color;
+    }
+
+    &_info {
+
+    }
+
+    &_title {
+      @include font-base(56px, 300, 72.8px);
+
+      margin-left: 68px;
+    }
+
+    &_description {
+      @include font-base(16px, 400, 25.6px);
+
+      width: 750px;
+      margin-left: 68px;
+    }
+
+    &_actions {
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+
+      &::ng-deep .btn_secondary {
+        border: 1px solid $white-color;
+      }
+    }
+
+    &_points {
+      @include font-base(18px, 400, 28.8px);
+      padding: 6.5px 12px;
+    }
+  }
+
+  &-main {
+    position: relative;
+    margin: -194px auto 0;
+    max-width: 1340px;
+  }
+
+  &-card {
+    position: relative;
+    display: flex;
+    background-color: $white-color;
+    margin-bottom: 20px;
+    padding: 68px;
+
+    &-img {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      background-color: $merch-grey-color;
+      height: 270px;
+      width: 270px;
+    }
+
+    &-photo {
+      width: 100%;
+    }
+
+    &-price {
+      @include font-base(16px, 400, 25.6px);
+
+      position: absolute;
+      top: 0;
+      right: 20px;
+      width: 93px;
+      height: 30px;
+      text-align: center;
+      padding-top: 4px;
+      background-color: $primary;
+    }
+
+    &-content {
+      position: relative;
+      width: 720px;
+      margin-left: 33px;
+      color: $objectives-text-color;
+    }
+
+    &-title {
+      @include font-base(36px, 300, 46.8px);
+    }
+
+    &-description {
+      @include font-base(16px, 400, 25.6px);
+
+      margin-top: 15px;
+    }
+
+    &-parametrs {
+      position: absolute;
+      bottom: 0;
+      display: flex;
+
+      &-cell {
+        margin-right: 30px;
+      }
+
+      &-title {
+        @include font-base(16px, 400, 25.6px);
+
+        color: $tag-title-color;
+      }
+
+      &-value {
+        @include font-base(16px, 400, 16px);
+
+        margin-top: 8px;
+        color: $objectives-text-color;
+      }
+
+      &-colors {
+        display: flex;
+        justify-content: flex-start;
+      }
+
+      &-color {
+        width: 16px;
+        height: 16px;
+        margin-right: 10px;
+        border: 1px solid #E0E0E0;
+      }
+    }
+
+    &-button {
+      position: absolute;
+      right: 68px;
+      bottom: 68px;
+    }
+  }
+
+  &-footer {
+    @include font-base(18px, 400, 28.8px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1340px;
+    height: 194px;
+    background-color: $white-color;
+    color: $tag-title-color;
+
+    &-text {
+      width: 800px;
+      text-align: center;
+    }
+  }
+}

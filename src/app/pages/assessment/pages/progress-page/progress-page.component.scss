@@ -1,0 +1,123 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.interview {
+  display: flex;
+  padding: 25px 0 10px;
+  flex-wrap: wrap;
+
+  .date-picker {
+    flex: 1;
+  }
+
+  &-block {
+    margin-top: 8px;
+  }
+
+  &-autocomplete {
+    flex: 1;
+  }
+
+  &-column {
+    width: 450px;
+    margin-right: 30px;
+  }
+
+  .english-comment-field, .salary-comment-field {
+    ::ng-deep .form-title {
+      flex-basis: 0;
+    }
+
+    ::ng-deep .form-input {
+      flex-basis: 312px;
+    }
+
+    ::ng-deep .form-field {
+      justify-content: flex-end;
+    }
+  }
+
+  &-english-section {
+    display: flex;
+    flex-direction: column;
+
+    .interview-box {
+      &_english-comment {
+        margin-bottom: 7px;
+      }
+    }
+  }
+
+  &-salary-section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-box {
+    display: flex;
+    margin-bottom: 10px;
+    min-height: 20px;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  .manager-comment {
+    display: flex;
+    margin-bottom: 10px;
+
+    & .margin {
+      margin-top: 8px;
+    }
+
+    & .text {
+      margin-top: 10px;
+      font-size: 14px;
+      width: 300px;
+      overflow-x: auto;
+    }
+  }
+
+  .coordinator-comment {
+    align-items: flex-start;
+  }
+
+  .coordinator-title {
+    margin-top: 8px;
+  }
+
+  &-title {
+    @include font-base(12px, 400, 20px);
+
+    color: $tag-title-color;
+    margin-right: 10px;
+    white-space: nowrap;
+    flex-basis: 130px;
+    text-align: right;
+  }
+
+  &-icon, &-button {
+    margin-right: 10px;
+  }
+
+  &-data {
+    @include font-base(14px, 400, 140%);
+
+    color: $text-primary;
+    flex: 1;
+  }
+
+  &-textarea {
+    width: 100%;
+  }
+}
+
+.border-bottom {
+  border-bottom: 1px solid $assessment-border-color;
+}
+
+.error-message {
+  @include font-base(14px, 400, 140%);
+
+  color: $assessment-error-color;
+  margin: 0 0 10px 140px;
+}

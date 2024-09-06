@@ -1,0 +1,79 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.confirmation {
+
+  &-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  &-icon {
+    display: flex;
+    justify-content: center;
+  }
+
+  &-titles {
+    max-width: 350px;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-title {
+    @include font-base(22px, 300, 140%);
+
+    color: $username-color;
+  }
+
+  &-subtitle {
+    @include font-base(18px, 200, 160%);
+
+    color: $username-color;
+  }
+
+  &-button {
+    display: flex;
+    justify-content: center;
+  }
+
+  ::ng-deep .modal-body {
+    width: 496px;
+    height: 364px;
+    padding: 60px 50px;
+    border-radius: 0;
+
+    .modal-close {
+      right: 30px;
+    }
+
+    .btn {
+      padding: 0 60px;
+      border-radius: 0;
+    }
+
+    .confirmation-button .btn {
+      @include font-base(14px, 500, 16px);
+
+      width: 180px;
+      height: 42px;
+      padding: 0;
+      color: $text-primary;
+    }
+
+    .confirmation-button .btn_primary {
+      margin-left: 36px;
+    }
+
+    .confirmation-button .btn_secondary {
+      border: 2px solid $border-link-hover;
+
+      &:hover {
+        border: 2px solid $primary-hover;
+      }
+    }
+  }
+}

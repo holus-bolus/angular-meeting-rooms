@@ -1,0 +1,26 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+.portal-backward-link {
+  @include font-base(14px, 500, 16px);
+
+  color: $black-color;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 3px 0;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.portal-backward-icon {
+  color: $primary;
+}
+
+.portal-backward-text {
+  border-bottom: 1px solid $primary;
+  margin-left: 5px;
+  padding-bottom: 5px;
+}

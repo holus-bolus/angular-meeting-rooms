@@ -1,0 +1,212 @@
+@import 'src/styles/shared-styles/colors';
+@import 'src/styles/shared-styles/mixins';
+@import 'src/styles/shared-styles/_vars.scss';
+
+.mat-dialog-container {
+  padding: 0;
+  border-radius: 0;
+  position: relative;
+}
+
+.add-modal-wrap {
+  padding: 45px 40px 40px;
+  overflow: visible;
+}
+
+.modal-add-one-to-one {
+  @include font-base(16px, 400, 26px, normal);
+
+  color: $objectives-text-color;
+  z-index: $modal-z-index;
+
+  &-close {
+    @include transition;
+
+    position: absolute;
+    right: 17px;
+    top: 17px;
+    cursor: pointer;
+    opacity: 0.5;
+    width: 20px;
+    min-width: 20px;
+    border: none;
+    background-color: transparent;
+
+    &-btn {
+      height: 20px;
+    }
+
+    svg {
+      stroke: $white-color;
+      stroke-width: 1px;
+      fill-opacity: 0.5;
+      width: 20px;
+      height: 20px;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &-comment-title {
+    @include font-base(14px, 400, 22.4px);
+
+    color: $tag-title-color;
+    margin-bottom: 10px;
+  }
+
+  &-comment-error {
+    @include font-base(12px, 400, 16.88px);
+
+    color: $error-color;
+    margin-top: 35px;
+  }
+
+  &-title {
+    @include font-base(24px, 400, 32px, normal);
+
+    padding-bottom: 10px;
+  }
+
+  textarea.form-input {
+    @include font-base(16px, 400, 25.6px);
+
+    &:focus {
+      color: $objectives-text-color !important;
+    }
+  }
+
+  .placeholder {
+    @include font-base(16px, 300, 25.6px);
+
+    color: $tag-box-border !important;
+  }
+
+  &-row {
+    margin-top: 40px;
+    display: flex;
+    gap: 40px;
+
+    &-comment {
+      margin-top: 40px;
+    }
+  }
+
+  &-column {
+    position: relative;
+    width: 320px;
+
+    &-full-width {
+      width: 100%;
+    }
+
+    .date {
+      .mat-form-field {
+        &-infix,
+        &-label {
+          color: $tag-box-border !important;
+          font-size: 16px !important;
+          font-weight: 400 !important;
+          line-height: 25.6px !important;
+        }
+
+        &-label {
+          font-weight: 300 !important;
+        }
+      }
+    }
+  }
+
+  &-buttons {
+    display: flex;
+    margin-top: 40px;
+  }
+
+  &-btn {
+    .btn {
+      width: 155px;
+      font-style: normal !important;
+      font-weight: 500 !important;
+      font-size: 14px !important;
+    }
+
+    &-cancel {
+      margin-right: 40px;
+      width: 152px;
+
+      .btn_previous {
+        width: 100% !important;
+      }
+    }
+
+    &-confirm {
+      cursor: pointer;
+      outline: none;
+    }
+  }
+
+  .mat-form-field-appearance-fill.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    display: none;
+  }
+
+  .mat-form-field-appearance-fill .mat-form-field-infix {
+    padding: 0;
+  }
+
+  .mat-select-value {
+    padding-bottom: 8px;
+  }
+}
+
+.mat-input-element:disabled {
+  color: $objectives-text-color;
+}
+
+.risk-panel-class, .type-panel-class {
+  position: absolute;
+  top: 10px;
+  left: 16px;
+  min-width: 100% !important;
+}
+
+.add-update-container {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 50px;
+  margin-bottom: 25px;
+  cursor: pointer;
+}
+
+.update-icon {
+  display: inline;
+  background-image: url('../../../../../assets/images/plus.svg');
+  background-repeat: no-repeat;
+  margin-right: 5px;
+  vertical-align: middle;
+  height: 24px;
+  width: 24px;
+}
+.one-to-one-update {
+  display: flex;
+}
+
+.one-to-one-comment {
+  font-weight: 400;
+  font-size: 14px;
+  color: #828282;
+}
+
+.one-to-one-update-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+}
+
+.one-to-one-view-container {
+  display: flex;
+  justify-content: space-between;
+  .modal-add-one-to-one-close {
+    position: unset;
+  }
+}

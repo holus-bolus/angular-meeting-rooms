@@ -1,0 +1,47 @@
+<div class="tags-wrapper">
+  <div class="tags">
+    <div class="tags-title">Popular Tags:</div>
+    <div class="tags-list">
+      <ng-container *ngFor="let tag of titleTags">
+        <div class="tags-item-box"
+             [class.active]="tag.checked">
+          <div class="tags-item"
+               (click)="searchByTag(tag)">{{tag.name}}</div>
+          <div class="tags-icon"
+               *ngIf="tag.checked"
+               [innerHTML]="closeIcon"
+               (click)="onRemove(tag.name)"></div>
+        </div>
+      </ng-container>
+    </div>
+    <div class="tags-button">
+      <andteam-dropdown-button (openDropdown)="onCloseDropdown(true)"></andteam-dropdown-button>
+    </div>
+  </div>
+  <div class="dropdown-box"
+       *ngIf="isOpenDropdown"
+       andteamOuterClick
+       (outerClick)="onCloseDropdown($event)">
+    <div class="dropdown">
+      <div class="dropdown-close" (click)="onCloseDropdown(false)">
+        <andteam-icon [icon]="closeIcon"></andteam-icon>
+      </div>
+      <div class="dropdown-title">All tags</div>
+      <div class="dropdown-list">
+        <div class="tags-item-box"
+             *ngFor="let tag of allTags"
+             [class.active]="tag.checked">
+          <div class="tags-item"
+               (click)="searchByTag(tag)">{{tag.name}}</div>
+          <div class="tags-icon"
+               *ngIf="tag.checked"
+               [innerHTML]="closeIcon"
+               (click)="onRemove(tag.name)"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

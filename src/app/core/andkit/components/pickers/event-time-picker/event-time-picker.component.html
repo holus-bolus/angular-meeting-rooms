@@ -1,0 +1,24 @@
+<div class="time-wrapper">
+  <div class="time-part">
+    <andteam-portal-input
+      [error]="hoursError"
+      [formControl]="hour"
+      inputType='hours'>
+    </andteam-portal-input>
+    <andteam-portal-select
+      [options]="hourList"
+      (selectOption)="selectHour($event)">
+    </andteam-portal-select>
+  </div>
+  <div class="time-part">
+    <andteam-portal-input
+      [error]="minutesError"
+      [formControl]="minute"
+      inputType='minutes'>
+    </andteam-portal-input>
+    <andteam-portal-select
+      [options]="minuteList"
+      (selectOption)="selectMinutes($event)">
+    </andteam-portal-select>
+  </div>
+</div>

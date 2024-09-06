@@ -1,0 +1,20 @@
+@import '~src/styles/shared-styles/colors';
+@import '~src/styles/shared-styles/mixins';
+
+:host {
+
+  .title-h1 {
+    margin: 130px 0 50px;
+  }
+}
+
+.overtime {
+
+  &-header {
+    padding: 70px 0 70px 80px;
+  }
+}
+
+.container {
+  padding: 150px 0 60px 0;
+}

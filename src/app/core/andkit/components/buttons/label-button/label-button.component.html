@@ -1,0 +1,6 @@
+<button *ngIf="label"
+        class="label {{ getLabelClass(label) }}"
+        [disabled]="isDisabled"
+        (click)="onClickLabel()">
+  {{ label.name }}
+</button>
